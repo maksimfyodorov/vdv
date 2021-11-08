@@ -1,0 +1,67 @@
+<div class="filter-content" [formGroup]="filterForm">
+    <span class='p-input-icon-right input__search'>
+      <i class="pi pi-search"></i>
+      <input type='text'
+             formControlName="general_search"
+             pInputText
+             placeholder='Поиск заданий'>
+    </span>
+
+  <p>Дата полёта</p>
+
+  <div class='filter-row'>
+    <div class='input-wrap' style='width: 45%'>
+      <p-calendar [showIcon]='true'
+                  formControlName="date_from"
+                  firstDayOfWeek="1"
+                  dateFormat="dd.mm.yy"
+                  icon='pi pi-calendar'>
+      </p-calendar>
+    </div>
+    &#8212;
+    <div class='input-wrap' style='width: 45%'>
+      <p-calendar
+        [showIcon]='true'
+        formControlName="date_to"
+        firstDayOfWeek="1"
+        dateFormat="dd.mm.yy"
+        icon='pi pi-calendar'>
+      </p-calendar>
+    </div>
+  </div>
+
+  <p>Статус задания</p>
+
+  <mat-slide-toggle color="primary" formControlName="status_name">Только завершённые</mat-slide-toggle>
+
+  <p>БПЛА</p>
+
+  <p-dropdown (click)='getUav()' [autoDisplayFirst]="false" [options]="bpla"
+              optionValue="uuid" optionLabel='vvst_sample_name' formControlName="bpla">
+    <ng-template pTemplate="empty">
+      <div *ngIf="!bpla && bpla?.length !== 0; else listEmpty" class="center">
+        <app-loader [spinnerSize]="30"></app-loader>
+      </div>
+    </ng-template>
+  </p-dropdown>
+
+  <p>Оператор</p>
+
+  <p-dropdown (click)='getOperators()' [options]="operators" [autoDisplayFirst]="false"
+              formControlName="operator" optionValue="uuid" optionLabel='fio'>
+    <ng-template pTemplate="empty">
+      <div *ngIf="!operators && operators?.length !== 0; else listEmpty" class="center">
+        <app-loader [spinnerSize]="30"></app-loader>
+      </div>
+    </ng-template>
+  </p-dropdown>
+
+  <div class="button-wrap">
+    <p-button label='Применить' (onClick)="applyFilter()"></p-button>
+    <p-button label='Сбросить' (onClick)="filterForm.reset()" class="clear-button"></p-button>
+  </div>
+</div>
+
+<ng-template #listEmpty>
+  Список пуст
+</ng-template>

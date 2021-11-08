@@ -1,0 +1,41 @@
+<div *ngIf='userData' class='dialog-data'>
+  <div class='user-info'>
+    <p class='title'>Данные СВИП</p>
+    <div class='row'>
+    <p class='user-info-name-text'>Логин пользователя</p>
+      <p class='user-info-value-text'>{{userData.userLogin}}</p>
+    </div>
+    <div class='row'>
+      <p class='user-info-name-text'>Группа</p>
+      <p class='user-info-value-text'>{{userData.group}}</p>
+    </div>
+    <div class='row'>
+      <p class='user-info-name-text'>Роль</p>
+      <p class='user-info-value-text'>{{userData.role}}</p>
+    </div>
+    <p class='title'>Раздает права</p>
+    <div class='row'>
+      <p class='user-info-name-text'>Логин пользователя</p>
+      <p class='user-info-value-text'>{{userData.userShareLogin}}</p>
+    </div>
+  </div>
+  <p class='title' style='margin-bottom: 20px'>Настройка прав по задачам</p>
+  <p-table [value]="userData.permissions">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Права</th>
+        <th class='centered'>Доступ</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-permissions>
+      <tr>
+        <td>{{permissions.name}}</td>
+        <td><div style='display: flex; justify-content: space-around'><p *ngIf='permissions.is_allow' class='have-access'><i class='pi pi-check'></i>&nbsp;  Разрешен</p></div>
+          <div style='display: flex; justify-content: space-around'><p *ngIf='!permissions.is_allow' class='dont-have-access'><i class='pi pi-times'></i>&nbsp;  Нет доступа</p></div></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div *ngIf='!userData' class='loading-block'>
+  <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+</div>

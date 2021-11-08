@@ -1,0 +1,28 @@
+<app-mat-dialog-wrap>
+  <ng-container ngProjectAs='title'>
+    Направление от {{startNode.call_sign}} до {{endNode.call_sign}}
+  </ng-container>
+
+  <ng-container ngProjectAs='body'>
+    <div *ngFor='let item of sortedChannels | keyvalue'
+         class='direction-dialog__channel-list channel-list'>
+      <div class='channel-list__category'>
+        <div class='channel-list__title direction-dialog__title p-d-flex p-ai-center p-jc-start'>
+          <div [ngClass]='{"channel-list__accordion-button_collapsed": accordionIsCollapsed[item.key]}'
+               class='channel-list__accordion-button'
+               (click)='toggleAccordion(item.key)'>
+          </div>
+          <div class='channel-list__type-name'>{{item.key}}</div>
+          <span>{{item.value.length}}</span>
+        </div>
+        <div class='channel-list__channels'
+             [ngClass]='{"channel-list__channels_collapsed": accordionIsCollapsed[item.key]}'>
+          <div *ngFor='let channel of item.value'
+               class='channel-list__channel  p-d-flex p-ai-center p-jc-between'>
+            <span>{{channel['connection_number']}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-mat-dialog-wrap>

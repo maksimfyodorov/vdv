@@ -1,0 +1,222 @@
+@import '../../../../../../styles/variables/colors';
+
+:host ::ng-deep {
+  .p-button {
+
+  }
+
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    width: 240px;
+    height: 40px;
+  }
+
+  .p-dropdown .p-dropdown-label.p-inputtext {
+    width: 240px;
+    height: 40px;
+  }
+
+  .p-datatable {
+    &.p-datatable-gridlines {
+      .p-paginator-bottom {
+        border: none;
+      }
+    }
+
+    &.p-datatable-sm .p-datatable-thead th {
+      background: none;
+    }
+  }
+
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+
+    .p-paginator-pages {
+      .p-paginator-page {
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+
+    .p-paginator-prev {
+      color: $primary-color;
+
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+
+      span {
+        &::before {
+          content: "\e900";
+        }
+
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+
+    .p-paginator-next {
+      color: $primary-color;
+
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    padding: 0 0 0 10px;
+    text-align: left;
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    height: 40px;
+    color: #252B34;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0 0 0 10px;
+    text-align: left;
+    line-height: 20px;
+  }
+
+  .p-datatable .p-datatable-thead > tr {
+    :first-child {
+      width: 60px;
+    }
+
+    :nth-child(2) {
+      width: 120px;
+    }
+
+    :nth-child(3) {
+      width: 170px;
+    }
+
+    :nth-child(4) {
+      width: 100px;
+    }
+
+    :nth-child(5) {
+      width: 165px;
+    }
+  }
+}
+
+h5 {
+  font-style: normal;
+  font-weight: normal;
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  line-height: 18px;
+  color: #252B34;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.desanting {
+  &__container {
+    width: 722px;
+    min-height: 516px;
+    padding-top: 36px;
+
+    &__card {
+      width: 722px;
+      min-height: 516px;
+      border: 1px solid #E1E3E8;
+      border-radius: 8px;
+      margin: 68px 0 0 56px;
+    }
+  }
+
+  &__table {
+    border: 1px solid #E1E3E8;
+    border-radius: 8px;
+    min-height: 403px;
+  }
+
+  &__title {
+    display: flex;
+    width: 620px;
+    height: 58px;
+    margin-bottom: 32px;
+    justify-content: space-between;
+
+    &_label {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+}
+
+.modal__table_input {
+  display: flex;
+  width: 150px;
+  height: 40px;
+  justify-content: space-between;
+  border-bottom: 1px solid #E1E3E8;;
+}
+
+.element {
+  &__select {
+    width: 16px;
+    height: 16px;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+
+  &__vvst {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
+.input__text {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.edit {
+  display: flex;
+}
+
+.icons_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+
+
+

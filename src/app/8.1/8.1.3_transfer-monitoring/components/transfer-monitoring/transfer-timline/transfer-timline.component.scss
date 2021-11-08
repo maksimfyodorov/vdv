@@ -1,0 +1,32 @@
+.margins {
+    margin: 5px;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 12px;
+    line-height: 18px;
+    color: #252b34;
+    margin: 5px 0;
+}
+
+.status {
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 18px;
+    color: #959ea9;
+}
+
+.absolute {
+    position: absolute;
+    bottom: 565px;
+    right: 0px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}

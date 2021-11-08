@@ -1,0 +1,147 @@
+:host::ng-deep.orders-list {
+  p,
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+
+  &__hidden-title {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .order {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 16px;
+    box-shadow: inset -1px 0px 0px #E1E3E8, inset 1px 0px 0px #E1E3E8, inset 0px -1px 0px #E1E3E8, inset 0px 1px 0px #E1E3E8;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    gap: 20px;
+
+    &__info {
+      max-width: 650px;
+    }
+
+    &__date-of-creation {
+      margin-bottom: 8px;
+
+      span {
+        margin-left: 20px;
+        color: #959EA9;
+      }
+    }
+
+    &__description,
+    &__title {
+      margin-bottom: 8px;
+      max-width: 530px;
+    }
+
+    &__author {
+      font-weight: 700;
+    }
+
+    &__administration {
+      color: #959EA9;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    &__term-of-execution {
+      &._status_blue span {
+        background: #228BE6;
+      }
+
+      &._status_yellow span {
+        background: #FF922B;
+      }
+
+      &._status_green span {
+        background: #82C91E;
+      }
+
+      &._status_red span {
+        background: #FA5252;
+      }
+    }
+
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .p-button-link {
+      display: block;
+      padding: 0;
+      margin-top: 8px;
+      color: #2196F3;
+      text-align: left;
+
+      &:hover {
+        opacity: .7;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      & .p-button-label {
+        text-decoration: none;
+
+        &:focus-visible {
+          outline: none;
+        }
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+    &__documents-list {
+      display: flex;
+      margin-top: 20px;
+      gap: 20px;
+    }
+
+    &__attached-docs {
+      min-width: 200px;
+      max-width: 350px;
+
+      .title {
+        font-size: 14px;
+        color: #959EA9;
+        font-weight: 400;
+      }
+    }
+
+    &__execute-btn {
+      height: 36px;
+      overflow: unset;
+      display: block;
+      margin-bottom: 20px;
+      min-width: 240px;
+    }
+  }
+}

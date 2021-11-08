@@ -1,0 +1,89 @@
+<div class="container">
+  <form [formGroup]="form"
+        (ngSubmit)="createOrChangeEvent()"
+        [appLoader]="loader.isLoading$"
+  >
+    <div class="container_title">
+      <div class="container_title_info">
+        <h6>Дата проведения с:</h6>
+        <p-calendar [showIcon]="true"
+                    dateFormat="dd.mm.yy"
+                    firstDayOfWeek='1'
+                    formControlName="date_start_plan"
+                    [showTime]="true"
+        ></p-calendar>
+      </div>
+      <div class="container_title_info">
+        <h6>по:</h6>
+        <p-calendar [showIcon]="true"
+                    dateFormat="dd.mm.yy"
+                    firstDayOfWeek='1'
+                    formControlName="date_end_plan"
+                    [showTime]="true"
+        ></p-calendar>
+      </div>
+      <div class="container_title_info">
+        <h6>Наименование ВЧ</h6>
+        {{newEventDataService.selectedMilitaryUnit?.label}}
+      </div>
+    </div>
+    <div class="container_basic-info">
+      <h6>Наимененование мероприятия</h6>
+      <p-dropdown [options]="eventExist"
+                  editable="true"
+                  emptyMessage="Мероприятия не найдены"
+                  formControlName="name"
+      ></p-dropdown>
+    </div>
+    <div class="container_basic-info">
+      <h6>Докладывает начальнику ВДП</h6>
+      <app-military [selectedMilitary] = "shdkInputUUID"
+                    [loadExecutive]="true"
+                    formControlName = "shdk_uuid"
+      ></app-military>
+    </div>
+    <div class="container_input">
+      <h6>Описание</h6>
+      <textarea rows="5" cols="30"
+                pInputTextarea class="element_inputtext"
+                formControlName="description"
+      ></textarea>
+    </div>
+    <div class="inputs__wrapper">
+      <p-dropdown
+        [options]="yearsArray"
+        (onChange)="onChange($event)"
+        class="academic__year"
+        placeholder="Учебный год"
+        formControlName="year"
+        showClear = "true"
+      >
+      </p-dropdown>
+      <p-dropdown
+        [options]="filteredPeriods"
+        optionLabel="name"
+        class="period"
+        placeholder="Период"
+        formControlName="period"
+        showClear = "true"
+      >
+      </p-dropdown>
+    </div>
+    <app-documents [documentsToShow]="documents" [title]=titleDoc></app-documents>
+
+    <button pButton pRipple type="submit" label="Сохранить" class="p-button-success" [disabled]='(form.invalid)'></button>
+    <div class="container__buttons" *ngIf="newEventDataService.newEventComponentState === 'edit'">
+      <button pButton pRipple type="button" label="Согласовать" icon="pi pi-send" class="p-button-outlined"></button>
+      <p-button label="Доклад" icon="pi pi-send"></p-button>
+      <button pButton pRipple type="submit" label="Выполнено" class="p-button-success" [disabled]=true></button>
+      <button pButton pRipple type="button" label="Не выполнено" class="p-button-danger" [disabled]=true></button>
+    </div>
+  </form>
+  <div class="container__after-report" *ngIf="false">
+    <div class="report">
+      <div class="report__info">
+        <span class="element__bold-text">Дата проведения:</span>
+      </div>
+    </div>
+  </div>
+</div>

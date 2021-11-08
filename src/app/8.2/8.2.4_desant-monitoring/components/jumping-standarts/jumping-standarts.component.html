@@ -1,0 +1,116 @@
+<div
+  [appLoader]="loader.isLoading$"
+  class="container"
+>
+
+  <app-add-new-category
+    (updateTable)="updateAfterPost()"
+    [militaryUnitId]="currentDivisionID"
+    [period]="selectedPeriod"
+    (cancelNewCategory)="newCategoryComponentCondition()"
+    *ngIf="newCategoryComponentStatus"
+  ></app-add-new-category>
+
+  <h1>{{title}}</h1>
+
+  <div class="inputs-wrapper">
+
+    <p-dropdown
+      class="academic-year"
+      placeholder="Учебный год"
+      [(ngModel)]="selectedYear"
+      [options]="years"
+      (onChange)="onChange($event)"
+    > </p-dropdown>
+
+    <p-dropdown
+      class="period"
+      placeholder="Период"
+      [disabled]="!selectedYear"
+      [options]="filteredPeriods"
+      [(ngModel)]="selectedPeriod"
+      optionLabel="name"
+    > </p-dropdown>
+
+    <p-button
+      (click)="newCategoryComponentCondition()"
+      *ngIf="!newCategoryComponentStatus"
+      class="add-category-button"
+      label="Добавить категорию"
+      [disabled]="!selectedYear || !selectedPeriod || status"
+    > </p-button>
+
+    <p-button
+      class="form-report-button"
+      label="Сформировать доклад"
+    > </p-button>
+  </div>
+
+  <div class="table-container">
+    <p-table
+      dataKey="uuid"
+      [value]="standards"
+    >
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="military-category">Категория военнослужащих (подразделения)</th>
+          <th class="subdivisions">Подразделения</th>
+          <th class="state-count">Количество л/с по штату</th>
+          <th class="jump-rate">Норма прыжков</th>
+        </tr>
+      </ng-template>
+
+      <ng-template
+        pTemplate="body"
+        let-standard
+        let-ri="rowIndex"
+      >
+        <tr>
+          <td class="military-category">
+            <div class="category-name">{{standard?.category_division?.name}}</div><i
+              (click)="op.toggle($event)"
+              (click)="getSelectedRowUuid(standard)"
+              class="pi pi-ellipsis-h"
+            ></i>
+          </td>
+          <td
+            scrollHeight="400px"
+            class="subdivisions"
+          >
+            <div class="subdivisions-container">
+              <div
+                *ngFor="let item of standard?.division"
+                class="subdivisions-wrapper"
+              >
+                {{item?.name}}: <div class="underscore"></div>{{item?.count}}
+              </div>
+            </div>
+          </td>
+          <td class="state-count">{{standard?.count_state}}</td>
+          <td class="jump-rate">
+            <p-inputNumber
+              (onFocus)="getCurrentJumpNumber($event)"
+              (onBlur)="jumpOnChange($event, standard)"
+              class="jump-rate-input"
+              [(ngModel)]="standard.norm_jump"
+            ></p-inputNumber>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-overlayPanel
+  [showCloseIcon]="true"
+  #op
+>
+  <ng-template pTemplate>
+    <app-category-hierarchy
+      (sendRequest)="closeOverlay($event, op)"
+      [selectedUuid]="selectedUuid"
+      [militaryUnitId]="currentDivisionID"
+    ></app-category-hierarchy>
+  </ng-template>
+</p-overlayPanel>

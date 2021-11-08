@@ -1,0 +1,36 @@
+:host ::ng-deep {
+    .p-dropdown {
+        width: 464px;
+        height: 40px;
+        border: 1.5px solid #e1e3e8;
+        border-radius: 4px;
+    }
+}
+
+.text {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #959ea9;
+    margin: 10px 0;
+}
+
+.btn {
+    width: 160px;
+    height: 40px;
+    background: #228be6;
+    border-radius: 4px;
+    margin: 10px 0;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    width: 464px;
+    height: 40px;
+    border: 1.5px solid #e1e3e8;
+    border-radius: 4px;
+}

@@ -1,0 +1,46 @@
+<div>
+    <div class="header">{{header}}</div>
+    <tbody>
+        <tr
+            my-active
+            *ngFor="let row of products; index as rowIndex"
+        >
+            <td *ngFor="let column of cols; index as i">
+                <div *ngIf="column.field === 'time' || column.field === 'name'">
+                    <span>
+                        {{ row[column.field] }}
+                    </span>
+                </div>
+                <div
+                    class="space-between"
+                    *ngIf="column.field === 'normal_time'"
+                >
+                    <span>
+                        {{ row[column.field] }}
+                    </span>
+                    <span
+                        (click)="deleteRow(rowIndex)"
+                        class="btn"
+                    >
+                        <i class="pi pi-trash"></i>
+                    </span>
+                </div>
+                <div
+                    class="checkbox"
+                    [appTimeStyle]="row.time"
+                    (click)="completeEvent(column.field, rowIndex)"
+                    *ngIf="!fieldsArray.includes(column.field)"
+                >
+                    {{row[column.field]}}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</div>
+<div
+    *ngIf="editFlag"
+    class="push-row"
+    (click)="pushRow()"
+>
+    +Мероприятие
+</div>

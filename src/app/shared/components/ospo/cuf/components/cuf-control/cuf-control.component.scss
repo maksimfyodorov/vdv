@@ -1,0 +1,83 @@
+@import "../../../../../../../styles/primeng-fix-style";
+
+.cuf-control {
+  &__period,
+  &__server {
+    margin-bottom: 16px;
+  }
+  &__server,
+  &__host {
+    margin-right: 128px;
+  }
+}
+
+.label {
+  display: block;
+  color: #68737F;
+  margin-bottom: 4px;
+}
+
+.period {
+  &__array {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  &__label {
+    color: #252B34;
+    font-size: 16px;
+    margin: 0;
+
+    span {
+      color: #969ea8;
+    }
+  }
+}
+
+.triggers, .period {
+  margin-top: 16px;
+  position: relative;
+
+  &__add-button {
+    position: absolute;
+    right: 10px;
+    z-index: 9999;
+    width: 18px;
+    height: 18px;
+  }
+
+
+  &__label {
+    color: #252B34;
+    font-size: 16px;
+    margin: 0;
+
+    span {
+      color: #969ea8;
+    }
+  }
+}
+
+:host ::ng-deep {
+
+  .p-button.p-button-icon-only {
+    height: 28px;
+    width: 28px;
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+
+  .trigger:last-child:not(:first-child) .p-dropdown .p-dropdown-panel {
+    top: auto !important;
+    bottom: 36px !important;
+    transform-origin: center bottom !important;
+  }
+}

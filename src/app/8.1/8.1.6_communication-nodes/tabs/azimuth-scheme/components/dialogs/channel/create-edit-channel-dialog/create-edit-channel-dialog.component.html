@@ -1,0 +1,73 @@
+<div class="channel-dialog">
+  <form [formGroup]="channelForm" class="channel-dialog__form channel-form p-fluid p-formgrid p-grid">
+    <div class="p-field p-col-12 p-md-12">
+      <label><small>Тип канала</small></label>
+      <app-editable-autocomplete
+        [dataSource]="channel_types"
+        [selectedSuggestion]="selectedType"
+        (selectSuggestion)="selectType($event)"
+        (editItem)="editType($event)"
+        (deleteItem)="deleteType($event)"
+        (createItem)="createType($event)"
+        [searchField]="'name'"
+        [displayField]="'name'"
+      ></app-editable-autocomplete>
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="connectionNumber"><small>Условный номер связи</small></label>
+      <input type="text" id="connectionNumber" formControlName="connection_number" pInputText />
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="zasDirectionNumber"><small>Условный номер направления ЗАС</small></label>
+      <input type="text" id="zasDirectionNumber" formControlName="zas_direction_number" pInputText />
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="lineType"><small>Тип линии</small></label>
+      <input type="text" id="lineType" formControlName="line_type" pInputText />
+    </div>
+    <div class="channel-form__title p-field p-col-12 p-md-12">Статус канала связи</div>
+    <div class="channel-form__radio-set radio-set p-field p-col-12 p-md-12  p-d-flex p-ai-center">
+      <p-radioButton
+        class="radio-set__item"
+        *ngFor="let item of channelStatuses"
+        [value]="item"
+        [label]="item.name"
+        formControlName="channel_status"
+      >
+      </p-radioButton>
+    </div>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="establishmentConnectionTime"><small>Время установления связи</small></label>
+      <p-calendar
+        [disabled]='channelForm.get("channel_status").value.name === "Действующий"'
+        id="establishmentConnectionTime"
+        dateFormat="yy-mm-dd"
+        dataType="string"
+        showTime="true"
+        showSeconds="true"
+        hourFormat="24"
+        showIcon="true"
+        formControlName="establishment_connection_time"
+      >
+      </p-calendar>
+    </div>
+
+    <app-documents
+      [documentsToShow]='channelForm?.get("documents").value'
+      (currentDocumentList)="documentsChanged($event)"
+    ></app-documents>
+    <div class="p-field p-col-12 p-md-12">
+      <label for="note"><small>Примечание</small></label>
+      <textarea id="note" pInputTextarea formControlName="note"> </textarea>
+    </div>
+  </form>
+  <div class="channel-dialog__controls p-d-flex p-jc-between">
+    <div>
+      <p-button label="Сохранить" [disabled]="channelForm?.invalid" icon="pi pi-save" (onClick)="saveChannel()">
+      </p-button>
+      <p-button styleClass="p-button-secondary p-button-text" label="Отмена" (onClick)="cancelDialog()"> </p-button>
+    </div>
+    <p-button *ngIf='mode === "edit"' styleClass="p-button-danger" icon="pi pi-trash" (onClick)="deleteChannel()">
+    </p-button>
+  </div>
+</div>

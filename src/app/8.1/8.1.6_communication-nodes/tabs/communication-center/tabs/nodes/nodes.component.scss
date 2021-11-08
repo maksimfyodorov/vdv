@@ -1,0 +1,98 @@
+.top-section {
+  display: flex;
+  width: 100%;
+  margin-bottom: 24px;
+
+  .right-block {
+    margin-left: auto;
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+    }
+  }
+
+  .left-block {
+    h2 {
+      margin-top: 10px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 36px;
+      color: #000000;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.node {
+  background: #F5F6F8;
+  border: 2px solid white;
+  border-left: 2px solid #82C91E;
+  padding: 0 12px;
+}
+
+.communication-node {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 300px;
+  height: 40px;
+
+  &_left {
+
+  }
+
+  &_right {
+    color: #959EA9;
+    display: flex;
+    gap: 6px;
+  }
+}
+
+.table-cell {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &_wrapper {
+    padding: 0 12px !important;
+  }
+}
+
+.table {
+  max-width: 1440px;
+}
+
+.car-icon {
+  width: 24px;
+}
+
+.controls {
+  display: flex;
+  gap: 6px;
+  color: #228BE6;
+  font-size: 14px;
+
+  &_plus {
+    border: 1px solid #228BE6;
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  &_edit {
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  &_delete {
+    padding: 6px;
+    cursor: pointer;
+  }
+}
+
+.communication-node_highlighted {
+  color: #228BE6;
+}

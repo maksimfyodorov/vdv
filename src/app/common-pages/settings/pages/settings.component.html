@@ -1,0 +1,12 @@
+<div class='wrapper'>
+  <app-military-units-sidebar [showDivisionsSwitch]='false' (selectMilitaryUnitChanged)='selectCurrentMilitaryUnit($event)'></app-military-units-sidebar>
+  <div class='settings'>
+    <app-breadcrumbs class='settings__breadcrumbs' [model]='breadcrumbsLabels'></app-breadcrumbs>
+    <h2 class='settings__title'>Настройка</h2>
+    <section class='settings__databaseMode'>
+      <label for='isTestDatabaseMode'>Учебный режим</label>
+      <p-inputSwitch id='isTestDatabaseMode' [(ngModel)]='isTestDatabaseMode'></p-inputSwitch>
+    </section>
+    <app-periods></app-periods>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<p-checkbox
+  [(ngModel)]="traningStatus"
+  label="Предпрыжковая тренировка проведена"
+  (click)="changeTraningStatus()"
+></p-checkbox>
+
+<div class="inputs__wrapper">
+  <span>С</span>
+  <p-calendar class="time__input" [timeOnly]="true" [(ngModel)]="startTime"></p-calendar>
+  <span>ПО</span>
+  <p-calendar class="time__input" [timeOnly]="true" [(ngModel)]="endTime"></p-calendar>
+  <p-calendar class="date__input" [(ngModel)]="date"></p-calendar>
+</div>

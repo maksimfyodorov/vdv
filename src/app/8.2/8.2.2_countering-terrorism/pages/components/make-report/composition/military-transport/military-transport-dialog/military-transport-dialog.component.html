@@ -1,0 +1,57 @@
+<div>
+    <div class="row end">
+        <input
+            placeholder="Поиск"
+            type="text"
+        >
+    </div>
+</div>
+<div>
+    <p-table
+        [(selection)]="chosenTech"
+        [value]="tableDataSource"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Образец</th>
+                <th>Инвентарный номер</th>
+                <th>Группа техники</th>
+                <th>Закрепление</th>
+                <th>Состояние на</th>
+            </tr>
+        </ng-template>
+        <ng-template
+            pTemplate="body"
+            let-tech
+        >
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="tech"></p-tableCheckbox>
+                </td>
+                <td>{{tech.vvst_sample.name}}</td>
+                <td>{{tech.number}}</td>
+                <td>{{tech.vvst_sample.type.name}}</td>
+                <td>{{tech.vvst_sample.group.name}}</td>
+                <td>{{tech?.status?.name}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div class="row end margin">
+    <button
+        pButton
+        pRipple
+        type="button"
+        label="Отмена"
+        class="p-button-raised p-button-secondary p-button-text"
+        (click)="dialogRef.close()"
+    ></button>
+    <p-button
+        class="marginBtn"
+        (click)="sendData()"
+        label="Добавить"
+    ></p-button>
+</div>

@@ -1,0 +1,30 @@
+<section [appLoader]="loader.isLoading$">
+  <p-treeTable [value]="[_hierarchy?.hierarchy]" class="table">
+    <ng-template pTemplate="header">
+      <tr class="header_row">
+        <th [style.width]="'40%'">Категория</th>
+        <th>По штату</th>
+        <th>По списку</th>
+        <th>На лицо</th>
+        <th>Болен</th>
+        <th>Команд.</th>
+        <th>Отсутств.</th>
+        <th>Процент</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode>
+      <tr
+        [ngClass]="{gray_row: rowNode.node?.point === 'cn' || rowNode.node?.point === 'center' || rowNode.node?.point === 'caption', mm_row: rowNode.node?.point === 'mm'}"
+      >
+        <td *ngFor="let column of columns; let i = index">
+          <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+          <ng-container
+            *ngTemplateOutlet="tableTemplates[column.template]; context: {$implicit: { value: rowNode, disabled: disabled}}"
+          ></ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</section>
+
+<app-completeness-templates #tableTemplates (actionEmitter)="doAction($event)"></app-completeness-templates>

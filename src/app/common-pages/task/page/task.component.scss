@@ -1,0 +1,290 @@
+:host {
+  .container {
+    padding: 38px 63px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  main {
+    display: flex;
+    flex-flow: column nowrap;
+    background: white;
+    position: relative;
+  }
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+
+    .title {
+      font-size: 32px;
+      line-height: 40px;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      margin-top: 8px;
+    }
+
+    .card {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+
+      margin: 0 24px 24px 0;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      width: 542px;
+      height: 170px;
+      letter-spacing: 0;
+      line-height: 24px;
+      box-shadow: 0 0 3px #E1E3E8;
+      flex-wrap: wrap;
+      background-color: #F5F6F8;
+      transition: background-color 0.2s;
+
+
+      &:nth-child(3n+1) {
+        margin-right: 0;
+      }
+
+      &.long_info {
+        & .card_title {
+          margin: 0;
+          width: 100%;
+
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 20px;
+          color: #484F59;
+          margin-bottom: 5px;
+        }
+
+        & .card_description {
+          margin: 0;
+
+          font-style: normal;
+          font-weight: normal;
+          font-size: 13px;
+          line-height: 18px;
+          color: #484F59;
+        }
+      }
+
+      &.short_info {
+        .card_description {
+          display: none;
+        }
+      }
+
+      & .button_description {
+        position: absolute;
+        right: 0;
+        top: 0;
+        outline: 0;
+        width: 50px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: help;
+
+        img {
+          width: 20px;
+        }
+
+        &:hover ~ .card_description {
+          display: block;
+          font-family: Noto Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 20px;
+          color: #484F59;
+        }
+
+        &:hover ~ .card_title {
+          display: none;
+        }
+      }
+    }
+
+    .card:hover {
+      color: #484F59;
+      background-color: #D0EBFF;
+    }
+  }
+
+  ::ng-deep {
+    .dropdown-container__wrap:nth-child(2) .p-dropdown .p-dropdown-label {
+      width: 272px;
+    }
+
+    .p-tabview {
+      position: relative;
+    }
+
+
+    #float-input {
+      width: 425px;
+    }
+
+    .p-float-label label {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #959EA9;
+      top: 44%;
+    }
+
+    .actions {
+      position: absolute;
+      top: -5px;
+      right: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .wrap-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 20px;
+      margin-top: 2px;
+    }
+
+    .wrap-container__title {
+      margin: -3px 10px 0 0;
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .p-tabview .p-tabview-nav {
+      border: none;
+    }
+
+    .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+      padding: 8px 16px;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    .p-inputswitch {
+      height: 1.7rem;
+    }
+
+    .p-tabview .p-tabview-panels {
+      padding: 32px 0 0;
+    }
+  }
+}
+
+@media (max-width: 1919px) {
+  .container {
+    max-width: 1500px!important;
+  }
+
+  .card {
+    width: 442px!important;
+    height: 200px!important;
+  }
+}
+
+@media (max-width: 1650px) {
+  .container {
+    max-width: 1300px!important;
+  }
+
+  .card {
+    width: 375px!important;
+    height: 200px!important;
+  }
+}
+
+@media (max-width: 1428px) {
+  :host {
+    .section {
+      .card {
+        margin-right: 20px!important;
+      }
+    }
+  }
+}
+
+
+::ng-deep {
+  // Стилизация материал полей | Start
+  mat-form-field.full-autocomplete {
+    width: 100%;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0!important;
+    padding-bottom: 0!important;
+  }
+
+  .mat-dialog-content {
+    padding: 0!important;
+    margin: 0!important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.55em 0 1em 0;
+  }
+
+  .mat-form-field-label-wrapper {
+    top: -1.14375em;
+    padding-bottom: 0;
+  }
+  // Стилизация материал полей | Finish
+
+
+
+
+  .search {
+    width: 425px;
+
+    & mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .search-autocomplete {
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(21, 22, 23, 0.25);
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background: #1516170b;
+    }
+
+
+    mat-option {
+      height: 39px;
+
+      .mat-option-text {
+        p {
+          font-size: 12px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,52 @@
+<section class="wrapper">
+  <section class="security">
+    <div class="top">
+      <div class="top_left">
+        <h2 *ngIf="infoForHeader?.label">Состояние техники БЛА - {{infoForHeader?.label}}</h2>
+      </div>
+      <div class="top_right">
+        <span class="p-float-label">
+          <p-calendar
+            inputId="calendar"
+            (onSelect)="routeByDate($event)"
+            (onClearClick)="routeByDate($event)"
+            dateFormat="dd.mm.yy"
+            firstDayOfWeek="1"
+            [disabled]="!tableDataSource?.hierarchy"
+            [ngModel]="filteredDate"
+            showIcon="true"
+            showButtonBar="true"
+            [maxDate]="maxDate"
+          ></p-calendar>
+          <label for="calendar">Выберите дату</label>
+        </span>
+        <div class="inputswitch-container">
+          <span>Техника</span>
+          <p-inputSwitch [(ngModel)]="techMode" (onChange)="routeByTechMode($event)"></p-inputSwitch>
+        </div>
+<!--        <app-documents-formalized groupName="8.1.4"></app-documents-formalized>-->
+        <button
+          pButton
+          [label]="hasReport ? 'Доклад сформирован' : 'Сформировать доклад'"
+          [disabled]="hasReport || selectionTreeService.militaryUnitId != selectionTreeService.selectionTreeSubject.value[0]?.id"
+          type="button"
+          icon="pi pi-file"
+          style='margin-right: 16px;'
+          (click)="generateReport()"
+        ></button>
+      </div>
+    </div>
+    <app-security-table
+      (addTech)="addTech($event)"
+      (editTech)="editTech($event)"
+      (updateStatus)="updateStatus($event)"
+      (deleteTech)="deleteTech($event)"
+      [cols]="cols"
+      [dataSource]="tableDataSource"
+      [viewSecurityItem]="techMode"
+      [disabled]="disabledTable"
+      class="table"
+    >
+    </app-security-table>
+  </section>
+</section>

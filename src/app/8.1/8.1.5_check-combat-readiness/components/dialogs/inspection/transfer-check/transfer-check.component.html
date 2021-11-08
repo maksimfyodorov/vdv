@@ -1,0 +1,58 @@
+<form [formGroup]='checkForm' novalidate>
+  <main>
+    <div class='row'>
+      <div class='inspection-period'>
+        <p class='title'>
+          Текущий срок проверки:
+        </p>
+        <p class='black'>с {{checkForm.controls['currentInspectionStartDate'].value}} г.
+          по {{checkForm.controls['currentInspectionEndDate'].value}} года</p>
+      </div>
+    </div>
+      <div class='row'>
+        <div>
+        <label for='dateStart'><small>Дата начала</small></label>
+        <p-calendar id='dateStart'
+                    appendTo='body'
+                    dateFormat='dd.mm.yy'
+                    dataType='string'
+                    showIcon='true'
+                    formControlName='newStartDate'>
+        </p-calendar>
+        </div>
+      <div class='end-date-calendar'>
+        <label for='dateEnd'><small>Дата окончания</small></label>
+        <p-calendar id='dateEnd'
+                    appendTo='body'
+                    dateFormat='dd.mm.yy'
+                    dataType='string'
+                    showIcon='true'
+                    formControlName='newEndDate'>
+        </p-calendar>
+    </div>
+    </div>
+    <div class='row'>
+      <app-documents (currentDocumentList)='currentDocumentList = $event' [documentsToShow]='documents ? documents: []' ></app-documents>
+    </div>
+    <div class='row'>
+      <div class='vertical-block width-max'>
+        <p class='date'>Причина переноса проверки</p>
+        <textarea [autoResize]='true' pInputTextarea formControlName='result'></textarea>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='wrap-warning-container'>
+        Вы действительно хотите перенести проверку?
+      </div>
+    </div>
+  </main>
+  <div class='ui-toolbar-group-left'>
+    <button
+      (click)='submitTransfer()'
+      icon='pi pi-check'
+      pButton
+      label='Перенести'
+      type='submit'>
+    </button>
+  </div>
+</form>

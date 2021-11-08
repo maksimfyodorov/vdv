@@ -1,0 +1,33 @@
+:host ::ng-deep {
+    .p-calendar {
+        width: 345px;
+        height: 40px;
+    }
+}
+
+:host ::ng-deep {
+    .editable-autocomplete {
+        width: 347px !important;
+        height: 40px !important;
+    }
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #252b34;
+    width: 952px;
+}
+
+.paragraph {
+    font-size: 12px;
+    line-height: 18px;
+    color: #252b34;
+    margin: 8px 0 4px 0 !important;
+}
+
+.input {
+    width: 345px;
+    height: 40px;
+}

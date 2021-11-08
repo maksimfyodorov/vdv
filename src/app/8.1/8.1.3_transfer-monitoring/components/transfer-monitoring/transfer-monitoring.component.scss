@@ -1,0 +1,67 @@
+:host::ng-deep {
+    .p-dropdown {
+        width: 405px !important;
+    }
+    .p-timeline {
+        width: 620px;
+    }
+    .p-timeline .p-timeline-event-connector {
+        background-color: #228be6;
+    }
+    .p-timeline .p-timeline-event-marker {
+        border-color: #228be6;
+    }
+}
+
+.page-data {
+    margin: 10px 0 0 10px;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.margins {
+    margin: 5px;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 12px;
+    line-height: 18px;
+    color: #252b34;
+    margin: 5px 0;
+}
+
+.status {
+    white-space: nowrap;
+    font-size: 12px;
+    line-height: 18px;
+    color: #959ea9;
+}
+
+.absolute{
+    position: absolute;
+    bottom: 565px;
+    right: 0px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}

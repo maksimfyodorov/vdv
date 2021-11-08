@@ -1,0 +1,31 @@
+<div class='buttons-space'>
+  <p-button *ngIf='!selectedMonth.reported' (onClick)='reportMonth()' class='buttons-space-element report-button'
+            label='Доложить' icon='pi pi-file' iconPos='left'></p-button>
+  <p-button *ngIf='!isEditMode.value && !selectedMonth.reported' class='buttons-space-element edit-button'
+            (onClick)='isEditMode.next(true)'
+            label='Редактировать' icon='pi pi-pencil' iconPos='left'></p-button>
+  <p-button *ngIf='isEditMode.value && !selectedMonth.reported' class='buttons-space-element edit-button'
+            (onClick)='saveSchedule()'
+            label='Сохранить' icon='pi pi-save' iconPos='left'></p-button>
+  <p-button *ngIf='!selectedMonth.reported' (onClick)='clearPosts()' class='buttons-space-element all-delete-button'
+            icon='pi pi-trash'
+            iconPos='left'></p-button>
+</div>
+<div class='content'>
+
+  <p-button
+    class='month-selector-button'
+    [label]='intercessionScheduleDataService?.selectedMonth?.month ? intercessionScheduleDataService.selectedMonth.month: "Выбрать дату"'
+    (onClick)='openMonthCalendarDialog()'>
+  </p-button>
+
+  <div class='post-select'>
+    <p-tabView (onChange)='isEditMode.next(false)' (activeIndexChange)='selectedPostChanged($event)'>
+      <p-tabPanel *ngFor='let post of intercessionScheduleDataService.posts' [header]='post?.number'>
+        <app-posts-schedule [shift]='intercessionScheduleDataService.shifts' [needSaveData]='needExportPosts' [needClearSubscribe]='needClearPosts' [editionSubscribe]='isEditMode'
+                            [postsValues]='intercessionScheduleDataService?.currentPostSchedule'></app-posts-schedule>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+

@@ -1,0 +1,140 @@
+.controllers {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+
+  &_date {
+    margin-left: 24px;
+  }
+
+  &_filter {
+    margin-left: 20px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  margin-bottom: 36px;
+
+  &_header:hover .grid_button {
+    opacity: 1;
+  }
+
+  &_header {
+    position: sticky;
+    top: 0;
+    background: white;
+    display: grid;
+    grid-template-rows: minmax(36px, 1fr);
+
+    div {
+      box-shadow: inset 0px -1px 0px #C4C4C4, inset -1px 0px 0px #F3F0ED;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #252B34;
+    }
+  }
+
+  &_dates {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_button {
+    opacity: 0;
+    height: 36px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background: #228BE6;
+    transition: .15s;
+  }
+
+  &_row {
+    display: grid;
+    grid-template-rows: minmax(36px, 1fr);
+
+    div {
+      font-size: 14px;
+      box-shadow: inset -1px -1px 0px #F3F0ED, inset 0 1px 0px #F3F0ED;
+      display: flex;
+      align-items: center;
+    }
+
+    .event {
+      grid-row: 1/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+
+      &_bar {
+        font-size: 12px;
+        width: 100%;
+        height: 80%;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: .15s;
+        padding: 8px;
+        background: #74C0FC;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+        color: white;
+
+        span {
+          text-wrap: none;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+
+        &:hover {
+          box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+        }
+      }
+    }
+  }
+}
+
+.previous {
+  left: 18.4%;
+  position: absolute;
+}
+
+.forward {
+  right: 0;
+  position: absolute;
+}
+
+.inspection {
+  display: grid;
+  grid-template-rows: minmax(36px, 1fr);
+
+  &_name {
+    padding-left: 12px;
+    box-shadow: inset 0px -1px 0px #F3F0ED;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-style: italic;
+  }
+}
+
+.selected {
+  transform: scale(1.05);
+}
+
+.formation-name {
+  padding-left: 12px;
+}

@@ -1,0 +1,430 @@
+<div class='page'>
+  <main>
+    <div
+      *ngIf='!spinnerFlag'
+      class='content'
+    >
+
+      <p class='title title-page'>Мониторинг актуализации информационных массивов</p>
+      <div class='header-page'>
+        <div class='search-container'>
+          <input
+            type='text'
+            placeholder='Поиск'
+            pInputText
+            [(ngModel)]='inputSearch'
+            (ngModelChange)='onSearch()'
+          />
+          <p-calendar
+            class='page_mrg-left'
+            dateFormat='dd.mm.yy'
+            [(ngModel)]='value'
+          ></p-calendar>
+          <p-dropdown
+            class='page_mrg-left'
+            [options]='dropDocuments'
+            optionLabel='name'
+          ></p-dropdown>
+          <p-button
+            class='page_mrg-left'
+            label='Печать'
+            icon='pi pi-print'
+            iconPos='left'
+          ></p-button>
+        </div>
+        <div
+          class='header-buttons'
+          *ngIf='isConnect'
+        >
+          <p-button
+            label='Настройка ИМ'
+            icon='pi pi-cog'
+            iconPos='left'
+            (click)='openSettingInformationArray()'
+          >
+          </p-button>
+          <p-button
+            class='page_mrg-left'
+            label='Проверить'
+            (click)='makeCheck()'
+            icon='pi pi-cog'
+            iconPos='left'
+          >
+          </p-button>
+        </div>
+        <div
+          class='header-buttons'
+          *ngIf='!isConnect'
+        >
+          <p-button
+            disabled='isConnected()'
+            label='Настройка ИМ'
+            icon='pi pi-cog'
+            iconPos='left'
+          ></p-button>
+          <p-button
+            disabled='isConnected()'
+            class='page_mrg-left'
+            label='Проверить все'
+            icon='pi pi-cog'
+            iconPos='left'
+          ></p-button>
+        </div>
+      </div>
+      <div
+        style='margin-top: 30px'
+        *ngIf='isConnect'
+      >
+
+        <p-table
+          #dt
+          [value]='actualizations'
+          [paginator]='true'
+          [rows]='8'
+          [totalRecords]='totalRecords'
+          [lazy]='true'
+          [(selection)]='selectedProducts'
+          [rowHover]='true'
+          dataKey='uuid'
+          (onPage)='paginate($event)'
+        >
+          <ng-template pTemplate='header'>
+            <tr>
+              <th style='width: 3rem'>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th>№</th>
+              <th>Идентификатор</th>
+              <th>Наименование</th>
+              <th>Ответственный</th>
+              <th>Объём</th>
+              <th>Дата обновления</th>
+              <th>Статус</th>
+              <th>Действия</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate='body'
+            let-product
+            let-i='rowIndex'
+          >
+            <tr>
+              <td>
+                <p-tableCheckbox [value]='product'></p-tableCheckbox>
+              </td>
+              <td (click)='showReportDialog(product)'>{{i + 1}}</td>
+              <td (click)='showReportDialog(product)'>{{product.identificator}}</td>
+              <td (click)='showReportDialog(product)'>
+                <div class='row-content'>
+                  <p class='row-content_text'>{{product.name}}</p>
+                  <p class='row-content_text row-content_gray'>{{product.uuid}}</p>
+                </div>
+              </td>
+              <td>
+                <p class='row-content_text row-content_gray'>{{product.responsible.rank}}</p>
+                <p class='row-content_text'>{{product.responsible.name}}</p>
+                <p class='row-content_text row-content_gray'>{{product.responsible.appointment}}</p>
+              </td>
+              <td (click)='showReportDialog(product)'>{{product.size}}</td>
+              <td (click)='showReportDialog(product)'>{{changeTypeOfDate(product.update) | date : 'dd.MM.yyyy'}}</td>
+              <td (click)='showReportDialog(product)'>
+                <div [ngStyle]="{
+                        'background': getBackground(checkStatus(product.files)),
+                        'border-radius': '4px',
+                        'font-family': 'Noto Sans',
+                        'font-style': 'normal',
+                        'font-weight': 'bold',
+                        'font-size': '12px',
+                        'line-height': '18px',
+                        'color': '#FFFFFF',
+                        'padding': '2px 8px',
+                        'display': 'flex',
+                        'justify-content': 'center'
+                     }">
+                  {{checkStatus(product.files)}}
+                </div>
+              </td>
+              <td class='buttons'>
+                <button
+                  pButton
+                  pRipple
+                  icon='pi pi-cog'
+                  (click)='editProduct(product)'
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon='pi pi-trash'
+                  class='p-button-rounded p-button-warning'
+                  (click)='deleteProduct(product)'
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+
+      </div>
+    </div>
+    <div
+      *ngIf='spinnerFlag'
+      class='loading-block'
+    >
+      <div class='spinner-center'>
+        <p-progressSpinner
+          [style]="{width: '100px', height: '100px'}"
+          styleClass='custom-spinner'
+          strokeWidth='8'
+          fill='#EEEEEE'
+          animationDuration='.5s'
+        ></p-progressSpinner>
+
+      </div>
+    </div>
+  </main>
+  <aside>
+    <p class='aside-content aside-content_title'>Подключение к серверу</p>
+    <div *ngIf='isConnect'>
+      <div class='aside-content__wrap-content'>
+        <p>Сервер</p>
+        <div class='row'>
+          <p-dropdown
+            [options]='serverTypes'
+            [(ngModel)]='selectedServerTypes'
+            (onChange)='selectServerType($event)'
+            optionLabel='type'
+          ></p-dropdown>
+          <p-dropdown
+            [options]='servers'
+            [(ngModel)]='selectedServers'
+            optionLabel='server'
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class='wrapppp'>
+        <div class='aside-content__wrap-content aside-content__wrap-content_small'>
+          <p>Логин</p>
+          <input
+            disabled='isConnect'
+            type='text'
+            placeholder='Логин'
+            pInputText
+            [(ngModel)]='login'
+          />
+        </div>
+        <div class='aside-content__wrap-content aside-content__wrap-content_small'>
+          <p>Пароль</p>
+          <p-password
+            disabled='isConnect'
+            [(ngModel)]='password'
+            [toggleMask]='true'
+          ></p-password>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='!isConnect'>
+      <div class='aside-content__wrap-content'>
+        <p>Сервер</p>
+        <div class='row'>
+          <p-dropdown
+            [options]='serverTypes'
+            [(ngModel)]='selectedServerTypes'
+            (onChange)='selectServerType($event)'
+            optionLabel='type'
+          ></p-dropdown>
+          <app-editable-autocomplete
+            [dataSource]='servers'
+            [selectedSuggestion]='selectedServers'
+            (selectSuggestion)='selectInputItem($event)'
+            (editItem)='editInputItem($event, "characterGroups")'
+            (deleteItem)='deleteInputItem($event, "characterGroups")'
+            (createItem)='addInputItem($event, "characterGroups")'
+            [searchField]="'server'"
+            [displayField]="'server'"
+          >
+          </app-editable-autocomplete>
+          <div
+            class='popup popup_padding-edit-box'
+            *ngIf='is_edit'
+          >
+            <p class='edit-menu_text'>Редактирование значение:</p>
+            <div class='wrap_box'>
+              <input
+                type='text'
+                placeholder='Заменить на..'
+                pInputText
+                [(ngModel)]='editServer'
+              />
+              <div style='margin-top: 5px;'>
+                <p-button
+                  (onClick)='saveEditableItem()'
+                  styleClass='p-button-text'
+                >
+                  <i class='popup_icon popup_icon_padding pi pi-plus'></i>
+                  <span class='popup__text popup__text_color'>Cохранить</span>
+                </p-button>
+                <p-button (onClick)='cancelEdit()'><span class='popup__text popup__text_color'>Отменить</span>
+                </p-button>
+              </div>
+            </div>
+          </div>
+          <div
+            class='popup popup_padding-edit-box'
+            *ngIf='is_delete'
+          >
+            <p class='edit-menu_text'>Вы уверены?</p>
+            <div class='wrap_box'>
+              <div style='margin-top: 5px;'>
+                <p-button
+                  (onClick)='delServerItem()'
+                  styleClass='p-button-text'
+                >
+                  <span class='popup__text popup__text_color'>Да</span>
+                </p-button>
+                <p-button (onClick)='cancelEdit()'><span class='popup__text popup__text_color'>Отменить</span>
+                </p-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='wrapppp'>
+        <div class='aside-content__wrap-content aside-content__wrap-content_small'>
+          <p>Логин</p>
+          <input
+            type='text'
+            placeholder='Логин'
+            pInputText
+            [(ngModel)]='login'
+          />
+        </div>
+        <div class='aside-content__wrap-content aside-content__wrap-content_small aside-content__wrap-content_left'>
+          <p>Пароль</p>
+          <p-password
+            [(ngModel)]='password'
+            [feedback]='false'
+            [toggleMask]='true'
+          ></p-password>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf='isConnect'
+      style='display: flex; flex-direction: row; align-items: center;'
+    >
+      <div style='background: #82C91E; border-radius: 50%; color: #82C91E; width: 16px; height: 16px'>.</div>
+      <p style='color: #959EA9; font-size: 14px; margin-left: 8px;'>Подключение установлено</p>
+    </div>
+    <div style='margin-top: 35px'>
+      <p-button
+        *ngIf='!isConnect'
+        [disabled]='disableButton'
+        (click)='connect()'
+        label='Подключиться'
+      ></p-button>
+      <p-button
+        *ngIf='isConnect'
+        [disabled]='disableButton'
+        (click)='disconnect()'
+        label='Отключиться'
+      ></p-button>
+    </div>
+    <div
+      class="connection-error"
+      *ngIf="connectErrorMessage"
+    >
+      <i class="pi pi-info-circle"></i>
+      {{connectErrorMessage}}
+    </div>
+    <div *ngIf='isConnect'>
+      <div *ngFor='let item of regulations'>
+        <div
+          *ngIf='regulations'
+          class='regulation'
+        >
+          <div
+            class='btn'
+            (click)='openAttachDocuments(item)'
+          >
+            <i
+              class='pi pi-file'
+              style='font-size: 19px'
+            ></i>
+            <div>
+              <span>Регламент {{regulations.indexOf(item) + 1}} {{item.size}}</span>
+            </div>
+          </div>
+          <span
+            (click)='deleteRegulation(item)'
+            class='delRegulation'
+          >×</span>
+        </div>
+        <div
+          *ngIf='regulations'
+          class='anchor'
+        >
+          <i
+            class='pi pi-info-circle'
+            style='font-size: 19px'
+          ></i>
+          <span>
+            Закреплён {{changeTypeOfDate(item.date) | date: 'dd MMMM yyyy'}}
+          </span>
+        </div>
+      </div>
+      <div
+        *ngIf='regulations.length == 0'
+        class='regulation'
+        style='cursor: pointer;'
+        (click)='openAttachDocuments()'
+      >
+        Выберите регламент
+      </div>
+      <div
+        *ngIf='isConnect && regulations.length > 0'
+        class='regulation'
+        style='cursor: pointer;'
+        (click)='openAttachDocuments()'
+      >
+        +Добавить регламент
+      </div>
+    </div>
+    <div
+      class='settings-container settings-container_margin-top'
+      (click)='openSettingInformationGroup()'
+      *ngIf='isConnect'
+    >
+      <img
+        alt=''
+        src='../../../../assets/img/icons/settings.svg'
+      />
+      <p class='settings-container__text settings-container__text_margin-left '>
+        Настройка информационных групп
+      </p>
+    </div>
+    <div *ngIf='isConnect'>
+      <div class='logoCheck'>
+        Проверки
+      </div>
+      <div
+        style='display: flex; align-items: center; justify-content: space-between;'
+        *ngFor='let item of check'
+      >
+        <span style='display: flex; color: #228BE6;'>
+          <i
+            class='pi pi-file'
+            style='font-size: 19px'
+          ></i>
+          от {{changeTypeOfDate(item.date) | date : 'd MMMM yyyy HH:mm'}}
+        </span>
+        <span
+          class='delCheck'
+          (click)='deleteCheck(item)'
+        >
+          ×
+        </span>
+      </div>
+    </div>
+  </aside>
+</div>

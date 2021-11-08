@@ -1,0 +1,270 @@
+<div class='coordinates-wrapper'>
+  <div
+    [formGroup]='formCoordinates'
+    class='epsg3857-coordinates-wrapper'
+    [ngClass]="formMode.get('mode').value === 'epsg3857' ? 'active-mode' : ''"
+  >
+    <div class='coordinates__wrapper --latitude'>
+      <h5 class='field-title'>
+        Широта
+      </h5>
+
+      <mat-form-field
+        class='coordinates__wrapper'
+        appearance='outline'
+      >
+        <input
+          [readonly]='isReadOnly'
+          type='number'
+          matInput
+          [formControl]='longitudeControl'
+        >
+      </mat-form-field>
+    </div>
+
+    <div class='coordinates__wrapper --latitude'>
+      <h5 class='field-title'>
+        Долгота
+      </h5>
+
+      <mat-form-field
+        class='coordinates__wrapper'
+        appearance='outline'
+      >
+        <input
+          [readonly]='isReadOnly'
+          type='number'
+          matInput
+          [formControl]='latitudeControl'
+        >
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div
+    *ngIf='!isReadOnly && !isModal'
+    class='degrees-coordinates-wrapper'
+    [formGroup]='stringHDMSForm'
+    [ngClass]="formMode.get('mode').value === 'degrees' ? 'active-mode' : ''"
+  >
+    <div
+      class='degrees-latitude--wrapper'
+      [formGroupName]="'latitude'"
+    >
+      <p class='coordinates-title'>Широта</p>
+      <div class='coordinates__wrapper degrees-wrapper'>
+        <h5 class='field-title'>
+          Градусы
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            max='90'
+            min='-90'
+            class='input degrees'
+            [formControlName]="'degree'"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class='coordinates__wrapper minutes-wrapper'>
+        <h5 class='field-title'>
+          Минуты
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            class='input degrees'
+            [formControlName]="'minute'"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class='coordinates__wrapper seconds-wrapper'>
+        <h5 class='field-title'>
+          Секунды
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            class='input degrees'
+            [formControlName]="'second'"
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field
+        appearance='outline'
+        class='form__infection-select'
+      >
+        <mat-select [formControlName]="'type'">
+          <mat-option [value]="'N'">С</mat-option>
+          <mat-option [value]="'S'">Ю</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div
+      class='degrees-longitude--wrapper'
+      [formGroupName]="'longitude'"
+    >
+      <p class='coordinates-title'>Долгота</p>
+      <div class='coordinates__wrapper degrees-wrapper'>
+        <h5 class='field-title'>
+          Градусы
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            class='input degrees'
+            [formControlName]="'degree'"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class='coordinates__wrapper minutes-wrapper'>
+        <h5 class='field-title'>
+          Минуты
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            class='input degrees'
+            [formControlName]="'minute'"
+          >
+        </mat-form-field>
+      </div>
+
+      <div class='coordinates__wrapper seconds-wrapper'>
+        <h5 class='field-title'>
+          Секунды
+        </h5>
+
+        <mat-form-field
+          class='coordinates__wrapper'
+          appearance='outline'
+        >
+          <input
+            matInput
+            type='number'
+            class='input degrees'
+            [formControlName]="'second'"
+          >
+        </mat-form-field>
+      </div>
+
+      <mat-form-field
+        appearance='outline'
+        class='form__infection-select'
+      >
+        <mat-select [formControlName]="'type'">
+          <mat-option [value]="'E'">В</mat-option>
+          <mat-option [value]="'W'">З</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div
+    *ngIf='isReadOnly || isModal'
+    class='degrees-coordinates-wrapper'
+    [formGroup]='stringHDMSForm'
+    [ngClass]="formMode.get('mode').value === 'degrees' ? 'active-mode' : ''"
+  >
+    <div
+      class='coordinates__wrapper --latitude'
+      formGroupName='latitude'
+    >
+      <h5 class='field-title'>
+        Широта
+      </h5>
+
+      <mat-form-field
+        class='coordinates__wrapper'
+        appearance='outline'
+      >
+        <input
+          [readonly]='isReadOnly'
+          matInput
+          class='input degrees'
+          [formControlName]="'str'"
+        >
+      </mat-form-field>
+    </div>
+
+    <div
+      class='coordinates__wrapper --latitude'
+      formGroupName='longitude'
+    >
+      <h5 class='field-title'>
+        Долгота
+      </h5>
+
+      <mat-form-field
+        class='coordinates__wrapper'
+        appearance='outline'
+      >
+        <input
+          [readonly]='isReadOnly'
+          matInput
+          class='input degrees'
+          [formControlName]="'str'"
+        >
+      </mat-form-field>
+    </div>
+  </div>
+
+  <p-button
+    *ngIf='!isCoordinateSelected'
+    (onClick)='selectCoordinatesOnMap()'
+    label='Выбор координат'
+    class='button-coordinates'
+  >
+  </p-button>
+
+  <p-button
+    *ngIf='isCoordinateSelected'
+    (onClick)='cancelSelectCoordinatesOnMap()'
+    label='Отмена'
+    class='button-coordinates'
+  >
+  </p-button>
+
+</div>
+
+
+<!-- Todo: Необходимо реализовать переключение систем координат -->
+<!--  <mat-form-field-->
+<!--    appearance='outline'-->
+<!--    class='form__infection-select'-->
+<!--  >-->
+<!--    <mat-select formControlName='mode'>-->
+<!--      <mat-option [value]="'epsg3857'">П</mat-option>-->
+<!--      <mat-option [value]="'degrees'">Г</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->

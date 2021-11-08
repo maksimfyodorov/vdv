@@ -1,0 +1,103 @@
+<ng-container *ngFor='let item of _data'>
+  <ng-container *ngTemplateOutlet='getTemplateOf(item); context: {$implicit: item}'></ng-container>
+
+  <app-ospo-hierarchy-folder
+    [selectedItem]='selectedItem'
+    *ngIf='item.children'
+    [sidebarExpanded]='_sidebarExpanded'
+    [data]='item?.children'
+    [deepLevel]='_deepLevel'
+  ></app-ospo-hierarchy-folder>
+</ng-container>
+
+<ng-template #center let-item>
+  <div
+    (click)='$event.stopPropagation(); selectionChanged(item)'>
+    <div
+      class='folder'
+      *ngIf='item.expanded'>
+      <div class='folder_background'>
+        <div *ngFor='let level of _deepLevel' class='folder_dot'></div>
+      </div>
+      <div [ngClass]='{ selected: selectedItem?.uuid === item.uuid }' class='content'>
+        <div class='content_description'>
+          <button *ngIf='item.children?.length' (click)='$event.stopPropagation(); toggleExpanding(item)'
+                  class='expand-button'>
+            <i class='pi {{isChildExpanded(item) ? "pi-angle-down" : "pi-angle-right"}}'></i>
+          </button>
+          <div class='content_name'>{{item.number}} {{item.center_type.name}}</div>
+          <div *ngIf='item.division' class='content_formation'>[{{item.division.label}}]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #cn let-item>
+  <div
+    (click)='$event.stopPropagation(); selectionChanged(item)'>
+    <div
+      class='folder'
+      *ngIf='item.expanded'>
+      <div class='folder_background'>
+        <div *ngFor='let level of _deepLevel' class='folder_dot'></div>
+      </div>
+      <div [ngClass]='{ selected: selectedItem?.uuid === item.uuid }' class='content'>
+        <div class='content_description'>
+          <button *ngIf='item.children?.length' (click)='$event.stopPropagation(); toggleExpanding(item)'
+                  class='expand-button'>
+            <i class='pi {{isChildExpanded(item) ? "pi-angle-down" : "pi-angle-right"}}'></i>
+          </button>
+          <div class='content_name'>{{item.call_sign}}</div>
+          <div class='content_formation'>[{{item.military_unit.label || item.military_unit}}]</div>
+        </div>
+        <div class='content_container' >
+          <div *ngIf='item.security && item.staffing' class='content_info'>
+            <div>O: {{item.security}}%</div>
+            <div>У: {{item.staffing}}%</div>
+          </div>
+          <img *ngIf='item.node_kind?.name === "Мобильный"' alt='mobile' class='car-icon' src='../../../../../../../../../assets/img/icons/car.svg' />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #bp let-item>
+  <div
+    (click)='$event.stopPropagation(); selectionChanged(item)'>
+    <div
+      class='folder'
+      *ngIf='item.expanded'>
+      <div class='folder_background'>
+        <div *ngFor='let level of _deepLevel' class='folder_dot'></div>
+      </div>
+      <div [ngClass]='{ selected: selectedItem?.uuid === item.uuid }' class='content'>
+        <div class='content_description'>
+          <button *ngIf='item.children?.length' (click)='$event.stopPropagation(); toggleExpanding(item)'
+                  class='expand-button'>
+            <i class='pi {{isChildExpanded(item) ? "pi-angle-down" : "pi-angle-right"}}'></i>
+          </button>
+          <div class='content_name'>{{item.number}} {{item.type.name}}</div>
+          <div *ngIf='item.division' class='content_formation'>[{{item.division.label}}]</div>
+        </div>
+        <div class='content_container' >
+          <div *ngIf='item.security && item.staffing' class='content_info'>
+            <div>O: {{item.security}}%</div>
+            <div>У: {{item.staffing}}%</div>
+          </div>
+          <img *ngIf='item.kind?.name === "Мобильный"' alt='mobile' class='car-icon' src='../../../../../../../../../assets/img/icons/car.svg' />
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #folded let-item>
+  <div [ngClass]='{ folded_selected: selectedItem?.uuid === item.uuid }' *ngIf='item.expanded' (click)='$event.stopPropagation(); selectionChanged(item)' class='folded'>
+    <div class='folded_content'>
+      <div class='content'>
+      </div>
+    </div>
+  </div>
+</ng-template>

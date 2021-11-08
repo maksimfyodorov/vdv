@@ -1,0 +1,178 @@
+<ng-template #node let-data>
+  <ng-container [ngSwitch]="data.node.point">
+    <ng-template [ngSwitchCase]='"cn"'>
+      <strong>{{data.node.call_sign}}</strong>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"center"'>
+      <span style="font-weight: 700;">{{data.node.number}} {{data.node.center_type.name}}</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"bp"'>
+      <span style="font-weight: 700;">{{ data.node.type.name }} [{{data.node.division?.label}}]</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"security"'>
+      <span>{{ data.node.name }}</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"mu"'>
+      <span>{{ data.node.label }}</span>
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #summary let-data>
+  <div
+    *ngIf="data.node.total"
+    [ngClass]="{
+      green: getProgressValues(data.node.total) > 75,
+      yellow: getProgressValues(data.node.total) >= 50 && getProgressValues(data.node.total) <= 75,
+      red: getProgressValues(data.node.total) < 50.
+    }"
+    class="progress-bar"
+  >
+    <p-progressBar class="summary" [value]="getProgressValues(data.node.total)" [showValue]="false"></p-progressBar>
+    <div class="progress-bar_value">
+      <strong
+        ><span>{{data.node.total.stock + data.node.total.excess +
+          data.node.total.broken}}</span
+        >/{{data.node.total.state}}</strong
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #state let-data>
+  <span *ngIf="data.node.total">{{data.node.total.state}}</span>
+
+  <div *ngIf="!data.node.total" class="factory_number gray">№{{data.node.number}}</div>
+</ng-template>
+
+<ng-template #stock let-data>
+  <span *ngIf="data.node.total">{{data.node.total.stock}}</span>
+
+  <p-checkbox
+    [disabled]="!data.node.number || data.disabled"
+    (onChange)='changeTechStatus($event.checked, data.node, "stock")'
+    *ngIf="!data.node.total"
+    [binary]="true"
+    [ngModel]="data.node.conditions?.stock?.status"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #excess let-data>
+  <span *ngIf="data.node.total">{{data.node.total.excess}}</span>
+
+  <p-checkbox
+    [disabled]="!data.node.number || data.disabled"
+    (onChange)='changeTechStatus($event.checked, data.node, "excess")'
+    *ngIf="!data.node.total"
+    [binary]="true"
+    [ngModel]="data.node.conditions?.excess?.status"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #lack let-data>
+  <span *ngIf="data.node.total">{{data.node.total.lack}}</span>
+
+  <p-checkbox
+    [disabled]="data.disabled || data.node?.number"
+    (onChange)='changeTechStatus($event.checked, data.node, "lack")'
+    *ngIf="!data.node.total"
+    [binary]="true"
+    [ngModel]="data.node.conditions?.lack?.status"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #broken let-data>
+  <span *ngIf="data.node.total">{{data.node.total.broken}}</span>
+
+  <div *ngIf="!data.node.total" class="p-d-flex p-flex-column">
+    <p-checkbox
+      [disabled]="!data.node.number || data.disabled"
+      (onChange)='changeTechStatus($event.checked, data.node, "broken")'
+      *ngIf="!data.node.total"
+      [binary]="true"
+      [ngModel]="data.node.conditions?.broken?.status"
+    ></p-checkbox>
+    <span *ngIf="data.node.conditions?.broken?.status && data.node?.repairs[0]"
+      >к {{ data.node.repairs[0]?.installation_date | date: "d.MM.YYYY" }}</span
+    >
+  </div>
+</ng-template>
+
+<ng-template #controls let-data>
+  <div *ngIf='data.node.point === "security_item" && data.viewSecurityItem' class="controls">
+    <p-button
+      [disabled]="data.disabled"
+      (onClick)='openTechModal("edit", data.node)'
+      styleClass="p-button-link"
+      icon="pi pi-pencil"
+    ></p-button>
+    <p-button
+      [disabled]="data.disabled"
+      (onClick)='deleteTech("delete", data.node)'
+      styleClass="p-button-link"
+      icon="pi pi-trash"
+    ></p-button>
+  </div>
+  <div
+    *ngIf='
+    data.node.point === "cn" && data.node.division && data.viewSecurityItem
+      || data.node.point === "bp" && data.node.division && data.viewSecurityItem
+      || data.node.point === "center" && data.node.division && data.viewSecurityItem
+      || data.node.point === "mu" && data.viewSecurityItem'
+    class="controls"
+  >
+    <button
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      class="p-button-outlined"
+      (click)='openTechModal("add", data.node)'
+    ></button>
+  </div>
+</ng-template>
+
+<ng-template #flight let-data>
+  {{data.node.total?.flight }}
+</ng-template>
+
+<ng-template #flight_total let-data>
+  {{data.node.flight_info?.total || 0 }}
+</ng-template>
+
+<ng-template #complete let-data>
+  {{data.node.flight_info?.completed || 0 }}
+</ng-template>
+
+<ng-template #not_complete let-data>
+  {{data.node.flight_info?.not_completed || 0 }}
+</ng-template>
+
+<ng-template #flight_summary let-data>
+  <div
+    *ngIf="data.node.total"
+    [ngClass]="{
+      green: getFlightProgressValues(data.node.flight_info) > 75,
+      yellow: getFlightProgressValues(data.node.flight_info) >= 50 && getFlightProgressValues(data.node.flight_info) <= 75,
+      red: getFlightProgressValues(data.node.flight_info) < 50.
+    }"
+    class="progress-bar"
+  >
+    <p-progressBar
+      class="summary"
+      [value]="getFlightProgressValues(data.node.flight_info)"
+      [showValue]="false"
+    ></p-progressBar>
+    <div class="progress-bar_value">
+      <strong
+        ><span>{{data.node.flight_info?.completed}}</span
+        >/{{data.node.flight_info?.total}}</strong
+      >
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #choseViechle let-data>
+  <p-checkbox [(ngModel)]="data.chose" (onChange)="chooseTech('chooseTech',data)"></p-checkbox>
+</ng-template>

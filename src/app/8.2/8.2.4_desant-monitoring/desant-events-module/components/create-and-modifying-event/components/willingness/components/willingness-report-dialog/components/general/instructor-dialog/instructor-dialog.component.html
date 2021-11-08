@@ -1,0 +1,68 @@
+<div class="content__wrapper">
+  <div class="inputs__wrapper">
+    <div class="container">
+      <div class="flex__column_wrapper">
+        <span>Инструктор</span>
+        <app-military
+          (appointment)="getRapporteurVDP($event)"
+          [selectedMilitary]="instructor"
+          [loadExecutive]="true"
+        ></app-military>
+      </div>
+    </div>
+    <div class="flex__column_wrapper">
+      <span class="input__title">Дата доклада</span>
+      <p-calendar
+        class="date__input"
+        [(ngModel)]="date"
+      ></p-calendar>
+    </div>
+    <div class="flex__column_wrapper">
+      <span class="input__title">Время доклада</span>
+      <p-calendar
+        class="time__input"
+        [timeOnly]="true"
+        [(ngModel)]="time"
+      ></p-calendar>
+    </div>
+  </div>
+  <div class="text__area__title">Примечание</div>
+  <div class="flex__row__wrapper">
+    <textarea
+      pInputTextarea
+      [(ngModel)]="selectedReport"
+    ></textarea>
+    <div class="buttons__wrapper">
+      <button
+        (click)="show()"
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать  из  шаблонов"
+        class="p-button-outlined"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Сохранить шаблон"
+        class="p-button-outlined"
+      ></button>
+    </div>
+  </div>
+  <button
+    pButton
+    class="save__button"
+    type="button"
+    label="Добавить"
+    (click)="save()"
+  ></button>
+  <button
+    pButton
+    pRipple
+    (click)="close()"
+    type="button"
+    label="Отмена"
+    class="p-button-secondary p-button-text cancel__button"
+  ></button>
+</div>

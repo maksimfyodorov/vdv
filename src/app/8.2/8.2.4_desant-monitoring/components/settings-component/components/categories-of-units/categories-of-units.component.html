@@ -1,0 +1,108 @@
+<app-new-category
+  *ngIf="newCategory"
+  (addedCategory)="getNewCategory()"
+>
+</app-new-category>
+<div class="add__category__container">
+  <p-button
+    (click)="addNewCategory()"
+    class="add__category-button"
+    label=" + Добавить Категорию"
+    *ngIf="!newCategory"
+  ></p-button>
+  <button
+    pButton
+    pRipple
+    (click)="deleteNewCategory()"
+    id="cancel"
+    type="button"
+    label="Отмена"
+    *ngIf="newCategory"
+    class="cancel p-button-danger"
+  ></button>
+</div>
+<div class="table_container">
+  <p-table
+    dataKey="uuid"
+    editMode="row"
+    [value]="categories"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="name">Категории</th>
+        <th class="action">Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-category
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr
+        [pEditableRow]="category"
+        [ngClass]="editing == true ? 'selected' : 'unselected'"
+      >
+       <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                class="nameChange__input"
+                type="text"
+                [(ngModel)]="category.name"
+              />
+            </ng-template>
+            <ng-template pTemplate='output'> {{category.name}} </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div
+            *ngIf="category.editable == true"
+            class="edit"
+            onclick="event.stopPropagation()"
+          >
+            <div class="icons_wrapper">
+              <button
+                *ngIf="!editing"
+                pButton
+                pRipple
+                type="button"
+                (click)="onRowEditInit(category)"
+                pInitEditableRow
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text"
+              ></button>
+              <i
+                (click)="deleteCategory(category)"
+                *ngIf="!editing"
+                class="pi pi-trash"
+              >
+              </i>
+            </div>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              (click)="onRowEditSave(category)"
+              pSaveEditableRow
+              icon="pi pi-check"
+              class="p-button-rounded p-button-text p-button-success p-mr-2"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel(category, ri)"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

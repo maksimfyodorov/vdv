@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <h5>Учебный год</h5>
+  <p-dropdown
+    [(ngModel)]="selectedYear"
+    [options]="years"
+    (onChange)="onChange($event)"
+    class="academic__year"
+  >
+  </p-dropdown>
+  <h5>Период</h5>
+  <div class="filter__field_period">
+    <div *ngFor="let period of filteredPeriods" class="p-field-checkbox">
+      <p-checkbox name="group2" value="period" [value]="period" [(ngModel)]="selectedPeriod"
+                  [inputId]="period.uuid"></p-checkbox>
+      <label [for]="period.name">{{period.name}}</label>
+    </div>
+  </div>
+  <h5>Дата проведения</h5>
+  <div class="filter__field_date">
+    <p-calendar [(ngModel)]="startDate"
+                [showIcon]="true"
+                icon="pi pi-calendar"
+                dateFormat="dd.mm.yy"
+                firstDayOfWeek='1'
+    ></p-calendar>
+    <i class="pi pi-minus"></i>
+    <p-calendar [(ngModel)]="endDate"
+                [showIcon]="true"
+                icon="pi pi-calendar"
+                dateFormat="dd.mm.yy"
+                firstDayOfWeek='1'
+                class="filter__field_calendar"
+    ></p-calendar>
+  </div>
+  <h5>Статус мероприятия</h5>
+  <div class="filter__state">
+    <p-inputSwitch [(ngModel)]="eventState"></p-inputSwitch>
+    <span class="element__state_title">Только выполненные</span>
+  </div>
+  <h5>Задача</h5>
+  <div class="filter__mission">
+
+  </div>
+  <h5>Аэродром вылета</h5>
+  <p-dropdown
+    [(ngModel)]="departureAerodrome"
+    [options]="allAerodrome"
+    class="aerodrome"
+    placeholder="Выбрать"
+  >
+  </p-dropdown>
+  <h5>Площадка приземления</h5>
+  <p-dropdown
+    [(ngModel)]="landingArea"
+    [options]="allLandingArea"
+    class="aerodrome"
+    placeholder="Выбрать"
+  >
+  </p-dropdown>
+  <div class="filter__buttons">
+    <p-button label="Применить"></p-button>
+    <button pButton pRipple type="button" label="Сбросить" class="p-button-secondary p-button-text"
+            icon="pi pi-undo"></button>
+  </div>
+</div>

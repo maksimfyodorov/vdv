@@ -1,0 +1,44 @@
+<section class='wrapper'>
+  <app-breadcrumbs [model]='breadcrumbsLabels'></app-breadcrumbs>
+
+  <p-tabView
+    class='main-tabs tab-wrapper'
+    styleClass='main-tabs'>
+
+    <p-tabPanel [cache]='false' header='Азимутальная схема'>
+      <ng-template pTemplate='content'>
+        <app-azimuth-scheme></app-azimuth-scheme>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel [cache]='false' header='Узел связи'>
+      <ng-template pTemplate='content'>
+        <app-communication-center></app-communication-center>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header='Схема-приказ'>
+      <ng-template pTemplate='content'>
+        Схема-приказ
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header='График связи'>
+      <ng-template pTemplate='content'>
+        График связи
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header='Мнемосхема'>
+      <ng-template pTemplate='content'>
+        Мнемосхема
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header='График связи'>
+      <ng-template pTemplate='content'>
+        График связи
+      </ng-template>
+    </p-tabPanel>
+  </p-tabView>
+</section>

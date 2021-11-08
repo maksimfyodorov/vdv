@@ -1,0 +1,153 @@
+:host::ng-deep {
+    .p-tabview .p-tabview-panels {
+        padding: 0;
+    }
+}
+
+:host::ng-deep {
+    .p-datatable .p-datatable-thead > tr > th {
+        background: #fff;
+    }
+}
+
+:host::ng-deep.subdivision__dropdown {
+    margin-right: 30px;
+    .p-component {
+        width: 240px;
+        margin-bottom: 30px;
+    }
+}
+
+:host ::ng-deep {
+    .p-paginator {
+        justify-content: flex-start !important;
+        margin-top: 10px;
+        .p-paginator-pages {
+            .p-paginator-page {
+                &.p-highlight {
+                    background: #2196f3;
+                    border-color: #2196f3;
+                    color: white;
+                }
+            }
+        }
+        .p-paginator-first,
+        .p-paginator-last {
+            display: none;
+        }
+        .p-paginator-prev {
+            color: #2196f3;
+            &:not(.p-disabled):not(.p-highlight):hover {
+                color: #2196f3;
+                background: white;
+            }
+            span {
+                &::before {
+                    content: "\e900";
+                }
+                &::after {
+                    content: "Назад";
+                    margin: 0 13px;
+                }
+            }
+        }
+        .p-paginator-next {
+            color: #2196f3;
+            &:not(.p-disabled):not(.p-highlight):hover {
+                color: #2196f3;
+                background: white;
+            }
+            span {
+                &::before {
+                    content: "Вперед";
+                    margin: 0 13px;
+                }
+                &::after {
+                    content: "\e901";
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+.flex-wrapper {
+    display: flex;
+}
+
+:host::ng-deep.add-subdivision-button {
+    .p-button {
+        width: 117px;
+        height: 40px;
+    }
+}
+
+.dropdown__title {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.dropdown__title {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.container {
+    display: flex;
+}
+
+.info__container {
+    margin-top: -67px;
+    padding: 0 15px 20px 15px;
+    width: 715px;
+    min-height: 320px;
+    box-shadow: 0px 2px 4px -1px #0000001f;
+    border-radius: 10px;
+    border: 1px solid #e1e3e8;
+}
+
+.basic__info {
+    width: 685px;
+    height: 224px;
+    background: #f5f6f8;
+}
+
+.subdivision__table {
+    width: 738px;
+    margin-right: 159px;
+}
+
+.date__th {
+    width: 130px;
+}
+
+.date__td {
+    width: 130px;
+}
+
+.number__th {
+    width: 80px;
+}
+
+.name__th {
+    width: 164px;
+}
+
+.subdivision {
+    width: 238px;
+}
+
+.count {
+    width: 238px;
+}
+.jump_count {
+    width: 100px;
+}
+
+.table-body-row {
+    cursor: pointer;
+}

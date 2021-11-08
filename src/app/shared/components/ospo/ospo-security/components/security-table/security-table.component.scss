@@ -1,0 +1,78 @@
+.table {
+  width: 100%;
+
+  &_row {
+    border-top: 3px solid white !important;
+    border-bottom: 3px solid white !important;
+  }
+
+  .gray {
+    background: #F5F6F8 !important;
+  }
+}
+
+.factory_number {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+
+  i {
+    cursor: pointer;
+    color: #228BE6;
+  }
+}
+
+
+:host ::ng-deep {
+  .p-progressbar {
+    width: 100% !important;
+  }
+
+  .green.progress-bar {
+    .p-progressbar-value {
+      background: #82C91E !important;
+    }
+  }
+
+  .yellow.progress-bar {
+    .p-progressbar-value {
+      background: #FFE066 !important;
+    }
+  }
+
+  .red.progress-bar {
+    .p-progressbar-value {
+      background: #F03E3E !important;
+    }
+  }
+}
+
+.progress-bar {
+  position: relative;
+  width: 120px;
+
+  &_value {
+    position: absolute;
+    top: 0;
+    right: 6px;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+
+  .delete_button {
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  .add_button {
+    color: #228BE6;
+    border: 1px solid #228BE6;
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+  }
+}
+

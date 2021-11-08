@@ -1,0 +1,240 @@
+<section class="commander-orders" [appLoader]="isLoading$">
+  <aside class="commander-orders__military-units">
+    <app-nodes-hierarchy [dataSource]="militaryUnitTree">
+      <app-uav-node-folder #folder></app-uav-node-folder>
+    </app-nodes-hierarchy>
+  </aside>
+
+  <div class="commander-orders__container">
+    <section class="commander-orders__header">
+      <h1 class="title">Поручения командующего</h1>
+
+      <div class="controls">
+        <button pButton (click)="openAddOrderDialog()" [disabled]="!selectedMilitaryUnit" label="Добавить поручение"></button>
+
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input type="text" [formControl]="orderSearching" pInputText placeholder="Поиск поручений">
+        </span>
+        <app-documents-formalized class="document-formalized"
+                                  groupName="8.2.30"
+                                  [documentConfig]="documentConfig"
+        ></app-documents-formalized>
+      </div>
+    </section>
+
+    <main class='commander-orders__main'>
+      <app-orders-list [orders]='orders'></app-orders-list>
+    </main>
+  </div>
+
+  <aside class="commander-orders__filter">
+    <app-orders-filter (orders)="updateOrders($event)"></app-orders-filter>
+  </aside>
+
+</section>
+
+<div class="document-for-printing">
+  <section class="signing-data" *ngFor="let data of [approvers, coordinators], let i = index">
+    <div class="signing-data__container" *ngFor="let military of data">
+      <div class="signing-data__military military">
+        <h2 class="military__title">{{ !i ? 'УТВЕРЖДАЮ' : 'СОГЛАСОВАНО' }}</h2>
+        <p class="military__appointment">{{ military.appointment }}</p>
+        <p class="military__division">{{ military.division || 'Воинская часть не указана в б/д' }}</p>
+        <p class="military__name">
+          <span>{{ military.rank }}</span>
+          <span class="military__name-underline"><small>(подпись)</small></span>
+          <span>{{ military.name }}</span>
+        </p>
+      </div>
+
+      <div class="signing-data__date date">
+        <span>&#8220;</span>
+        <span class="date__day-underline"></span>
+        <span>&#8221;</span>
+        <span class="date__month-underline"></span>
+        <span>{{ year }}<small>г.</small></span>
+      </div>
+    </div>
+  </section>
+
+  <ng-container
+    *ngTemplateOutlet="getTemplate()"
+  ></ng-container>
+
+  <section class="signer-section" *ngFor="let signer of signers">
+    <div class="signer-section__signer signer">
+      <span class="signer__appointment">{{ signer.appointment }}</span>
+      <span class="signer__sign"><small>(подпись)</small></span>
+      <span class="signer__name">{{ signer.name }}</span>
+    </div>
+    <div class="signer-section__division">{{ signer.division || 'Воинская часть не указана в б/д' }}</div>
+    <div class="signer-section__date date">
+      <span>&#8220;</span>
+      <span class="date__day-underline"></span>
+      <span>&#8221;</span>
+      <span class="date__month-underline"></span>
+      <span>{{ year }}<small>г.</small></span>
+    </div>
+  </section>
+</div>
+
+
+<ng-template #listOfOrdersExecutionTemplate>
+  <h1 class="table-title">ВЕДОМОСТЬ <br>исполнения поручений Командующего ВДВ (начальника штаба ВДВ) по состоянию на {{ date | date: 'dd.MM.YYYY' }}</h1>
+  <div class="table">
+    <small class="table__name">Приложение 11</small>
+    <p-table [value]="orders" autoLayout="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of cols, let i = index" [ngClass]="!i && 'table__row-index' || setCellSize(col.field)">
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order let-rowIndex="rowIndex">
+        <tr>
+          <td *ngFor="let col of cols, let i = index" [ngClass]="setCellBackground(col.field, order.status.color) || setCellClass(col.field)">
+            <ng-container *ngIf="!i else orderData">
+              {{ rowIndex + 1 }}
+            </ng-container>
+            <ng-template #orderData>
+              <div *ngIf="col.field === 'orderDocuments'">
+                <p *ngFor="let doc of order.printInfo.orderDocuments, let i = index" class="table__documents">
+                  <span *ngIf="order.printInfo.orderDocuments.length === 1 else severalOrderDocuments">{{ doc }}</span>
+                  <ng-template #severalOrderDocuments>
+                    <span>{{ i + 1 }}. {{ doc }}</span>
+                  </ng-template>
+                </p>
+              </div>
+
+              <div *ngIf="col.field === 'reportDocuments'">
+                <p *ngFor="let doc of order.printInfo.reportDocuments, let i = index" class="table__documents">
+                  <span *ngIf="order.printInfo.reportDocuments.length === 1 else severalReportDocuments">{{ doc }}</span>
+                  <ng-template #severalReportDocuments>
+                    <span>{{ i + 1 }}. {{ doc }}</span>
+                  </ng-template>
+                </p>
+              </div>
+
+              <div *ngIf="col.field !== 'orderDocuments' && col.field !== 'reportDocuments'">
+                {{order.printInfo[col.field]}}
+              </div>
+            </ng-template>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</ng-template>
+
+<ng-template #controlOfExecutionTemplate>
+  <h1 class="table-title">Ведомость контроля исполнения <br>указаний Генерального штаба ВС РС</h1>
+  <div class="table">
+    <small class="table__name">Приложение 11б</small>
+    <table class="control-table">
+      <thead>
+      <tr>
+        <td rowspan="4" class="cell_medium rotation-cancel bold">№<br>п&nbsp;/&nbsp;п</td>
+        <th rowspan="4" class="cell_large">Наименование&nbsp;проводимых организационных&nbsp;мероприятий (в&nbsp; соответствии&nbsp;с Приложением&nbsp;№26 к&nbsp;инструкции)</th>
+        <th rowspan="4">Срок&nbsp;выполнения</th>
+        <th rowspan="4" class="cell_large">Пункт&nbsp;дислокации (н.п.,&nbsp;край,&nbsp;область)</th>
+        <th rowspan="4">Подчиненность</th>
+        <th colspan="13" class="rotation-cancel bold cell_staff">Изменение штатной численности</th>
+        <th colspan="6" class="rotation-cancel bold">В ЦОВУ (ОВУ, ОСК)</th>
+        <th colspan="5" class="rotation-cancel bold">В объединении</th>
+        <th colspan="5" class="rotation-cancel bold">В&nbsp;соединении,&nbsp;воинской части (организации)</th>
+      </tr>
+      <tr>
+        <th colspan="13" class="rotation-cancel">в том числе:</th>
+        <th rowspan="3" colspan="2">Ответственный за&nbsp;ОШМ</th>
+        <th colspan="4" class="rotation-cancel bold">Дата и номер</th>
+        <th rowspan="3" colspan="2">Ответственный за&nbsp;ОШМ</th>
+        <th colspan="3" class="rotation-cancel bold">Дата и номер</th>
+        <th rowspan="3" colspan="2">Ответственный за&nbsp;ОШМ</th>
+        <th colspan="3" class="rotation-cancel bold">Дата и номер</th>
+      </tr>
+      <tr>
+        <th rowspan="2" class="bold">Всего&nbsp;в/&nbsp;с</th>
+        <th rowspan="2" class="bold">Всего&nbsp;офицеров</th>
+        <th colspan="7" class="rotation-cancel">из них:</th>
+        <th rowspan="2">Прапорщиков</th>
+        <th rowspan="2">Сержантов</th>
+        <th rowspan="2">Солдат</th>
+        <th rowspan="2">Гражданский персонал</th>
+        <th rowspan="2">Входящий&nbsp;УГШ</th>
+        <th rowspan="2">Директивы&nbsp;(приказа), КВВО,&nbsp;НШО</th>
+        <th rowspan="2">Указаний&nbsp;ШВО</th>
+        <th rowspan="2">Донесения&nbsp;3/&nbsp;ДИС</th>
+        <th rowspan="2">Входящей&nbsp;директивы, указаний&nbsp;ВО</th>
+        <th rowspan="2">Приказа командующего</th>
+        <th rowspan="2">Донесения&nbsp;3/&nbsp;ДИС</th>
+        <th rowspan="2">Входящего&nbsp;приказа командующего</th>
+        <th rowspan="2">Приказа&nbsp;командира (начальника)</th>
+        <th rowspan="2">Донесения&nbsp;3/&nbsp;ДИС</th>
+      </tr>
+      <tr>
+        <th class="fix-height">Высших</th>
+        <th class="fix-height">Полковников</th>
+        <th class="fix-height">Подполковников</th>
+        <th class="fix-height">Майоров</th>
+        <th class="fix-height">Капитанов</th>
+        <th class="fix-height">Ст.&nbsp;лейтенантов</th>
+        <th class="fix-height">Лейтенантов</th>
+      </tr>
+      <tr>
+        <th *ngFor="let number of columnNumbers; let i = index" [colSpan]="setColSpanValue(i)" class="rotation-cancel">{{ i + 1 }}</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let table of nestedTables; let i = index">
+      <tr>
+        <th class="rotation-cancel bold" colspan="34">{{ table }}</th>
+      </tr>
+      <tr>
+        <th class="rotation-cancel bold" colspan="34">Западный военный округ</th>
+      </tr>
+      <tr>
+        <td *ngFor="let number of columnNumbers; let i = index" [colSpan]="setColSpanValue(i)" [style.height]="'15px'"></td>
+      </tr>
+      <tr>
+        <td *ngFor="let number of columnNumbers; let i = index" [colSpan]="setColSpanValue(i)" [style.height]="'15px'"></td>
+      </tr>
+      <tr>
+        <td *ngFor="let number of columnNumbers; let i = index" [colSpan]="setColSpanValue(i)" [style.height]="'15px'"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #notesAboutExecutionTemplate>
+  <h1 class="table-title">Замечания по исполнению<br>поручений Командующего ВДВ (начальника штаба ВДВ)</h1>
+  <div class="table notes-table">
+    <small class="table__name">Приложение 11а</small>
+    <p-table [value]="decisions" autoLayout="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of notesTableCols, let i = index" >
+            {{col.header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-decision let-rowIndex="rowIndex">
+        <tr>
+          <td *ngFor="let col of notesTableCols, let i = index" [ngClass]="col.field === 'state' && decision.status.code">
+            <ng-container *ngIf="!i else decisionData">
+              {{ rowIndex + 1 }}
+            </ng-container>
+            <ng-template #decisionData>
+              {{ decision[col.field] }}
+            </ng-template>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</ng-template>
+
+<ng-template #reportTemplate>
+
+</ng-template>

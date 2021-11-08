@@ -1,0 +1,17 @@
+<div class="page">
+  <app-military-units-sidebar (selectMilitaryUnitChanged)='onSelectMilitaryUnit($event)'></app-military-units-sidebar>
+  <div class="container">
+    <div class="container__navigation">
+      <p-breadcrumb
+        [model]="crumbs"
+        [home]="home"
+      ></p-breadcrumb>
+    </div>
+    <div class="container__header">
+      Контроль противодействия терроризму
+    </div>
+    <div class="container__router">
+      <router-outlet [ngClass]="{setWidth: true}"></router-outlet>
+    </div>
+  </div>
+</div>

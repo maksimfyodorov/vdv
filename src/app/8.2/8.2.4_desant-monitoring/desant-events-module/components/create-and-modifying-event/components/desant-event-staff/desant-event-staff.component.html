@@ -1,0 +1,110 @@
+<div [appLoader]="loader.isLoading$">
+  <div class="staff__header-button">
+    <p-button label="Новая задача"
+              (click)="addNewTask()"
+              class="add__task-button"
+              [disabled]="!newEventDataService.eventUUID"
+    ></p-button>
+  </div>
+  <p-paginator [rows]="row" [totalRecords]="tasksCount" (onPageChange)="showNextPage($event.page)"
+               *ngIf="allPage > 1"></p-paginator>
+  <div class="staff__container">
+    <div class="staff__event" *ngFor="let task of taskList; let indexes = index">
+      <div class="staff__title">
+        <div class="staff__title__date">
+          <span class="element__staff_main-font">{{task?.date_start_plan | date :'dd.MM.yyyy'}}</span>
+          <span><i class="pi pi-minus"></i></span>
+          <span class="element__staff_main-font">{{task?.date_end_plan | date :'dd.MM.yyyy'}}</span>
+        </div>
+        <div class="staff__title_airplane">
+          <span class="element__staff_main-font">{{task?.aircraft_main?.name}}</span>
+        </div>
+        <div class="staff__title_buttons">
+          <i class="pi pi-pencil" (click)="changeStaffTask(task?.uuid)"></i>
+          <i class="pi pi-trash" (click)="deleteStaffTask(task?.uuid)"></i>
+          <button pButton pRipple type="button" label="Выполнить" class="p-button-outlined"
+                  (click)="setStaffCompleteStatus()"></button>
+        </div>
+      </div>
+      <div class="staff__title">
+        <div class="staff__title_event-name">
+          <span class="element__event-name">{{task?.task_directory?.code}}</span>
+          <span><i class="pi pi-minus" *ngIf="task?.task_directory?.code"></i></span>
+          <span class="element__event-name">{{task?.task_directory?.name}}</span>
+        </div>
+        <div class="staff__title_parachute">
+          <span class="element__staff_main-font">Д-10</span>
+        </div>
+        <div class="staff__title_jumps">
+          <span class="element__jumps_planned">{{task.jump_count_total || 0}}</span>
+          <span class="element__jumps_slash">/</span>
+          <span class="element__jumps_done">0</span>
+        </div>
+      </div>
+      <div class="staff_subdivisions">
+        <span class="element_subdivisions">Привлеченные подразделения:</span>
+        <span class="element__divisions">вдо рдо,</span>
+        <span class="element__divisions">3пдп</span>
+      </div>
+      <div class="staff__coordinates">
+        <div class="staff__coordinates_departure">
+          <div class="staff__coordinates_airports_title">
+            <img src="../../../../../../../../assets/img/icons/airplane.svg">
+            <span class="element_airport_name">{{task?.aerodrome_start?.name}}</span>
+          </div>
+          <div class="staff__coordinates_airports_name">
+            <span class="element_airport_region">{{task?.aerodrome_start?.coordinates?.mark}}</span>
+          </div>
+        </div>
+        <span class="element__arrow-right"><i class="pi pi-arrow-right"></i></span>
+        <div class="staff__coordinates_landing">
+          <div class="staff__coordinates_airports_title">
+            <img src="../../../../../../../../assets/img/icons/parachute.svg">
+            <span class="element_airport_name">{{task?.platform_landing_area?.x}}
+              с.ш., {{task?.platform_landing_area?.y}} в.д.</span>
+          </div>
+          <div class="staff__coordinates_airports_name">
+            <span class="element_airport_region">{{task?.platform_landing_area?.mark}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="staff__subtasks">
+        <div class="staff__subtasks_element" *ngFor="let subtask of task?.completing; let i = index">
+          <span class="element__subtasks">{{subtask?.date_plan | date :'dd.MM.yyyy'}}</span>
+          <div class="staff__subtasks_element_steps">
+            <div class="staff__subtasks_element_badge">
+              <p-badge [value]="i+1" *ngIf="subtask?.selected"></p-badge>
+              <div class="staff__subtasks_element_inactive-badge" *ngIf="!subtask?.selected">
+                <span>{{i + 1}}</span>
+              </div>
+
+            </div>
+            <div class="staff__subtasks_element_active-line" *ngIf="subtask?.selected && i != subtasks?.length-1"></div>
+            <div class="staff__subtasks_element_not-active-line"
+                 *ngIf="!subtask?.selected && i != subtasks?.length-1"></div>
+          </div>
+          <div class="staff__subtasks_element_data">
+            <div *ngFor="let task of subtask?.tasks">
+              <div class="staff__subtasks_element_data_info">
+                <div class="staff__subtasks_element_data_icons">
+                  <i class="pi pi-check" *ngIf="task?.done"></i>
+                </div>
+                <div class="staff__subtasks_element_data_name">
+                  <span class="element__subtasks">{{task?.name}}</span>
+                </div>
+                <div class="staff__subtasks_element_data_edit">
+                  <i class="pi pi-pencil" *ngIf="!task?.done" (click)="changeSubtask(task?.uuid)"></i>
+                  <i class="pi pi-check-circle" *ngIf="!task?.done" (click)="setSubtaskReadyState(task?.uuid)"></i>
+                </div>
+              </div>
+            </div>
+            <i class="pi pi-plus" (click)="addNewSubTask(task?.uuid)"></i>
+            <span class="element__subtasks_new">Новая подзадача</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

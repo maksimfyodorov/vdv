@@ -1,0 +1,145 @@
+<div [formGroup]="verificationForm">
+    <div class='message'>
+        Организация проверок состояния противодействия терроризму в подчиненных и оперативно подчиненных воинских
+        частях.Сведения о проверках и их результатах, с указанием основных выявленных недостатков, причин их
+        возникновения,
+        должностных лицах, виновных в нарушениях и принятых мерах.
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Командирская проверка</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="commandCheckFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Проверка командиром бригады (воинской части) лично или другим должностным лицом по их указанию.
+        </div>
+        <div *ngIf="this.verificationForm.controls['commandCheckFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'Командирская проверка')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Командирская проверка',this.verificationForm.controls['commandCheck'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Командирская проверка')"
+                pInputTextarea
+                formControlName="commandCheck"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Проверка военного управления</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="militaryControlCheckFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Проверка руководителем центрального органа военного управления, лично или другим должностным лицом по их
+            указанию.
+        </div>
+        <div *ngIf="this.verificationForm.controls['militaryControlCheckFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(1,'Проверка военного управления')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Проверка военного управления',this.verificationForm.controls['militaryControlCheck'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Проверка военного управления')"
+                pInputTextarea
+                formControlName="militaryControlCheck"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Проверка начальником зоны</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="zoneMasterCheckFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Проверка начальником зоны (территориального гарнизона, отдельного района) лично или другим должностным
+            лицом по его указанию. </div>
+        <div *ngIf="this.verificationForm.controls['zoneMasterCheckFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(2,'Проверка начальником зоны')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Проверка начальником зоны',this.verificationForm.controls['zoneMasterCheck'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Проверка начальником зоны')"
+                pInputTextarea
+                formControlName="zoneMasterCheck"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Проверка местных гарнизонов</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="checkingLocalGarrisonsFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Проверка в органах военного управления, местных гарнизонах, войсках (силах) и организациях Вооруженных
+            Сил, дислоцированных в границах зоны ответственности. </div>
+        <div *ngIf="this.verificationForm.controls['checkingLocalGarrisonsFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(3,'Проверка местных гарнизонов')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Проверка местных гарнизонов',this.verificationForm.controls['checkingLocalGarrisons'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Проверка местных гарнизонов')"
+                pInputTextarea
+                formControlName="checkingLocalGarrisons"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='left'
+            routerLink='../protection-security'
+            (click)='reducePageIndex()'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+        <p-button
+            label='Учения'
+            icon='pi pi-arrow-right'
+            iconPos='right'
+            routerLink='../teachings'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+            (click)='addPageIndex()'
+        ></p-button>
+    </div>
+</div>

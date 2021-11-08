@@ -1,0 +1,187 @@
+<div class="row">
+    <div class="border-right">
+        <app-military-city-tree (onSelectItem)="selectLabel($event)"></app-military-city-tree>
+    </div>
+    <div
+        class="margin-left"
+        [formGroup]="bchsForm"
+    >
+        <div class="row">
+            <input
+                class='input'
+                type='text'
+                placeholder='название города'
+                pInputText
+                formControlName="cityName"
+            >
+            <input
+                class='input-number'
+                type='text'
+                pInputText
+                formControlName="cityNumber"
+            >
+            <app-editable-autocomplete
+                [dataSource]='objectCategories'
+                [selectedSuggestion]='choseCategory'
+                (selectSuggestion)='selectType($event)'
+                (editItem)='editType($event)'
+                (deleteItem)='deleteType($event)'
+                (createItem)='createType($event)'
+                [searchField]='"name"'
+                [displayField]='"name"'
+                [placeholder]='"Категория объекта"'
+            ></app-editable-autocomplete>
+            <input
+                class='input'
+                type='text'
+                placeholder='координаты'
+                pInputText
+                formControlName="coordinates"
+                (click)="setCoordinate()"
+            >
+            <div
+                class="make-bchs"
+                (click)='makeBCHS()'
+            >
+                Создать БЧС
+            </div>
+        </div>
+        <div *ngIf="showBchsFlag">
+            <div class="margin-bottom row">
+                <span class="row__named mode logo">
+                    ОГ “Антитеррор”
+                </span>
+                <span class="row">
+                    <div class="small-container column margin8px">
+                        <div class="gray-color">сокр.</div>
+                        <div>Режим В</div>
+                    </div>
+                    <div class="small-container column margin24px">
+                        <div class="gray-color">полн.</div>
+                        <div>Режим А, Б</div>
+                    </div>
+                    <div class="big-container center margin8px">
+                        <div class="gray-color">время</div>
+                        <div>Рабочее</div>
+                    </div>
+                    <div class="big-container center">
+                        <div class="gray-color">время</div>
+                        <div>Нерабочее</div>
+                    </div>
+                </span>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named mode">
+                    Подразделения усиления гарнизона
+                </span>
+                <span>
+                    <app-anti-terror-unit-mode
+                        [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                        [bchsGroup]="findGroup('ОГ “Антитеррор”')"
+                        formControlName="mode"
+                    ></app-anti-terror-unit-mode>
+                </span>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="logo">Подразделения антитеррора</div>
+                <div class="small-container center margin8px">Л/С</div>
+                <div class="small-container center margin8px">ВВТ АТ</div>
+                <div class="small-container center margin24px">ВВТ БТ</div>
+                <div class="big-container center margin8px">
+                    <div class="gray-color">время</div>
+                    <div>Рабочее</div>
+                </div>
+                <div class="big-container center">
+                    <div class="gray-color">время</div>
+                    <div>Нерабочее</div>
+                </div>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named">
+                    Подразделения усиления гарнизона
+                </span>
+                <span>
+                    <app-anti-terror-unit
+                        [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                        [bchsGroup]="findGroup('Подразделения усиления гарнизона')"
+                        formControlName="strengthGarrison"
+                    ></app-anti-terror-unit>
+                </span>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named">
+                    Подразделения антитеррора гарнизона
+                </span>
+                <span>
+                    <app-anti-terror-unit
+                        [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                        [bchsGroup]="findGroup('Подразделения антитеррора гарнизона')"
+                        formControlName="antiterrorGarrison"
+                    ></app-anti-terror-unit>
+                </span>
+            </div>
+            <div>
+                <div>
+                    Подразделения усиления гарнизона:
+                </div>
+                <app-garrison-strength
+                    [amplificationsUuid]="amplificationsUuid"
+                    [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                    [bchsGroup]="findGroup('Подразделения антитеррора в/г')"
+                    [militaryCity]="militaryCityUuid"
+                    formControlName="strengthGarrisonArray"
+                ></app-garrison-strength>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named">
+                    Резерв в НГ (НЗ)
+                </span>
+                <span>
+                    <app-anti-terror-unit
+                        [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                        [bchsGroup]="findGroup('Резерв в НГ (НЗ)')"
+                        formControlName="reserve"
+                    ></app-anti-terror-unit>
+                </span>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named">
+                    Моб. рез. КВВО
+                </span>
+                <span>
+                    <app-anti-terror-unit
+                        [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                        [bchsGroup]="findGroup('Моб. рез. КВВО')"
+                        formControlName="mobileReserve"
+                    ></app-anti-terror-unit>
+                </span>
+            </div>
+            <div class="margin-bottom row">
+                <span class="row__named">Функц. гр. ОШ ФСБ-КТО</span>
+                <app-anti-terror-unit
+                    [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                    [bchsGroup]="findGroup('Функц. гр. ОШ ФСБ-КТО')"
+                    formControlName="functionGroup"
+                ></app-anti-terror-unit>
+            </div>
+            <hr>
+            <div class="margin-bottom row">
+                <span class="row__named logo">
+                    Подразделение ликвидации последствий теракта
+                </span>
+                <app-anti-terror-unit
+                    [bchsUuid]="bchs.uuid ? bchs.uuid : null"
+                    [bchsGroup]="findGroup('Подразделение ликвидации последствий теракта')"
+                    formControlName="liquidationDivision"
+                ></app-anti-terror-unit>
+            </div>
+            <div
+                class="clear-form"
+                (click)="clearBCHS()"
+            >
+                Очистить форму
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<p-toast (onClose)='setMessageRead($event.message)' position='top-right'>
+  <ng-template let-message pTemplate='message'>
+    <div class='toast'>
+      <div class='toast__top'>
+        <h2 class='toast__title'>{{message.summary}}</h2>
+        <span class='toast__time'>{{message.data.date | date: 'HH:mm, dd.MM.yyyy'}}</span>
+      </div>
+      <ng-container [ngSwitch]='message.data.type'>
+        <!--8.1.4-->
+        <app-bla-state *ngSwitchCase="'blaState'" [data]='message'></app-bla-state>
+        <!--8.2.20-->
+        <app-video-state *ngSwitchCase="'videoState'" [data]='message' (clickLink)='openLink($event)'></app-video-state>
+        <!--8.1.6-->
+        <app-creation-request *ngSwitchCase="'creationRequest'" [data]='message'
+                              (clickLink)='openLink($event)'></app-creation-request>
+        <app-request-of-staffing-and-security *ngSwitchCase="'requestOfStaffingAndSecurity'" [data]='message'
+                                              (clickLink)='openLink($event)'></app-request-of-staffing-and-security>
+        <app-document-was-received *ngSwitchCase="'documentWasReceived'"
+                                   [data]='message'
+                                   (clickLink)='openLink($event)'></app-document-was-received>
+        <!--common-->
+        <app-execution-report *ngSwitchCase="'executionReport'" [data]='message'
+                              (clickLink)='openLink($event)'></app-execution-report>
+        <app-text-message *ngSwitchDefault [data]='message' (clickLink)='openLink($event)'></app-text-message>
+      </ng-container>
+      <div class='toast__sender'>{{message.data.sender}}</div>
+    </div>
+  </ng-template>
+</p-toast>

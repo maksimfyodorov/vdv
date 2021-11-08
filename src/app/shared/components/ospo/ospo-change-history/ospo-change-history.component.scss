@@ -1,0 +1,63 @@
+$status_radius: 4px;
+$status_padding: 2px 8px 2px 8px;
+
+.wrapper {
+  padding-bottom: 24px;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+:host ::ng-deep {
+  .p-datatable .p-datatable-thead > tr > th {
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252B34;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    line-height: 20px;
+  }
+
+}
+
+.table__item {
+  width: fit-content;
+  margin: 0 auto;
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.new {
+  background: #339AF0;
+  border-radius: $status_radius;
+  padding: $status_padding;
+}
+
+.normal {
+  background: #82C91E;
+  border-radius: $status_radius;
+  padding: $status_padding;
+}
+
+.damage {
+  background: #F03E3E;
+  border-radius: $status_radius;
+  padding: $status_padding;
+}
+
+.removed {
+  background: #228BE6;
+  border-radius: $status_radius;
+  padding: $status_padding;
+}
+

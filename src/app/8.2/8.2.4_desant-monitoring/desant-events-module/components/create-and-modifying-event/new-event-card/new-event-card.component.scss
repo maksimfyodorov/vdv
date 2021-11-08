@@ -1,0 +1,583 @@
+.wrapper {
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border: 1px solid #E1E3E8;
+  border-radius: 8px;
+  background: #FFFFFF;
+}
+
+.card {
+  &__head {
+    display: flex;
+    width: 712px;
+    height: 140px;;
+    padding: 24px;
+  }
+
+  &__title {
+    &_show-card {
+      margin-left: auto;
+      margin-top: auto;
+    }
+  }
+
+  &__all-info {
+    display: flex;
+    width: 450px;
+    height: 52px;
+  }
+
+  &__container {
+    &_title {
+      width: 640px;
+      height: 92px;
+    }
+
+    &__full {
+      width: 100%;
+      height: 100%;
+      padding: 24px;
+      border-top: 1px solid #E1E3E8;
+
+      &__airdrome {
+        display: flex;
+        width: 100%;
+        min-height: 54px;
+        border: 1px solid #228BE6;
+        box-sizing: border-box;
+        border-radius: 2px;
+        margin-top: 16px;
+        padding: 8px;
+        background: #F5F6F8;
+
+        &__show {
+          margin-top: auto;
+          margin-bottom: auto;
+          margin-left: auto;
+        }
+
+        &__expanded {
+          width: 100%;
+          min-height: 480px;
+
+          &__info {
+            padding: 16px;
+            width: 100%;
+            min-height: 480px;
+            background: #F5F6F8;
+          }
+        }
+      }
+    }
+  }
+
+
+  &__info {
+    width: 280px;
+    height: 52px;
+    margin: 16px 0 16px 0;
+
+    &_title {
+      display: flex;
+      width: 280px;
+      height: 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      justify-content: space-between;
+      text-align: justify;
+      text-align-last: justify;
+    }
+
+    &_date {
+      display: flex;
+      margin-top: 8px;
+      width: 280px;
+      height: 20px;
+      justify-content: space-between;
+      text-align: justify;
+      text-align-last: justify;
+    }
+
+    &_general {
+      margin-top: 16px;
+      margin-left: 32px;
+      display: flex;
+      width: 320px;
+      height: 52px;
+
+      &_jumps {
+        width: 93.67px;
+        height: 52px;
+
+        &_container {
+          width: 144px;
+          height: 24px;
+        }
+
+        &_equip {
+          margin-left: 25px;
+          width: 93.67px;
+          height: 52px;
+        }
+      }
+    }
+  }
+
+  &__jumps {
+
+    &_airplane {
+      display: flex;
+      width: 480px;
+      height: 40px;
+      margin-bottom: 8px;
+
+      &_inner {
+        display: flex;
+        width: 480px;
+        height: 24px;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+
+    &_count {
+      display: flex;
+      width: 613px;
+      height: 60px;
+
+      &_inner {
+        width: 613px;
+        display: flex;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      &_all {
+        width: 121px;
+        height: 42px;
+      }
+
+      &_tech {
+        padding-left: 10px;
+        min-width: 44px;
+        height: 42px;
+      }
+
+      &_status {
+        display: grid;
+        max-width: 332px;
+        height: 44px;
+        margin-left: auto;
+      }
+    }
+  }
+  &__staff {
+    padding-top: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #E1E3E8;
+    margin-bottom: 10px;
+
+    &_task {
+      padding: 4px 0 4px 0;
+
+      &_title {
+        display: flex;
+        width: 613px;
+        height: 20px;
+        margin-top: auto;
+        margin-bottom: 4px;
+      }
+
+      &_name {
+        flex-basis: 399px;
+      }
+
+      &_tech {
+        flex-basis: 90px;
+        padding-left: 10px;
+      }
+
+      &_jumps {
+        margin-left: auto;
+        flex-basis: 100px;
+      }
+
+      &_subtitle {
+        display: flex;
+        width: 613px;
+        margin-top: 3px;
+
+        &_info {
+          padding: 0;
+          margin: 0;
+          flex-basis: 500px;
+        }
+
+        &_jumps {
+          margin-left: auto;
+          flex-basis: 100px;
+        }
+      }
+    }
+  }
+  &__vvst {
+    padding-bottom: 4px;
+    border-bottom: 1px solid #E1E3E8;
+    margin-bottom: 10px;
+  }
+  &__cargo {
+
+  }
+}
+
+.staff {
+  &__coordinates {
+    display: flex;
+    width: 536px;
+    height: 46px;
+
+    &_departure {
+      min-width: 150px;
+      height: 38px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    &_title {
+      display: flex;
+      width: 150px;
+      height: 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+      justify-content: space-between;
+    }
+
+    &_name {
+      display: grid;
+      margin-left: 12px;
+      min-width: 98px;
+      height: 18px;
+    }
+
+    &_landing {
+      min-width: 150px;
+      height: 38px;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: 20px;
+
+    }
+  }
+}
+
+h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #252B34;
+}
+
+h5 {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #959EA9;
+}
+
+h6 {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+
+  color: #959EA9;
+}
+
+.element {
+  &__event {
+    &_state {
+      background: #959EA9;
+      border-radius: 4px;
+      padding: 2px 8px;
+      color: #FFFFFF;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 18px;
+
+    }
+
+    &_military {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_date {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_day {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #959EA9;
+    }
+  }
+
+  &__jumps {
+
+    &_planned {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #252B34;
+    }
+
+    &_slash {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #E1E3E8;
+    }
+
+    &_done {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #82C91E;
+    }
+
+    &_card {
+      &_planned {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #252B34;
+      }
+
+      &_slash {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #E1E3E8;
+      }
+
+      &_done {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #82C91E;
+      }
+    }
+  }
+
+  &__airplane {
+    &_name {
+      flex-basis: 70px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #252B34;
+    }
+
+    &_num-of-flights {
+      flex-basis: 120px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 24px;
+      color: #252B34;
+    }
+  }
+
+  &__request {
+    flex-basis: 180px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    height: 24px;
+    padding: 2px 8px;
+    background: #FF922B;
+    border-radius: 4px;
+    color: #FFFFFF;
+  }
+
+  &__report {
+    margin-left: auto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252B34;
+
+    &_button {
+      margin-left: auto;
+      color: #228BE6;
+      cursor: pointer;
+    }
+  }
+
+  &__military-unit {
+    padding-left: 10px;
+
+    &_all {
+      color: #228BE6;
+      cursor: pointer;
+    }
+  }
+
+  &__task {
+    &_title {
+      padding-right: 5px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_tech {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_subtitle {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #959EA9;
+
+      &_airplane {
+        padding-left: 10px;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        color: #252B34;
+      }
+
+      &_time {
+        margin-right: auto;
+      }
+    }
+  }
+
+  &__staff_task {
+    &_planned {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_slash {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      color: #C7CDD3;
+    }
+
+    &_done {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      color: #82C91E;
+    }
+  }
+
+  &_airport {
+    &_name {
+      margin-left: 5px;
+      color: #252B34;
+    }
+
+    &_region {
+      font-size: 12px;
+      line-height: 18px;
+      color: #959EA9;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .pi-angle-down:before {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    color: #228BE6;
+    border: 1.2px solid #228BE6;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-top: auto;
+    cursor: pointer;
+  }
+
+  .pi-angle-up:before {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    color: #228BE6;
+    border: 1.2px solid #228BE6;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-top: auto;
+    cursor: pointer;
+  }
+
+  .p-tabview .p-tabview-nav {
+    width: 100%;
+    justify-content: start;
+  }
+
+  .p-tabview-nav-link {
+    height: 40px;
+  }
+
+  .p-button.p-button-link {
+    height: 24px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .p-dropdown {
+    width: 240px;
+    height: 40px;
+  }
+
+}
+
+.element__arrow-right {
+  margin-top: auto;
+  margin-bottom: auto;
+}

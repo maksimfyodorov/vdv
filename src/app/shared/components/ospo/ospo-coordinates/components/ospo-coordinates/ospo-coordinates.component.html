@@ -1,0 +1,35 @@
+<main class='wrapper' >
+  <div class='content' >
+    <div class='left-block'>
+      <app-form-coordinates
+        [height]='config.data?.height'
+      ></app-form-coordinates>
+      <app-selection-table
+        [cols]='config.data?.cols'
+      ></app-selection-table>
+    </div>
+
+    <div class='map-wrapper'>
+      <ues-map>
+        <app-ol-map-init></app-ol-map-init>
+        <app-show-sign-marks></app-show-sign-marks>
+        <ues-main-toolbar></ues-main-toolbar>
+      </ues-map>
+    </div>
+  </div>
+
+  <div class='controls'>
+    <p-button
+      (onClick)='closeDialog(selectedMark)'
+      [disabled]='!selectedMark'
+      label='Выбрать'>
+    </p-button>
+
+    <p-button
+      (onClick)='closeDialog()'
+      class='button white'>
+      Отмена
+    </p-button>
+  </div>
+</main>
+

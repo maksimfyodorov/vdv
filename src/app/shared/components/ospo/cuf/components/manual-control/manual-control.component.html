@@ -1,0 +1,10 @@
+<div class='manual-control'>
+  <div class='manual-control__title'>Статус связи</div>
+  <div class='status__actions actions'>
+    <div *ngFor='let status of statuses' [ngClass]="{'action_selected': status.uuid===selectedStatus}"
+         class='actions__action action  action_{{status.class}}' (click)='selectStatus(status)'>
+      <i class='pi {{status.icon}}'></i>{{status.name}}
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,139 @@
+<div class="content__wrapper">
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Дежурный офицер ВДП на старте</span>
+      <div
+        class="duty__officer"
+        *ngIf="!selectedPersonMultiple.dutyOfficerAtTheStart?.length; else selectedDutyAtTheStart"
+      >
+        <span>Должность, звание, Ф. И. О.</span>
+        <span>Должность, звание, Ф. И. О.</span>
+      </div>
+      <ng-template
+        #selectedDutyAtTheStart
+        class="duty__officer"
+      >
+        <div *ngFor="let officer of selectedPersonMultiple.dutyOfficerAtTheStart">
+          <div>
+            - {{officer.appointment.name}},
+            {{officer.rank.name}},
+            {{officer.surname}}
+            {{officer.name}}
+            {{officer.middle_name}}
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show('dutyOfficerAtTheStart', 'multiple')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Дежурный офицер ВДП на площадке приземления</span>
+      <span *ngIf="!selectedPersonSingle.officerAtTheLandingSite; else selectedOfficerAtTheLanding"> Должность, звание,
+        Ф. И. О.</span>
+      <ng-template #selectedOfficerAtTheLanding>
+        <span>
+          {{showSelectedPersonInfo('officerAtTheLandingSite')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        (click)="show('officerAtTheLandingSite')"
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Дежурный по площадке приземления</span>
+      <span *ngIf="!selectedPersonSingle.landingOfficer; else selectedLandingDuty"> Должность, звание, Ф. И. О.</span>
+      <ng-template #selectedLandingDuty>
+        <span>
+          {{ showSelectedPersonInfo('landingOfficer')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        (click)="show('landingOfficer')"
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Дежурный врач на площадке приземления</span>
+      <div
+        *ngIf="!selectedPersonMultiple.doctorOnDuty?.length; else selectedDoctors"
+        class="duty__officer"
+      >
+        <span>Должность, звание, Ф. И. О.</span>
+        <span>Должность, звание, Ф. И. О.</span>
+      </div>
+      <ng-template
+        #selectedDoctors
+        class="duty__officer"
+      >
+        <div *ngFor="let officer of selectedPersonMultiple.doctorOnDuty">
+          <div>
+            - {{officer.appointment.name}},
+            {{officer.rank.name}},
+            {{officer.surname}}
+            {{officer.name}}
+            {{officer.middle_name}}
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show('doctorOnDuty', 'multiple')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Дежурный офицер при посадке в вертолёт</span>
+      <span *ngIf="!selectedPersonSingle.helicopterBoardingOfficer; else helicopterBoardingOfficer"> Должность, звание,
+        Ф. И. О.</span>
+      <ng-template #helicopterBoardingOfficer>
+        <span>
+          {{ showSelectedPersonInfo('helicopterBoardingOfficer')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        (click)="show('helicopterBoardingOfficer')"
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+      ></button>
+    </div>
+  </div>
+</div>

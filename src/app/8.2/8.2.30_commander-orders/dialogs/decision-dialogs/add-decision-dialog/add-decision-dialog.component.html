@@ -1,0 +1,50 @@
+<p-scrollPanel [style]='{height: "65vh"}'>
+  <form class='add-decision-form' [formGroup]='form' [appLoader]='loader.isLoading$'>
+    <section class='summary'>
+      <h3 class='summary__title'>Краткое содержание поручения</h3>
+      <p class='summary__text'>{{orderDescription}}</p>
+    </section>
+
+    <section class='execution-date'>
+      <h3 class='title'>Дата решения</h3>
+      <p-calendar formControlName='date'
+                  [showIcon]='true'
+                  firstDayOfWeek="1"
+                  dateFormat="dd.mm.yy"
+                  icon='pi pi-calendar'
+      ></p-calendar>
+    </section>
+
+    <section class='attached-docs'>
+      <h3 class='title'>Прикреплённые документы</h3>
+      <app-documents title='Документы решения'
+                     hasNullifiedPaddings='true'
+                     [documentsToShow]='form?.get("documents").value'
+                     (currentDocumentList)='documentsChanged($event)'
+                     [isViewMode]="isViewMode"
+      ></app-documents>
+    </section>
+
+    <section class='name'>
+      <h3 class='title'>Краткое наименование решения</h3>
+      <input formControlName='name' type='text' pInputText placeholder='Наименование' [style]='{width: "100%"}'>
+    </section>
+
+    <section class='accepted-decision'>
+      <h3 class='title'>Принятое решение</h3>
+      <textarea formControlName='decision' [rows]='5' [cols]='30' pInputTextarea placeholder='Краткое содержание'></textarea>
+    </section>
+
+    <section class='execution-progress'>
+      <h3 class='title'>Ход исполнения</h3>
+      <textarea formControlName='progress' [rows]='5' [cols]='30' pInputTextarea placeholder='Текст хода исполнения'></textarea>
+    </section>
+
+    <section class='controls' *ngIf="!isViewMode">
+      <button *ngIf='decisionToEdit' (click)="reportOnSuccess()" [disabled]='form.invalid || !order.status' pButton type="button" label="Доложить о выполнении" class="p-button-success"></button>
+      <button (click)='addDecision()' [disabled]='form.invalid' pButton type="button" label="Сохранить"></button>
+      <button *ngIf='decisionToEdit' (click)="reportOnFailure()" [disabled]='form.invalid || !order.status' pButton type="button" label="Доложить о невыполнении" class="p-button-danger"></button>
+      <button (click)='cancelChanges()' pButton type="button" label="Отмена" class="p-button-text p-button-plain"></button>
+    </section>
+  </form>
+</p-scrollPanel>

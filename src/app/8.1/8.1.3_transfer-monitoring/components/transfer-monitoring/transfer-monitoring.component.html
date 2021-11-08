@@ -1,0 +1,19 @@
+<div class="page">
+    <app-military-units-sidebar (selectMilitaryUnitChanged)='onSelectMilitaryUnit($event)'></app-military-units-sidebar>
+    <div
+        class="page-data"
+        style="width: 100%;"
+    >
+        <div class="logo">
+            Мониторинг перевода в всБГ
+        </div>
+        <p-tabView>
+            <p-tabPanel header="Мероприятия">
+                <app-monitor-signal></app-monitor-signal>
+            </p-tabPanel>
+            <p-tabPanel header="Контроль">
+
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

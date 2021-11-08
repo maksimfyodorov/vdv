@@ -1,0 +1,19 @@
+<div class='tech-settings-item'>
+  <app-editable-autocomplete
+    (selectSuggestion)='techSelected($event)'
+    [canRemove]='false'
+    [canCreate]='false'
+    [canEdit]='false'
+    class='autocomplete'
+    [dataSource]='techItems'
+    searchField='name'
+    displayField='name'>
+  </app-editable-autocomplete>
+  <input (ngModelChange)='countChanged($event)' [(ngModel)]='techItem.count' class='numeric-input' [min]='1' pInputText
+         type='number' />
+  <p-button (onClick)='delete()' class='delete-button' styleClass='p-button-outlined p-button-danger'>
+    <ng-template pTemplate='content'>
+      <img alt='delete' src='../../../../../../../../../assets/img/icons/main-delete-red.svg' />
+    </ng-template>
+  </p-button>
+</div>

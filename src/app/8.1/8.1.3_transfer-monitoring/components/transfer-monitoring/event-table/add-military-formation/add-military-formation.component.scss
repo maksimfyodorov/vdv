@@ -1,0 +1,27 @@
+:host ::ng-deep {
+    .p-tree {
+        border: 0;
+    }
+} 
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.name {
+    margin-right: 5px;
+}
+
+input {
+    width: 220px;
+    height: 35px;
+}

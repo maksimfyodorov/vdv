@@ -1,0 +1,86 @@
+:host ::ng-deep .p-tabmenu-nav {
+  width: 55rem;
+  .p-menuitem-link:focus {
+    box-shadow: none !important;
+  }
+}
+
+.list-with-result {
+  position: absolute;
+  top: 323px;
+  left: 986px;
+}
+
+.list-with-all-result {
+  position: absolute;
+  top: 371px;
+  left: 986px;
+}
+
+.children-with-result {
+  position: absolute;
+  top: 751px;
+  left: 986px;
+}
+
+.children-with-all-result {
+  position: absolute;
+  top: 800px;
+  left: 986px;
+}
+
+.military-city-info-1 {
+  position: absolute;
+  top: 587px;
+  left: 40px;
+}
+
+.military-city-info-2 {
+  position: absolute;
+  top: 649px;
+  left: 40px;
+}
+
+.military-city-info-3 {
+  position: absolute;
+  top: 713px;
+  left: 40px;
+}
+
+.military-city-info-4 {
+  position: absolute;
+  top: 580px;
+  left: 95px;
+}
+
+.military-city-info-5 {
+  position: absolute;
+  top: 644px;
+  left: 95px;
+}
+
+.military-city-info-6 {
+  position: absolute;
+  top: 1008px;
+  left: 150px;
+}
+
+.military-city-info-7 {
+  position: absolute;
+  top: 1072px;
+  left: 150px;
+}
+
+:host ::ng-deep .p-dialog-content {
+  overflow-y: hidden;
+}
+
+.svg-btn {
+  cursor: pointer;
+}
+
+.document-formalized {
+  position: absolute;
+  top: 181px;
+  left: 1887px;
+}

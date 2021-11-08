@@ -1,0 +1,11 @@
+<div class="container">
+    <p-tree  [filter]="true" [value]="hierarchy" selectionMode="checkbox" [(selection)]="selectedFile"></p-tree>
+
+    <button
+    (click)="updateCategory()"
+    class="save_button"
+    pButton
+    type="button"
+    label="Сохранить"
+></button>
+</div>

@@ -1,0 +1,26 @@
+<div [formGroup]="addEvent">
+    <div class="data">
+        <div>
+            Наименование
+        </div>
+        <input class="time" type="text" pInputText formControlName="name" />
+    </div>
+    <div class="data">
+        <div>
+            Время
+        </div>
+        <div class="time">
+            <app-time-input formControlName="time" [timeChFlag]="true"></app-time-input>
+        </div>
+    </div>
+    <div class="data">
+        <div>
+            Нормативное время
+        </div>
+        <div class="time">
+            <app-time-input formControlName="normal_time" [timeChFlag]="true"></app-time-input>
+        </div>
+    </div>
+</div>
+<button pButton (click)="saveData()">Выбрать</button>
+<button pButton (click)="closeDialog()" class="p-button-secondary p-button-text">Отмена</button>

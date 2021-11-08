@@ -1,0 +1,141 @@
+:host::ng-deep {
+    .p-autocomplete.p-component.p-autocomplete-dd {
+        border: 1px solid #959ea9;
+    }
+}
+
+app-editable-autocomplete {
+    height: 40px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+.input {
+    width: 345px;
+    height: 40px;
+    border: 1px solid #959ea9;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.input-number {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #959ea9;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    &__named {
+        width: 658px;
+        height: 40px;
+        align-items: center;
+        display: flex;
+    }
+}
+
+.disabled-input {
+    display: none;
+}
+
+.logo {
+    width: 658px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252b34;
+}
+
+.mode {
+    width: 746px;
+}
+
+.small-container {
+    width: 80px;
+    height: 40px;
+}
+
+.big-container {
+    width: 109px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.margin8px {
+    margin-right: 8px;
+}
+
+.margin24px {
+    margin-right: 24px;
+}
+
+.margin-left {
+    margin-left: 32px;
+}
+
+.margin-bottom {
+    margin-bottom: 8px;
+}
+
+.gray-color {
+    color: #959ea9;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.border-right {
+    border-right: 1px solid #c7cdd3;
+}
+
+.clear-form {
+    width: 160px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #959ea9;
+    border: 1px solid #c7cdd3;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+hr {
+    height: 1px;
+    color: #c7cdd3;
+    background: #c7cdd3;
+    border: 0;
+    width: 100%;
+}
+
+.make-bchs {
+    color: #228be6;
+    font-size: 12px;
+    line-height: 18px;
+    cursor: pointer;
+    border: 1px solid #228be6;
+    border-radius: 4px;
+    height: 40px;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}

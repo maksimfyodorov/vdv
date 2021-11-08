@@ -1,0 +1,180 @@
+<ng-template #nodeTemplate let-data>
+  <ng-container [ngSwitch]="data.value.node.point">
+    <ng-template [ngSwitchCase]='"caption"'>
+      <strong>{{data.value.node.label}}</strong>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"cn"'>
+      <strong>{{data.value.node.call_sign}}</strong>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"center"'>
+      <span style="font-weight: 700;">{{data.value.node.number}} {{data.value.node.center_type.name}}</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"bp"'>
+      <span style="font-weight: 700;">{{ data.value.node.type.name }} [{{data.value.node.division?.label}}]</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"mu"'>
+      <span style="font-weight: 700;">{{data.value.node?.label}}</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"security"'>
+      <span>{{ data.value.node.alias }}</span>
+    </ng-template>
+    <ng-template [ngSwitchCase]='"security_item"'>
+      <span class="p-mr-4">{{ data.value.node.military_man?.rank?.name || data.value.node.rank.name }}</span>
+      <span
+        class="p-mr-4"
+        >{{ data.value.node.military_man?.surname ? data.value.node.military_man?.surname + ' ' +  data.value.node.military_man?.name + ' ' + data.value.node.military_man?.middle_name : '[военнослужащий не закреплён]'}}</span
+      >
+    </ng-template>
+    <ng-template [ngSwitchCase]='"app"'>
+      <span class="p-mr-4">{{ data.value.node?.name }} - {{ data.value.node?.appointment?.VUS }} - {{ data.value.node?.rank?.name }}</span>
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #stateTemplate let-data>
+  <span>{{ data.value.node.total?.state }}</span>
+</ng-template>
+
+<ng-template #listTemplate let-data>
+  <span>{{ data.value.node.total?.by_list }}</span>
+</ng-template>
+
+<ng-template #faceTemplate let-data>
+  <span *ngIf="data.value.node.total">{{ data.value.node.total.available }}</span>
+  <p-checkbox
+    pTooltip="На лицо"
+    tooltipPosition="bottom"
+    *ngIf="data.value.node.point === 'security_item' && data.value.node.military_man"
+    [disabled]="data.disabled"
+    [binary]="true"
+    [ngModel]="data.value.node.military_man?.conditions.available.status"
+    (onChange)="doAction({ key: 'changeStatus', value: { checked: $event.checked, data: data.value, statusName: 'available' }})"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #diseaseTemplate let-data>
+  <span *ngIf="data.value.node.total">{{ data.value.node.total.ill }}</span>
+  <p-checkbox
+    *ngIf="data.value.node.point === 'security_item' && data.value.node.military_man"
+    [disabled]="data.disabled"
+    [binary]="true"
+    [ngModel]="data.value.node.military_man?.conditions.ill.status"
+    (onChange)="doAction({ key: 'changeStatus', value: { checked: $event.checked, data: data.value, statusName: 'ill' }})"
+    pTooltip="Болен"
+    tooltipPosition="bottom"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #commandTemplate let-data>
+  <span *ngIf="data.value.node.total">{{ data.value.node.total.sent }}</span>
+  <p-checkbox
+    *ngIf="data.value.node.point === 'security_item' && data.value.node.military_man"
+    [disabled]="data.disabled"
+    [binary]="true"
+    [ngModel]="data.value.node.military_man?.conditions.sent.status"
+    (onChange)="doAction({ key: 'changeStatus', value: { checked: $event.checked, data: data.value, statusName: 'sent' }})"
+    pTooltip="Команд."
+    tooltipPosition="bottom"
+  ></p-checkbox>
+</ng-template>
+
+<ng-template #emptyTemplate let-data>
+  <span *ngIf="data.value.node.total">{{ data.value.node.total.lack }}</span>
+  <div
+    *ngIf="data.value.node.point === 'security_item' && data.value.node.military_man"
+    class="p-d-flex p-ai-center flex-gap-1"
+  >
+    <p-checkbox
+      [disabled]="data.disabled"
+      [binary]="true"
+      [ngModel]="data.value.node.military_man?.conditions.lack.status"
+      (onChange)="doAction({ key: 'changeStatus', value: { checked: $event.checked, data: data.value, statusName: 'lack' }})"
+      pTooltip="Отсутств."
+      tooltipPosition="bottom"
+    ></p-checkbox>
+    <button
+      *ngIf="data.value.node.military_man?.conditions.lack.status"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-info"
+      class="p-button-rounded p-button-warning p-button-outlined"
+      [pTooltip]="data.value.node.military_man.note"
+      tooltipPosition="bottom"
+    ></button>
+  </div>
+</ng-template>
+
+<ng-template #procentTemplate let-data>
+  <progress-bar
+    *ngIf="data.value.node.point === 'security'"
+    [value]="(data.value.node.total.by_list / data.value.node.total.state) * 100 || 0"
+  ></progress-bar>
+</ng-template>
+
+<ng-template #controlsTemplate let-data>
+  <span
+    *ngIf="data.value.node.point === 'cn'  || (data.value.node.point === 'center' && data.value.node.division) || (data.value.node.point === 'bp' && data.value.node.division) || data.value.node.point === 'security'"
+  >
+    <button
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      class="p-button-outlined"
+      (click)="doAction({ key: 'add', value: data.value })"
+      pTooltip="Настройка личного состава"
+      tooltipPosition="bottom"
+    ></button>
+  </span>
+  <span *ngIf=" data.value.node.point === 'security_item'">
+    <button
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-pencil"
+      class="p-button-rounded p-button-primary p-button-text"
+      (click)="doAction({ key: 'edit', value: data.value })"
+      pTooltip="Выбрать военнослужащего"
+      tooltipPosition="bottom"
+    ></button>
+    <button
+      *ngIf="data.value.node.military_man"
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-user-minus"
+      class="p-button-rounded p-button-danger p-button-text"
+      pTooltip="Открепить военнослужащего"
+      tooltipPosition="bottom"
+      (click)="doAction({ key: 'deleteMilitaryMan', value: data.value})"
+    ></button>
+    <button
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-times"
+      class="p-button-rounded p-button-danger p-button-text"
+      (click)="doAction({ key: 'deleteSecurityItem', value: data.value })"
+      pTooltip="Удалить запись ШДК"
+      tooltipPosition="bottom"
+    ></button>
+  </span>
+  <span *ngIf=" data.value.node.point === 'app'">
+    <button
+      [disabled]="data.disabled"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-user-plus"
+      class="p-button-rounded p-button-text"
+      pTooltip="Добавить запись ШДК"
+      tooltipPosition="bottom"
+      (click)="doAction({ key: 'addEmptyShdk', value: data.value })"
+    ></button>
+  </span>
+</ng-template>

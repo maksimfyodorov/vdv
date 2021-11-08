@@ -1,0 +1,104 @@
+<form [formGroup]="dialogForm" novalidate>
+	<p-dialog [(visible)]="display" styleClass="Dialog" (onHide)="cancelCreateDialog()" modal='true'>
+
+		    <ng-template pTemplate="header">
+		        <p class="page-title">Исполнение проверки</p>
+		    </ng-template>
+
+				<main>
+
+            <div class="content content_margin">
+              <p class="title">Наименование проверки</p>
+              <input type="text" formControlName="nameVerification" pInputText />
+              <div *ngIf="checkNameVerificationValid()">
+                <span class="red" *ngIf="_nameVerification.errors?.required">Обязательное поле</span>
+              </div>
+            </div>
+
+  					<div class="dropdown-container content_margin">
+  							<p class="title">Орган управления организурующий проверку</p>
+  							<p-dropdown emptyMessage='Не найдено' [options]="organizingVerifications" formControlName="organizingVerification" optionLabel="organizingVerification"></p-dropdown>
+  			    </div>
+
+  					<div class="dropdown-container content_margin">
+  							<p class="title">Проверямое воинское формирование</p>
+  							<p-dropdown emptyMessage='Не найдено' [options]="verifiableMilitaryFormations" formControlName="verifiableMilitaryFormation" optionLabel="verifiableMilitaryFormation"></p-dropdown>
+  			    </div>
+
+  					<div class="dropdown-container content_margin">
+  							<p class="title">Планируемый срок мероприятия</p>
+                <div class="calendar-container">
+                  <p-calendar
+                    formControlName="plannedDateStart"
+                    dateFormat="dd.mm.yy"
+                    placeholder="с.."
+                    [readonlyInput]="true">
+                  </p-calendar>
+                  <p-calendar
+                    formControlName="plannedDateEnd"
+                    dateFormat="dd.mm.yy"
+                    placeholder="по.."
+                    [readonlyInput]="true">
+                  </p-calendar>
+                </div>
+  			    </div>
+
+  					<div class="dropdown-container content_margin">
+  							<p class="title">Фактическая дата мероприятия</p>
+                <div class="calendar-container">
+                  <p-calendar
+                    formControlName="factualDateStart"
+                    dateFormat="dd.mm.yy"
+                    placeholder="с.."
+                    [readonlyInput]="true">
+                  </p-calendar>
+                  <p-calendar
+                    formControlName="factualDateEnd"
+                    dateFormat="dd.mm.yy"
+                    placeholder="по.."
+                    [readonlyInput]="true">
+                  </p-calendar>
+                </div>
+  			    </div>
+
+            <div class="content content_margin">
+              <p class="title">Причина срыва/задержки сроков</p>
+              <textarea pInputTextarea formControlName="reason"></textarea>
+							<div *ngIf="checkReason()">
+                <span class="red" *ngIf="_reason.errors?.required">Обязательное поле</span>
+              </div>
+            </div>
+
+            <div class="content content_margin">
+  							<p class="title title_large title_bold">Документы</p>
+  							<p class="title title_bold">Приказ о проведении проверки</p>
+  							<p class="title title_bold">Акт проведения внезапной проверки</p>
+  							<p class="title title_bold title_blue">Приказ по результатам проведения внезапной проверки</p>
+  			    </div>
+
+            <div class="content content_margin">
+              <app-documents #upload1 [documentsToShow]='documents' ></app-documents>
+  					</div>
+
+            <div class="dropdown-container content_margin">
+  							<p class="title title_bold">План устранения недостатвков</p>
+                <p class="title title_bold title_blue">Доклад об устранении выявленных недостатков</p>
+  			    </div>
+
+            <div class="content content_margin">
+              <app-documents #upload2 [documentsToShow]='documents' ></app-documents>
+            </div>
+
+  			</main>
+
+		    <p-footer>
+		        <div class="button-container">
+		        	<button pButton type="button" icon="pi pi-check" label="Сохранить" (click)=saveVerification()></button>
+							<!-- TO-DO.. Оставлено специально -->
+		        	<!-- <button pButton type="button" label="Сохранить" (click)=upload2.uploadOutsideFiles(files)></button> -->
+							<button pButton type="button" label="Отмена" styleClass="cancelButton" (click)=cancelCreateDialog()></button>
+		        </div>
+		    </p-footer>
+
+	</p-dialog>
+</form>

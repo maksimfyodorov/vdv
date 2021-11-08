@@ -1,0 +1,53 @@
+<p class="dropdown__title">Подразделение</p>
+<p-dropdown class="subdivision__dropdown"></p-dropdown>
+
+<div class="container">
+    <div class="subdivision__table">
+        <p-table [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="number__th">№</th>
+                    <th class="name__th">Наименование</th>
+                    <th class="subdivision__th">Подразделение</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="info__container">
+        <p-tabView>
+            <p-tabPanel
+                class="basic__info__tabPanel"
+                header="Основные сведения"
+            >
+                <ng-template pTemplate="content">
+                    <div class="basic__info"></div>
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="История">
+                <ng-template pTemplate="content">
+                    <p-table>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="date__th">Дата</th>
+                                <th>Событие</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body">
+                            <tr>
+                                <td class="date__td"></td>
+                                <td></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </ng-template>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<section [ngClass]='{folded: !sidebarExpanded}' class='wrapper'>
+  <div class='title'>
+    <div class='expand' (click)='$event.stopPropagation(); expandSidebar()'>
+      <button class='expand__button'>
+        <i class='pi {{sidebarExpanded ? "pi-chevron-left" : "pi-chevron-right"}}'></i>
+      </button>
+    </div>
+    <div *ngIf='switchLabel && sidebarExpanded && showDivisionsSwitch' class='switch'>
+      <h3>{{switchLabel}}</h3>
+      <p-inputSwitch [(ngModel)]='isSwitchChecked' (onChange)='emitSwitchValue($event.checked)'></p-inputSwitch>
+    </div>
+  </div>
+  <p-scrollPanel>
+    <div class='hierarchy'>
+      <ng-content></ng-content>
+    </div>
+  </p-scrollPanel>
+</section>

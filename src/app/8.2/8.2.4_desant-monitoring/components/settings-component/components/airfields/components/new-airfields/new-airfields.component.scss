@@ -1,0 +1,31 @@
+:host::ng-deep.save__airfield-button {
+  .p-button {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+    position: relative;
+    left: 230px;
+    top: 40px;
+  }
+}
+
+.airfield__name__input {
+  width: 300px;
+  margin-right: 20px;
+}
+
+.coordinate {
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: 300px;
+  height: 35px;
+  margin-right: 20px;
+}
+
+.inputs__container {
+  display: flex;
+  align-items: center;
+}

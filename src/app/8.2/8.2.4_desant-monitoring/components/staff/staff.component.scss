@@ -1,0 +1,40 @@
+.staff {
+  &__title {
+    padding-top: 40px;
+      display: flex;
+    flex-flow: row wrap;
+    &_right {
+      position: absolute;
+      right: 32px;
+    }
+    &_left {
+      display: flex;
+    }
+  }
+  &__calendar{
+    padding-right: 16px;
+  }
+  &__button__report{
+    margin-left: 10px;
+  }
+  &__tab_panel{
+    padding-top: 32px;
+  }
+}
+:host ::ng-deep {
+  .p-button{
+    height: 40px;
+  }
+  .p-tabview .p-tabview-nav {
+    max-width: 325px;
+  }
+  .p-tabview-nav {
+    display: flex;
+    flex-wrap: inherit;
+  }
+  .p-inputtext {
+    width: 100%;
+    height: 40px;
+  }
+}
+

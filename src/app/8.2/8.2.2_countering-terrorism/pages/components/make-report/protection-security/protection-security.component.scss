@@ -1,0 +1,77 @@
+.message {
+    width: 952px;
+    height: 68px;
+    background: rgba(208, 235, 255, 0.4);
+    border: 1px solid #d0ebff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px 0 0 16px;
+    font-size: 12px;
+    color: #252b34;
+    margin-bottom: 10px;
+}
+
+.criticalFacilities {
+    width: 448px;
+    height: 40px;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+    padding: 8px 8px 8px 16px;
+}
+
+.row {
+    width: 952px;
+    display: flex;
+    flex-direction: row;
+}
+
+.contentSpaceBetween {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #252b34;
+}
+
+.btn {
+    width: 114px;
+    color: #228be6;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.text {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #484f59;
+    width: 952px;
+}
+
+.width145 {
+    width: 145px;
+}
+
+.head {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+textarea {
+    width: 952px;
+    height: 72px;
+}

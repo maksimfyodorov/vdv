@@ -1,0 +1,129 @@
+<div class="container" (click)="$event.stopPropagation();">
+    <div class="row">
+        <i class="pi pi-clock"></i>
+        {{timeStr}}
+    </div>
+    <div
+        class="row"
+        *ngIf="initConfig.month"
+    >
+        <div class="column">
+            <div class="text">
+                Мес.
+            </div>
+            <div (click)="changeMonth(true)">
+                <i class="pi pi-chevron-up chevron"></i>
+            </div>
+            <ng-container
+                [ngTemplateOutlet]="showData"
+                [ngTemplateOutletContext]="{ $implicit: data.month}"
+            ></ng-container>
+            <div (click)="changeMonth(false)">
+                <i class="pi pi-chevron-down chevron"></i>
+            </div>
+        </div>
+        <div
+            *ngIf="initConfig.minute || initConfig.seconds || initConfig.hour || initConfig.month"
+            class="mrg"
+        >:</div>
+    </div>
+    <div
+        class="row"
+        *ngIf="initConfig.day"
+    >
+        <div class="column">
+            <div class="text">
+                Сут.
+            </div>
+            <div (click)="changeDay(true)">
+                <i class="pi pi-chevron-up chevron"></i>
+            </div>
+            <ng-container
+                [ngTemplateOutlet]="showData"
+                [ngTemplateOutletContext]="{ $implicit: data.day}"
+            ></ng-container>
+            <div (click)="changeDay(false)">
+                <i class="pi pi-chevron-down chevron"></i>
+            </div>
+        </div>
+        <div
+            *ngIf="initConfig.minute || initConfig.seconds || initConfig.hour"
+            class="mrg"
+        >:</div>
+    </div>
+    <div
+        class="row"
+        *ngIf="initConfig.hour"
+    >
+        <div class="column">
+            <div class="text">
+                Ч.
+            </div>
+            <div (click)="changeHour(true)">
+                <i class="pi pi-chevron-up chevron"></i>
+            </div>
+            <ng-container
+                [ngTemplateOutlet]="showData"
+                [ngTemplateOutletContext]="{ $implicit: data.hour}"
+            ></ng-container>
+            <div (click)="changeHour(false)">
+                <i class="pi pi-chevron-down chevron"></i>
+            </div>
+        </div>
+        <div
+            *ngIf="initConfig.minute || initConfig.seconds"
+            class="mrg"
+        >:</div>
+    </div>
+    <div
+        class="row"
+        *ngIf="initConfig.minute"
+    >
+        <div class="column">
+            <div class="text">
+                Мин.
+            </div>
+            <div (click)="changeMinute(true)">
+                <i class="pi pi-chevron-up chevron"></i>
+            </div>
+            <ng-container
+                [ngTemplateOutlet]="showData"
+                [ngTemplateOutletContext]="{ $implicit: data.minute}"
+            ></ng-container>
+            <div (click)="changeMinute(false)">
+                <i class="pi pi-chevron-down chevron"></i>
+            </div>
+        </div>
+        <div
+            *ngIf="initConfig.seconds"
+            class="mrg"
+        >:</div>
+    </div>
+    <div
+        class="row"
+        *ngIf="initConfig.seconds"
+    >
+        <div class="column">
+            <div class="text">
+                Сек.
+            </div>
+            <div (click)="changeSecond(true)">
+                <i class="pi pi-chevron-up chevron"></i>
+            </div>
+            <ng-container
+                [ngTemplateOutlet]="showData"
+                [ngTemplateOutletContext]="{ $implicit: data.seconds}"
+            ></ng-container>
+            <div (click)="changeSecond(false)">
+                <i class="pi pi-chevron-down chevron"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template
+    #showData
+    let-timeData
+>
+    <div class="cell">{{addZeroToString(timeData)}}</div>
+</ng-template>

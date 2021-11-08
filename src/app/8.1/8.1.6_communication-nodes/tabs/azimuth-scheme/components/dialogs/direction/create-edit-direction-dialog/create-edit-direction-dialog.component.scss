@@ -1,0 +1,132 @@
+@import "../../../../../../../../../styles/primeng-fix-style";
+
+.direction-dialog {
+  &__title {
+    font-weight: bold;
+    margin-bottom: 14px;
+  }
+  &__common-title {
+    font-weight: bold;
+    span {
+      color: #949ea8;
+    }
+  }
+  &__controls {
+    padding-top: 30px;
+    border-top: 1px solid #E1E3E8;
+  }
+}
+
+.radio-set {
+  padding: 0 14px;
+  margin-bottom: 18px;
+
+  &__item {
+    &:first-child {
+      margin-right: 56px;
+    }
+  }
+}
+
+.channel-list {
+  &__category {
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+    font-weight: bold;
+
+    span {
+      color: #949ea8;
+    }
+  }
+
+  &__type-name {
+    margin-right: 10px;
+  }
+
+  &__accordion-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 12px;
+    border: 2px solid #959EA9;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      display: none;
+      content: '';
+      position: absolute;
+      background: #959EA9;
+    }
+
+    &:before {
+      display: block;
+      top: 3px;
+      width: 6px;
+      height: 2px;
+    }
+
+    &:after {
+      width: 2px;
+      height: 6px;
+    }
+
+    &_collapsed {
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  &__channels_collapsed {
+    display: none;
+  }
+
+  &__channel {
+    height: 38px;
+    padding: 0 0 0 26px;
+    margin: 0 0 3px 7px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 6px;
+    background: #F5F6F8;
+    span {
+      max-height: 20px;
+      overflow: hidden;
+    }
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -6px;
+      width: 4px;
+      height: 100%;
+      display: block;
+      content: '';
+      background: #82C91E;
+      box-sizing: border-box;
+      border-radius: 6px;
+    }
+
+    .channel-list__controls {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    &:hover > .channel-list__controls {
+      display: block;
+    }
+  }
+}
+
+
+

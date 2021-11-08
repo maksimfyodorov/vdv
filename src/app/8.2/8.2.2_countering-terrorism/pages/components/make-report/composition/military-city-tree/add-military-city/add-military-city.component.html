@@ -1,0 +1,45 @@
+<div>
+    <div class="text">
+        Округ
+    </div>
+    <p-dropdown
+        [options]="districts"
+        [(ngModel)]="selectedDistrict"
+        (onChange)="getGarrison(selectedDistrict.id)"
+        optionLabel="name"
+    ></p-dropdown>
+</div>
+<div>
+    <div class="text">
+        Гарнизон
+    </div>
+    <p-dropdown
+        [options]="garrisons"
+        [(ngModel)]="selectedGarrison"
+        optionLabel="name"
+    ></p-dropdown>
+</div>
+<div>
+    <div class="text">
+        Название города
+    </div>
+    <input
+        type="text"
+        [(ngModel)]="cityName"
+    >
+</div>
+<div>
+    <div class="text">
+        Местоположение
+    </div>
+    <input
+        type="text"
+        (click)="setCoordinate()"
+        [(ngModel)]="coordinates"
+    >
+</div>
+<div>
+    <div class="btn" (click)="addMilitaryCity()">
+        Сохранить
+    </div>
+</div>

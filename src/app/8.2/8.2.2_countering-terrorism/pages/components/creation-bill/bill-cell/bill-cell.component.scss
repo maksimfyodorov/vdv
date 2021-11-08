@@ -1,0 +1,19 @@
+.first-node {
+    margin: 10px 0 10px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.delete-btn {
+    width: 72px;
+    height: 72px;
+    border: 1.5px solid #959ea9;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #959ea9;
+    cursor: pointer;
+    margin-left: 10px;
+}

@@ -1,0 +1,52 @@
+:host::ng-deep {
+  .should-intercede-container {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .should-intercede-rank {
+    color: #959EA9;
+    margin: 2px 0;
+  }
+
+  .should-intercede-name {
+    margin: 2px 0;
+  }
+
+  .should-intercede-number {
+    margin: 2px 0;
+    color: #92d03a;
+  }
+
+  .icon-button {
+    margin: 0 5px;
+  }
+
+  .p-dropdown {
+    min-width: 180px;
+  }
+
+  .choice-another-dropdown .p-dropdown {
+    margin-top: 10px;
+  }
+
+  .little-th {
+    width: 70px;
+    text-align: center !important;
+  }
+
+  .large-th {
+    min-width: 10vw;
+  }
+
+  .centered-td {
+    text-align: center !important;
+  }
+}

@@ -1,0 +1,12 @@
+<form class='wrapper' [formGroup]='dateForm'>
+  <div class='date-picker'>
+    <p-calendar appendTo='body' firstDayOfWeek='1' [minDate]='importedDateValues.min' [maxDate]='importedDateValues.max'
+                (onSelect)='valueChanges()' dateFormat='C dd.mm.yy' formControlName='from'></p-calendar>
+    <span class='pi pi-calendar date-picker_icon'></span>
+  </div>
+  <div class='date-picker'>
+    <p-calendar [minDate]='importedDateValues.min' [maxDate]='importedDateValues.max' appendTo='body' firstDayOfWeek='1'
+                (onSelect)='valueChanges()' dateFormat='По dd.mm.yy' formControlName='to'></p-calendar>
+    <span class='pi pi-calendar date-picker_icon'></span>
+  </div>
+</form>

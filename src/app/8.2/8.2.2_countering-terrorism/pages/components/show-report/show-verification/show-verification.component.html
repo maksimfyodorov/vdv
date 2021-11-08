@@ -1,0 +1,82 @@
+<div class='message'>
+    Организация проверок состояния противодействия терроризму в подчиненных и оперативно подчиненных воинских
+    частях.Сведения о проверках и их результатах, с указанием основных выявленных недостатков, причин их возникновения,
+    должностных лицах, виновных в нарушениях и принятых мерах.
+</div>
+<p-tabView>
+    <p-tabPanel header='Командирская проверка'>
+        <div
+            *ngIf="verification.commandCheck"
+            class="container"
+        >
+            {{verification.commandCheck}}
+        </div>
+        <div
+            class="no-data"
+            *ngIf="!verification.commandCheck"
+        >
+            Данные не предоставленны.
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header='Проверка военного управления'>
+        <div
+            *ngIf="verification.militaryControlCheck"
+            class="container"
+        >
+            {{verification.militaryControlCheck}}
+        </div>
+        <div
+            class="no-data"
+            *ngIf="!verification.militaryControlCheck"
+        >
+            Данные не предоставленны.
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header='Проверка начальником зоны'>
+        <div
+            *ngIf="verification.zoneMasterCheck"
+            class="container"
+        >
+            {{verification.zoneMasterCheck}}
+        </div>
+        <div
+            class="no-data"
+            *ngIf="!verification.zoneMasterCheck"
+        >
+            Данные не предоставленны.
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header='Проверка местных гарнизонов'>
+        <div
+            *ngIf="verification.checkingLocalGarrisons"
+            class="container"
+        >
+            {{verification.checkingLocalGarrisons}}
+        </div>
+        <div
+            class="no-data"
+            *ngIf="!verification.checkingLocalGarrisons"
+        >
+            Данные не предоставленны.
+        </div>
+    </p-tabPanel>
+</p-tabView>
+
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        routerLink='../protection-security'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='reducePageIndex()'
+    ></p-button>
+    <p-button
+        label='Учения'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        routerLink='../teachings'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='addPageIndex()'
+    ></p-button>
+</div>

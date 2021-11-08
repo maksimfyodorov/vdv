@@ -1,0 +1,53 @@
+<div class="title_sport">
+  <p-button label="Добавить участника" (onClick)="openAddParticipant()" ></p-button>
+
+    <p-calendar [(ngModel)]="selectedDate"
+                [showIcon]="true"
+                icon="pi pi-calendar"
+                dateFormat="dd.mm.yy"
+                firstDayOfWeek='1'
+                class="calendar"
+    ></p-calendar>
+  </div>
+<div class="wrapper">
+  <div class="table">
+    <p-table [value]="sportTeamPersons"
+             selectionMode="single"
+             [(selection)]="selectedPerson"
+             dataKey="uuid"
+             (onRowSelect)="onRowSelect($event)"
+             (onRowUnselect)="onRowUnselect($event)"
+             [paginator]="sportTeamPersons.length > 0"
+             [rows]="5" [showCurrentPageReport]="false">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>№</th>
+          <th>Должность</th>
+          <th>Звание</th>
+          <th>ФИО</th>
+          <th>Подразделение</th>
+          <th>Спортивный разряд</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-sportTeam let-rowIndex="rowIndex">
+        <tr [pSelectableRow]="sportTeam">
+          <td>{{rowIndex + 1}}</td>
+          <td>{{sportTeam?.appointment?.name}}</td>
+          <td>{{sportTeam?.rank?.name}}</td>
+          <td>{{sportTeam?.surname}} {{sportTeam?.name}} {{sportTeam?.middle_name}}</td>
+          <td>{{sportTeam?.division?.label}}</td>
+          <td>
+            <p-dropdown [options]="sportCategory" [(ngModel)]="sportTeam.sports_category" editable="true"
+                        optionLabel="title"></p-dropdown>
+          </td>
+          <td>
+            <i class="pi pi-trash" (click)="deletePerson(sportTeam?.uuid)"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="container__card">
+    <app-sport-card [selectedUUID]="selectedUUID" [selectedDate]="selectedDate"></app-sport-card>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+.disabled-input {
+    display: none;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.frame {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+    position: relative;
+
+    div {
+        color: #959ea9;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+.width {
+    width: 45px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-down {
+    width: 109px;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}

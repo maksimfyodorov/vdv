@@ -1,0 +1,138 @@
+@import '../../common/mixins/calendar';
+
+:host::ng-deep.orders-filter {
+  width: 363px;
+  margin-right: 25px;
+
+  .title {
+    margin: 29px 0 24px;
+    font-size: 20px;
+    color: #252B34;
+  }
+
+  .section-title {
+    font-size: 14px;
+    color: #252B34;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .dates {
+    margin-bottom: 25px;
+
+    &__container {
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+
+      .p-calendar {
+        .p-datepicker-trigger {
+          color: #959EA9;
+          background: none;
+          border-color: #ced4da;
+          border-left: none;
+          border-right: 1px solid #ced4da !important;
+        }
+
+        .p-component {
+          cursor: pointer;
+          border-right: none;
+
+          &:hover {
+            border-color: #ced4da;
+          }
+
+          &:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+          }
+        }
+      }
+    }
+  }
+
+  .order-status {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+
+
+    .checkbox {
+      color: #252B34;
+      margin-bottom: 10px;
+
+      .p-checkbox {
+        align-items: center;
+      }
+
+      label {
+        display: inline-block;
+        margin-left: 10px;
+        user-select: none;
+        cursor: pointer;
+
+        span:hover {
+            opacity: .7;
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    margin-bottom: 25px;
+
+    .p-dropdown {
+      width: 100%;
+    }
+  }
+
+  .buttons {
+    margin-top: 15px;
+
+    .clear-button {
+      button {
+        background: none;
+        border: none;
+        color: #959EA9;
+        margin-left: 10px;
+
+        &:hover {
+          opacity: .7;
+        }
+      }
+    }
+  }
+}
+
+:host::ng-deep {
+  @include calendar-weekend;
+
+  .mat-checkbox {
+    cursor: default;
+  }
+
+  .mat-checkbox-layout {
+    cursor: pointer;
+
+    & .mat-checkbox-label {
+      font-family: "Noto Sans", sans-serif;
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
+
+  .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+    background-color: #228be6;
+  }
+
+  .mat-checkbox-frame {
+    border: 1px solid #ced4da;
+
+    &:hover {
+      border-color: #228be6;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<p-scrollPanel [style]="{ height: '65vh' }">
+  <div class='document__wrapper' [appLoader]="isLoading$">
+    <p-tabView>
+      <p-tabPanel header='Настройка документа'>
+        <app-document-settings [configData]="configData"
+                               [formControl]="documentDialogControl"
+        ></app-document-settings>
+      </p-tabPanel>
+      <p-tabPanel header='Сохраненные документы '>
+        <app-saved-document></app-saved-document>
+      </p-tabPanel>
+    </p-tabView>
+    <div class='document__controls'>
+      <p-button icon='pi pi-save'
+                label='Сохранить в документы'
+                [disabled]='true'
+      ></p-button>
+      <p-button styleClass='p-button-outlined p-button-secondary'
+                icon='pi pi-print'
+                label='Распечатать'
+                [disabled]='!currentDocumentPrintLink'
+                (onClick)='printDocument()'
+      ></p-button>
+      <p-button styleClass='p-button-outlined'
+                icon="pi pi-download"
+                (onClick)="fileFormatsPanel.toggle($event)"
+      ></p-button>
+      <p-button styleClass='p-button-outlined'
+                icon='pi pi-send'
+                label='Отправить'
+                [disabled]='true'
+      ></p-button>
+    </div>
+    <button styleClass='p-button-outlined p-button-secondary'
+              class="mock-button"
+              icon='pi pi-print'
+              label='Печать'
+              pButton
+              [disabled]="documentDialogControl.invalid"
+              (click)="handleAction('print')"
+              style="margin-top: 20px"
+    ></button>
+  </div>
+  <p-overlayPanel #fileFormatsPanel
+                  appendTo='body'
+                  styleClass='dropdown__panel'>
+    <ul class='document__template-menu'>
+      <li *ngFor='let item of templateMenuItems' (click)='downloadFile(item.url)'>{{item.label}}</li>
+    </ul>
+  </p-overlayPanel>
+</p-scrollPanel>

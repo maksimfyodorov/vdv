@@ -1,0 +1,96 @@
+:host ::ng-deep {
+  .all-content {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .all-delete-button .p-button {
+    background-color: white !important;
+    color: #228BE6 !important;
+  }
+
+  .main-content {
+    margin-left: 20px;
+  }
+
+  .print-block {
+    text-align: end;
+    width: 50%;
+  }
+
+  .edit-button .p-button {
+    background-color: white !important;
+    color: #228BE6 !important;
+  }
+
+  .report-button .p-button {
+    background-color: white !important;
+    color: #228BE6 !important;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .change-report-button .p-button {
+    background-color: white !important;
+    color: #228BE6 !important;
+  }
+
+
+  .save-button .p-button {
+    background-color: white;
+    color: #228BE6;
+  }
+
+  .header-text {
+    width: 50%;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: left;
+    color: #252B34;
+  }
+
+  .card {
+    display: flex;
+  }
+
+  .buttons-space {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .buttons-space-element {
+    margin-left: 10px;
+  }
+
+  .p-calendar {
+    .p-datepicker-trigger {
+      color: #959EA9;
+      background: none;
+      border-color: #ced4da;
+      border-left: none;
+      border-right: 1px solid #ced4da !important;
+    }
+  }
+
+  .print-button {
+    background-color: white !important;
+  }
+
+  .p-button {
+    white-space: nowrap;
+  }
+
+  .state-setting-button {
+
+  }
+
+  .print-dropdown .p-dropdown {
+  }
+}

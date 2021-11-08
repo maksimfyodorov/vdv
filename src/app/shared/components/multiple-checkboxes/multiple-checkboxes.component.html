@@ -1,0 +1,10 @@
+<section class='wrapper'>
+  <div class='checkbox-wrapper checkbox-wrapper--all'>
+    <p-checkbox [binary]='true' [(ngModel)]='allSelected' (onChange)='selectAll($event.checked)' styleClass='checkbox' ></p-checkbox>
+    <span class='checkbox_description'>Все</span>
+  </div>
+  <div *ngFor='let item of checkboxes' [style.background]='item.color' class='checkbox-wrapper'>
+    <p-checkbox [binary]='true' [(ngModel)]='item.checked' (onChange)='valueChanged()' styleClass='checkbox' ></p-checkbox>
+    <span class='checkbox_description' >{{item.viewName}}</span>
+  </div>
+</section>

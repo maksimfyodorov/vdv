@@ -1,0 +1,98 @@
+:host::ng-deep {
+  .p-tabview .p-tabview-panels {
+    padding: 0;
+  }
+  .p-input-icon-right > .p-inputtext {
+    width: 380px;
+    height: 40px;
+  }
+  .p-inputtextarea  {
+    min-width: 776px;
+    max-width: 776px;
+    min-height: 200px;
+    max-height: 200px;
+  }
+  .p-calendar-w-btn .p-datepicker-trigger {
+    background: white;
+    color: #959EA9;
+    border-color: #C7CDD3;
+    border-left: none;
+  }
+}
+
+:host::ng-deep .calendar {
+  .p-calendar {
+    width: 100%;
+    height: 40px;
+  }
+}
+.modal {
+  min-height: 580px;
+  &__general {
+    &_container {
+      width: 776px;
+      height: 66px;
+      margin-top: 16px;
+      justify-content: space-between;
+      &_inner {
+        width: 380px;
+        height: 66px;
+      }
+      &_date {
+        display: flex;
+        width: 776px;
+        height: 66px;
+        justify-content: space-between;
+      }
+    }
+  }
+  &__report {
+    &__text-aria {
+      margin-top: 20px;
+      width: 776px;
+      height: 136px;
+    }
+    &__buttons{
+      display: flex;
+      width: 650px;
+      height: 40px;
+      justify-content: space-between;
+    }
+  }
+  &__incidents {
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+}
+h5 {
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  color: #252B34;
+}
+#disabled-input-disabled-airdrome_landing {
+  width: 380px;
+  height: 40px;
+}
+#disabled-input-disabled-landing-area {
+  width: 380px;
+  height: 40px;
+}
+#disabled-input-airplane {
+  width: 380px;
+  height: 40px;
+}
+.element__incidient-title {
+  margin-top: 16px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #252B34;
+}
+.subdivisions__button {
+  margin-top: 20px;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,31 @@
+@import "../../../../../../styles/variables/_variables";
+
+.document-list {
+  padding-left: 0;
+}
+
+.document {
+  list-style: none;
+  &__name {
+    padding: 10px;
+    font-size: 14px;
+  }
+  &__name {
+    cursor: pointer;
+    &:hover {
+      background: $primary-color;
+      color: white;
+    }
+    &_disabled {
+      opacity: 0.7;
+    }
+  }
+}
+
+@media print {
+  ::ng-deep {
+    .p-overlaypanel {
+      display: none;
+    }
+  }
+}

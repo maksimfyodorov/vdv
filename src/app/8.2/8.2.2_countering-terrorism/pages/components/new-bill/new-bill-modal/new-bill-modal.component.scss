@@ -1,0 +1,53 @@
+:host ::ng-deep {
+    .p-calendar {
+        width: 356px;
+    }
+}
+
+::ng-deep {
+    .p-dialog-content {
+        overflow: visible !important;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    color: #959ea9;
+    font-size: 12px;
+    margin: 12px 0;
+}
+
+.input {
+    width: 356px;
+    height: 40px;
+}
+
+.buttons {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    &__cancel {
+        color: #959ea9;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__save {
+        width: 180px;
+        height: 40px;
+        border-radius: 4px;
+        background: #228be6;
+        color: #ffffff;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,70 @@
+<div class="dialog">
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      label="Добавить должность"
+      class="p-button-outlined"
+      (click)="addPerson()"
+    ></button>
+  </div>
+  <div class="p-d-flex p-flex-column flex-gap-1">
+    <form [formGroup]="form">
+      <div formArrayName="list" class="form-wrapper">
+        <div *ngIf="getFormList.controls.length" class="p-d-flex p-jc-between flex-gap-1">
+          <div style="width: 240px">Должность</div>
+          <div style="width: 240px">Штат</div>
+          <div style="width: 240px">Воинское звание</div>
+          <div style="width: 35px"></div>
+        </div>
+        <div *ngFor="let item of getFormList.controls; let i = index" [formGroupName]="i">
+          <div class="p-d-flex p-jc-between flex-gap-1">
+            <p-dropdown
+              [options]="staffingAppointments"
+              optionLabel="name"
+              formControlName="appointment"
+              [autoDisplayFirst]="false"
+              appendTo="body"
+            ></p-dropdown>
+            <input style="width: 240px" type="number" pInputText formControlName="count" min="0" />
+            <p-dropdown
+              [options]="staffingRanks"
+              optionLabel="name"
+              formControlName="rank"
+              [autoDisplayFirst]="false"
+              appendTo="body"
+            ></p-dropdown>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-outlined p-button-danger p-mr-4"
+              (click)="removeFormGroup(item)"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <hr class="drawler" />
+    <div class="p-d-flex p-jc-end flex-gap-1">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Отмена"
+        class="p-button-secondary p-button-text"
+        (click)="closeDialog()"
+      ></button>
+      <button
+        [disabled]="form.invalid || !form.controls?.list?.controls?.length"
+        pButton
+        label="Сохранить"
+        icon="pi pi-file"
+        (click)="submit()"
+      ></button>
+    </div>
+  </div>
+</div>

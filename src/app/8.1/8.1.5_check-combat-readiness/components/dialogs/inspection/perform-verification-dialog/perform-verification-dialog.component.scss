@@ -1,0 +1,169 @@
+.page-title {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #252B34;
+}
+
+.title {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #68737F;
+  margin: 4px 0;
+}
+
+.title_bold {
+  font-weight: bold;
+  line-height: 26px;
+  color: #252B34;
+}
+
+.title_large {
+  font-size: 16px;
+}
+
+.title_blue {
+  line-height: 20px;
+  color: #228BE6;
+}
+
+.title_status {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #252B34;
+  margin-left: 8px;
+}
+
+.circle {
+  border-radius: 50%;
+  background: #82C91E;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content__row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.content__row_baseline {
+  display: flex;
+  align-items: center;
+}
+
+.content_margin {
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  border: 1px solid #C7CDD3;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #252B34;
+}
+
+.checkbox-group p-checkbox {
+  margin: 6px 0;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  p-calendar:nth-child(2) {
+    margin-left: 20px;
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  width: 54%;
+  justify-content: space-between;
+}
+
+.red {
+  color: red;
+}
+
+:host {
+  ::ng-deep {
+
+    .button-container button:nth-child(2) {
+      background: white;
+      color: #959EA9;
+      border: none;
+    }
+
+    .Dialog {
+      width: 500px;
+      height: 852px;
+    }
+
+    .p-dropdown {
+      width: 100%;
+    }
+
+    .p-datepicker table td > span {
+        width: 1.4rem;
+        height: 1.4rem;
+        font-size: 16px;
+      }
+
+      .p-datepicker table td {
+        padding: 0.2rem;
+      }
+
+      .p-calendar .p-datepicker {
+        width: 220px;
+      }
+
+      .p-datepicker table th {
+        padding: 0.2rem;
+      }
+
+      .p-datepicker table td.p-datepicker-today > span {
+        color: #ff8709;
+      }
+
+      .p-datepicker .p-datepicker-header {
+        padding: 0;
+      }
+
+  }
+}

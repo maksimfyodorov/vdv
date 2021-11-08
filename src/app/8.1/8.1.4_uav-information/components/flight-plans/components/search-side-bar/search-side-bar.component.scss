@@ -1,0 +1,71 @@
+@import "src/app/8.1/8.1.4_uav-information/components/flight-plans/flight-plans.component";
+
+:host::ng-deep.filter-content {
+  width: 100%;
+  padding: 0 20px 0 20px;
+
+  .input__search {
+    width: 100% !important;
+
+    i {
+      font-size: 20px;
+      margin-top: -.7rem;
+    }
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  .filter-row {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+    .p-calendar {
+      .p-datepicker-trigger {
+        color: #959EA9;
+        background: none;
+        border-color: #ced4da;
+        border-left: none;
+        border-right: 1px solid #ced4da !important;
+      }
+
+      .p-component {
+        cursor: pointer;
+        border-right: none;
+
+        &:hover {
+          border-color: #ced4da;
+        }
+
+        &:focus {
+          box-shadow: none;
+          border-color: #ced4da;
+        }
+      }
+    }
+  }
+
+  .p-dropdown {
+    width: 100%;
+    text-align: left;
+  }
+
+  .button-wrap {
+    margin-top: 20px;
+
+    .clear-button {
+      button {
+        background: none;
+        border: none;
+        color: #959EA9;
+      }
+    }
+  }
+
+  .center {
+    @include flexCenter
+  }
+}

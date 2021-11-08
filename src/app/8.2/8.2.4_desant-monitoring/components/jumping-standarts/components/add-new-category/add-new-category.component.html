@@ -1,0 +1,28 @@
+<p-dropdown
+    class="category-dropdown"
+    [options]="categories"
+    optionLabel="name"
+    placeholder="Выберите категорию"
+    [(ngModel)]="selectedCategory"
+>
+
+</p-dropdown>
+
+<div class="buttons-wrapper">
+    <button
+        pButton
+        pRipple
+        id="cancel"
+        type="button"
+        (click)="newCategoryStatus()"
+        label="Отмена"
+        class="cancel p-button-danger"
+    ></button>
+    <button
+        class="save-button"
+        (click)="postCategoryDivision()"
+        pButton
+        type="button"
+        label="Сохранить"
+    ></button>
+</div>

@@ -1,0 +1,141 @@
+<form [formGroup]="formGroup">
+  <div class="p-d-flex p-flex-column">
+    <h3>Персональные</h3>
+    <div class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        Место установки
+        <div *ngIf="!isEditCharacheristics; else placeInput">
+          {{ equipment.object ? equipment.object.name : 'Не установлена' }}
+        </div>
+        <ng-template #placeInput>
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            [options]="allMonitoringObjects"
+            optionLabel="name"
+            optionValue="uuid"
+            formControlName="object"
+            [filter]="true"
+            emptyMessage="Схемы отсутствуют"
+            emptyFilterMessage="Схемы отсутствуют"
+          ></p-dropdown>
+        </ng-template>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+    <div class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        Модель камеры
+        <div *ngIf="!isEditCharacheristics; else modelInput">
+          {{ equipment.fixation?.number || 'Модель камеры не закреплена'  }}
+        </div>
+        <ng-template #modelInput>
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            [options]="fixations"
+            optionLabel="number"
+            optionValue="uuid"
+            formControlName="fixation_uuid"
+            [filter]="true"
+            emptyMessage="Модели камер отсутствуют"
+            emptyFilterMessage="Модели камер отсутствуют"
+          ></p-dropdown>
+        </ng-template>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+    <div class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        Дата установки
+        <div *ngIf="!isEditCharacheristics; else createdDateInput">
+          {{ equipment.installation_date | date: 'd.MM.YYYY' || null }}
+        </div>
+        <ng-template #createdDateInput>
+          <p-calendar
+            dateFormat="dd.mm.yy"
+            [showIcon]="true"
+            formControlName="installation_date"
+            [disabled]="!formGroup.value.object"
+            firstDayOfWeek="1"
+            showButtonBar="true"
+          ></p-calendar>
+        </ng-template>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+    <div class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        Статус
+        <div *ngIf="!isEditCharacheristics; else statusInput">
+          {{ equipment.status.name }}
+        </div>
+        <ng-template #statusInput>
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [options]="equipmentStatuses"
+            optionLabel="name"
+            optionValue="uuid"
+            formControlName="status"
+            [filter]="true"
+            emptyMessage="Статусы отсутствуют"
+            emptyFilterMessage="Статусы отсутствуют"
+          ></p-dropdown>
+        </ng-template>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+    <div class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        Примечание
+        <div *ngIf="!isEditCharacheristics; else descriptionInput">
+          {{ equipment.description }}
+        </div>
+        <ng-template #descriptionInput>
+          <input type="text" pInputText formControlName="description" />
+        </ng-template>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+
+    <div class="p-d-flex p-jc-end flex-gap-1">
+      <button
+        pButton
+        [disabled]="isEditCharacheristics && !formGroup.valid"
+        type="button"
+        [label]="isEditCharacheristics ? 'Сохранить' : 'Редактировать'"
+        [icon]="isEditCharacheristics ? 'pi pi-save' : 'pi pi-pencil'"
+        class="p-button-outlined p-button-success"
+        (click)="isEditCharacheristics ? submitForm() : editCharacheristics()"
+      ></button>
+      <span *ngIf="isEditCharacheristics">
+        <button
+          pButton
+          type="button"
+          label="Отмена"
+          class="p-button-outlined p-button-secondary"
+          (click)="clear()"
+        ></button>
+      </span>
+      <button
+        pButton
+        [disabled]="isEditCharacheristics && !formGroup.valid"
+        type="button"
+        label="Удалить"
+        icon="pi pi-trash"
+        class="p-button-outlined p-button-danger"
+        (click)="deleteEquipment()"
+      ></button>
+    </div>
+    <h3>Общие</h3>
+    <div *ngFor="let specification of equipment.fixation?.specifications" class="p-d-flex p-flex-column">
+      <div class="p-d-flex p-jc-between p-ai-center">
+        {{ specification.name }}
+        <div>
+          {{ specification.value }}
+        </div>
+      </div>
+      <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+    </div>
+  </div>
+</form>

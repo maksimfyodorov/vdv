@@ -1,0 +1,43 @@
+.period form {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+:host ::ng-deep {
+  .p-inputmask {
+    width: 5rem !important;
+  }
+
+  p-dropdown.period > .p-dropdown {
+    width: 150px;
+  }
+
+  p-dropdown.yearly {
+    order: 0;
+  }
+
+  .yearly {
+    .p-dropdown {
+      width: 143px;
+    }
+  }
+
+  .day {
+    .p-dropdown {
+      width: 143px;
+    }
+  }
+
+  p-dropdown.weekly {
+    order: 1;
+  }
+
+  p-dropdown.day {
+    order: 2;
+  }
+
+  span.p-input-icon-right {
+    order: 3;
+  }
+}

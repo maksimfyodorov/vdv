@@ -1,0 +1,32 @@
+<div class="page">
+  <div class="main">
+
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Поиск" [(ngModel)]="groupName" (ngModelChange)='onKey($event)'>
+    </span>
+
+    <div class="container">
+      <div [ngClass]="{card: true}" *ngFor="let item of groups" (click)="selectGroup(item)">
+        <div class="action-container">
+          <span class="name">{{item.name}}</span>
+          <span (click)="closeDetailContainer(false)" class="closeDetail p-button-icon pi pi-pencil" aria-hidden="true"></span>
+          <span (click)="deleteGroup(item)" class="delGroup p-button-icon pi pi-trash" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <p-button label="Добавить группу" (click)="openAddContainer()"></p-button>
+    </div>
+
+  </div>
+
+  <app-details [group]="selectedGroup" (onClosed)="closeDetailContainer($event)"
+    *ngIf="displayDetails && selectedGroup">
+  </app-details>
+  <app-changes-detail [edit]="editFlag" [group]="selectedGroup" [title]="modeChangeDetailContainer"
+    (onChanged)="closeChangesDetail($event)" *ngIf="!displayDetails">
+  </app-changes-detail>
+
+</div>

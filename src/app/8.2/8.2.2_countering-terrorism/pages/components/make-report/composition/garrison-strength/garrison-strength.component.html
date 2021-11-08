@@ -1,0 +1,37 @@
+<form [formGroup]="garrisonForm">
+    <div formArrayName="garrisonArray">
+        <div *ngFor="let item of ads.controls; let i=index;">
+            <div
+                class="row"
+                [formGroupName]="i"
+            >
+                <div class="logo">
+                    <input
+                        formControlName="name"
+                        (blur)="onBlurMethod(i)"
+                    >
+                    <div
+                        class="trash"
+                        (click)="deleteArray(i)"
+                    >
+                        <i class="pi pi-trash"></i>
+                    </div>
+                </div>
+                <app-anti-terror-unit
+                    [mode]="'amplification'"
+                    [amplificationUuid]="uuids[i]"
+                    [bchsUuid]="bchsUuid"
+                    [bchsGroup]="bchsGroup"
+                    formControlName="garrisonStr"
+                ></app-anti-terror-unit>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div
+    class="add-btn"
+    (click)="addArray()"
+>
+    + Подразделение
+</div>

@@ -1,0 +1,54 @@
+:host::ng-deep {
+  .double-input-header {
+    border: 1px solid #e1e3e8 !important;
+    color: #252B34;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 0;
+    text-align: left;
+  }
+
+  .double-input-body {
+    border: 1px solid #e1e3e8 !important;
+  }
+
+  .right-input {
+    min-width: 240px;
+    height: 25px;
+  }
+
+  .left-input {
+    min-width: 93px;
+  }
+
+  tr {
+    height: 40px;
+  }
+
+  .p-inputtext {
+    border-color: white !important;
+  }
+
+  .p-button, .p-button:hover {
+    color: #8e97a1;
+    background-color: white;
+    border-color: white;
+  }
+
+  .left-input .p-inputtext {
+    width: 93px !important;
+  }
+
+  .p-inputtext {
+  }
+}
+

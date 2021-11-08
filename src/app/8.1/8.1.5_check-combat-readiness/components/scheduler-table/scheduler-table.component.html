@@ -1,0 +1,138 @@
+<div class='controllers'>
+  <p-dropdown
+    optionLabel='name'
+    emptyMessage='Не найдено'
+    (onChange)='changeViewMode()'
+    [options]='viewOptions'
+    [(ngModel)]='viewMode'>
+  </p-dropdown>
+  <div class='controllers_date'>
+    <b *ngIf='viewMode.value !== "year"'>{{monthNames[(displayedRange[0] | date: 'M') - 1]}}</b>
+    <b> {{displayedRange[0] | date: 'yyyy'}}</b>
+  </div>
+  <app-multiple-checkboxes class='controllers_filter' (selectionChanged)='filterByCheckboxes($event)'
+                           [checkboxes]='filterOptions'></app-multiple-checkboxes>
+</div>
+
+<p-scrollPanel [styleClass]='"scroll-panel"' [style]='{width: "100%", height: "auto"}'>
+  <div (click)='selectionChanged(null)' [ngSwitch]='viewMode.value' class='grid'>
+    <ng-container [appLoader]='loaderService.isLoading$' *ngSwitchCase='"week"'>
+      <div [style.gridTemplateColumns]="'1.75fr repeat(' + displayedRange.length + ', 1fr)'" class='grid_header'>
+        <button class='grid_button previous' (click)='turnViewPage(false, "week")'><i class='pi pi-chevron-left'></i>
+        </button>
+        <button class='grid_button forward' (click)='turnViewPage(true, "week")'><i class='pi pi-chevron-right'></i>
+        </button>
+        <div>Проверяемое в/ф</div>
+        <div
+          *ngFor='let day of displayedRange; let index = index'>{{weekDaysNames[index]}} {{day | date:'dd.MM.yy'}}</div>
+      </div>
+      <div class='inspection' *ngFor='let formation of dataSource?.formations'>
+        <div class='inspection_name'>
+          <span>{{formation.name}}</span>
+        </div>
+        <div
+          [style.gridTemplateColumns]="'1.75fr repeat(' + displayedRange.length + ', 1fr)'"
+          class='grid_row'>
+          <div class='formation-name'></div>
+          <ng-container *ngFor='let row of formation.inspections'>
+            <div *ngFor='let column of displayedRange'></div>
+          </ng-container>
+          <div
+            [ngClass]='{selected: selectedEvent?.uuid === event.uuid}'
+            *ngFor='let event of getDisplayedEvents(formation.inspections); let index = index'
+            [style.gridRow]='index + 1'
+            [style.gridColumn]='event.startColumn + "/" + (event.startColumn + event.duration)'
+            class='event'>
+            <div
+              [style.background]='getInspectionColor(event?.status?.name, event?.combat_readiness?.name)'
+              [pTooltip]='eventStatusNames[event.status]'
+              tooltipPosition='top'
+              (click)='$event.stopPropagation(); openInspectionDialog(event)'
+              class='event_bar {{event.status.name}}'>
+              <span>{{event.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container [appLoader]='loaderService.isLoading$' *ngSwitchCase='"month"'>
+      <div [style.gridTemplateColumns]="'7fr repeat(' + displayedRange.length + ', 1fr)'"
+           class='grid_header'>
+        <button class='grid_button previous' (click)='turnViewPage(false, "month")'><i class='pi pi-chevron-left'></i>
+        </button>
+        <button class='grid_button forward' (click)='turnViewPage(true, "month")'><i class='pi pi-chevron-right'></i>
+        </button>
+        <div>Проверяемое воинское формирование</div>
+        <div *ngFor='let day of displayedRange' class='grid_dates'><span>{{day | date:'dd'}}</span></div>
+      </div>
+      <div *ngFor='let formation of dataSource?.formations' class='inspection'>
+        <div class='inspection_name'>
+          <span>{{formation.name}}</span>
+        </div>
+        <div
+          [style.gridTemplateColumns]="'7fr repeat(' + displayedRange.length + ', 1fr)'"
+          class='grid_row'>
+          <div class='formation-name'></div>
+          <ng-container *ngFor='let row of formation.inspections'>
+            <div *ngFor='let column of displayedRange'></div>
+          </ng-container>
+          <div
+            [ngClass]='{selected: selectedEvent?.uuid === event.uuid}'
+            *ngFor='let event of getDisplayedEvents(formation.inspections); let index = index'
+            [style.gridRow]='index + 1'
+            [style.gridColumn]='event.startColumn + "/" + (event.startColumn + event.duration)'
+            class='event'>
+            <div
+              [style.background]='getInspectionColor(event?.status?.name, event?.combat_readiness?.name)'
+              [pTooltip]='eventStatusNames[event.status]'
+              tooltipPosition='top'
+              (click)='$event.stopPropagation(); openInspectionDialog(event)'
+              class='event_bar {{event.status.name}}'>
+              <span>{{event.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container [appLoader]='loaderService.isLoading$'  *ngSwitchCase='"year"'>
+      <div [style.gridTemplateColumns]="'3fr repeat(' + displayedRange.length + ', 1fr)'"
+           class='grid_header'>
+        <button class='grid_button previous' (click)='turnViewPage(false, "year")'><i class='pi pi-chevron-left'></i>
+        </button>
+        <button class='grid_button forward' (click)='turnViewPage(true, "year")'><i class='pi pi-chevron-right'></i>
+        </button>
+        <div>Проверяемое воинское формирование</div>
+        <div class='' *ngFor='let day of displayedRange; let index = index'>{{monthNames[index]}}</div>
+      </div>
+      <div class='inspection' *ngFor='let formation of dataSource?.formations'>
+        <div class='inspection_name'>
+          <span>{{formation.name}}</span>
+        </div>
+        <div
+          [style.gridTemplateColumns]="'3fr repeat(' + displayedRange.length + ', 1fr)'"
+          class='grid_row'>
+          <ng-container *ngFor='let row of formation.inspections'>
+            <div *ngFor='let column of displayedRange'></div>
+          </ng-container>
+          <div
+            [ngClass]='{selected: selectedEvent?.uuid === event.uuid}'
+            *ngFor='let event of getDisplayedEvents(formation.inspections); let index = index'
+            [style.gridRow]='index + 1'
+            [style.gridColumn]='event.startColumn + "/" + (event.startColumn + event.duration)'
+            class='event'>
+            <div
+              [style.background]='getInspectionColor(event?.status?.name, event?.combat_readiness?.name)'
+              [pTooltip]='eventStatusNames[event.status]'
+              tooltipPosition='top'
+              (click)='$event.stopPropagation(); openInspectionDialog(event)'
+              class='event_bar {{event.status.name}}'>
+              <span>{{event.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</p-scrollPanel>

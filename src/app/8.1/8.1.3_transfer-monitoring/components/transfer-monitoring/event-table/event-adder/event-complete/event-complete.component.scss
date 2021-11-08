@@ -1,0 +1,42 @@
+.row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    &__plan {
+        font-size: 14px;
+        line-height: 20px;
+        color: #68737f;
+    }
+    &__time {
+        font-size: 14px;
+        line-height: 20px;
+        margin-left: 50px;
+        color: #252b34;
+    }
+}
+
+.coment {
+    &__text {
+        font-size: 12px;
+        color: #252b34;
+        line-height: 18px;
+        margin: 5px 0;
+    }
+    &__area {
+        width: 324px;
+        height: 110px;
+        background: #ffffff;
+        border: 1px solid #c7cdd3;
+        box-sizing: border-box;
+        border-radius: 4px;
+    }
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+p-radioButton{
+    margin: 10px 0;
+}

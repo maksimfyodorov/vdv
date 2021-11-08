@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="logo">
+        Источники информации и порядок её получения
+    </div>
+    <div class="message">
+        Информация о составе сил и средств, предназначенных для противодействия терроризму в подчиненных соединениях и
+        воинских частях ВДВ формируется на уровне управления соединение, и передаётся для обобщения и последующего
+        анализа в
+        вышестоящий орган управления по существующим закрытым каналам связи.
+    </div>
+    <div
+        *ngIf="protectionSecurity.informationSources"
+        class="text"
+    >
+        {{protectionSecurity.informationSources}}
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!protectionSecurity.informationSources"
+    >
+        Данные не предоставленны.
+    </div>
+    <div class="logo">
+        Работа по обеспечению антитеррористической защищенности
+    </div>
+    <div class="message">
+        Принятие в отчетном периоде на вооружение (ввод в эксплуатацию, установка, ремонт) защитных устройств и
+        комплексов
+        технических средств охраны, инженерных, строительных, технических сооружений, конструкций и ограждений,
+        обеспечивающих защиту и безопасные условия жизнедеятельности военнослужащих и лиц гражданского персонала.
+    </div>
+    <div
+        *ngIf="protectionSecurity.securityWork"
+        class="text"
+    >
+        {{protectionSecurity.securityWork}}
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!protectionSecurity.securityWork"
+    >
+        Данные не предоставленны.
+    </div>
+    <div class="logo">
+        Пределы изменения данных, их размерность
+    </div>
+    <div class="message">
+        Данные отображаемые в ходе решения задачи выражают количественное значение, измеряются в целых числах имеют
+        отображение: <br> — числовые значения для обозначения наименований воинских частей и соединений, количественных
+        характеристик состава сил и средств противодействия терроризму; <br> — текстовый формат для отображения
+        наименования
+        воинских частей и соединений,
+    </div>
+    <div
+        *ngIf="protectionSecurity.dataLimits"
+        class="text"
+    >
+        {{protectionSecurity.dataLimits}}
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!protectionSecurity.dataLimits"
+    >
+        Данные не предоставленны.
+    </div>
+</div>
+
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        (click)='reducePageIndex()'
+        routerLink='../annual-plan'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+    <p-button
+        label='Проверки'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        (click)='addPageIndex()'
+        routerLink='../verification'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+</div>

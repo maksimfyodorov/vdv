@@ -1,0 +1,38 @@
+:host ::ng-deep {
+  p-button button {
+    background: transparent;
+    border: none;
+    padding: 8px;
+
+    &:hover {
+      i {
+        color: #FFFFFF!important;
+      }
+    }
+
+    .p-button-label {
+      display: none;
+    }
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 5px 12px;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    padding: 10px 12px!important;
+    background-color: #fff!important;
+    font-weight: 500!important;
+  }
+
+  .p-datatable-header {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+  }
+
+  .p-paginator-current {
+    display: none;
+  }
+}

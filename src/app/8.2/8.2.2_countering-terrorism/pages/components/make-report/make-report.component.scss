@@ -1,0 +1,29 @@
+:host ::ng-deep {
+    .p-inputswitch {
+        margin-left: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .p-inputswitch-slider {
+        background: #fab005;
+        transition: none;
+    }
+
+    .p-inputswitch:not(.p-disabled):hover .p-inputswitch-slider {
+        background: #fab005;
+    }
+
+    .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+        background: #228be6;
+    }
+}
+
+.indent {
+    height: 10px;
+    width: 100%;
+}
+
+.container {
+    padding-left: 15px;
+}

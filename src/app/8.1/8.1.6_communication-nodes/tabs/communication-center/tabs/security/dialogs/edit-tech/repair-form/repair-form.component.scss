@@ -1,0 +1,33 @@
+:host ::ng-deep .p-accordion .p-accordion-header {
+  background: white !important;
+  color: red;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  ::ng-deep .p-calendar {
+    width: 100%;
+  }
+
+  span:first-child {
+    margin-top: 0.5rem;
+  }
+
+
+  .coordinate-row {
+    margin-top: -1.5rem;
+    .coordinate {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+
+      :first-child {
+        width: 100%;
+      }
+    }
+  }
+}

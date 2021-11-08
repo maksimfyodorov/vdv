@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <div [appLoader]="loader.isLoading$">
+  <div class="desanting__container">
+    <h5>Подразделение</h5>
+    <div class="desanting__title">
+      <p-dropdown [options]="militaryUnits"
+                  [(ngModel)]="selectedUnit"
+                  placeholder="Выберите подразделение"
+                  optionLabel="label"
+                  [showClear]="true"
+                  id="dropdown"
+                  (onChange)="showDesantList(selectedUnit?.id)"
+                  class="dropdown"
+      ></p-dropdown>
+      <p-button label="Добавить десантников" (onClick)="addDesantUnit()" class="p-button-info"
+                *ngIf="selectedUnit"></p-button>
+    </div>
+    <div class="desanting__table">
+        <p-table [value]="paratroopers"
+                 [paginator]="paratroopers?.length > row"
+                 [rows]="row"
+                 [showCurrentPageReport]="false"
+                 selectionMode="single"
+                 [(selection)]="selectedPerson"
+                 (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                 dataKey="uuid"
+                 editMode="row"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>№ п/п</th>
+              <th>Звание</th>
+              <th>ФИО</th>
+              <th>Прыжков</th>
+              <th>Инв № парашюта</th>
+              <th>Действия</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body"
+                       let-staff
+                       let-editing="editing"
+                       let-ri="rowIndex">
+            <tr [pSelectableRow]="staff" [pEditableRow]="staff">
+              <td>{{ri + 1}}</td>
+              <td>{{staff?.military_man?.rank?.name}}</td>
+              <td>{{setParatroopersFullName(staff?.military_man?.name, staff?.military_man?.middle_name, staff?.military_man?.surname)}} </td>
+              <td>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input
+                      pInputText
+                      class="nameChange__input"
+                      type="text"
+                      [(ngModel)]="staff.jump_count"/>
+                  </ng-template>
+                  <ng-template pTemplate="output">{{staff?.jump_count || 0}} </ng-template>
+                </p-cellEditor>
+              <td>
+                <div class="modal__table_input">
+                  <p class="input__text">Осн.</p>
+                  <span class="element__vvst">{{staff?.vvst_fixation_main?.number}}</span>
+                  <span class="element__select"><i class="pi pi-ellipsis-h icon-pointer"
+                                                   (click)="showSelectionMenu()"></i></span>
+
+                </div>
+                <div class="modal__table_input">
+                  <p class="input__text">Зап.</p>
+                  <span class="element__vvst">{{staff?.vvst_fixation_reserve?.number}}</span>
+                  <span class="element__select"><i class="pi pi-ellipsis-h icon-pointer"
+                                                   (click)="showSelectionMenu()"></i></span>
+                </div>
+              </td>
+              <td>
+                <div
+                  class="edit"
+                  onclick="event.stopPropagation()">
+                  <div class="icons_wrapper">
+                    <button
+                      *ngIf="!editing"
+                      pButton
+                      pRipple
+                      type="button"
+                      (click)="onRowEditInit(staff)"
+                      pInitEditableRow
+                      icon="pi pi-pencil"
+                      class="p-button-rounded p-button-text"
+                    ></button>
+                    <i
+                      *ngIf="!editing"
+                      (click)="deleteParatrooper(staff)"
+                      class="pi pi-trash">
+                    </i>
+                  </div>
+                  <button
+                    *ngIf="editing"
+                    pButton
+                    pRipple
+                    type="button"
+                    (click)="onRowEditSave(staff)"
+                    pSaveEditableRow
+                    icon="pi pi-check"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2"
+                  ></button>
+                  <button
+                    *ngIf="editing"
+                    pButton
+                    pRipple
+                    type="button"
+                    pCancelEditableRow
+                    (click)="onRowEditCancel(staff, ri)"
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-text p-button-danger"
+                  ></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+    </div>
+  </div>
+  <div class="desanting__container__card">
+    <app-staff-desanting-card [selectedUUID]="selectedUUID"></app-staff-desanting-card>
+  </div>
+</div>

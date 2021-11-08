@@ -1,0 +1,39 @@
+@import "../../../../../../../../../styles/primeng-fix-style";
+
+::ng-deep {
+  .p-dialog-content {
+    overflow: visible;
+  }
+}
+
+.channel-dialog {
+  &__form {
+    max-width: 460px;
+  }
+  &__controls{
+    padding-top: 30px;
+    border-top: 1px solid #E1E3E8;
+  }
+}
+
+.channel-form {
+  &__title {
+    font-weight: bold;
+    padding-left: 8px;
+    margin-bottom: 14px;
+  }
+  &__document {
+    padding-left: 8px;
+    width: 100%;
+    margin-bottom: 22px;
+  }
+}
+
+.radio-set{
+  padding: 0 14px;
+  &__item {
+    &:first-child {
+      margin-right: 56px;
+    }
+  }
+}

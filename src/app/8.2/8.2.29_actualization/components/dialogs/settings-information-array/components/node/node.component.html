@@ -1,0 +1,14 @@
+
+<div>
+    Директория/файл
+</div>
+<div>
+    <input class="node__input" [(ngModel)]="inputText" placeholder="Введите..." type="text">
+</div>
+<div class="checkbox__wrapper">
+    <p-checkbox binary="true" inputId="binary" [(ngModel)]="selectedValues"></p-checkbox><span class="checkbox__label">Директория</span>
+</div>
+<div class="buttons__wrapper">
+    <button pButton class="save" type="button"(click)="saveInfo()" label="Сохранить"></button>
+    <button pButton pRipple type="button" label="Отменить" (click)="closeWindow()" class="p-button-secondary p-button-text"></button>
+</div>

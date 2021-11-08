@@ -1,0 +1,68 @@
+.main {
+  width: 432px;
+  max-height: 542px;
+}
+
+.container {
+  height: 354px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  margin: 22px 0 12px 0;
+}
+
+.name {
+  width: 70%;
+}
+
+.closeDetail{
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+.delGroup{
+  cursor: pointer;
+}
+
+.action-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  border: 1px solid #e1e3e8;
+  color: #252b34;
+  height: 44px;
+  width: 432px;
+  margin: 2px 0;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background: #e7f5ff;
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+}
+
+:host {
+  ::ng-deep {
+    .p-input-icon-left > .p-inputtext {
+      width: 430px;
+    }
+
+    .button-container .p-button {
+      background: #fff;
+      border: 1px solid #228be6;
+      color: #228be6;
+      width: 100%;
+    }
+  }
+}

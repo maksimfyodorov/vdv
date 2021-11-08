@@ -1,0 +1,6 @@
+<div class='text-message__wrapper'>
+  <p class='text-message__text'>{{data.detail}}</p>
+  <div class='text-message__link' *ngIf='data.data.link' (click)='emitClickLink(data.data.link)'>
+    Ссылка
+  </div>
+</div>

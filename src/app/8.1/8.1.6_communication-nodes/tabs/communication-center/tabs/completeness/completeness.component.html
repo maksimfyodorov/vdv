@@ -1,0 +1,67 @@
+<div class="p-d-flex flex-gap-1">
+  <app-nodes-hierarchy
+    switchLabel="БП"
+    (switchToggle)="toggleHierarchyMode($event)"
+    [selectedItem]="selectedHierarchyItem"
+    [dataSource]="hierarchyDataSource"
+  >
+    <app-ospo-hierarchy-folder #folder></app-ospo-hierarchy-folder>
+  </app-nodes-hierarchy>
+  <div class="p-d-flex p-flex-column flex-gap-2">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      <span *ngIf="!selectedHierarchyItem" class="tab-caption"
+      >Расчёт укомплектованности </span
+      >
+
+      <span *ngIf="selectedHierarchyItem?.point ==='cn'" class="tab-caption"
+      >Расчёт укомплектованности УС {{ selectedHierarchyItem.call_sign }}</span
+      >
+
+      <span *ngIf="selectedHierarchyItem?.point ==='center'" class="tab-caption"
+      >Расчёт укомплектованности центра {{ selectedHierarchyItem.number }}
+        {{ selectedHierarchyItem.center_type?.name }}</span
+      >
+
+      <span *ngIf="selectedHierarchyItem?.point ==='bp'" class="tab-caption"
+      >Расчёт укомплектованности {{ selectedHierarchyItem.number }} {{ selectedHierarchyItem.type.name }}</span
+      >
+      <div class="p-d-flex p-jc-end flex-gap-1">
+
+      <span class="p-float-label">
+        <p-calendar
+          inputId="calendar"
+          (onSelect)="getCompletenessHierarchy()"
+          (onClearClick)="getCompletenessHierarchy()"
+          dateFormat="dd.mm.yy"
+          firstDayOfWeek="1"
+          [disabled]="!selectedHierarchyItem"
+          [(ngModel)]="filteredDate"
+          [maxDate]="maxDate"
+          showIcon="true"
+          showButtonBar="true"
+        ></p-calendar>
+        <label for="calendar">Выберите дату</label>
+      </span>
+        <app-documents-formalized groupName="8.1.6"></app-documents-formalized>
+        <button
+          pButton
+          [label]="hasReport ? 'Доклад сформирован' : 'Сформировать доклад'"
+          [disabled]="hasReport"
+          type="button"
+          icon="pi pi-file"
+          (click)="generateReport()"
+        ></button>
+      </div>
+    </div>
+    <app-completeness-table
+      [disabled]="disabledTable"
+      [hierarchy]="completenessHierarchy"
+      [hierarchyMode]="hierarchMode"
+      (deleteRecordShdkEmitter)="deleteRecordShdk($event)"
+      (deleteMilitaryManEmitter)="deleteMilitaryMan($event)"
+      (createNewShdkEmitter)="createNewShdk($event)"
+      (updateMilitaryManEmitter)="updateMilitaryMan($event)"
+      (changeStatusEmitter)="changeStatus($event)"
+    ></app-completeness-table>
+  </div>
+</div>

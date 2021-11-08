@@ -1,0 +1,39 @@
+.period {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 0 20px 20px 20px;
+
+  &__inputs {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+
+    .input-wrap {
+      margin-right: 15px;
+      position: relative;
+
+      input {
+        cursor: pointer;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        color: #68737F;
+      }
+
+      .icon-choose {
+        position: absolute;
+        right: 10px;
+        bottom: 12px;
+      }
+    }
+  }
+
+  &__btns {
+    p-button {
+      margin-left: 15px;
+    }
+  }
+}

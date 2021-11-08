@@ -1,0 +1,43 @@
+<div class="logo">
+    Общие сведения
+</div>
+<div class="container">
+    <div class="row">
+        <div class="text">№ документа</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.number}}</div>
+    </div>
+    <div class="row">
+        <div class="text">Дата документа</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.date}}</div>
+    </div>
+    <div class="row">
+        <div class="text">Пункт управления</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.control_point.name}}</div>
+    </div>
+    <div class="row">
+        <div class="text">Воинское формирование</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.summary_uuid}}</div>
+    </div>
+    <div class="row">
+        <div class="text">Карта</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.map}}</div>
+    </div>
+    <div class="row">
+        <div class="text">Издание</div>
+        <span class="border"></span>
+        <div class="text">{{generalInformation.publication}}</div>
+    </div>
+</div>
+<p-button
+    label='Состав'
+    icon='pi pi-arrow-right'
+    iconPos='right'
+    routerLink='../composition'
+    [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    (click)='changePageIndex()'
+></p-button>

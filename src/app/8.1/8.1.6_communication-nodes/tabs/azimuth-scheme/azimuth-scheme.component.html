@@ -1,0 +1,33 @@
+<div class='nodes'>
+  <app-nodes-hierarchy
+    title='Узлы связи'
+    [selectedItem]='nodesHierarchy.selectedItem$ | async'
+    [dataSource]='nodesHierarchy.nodesHierarchy$ | async'
+    (click)='resetSelection()'
+  >
+    <app-hierarchy-folder #folder></app-hierarchy-folder>
+  </app-nodes-hierarchy>
+
+  <div class='wrapper'>
+    <button class='request-btn' pButton icon='pi pi-send' label='Отправить запрос'></button>
+    <p-tabView class='tab-wrapper'>
+      <p-tabPanel header='Схема'>
+        <ng-template pTemplate='content'>
+          <app-nodes-scheme></app-nodes-scheme>
+        </ng-template>
+      </p-tabPanel>
+
+      <p-tabPanel
+        header='Карта'
+        class='ues-map'>
+        <ng-template pTemplate='content'>
+          <ues-map>
+            <app-direction-map-view (openDialogViewEmit)='openDirectionInfoDialog($event)'></app-direction-map-view>
+            <app-unit-map-view (openDialogViewEmit)='openNodeInfoDialog($event)'></app-unit-map-view>
+            <ues-main-toolbar></ues-main-toolbar>
+          </ues-map>
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

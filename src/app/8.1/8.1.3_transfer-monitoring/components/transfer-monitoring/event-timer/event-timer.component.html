@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <i class="pi pi-clock text"></i>
+        <div class="text">
+            Оперативное время
+        </div>
+    </div>
+    <div class="row">
+        <div class="time">
+            <div class="numbers">{{ date.month}}</div>
+            <div class="text">мес.</div>
+        </div>
+        <div class="time">
+            <div class="numbers">{{date.day}}</div>
+            <div class="text">сут.</div>
+        </div>
+        <div class="time">
+            <div class="numbers">{{date.hour}}</div>
+            <div class="text">ч.</div>
+        </div>
+        <div class="numbers" style="margin-bottom: 22px;">
+            :
+        </div>
+        <div class="time">
+            <div class="numbers">{{date.minute}}</div>
+            <div class="text">мин.</div>
+        </div>
+    </div>
+    <div class="btn row" (click)="startTimer()">
+        <div>
+            <i class="pi pi-play"></i>
+        </div>
+        <div>
+            Запуск отсчета
+        </div>
+    </div>
+</div>

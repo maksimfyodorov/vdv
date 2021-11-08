@@ -1,0 +1,32 @@
+:host::ng-deep {
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .row {
+    display: flex;
+    padding: 25px;
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    width: 80vw;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 370px;
+    margin-right: 69px;
+
+  }
+
+  .add-post-button-container  {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+

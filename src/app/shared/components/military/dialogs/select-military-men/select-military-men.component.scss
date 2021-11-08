@@ -1,0 +1,87 @@
+@import '../../../../../../styles/variables/colors';
+
+.button {
+  text-align: right;
+}
+
+.p-inputtext {
+  width: 377px;
+  height: 40px;
+}
+
+:host ::ng-deep {
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+    .p-paginator-pages {
+      .p-paginator-page{
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "\e900";
+        }
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .p-datatable table {
+  }
+  .p-datatable-header {
+    background: #fff !important;
+    border: none;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    text-align: left;
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252b34;
+    height: 60px;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+    line-height: 20px;
+  }
+}

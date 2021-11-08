@@ -1,0 +1,146 @@
+<div [appLoader]='loaderService.isLoading$'
+     class='attach-document-dialog__container'>
+  <div class='p-grid p-ai-stretch'>
+    <div class='attach-document__documents documents p-col-7'>
+      <form [formGroup]='filterForm' class='documents__filter-bar filter-bar p-fluid p-formgrid p-grid'>
+        <div class='filter-bar__group-dropdown p-field p-col-12 p-md-2'>
+          <label for='group'><small>Группа</small></label>
+          <p-dropdown id='group'
+                      [options]='groups'
+                      optionValue='uuid'
+                      optionLabel='code'
+                      placeholder='Выберите...'
+                      formControlName='group_uuid'>
+          </p-dropdown>
+        </div>
+        <div class='filter-bar__kind-dropdown p-field p-col-12 p-md-2'>
+          <label for='kind'><small>Вид</small></label>
+          <p-dropdown id='kind'
+                      [options]='kinds'
+                      optionLabel='name'
+                      optionValue='uuid'
+                      placeholder='Выберите...'
+                      formControlName='kind_uuid'>
+          </p-dropdown>
+        </div>
+        <div class='filter-bar__type-dropdown p-field p-col-12 p-md-2'>
+          <label for='type'><small>Тип</small></label>
+          <p-dropdown id='type'
+                      [options]='types'
+                      optionLabel='name'
+                      optionValue='uuid'
+                      placeholder='Выберите...'
+                      formControlName='type_uuid'>
+          </p-dropdown>
+        </div>
+        <div class='filter-bar__mu-dropdown p-field p-col-12 p-md-3'>
+          <label><small>ВФ</small></label>
+          <app-military-units-dropdown-flat formControlName='military_unit_id'></app-military-units-dropdown-flat>
+        </div>
+        <div class='filter-bar__filter-word p-field p-col-12 p-md-3'>
+          <label for='filter-word'><small>Поиск</small></label>
+          <span class='p-input-icon-right'>
+            <i class='pi pi-search'></i>
+            <input id='filter-word'
+                   type='text'
+                   pInputText
+                   placeholder='Введите...'
+                   formControlName='name' />
+          </span>
+        </div>
+      </form>
+      <div class='documents__table table-documents'>
+        <p-table styleClass='p-datatable-gridlines'
+                 [value]='documents'
+                 [rowHover]='true'
+                 [lazy]='true'
+                 [paginator]='true'
+                 [rows]='documentsPerPage'
+                 [totalRecords]='totalDocuments'
+                 [(selection)]='selectedDocuments'
+                 (onLazyLoad)='lazyLoadDocuments($event)'>
+          <ng-template pTemplate='header'>
+            <tr>
+              <th *ngIf='showControls' class='table-documents__th_checkbox'>
+                <p-tableHeaderCheckbox *ngIf='dialogMode==="multiple"'></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn='kind' class='table-documents__th_kind'>
+                Вид
+                <p-sortIcon field='kind'></p-sortIcon>
+              </th>
+              <th pSortableColumn='name' class='table-documents__th_name'>
+                Наименование
+                <p-sortIcon field='name'></p-sortIcon>
+              </th>
+              <th pSortableColumn='military_unit' class='table-documents__th_military-unit'>
+                В/ч
+                <p-sortIcon field='military_unit'></p-sortIcon>
+              </th>
+              <th pSortableColumn='date' class='table-documents__th_date'>
+                Дата
+                <p-sortIcon field='date'></p-sortIcon>
+              </th>
+              <th pSortableColumn='number' class='table-documents__th_number'>
+                №
+                <p-sortIcon field='number'></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate='body' let-document>
+            <tr (click)='showDocument(document)'>
+              <td *ngIf='showControls' >
+                <p-tableCheckbox *ngIf='dialogMode==="multiple"' (click)='$event.stopPropagation()'
+                                 [value]='document'></p-tableCheckbox>
+                <p-tableRadioButton *ngIf='dialogMode==="single"' (click)='$event.stopPropagation()'
+                                    [value]='document'></p-tableRadioButton>
+              </td>
+              <td>{{document.kind.name}}</td>
+              <td>{{document.name}}</td>
+              <td>{{document.military_unit.common_number_name}}</td>
+              <td>{{document.date}}</td>
+              <td>{{document.number}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <div class='attach-document__new-document-button'>
+          <p-button
+            styleClass='p-button-outlined'
+            label='Добавить новый документ'
+            type='button'
+            (onClick)='changeDocumentMode("create")'
+          ></p-button>
+        </div>
+      </div>
+    </div>
+    <div [ngSwitch]='documentMode' class='attach-document__document p-col-5'>
+      <app-document-create *ngSwitchCase='"create"'
+                           [kinds]='kinds'
+                           (reloadDocumentsList)='reloadDocumentsList()'
+      ></app-document-create>
+      <app-document-view *ngSwitchCase='"view"'
+                         [currentDocumentId]='currentDocumentId'
+                         [kinds]='kinds'
+                         (changeDocumentModeEvent)='changeDocumentMode($event)'
+                         (reloadDocumentsList)='reloadDocumentsList()'
+      ></app-document-view>
+      <app-document-edit *ngSwitchCase='"edit"'
+                         [currentDocumentId]='currentDocumentId'
+                         [kinds]='kinds'
+                         (changeDocumentModeEvent)='changeDocumentMode($event)'
+                         (reloadDocumentsList)='reloadDocumentsList()'
+      ></app-document-edit>
+    </div>
+  </div>
+  <div *ngIf='showControls' class='attach-document__button-container'>
+    <p-button type='button'
+              styleClass='p-mr-2'
+              label='Выбрать'
+              (onClick)='attachChosenDocuments()'
+    ></p-button>
+    <p-button type='button'
+              styleClass='p-button-secondary p-button-text'
+              label='Отмена'
+              (onClick)='cancelDialog()'
+    ></p-button>
+  </div>
+</div>

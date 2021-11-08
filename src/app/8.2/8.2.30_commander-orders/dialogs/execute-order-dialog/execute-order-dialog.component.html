@@ -1,0 +1,126 @@
+<p-scrollPanel [style]='{height: !isViewMode ? "80vh" : "70vh"}'>
+  <form class='execute-order-form' [formGroup]='form' [appLoader]="loader.isLoading$">
+    <div class="execute-order-form__container" formGroupName="report">
+
+      <section class='summary'>
+        <h3 class='summary__title'>Краткое содержание поручения</h3>
+        <p class='summary__text' [class._disabled]="form.disabled">{{order.description}}</p>
+      </section>
+
+      <section class='execution-date'>
+        <h3 class='title'>Дата выполнения</h3>
+        <p-calendar formControlName='execution_date'
+                    [showIcon]='true'
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon='pi pi-calendar'
+        ></p-calendar>
+      </section>
+
+      <section class='attached-docs'>
+        <h3 class='title'>Прикреплённые документы</h3>
+        <div class='attached-docs__item'>
+          <app-documents title='Доклад'
+                         hasNullifiedPaddings='true'
+                         attachMode='single'
+                         isMainDocument='true'
+                         [documentsToShow]="this.form.get('report').value.document"
+                         (currentDocumentList)='reportInDocumentsChanged($event)'
+                         [isViewMode]="form.disabled"
+          ></app-documents>
+        </div>
+
+        <div class='attached-docs__item' [class._disabled]="form.disabled">
+          <app-documents title='Дополнительные документы'
+                         hasNullifiedPaddings='true'
+                         [documentsToShow]="this.form.get('report').value.additional_documents"
+                         (currentDocumentList)='documentsChanged($event)'
+                         [isViewMode]="form.disabled"
+          ></app-documents>
+        </div>
+      </section>
+
+      <section class='execution-notes'>
+        <h3 class='title'>Примечание по исполнению</h3>
+        <textarea formControlName='description' [rows]='5' [cols]='30' pInputTextarea placeholder='Краткое содержание'></textarea>
+      </section>
+    </div>
+
+      <section class='executors'>
+        <section class='executor' formGroupName='executor'>
+          <h3 class='executor__title'>Исполнитель</h3>
+          <div class='executor__container'>
+
+            <div class='executor__administration'>
+              <p class='title'>Управление (отдел, служба)</p>
+              <app-military-units-dropdown-flat formControlName='military_unit_id'></app-military-units-dropdown-flat>
+            </div>
+
+          <div class='executor__military-man' [class._disabled]="form.disabled">
+            <app-military [loadExecutive]="true" formControlName='shdk_uuid'>Исполнитель ДЛ</app-military>
+            <p class='executor__user-icon' *ngIf="form.get('executor').value.shdk_uuid">
+              <i class="pi pi-user"></i>
+              {{form.get('executor').value.shdk_uuid.appointment}}
+            </p>
+          </div>
+
+          </div>
+        </section>
+
+      <section class='co-executor'
+               formArrayName='co_executors'
+               *ngFor="let coExecutor of form.get('co_executors')['controls']; let i = index;">
+        <div class='co-executor__inner-wrap' [formGroupName]='i'>
+          <h3 class='co-executor__title'>Соисполнитель</h3>
+          <div class='co-executor__container'>
+            <div class='co-executor__administration'>
+              <p class='title'>Управление (отдел, служба)</p>
+              <app-military-units-dropdown-flat formControlName='military_unit_id'></app-military-units-dropdown-flat>
+            </div>
+
+            <div class='co-executor__military-man' [class._disabled]="form.disabled">
+              <app-military [loadExecutive]="true"
+                            formControlName='shdk_uuid'
+              >Соисполнитель ДЛ</app-military>
+              <p class='co-executor__user-icon' *ngIf='coExecutor.value.shdk_uuid?.appointment' >
+                <i class="pi pi-user"></i>
+                {{ coExecutor.value.shdk_uuid?.appointment }}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <div class='executors__buttons' *ngIf="!isViewMode">
+        <button (click)='addCoExecutor()'
+                pButton
+                type="button"
+                label="Добавить"
+                class="p-button-outlined"
+                [disabled]="!this.form.get('co_executors').value[this.form.get('co_executors').value.length - 1]?.shdk_uuid &&
+                            !this.form.get('co_executors').value[this.form.get('co_executors').value.length - 1]?.military_unit_id"
+        ></button>
+        <button *ngIf="this.form.get('co_executors').value.length > 1"
+                (click)='deleteCoExecutor()'
+                pButton type="button"
+                label="Удалить"
+                class="p-button-danger delete-btn"
+        ></button>
+        <button *ngIf="this.form.get('co_executors').value[0]?.shdk_uuid && this.form.get('co_executors').value.length === 1 ||
+                       this.form.get('co_executors').value[0]?.military_unit_id && this.form.get('co_executors').value.length === 1"
+                (click)='resetCoExecutor()'
+                pButton type="button"
+                label="Удалить"
+                class="p-button-danger delete-btn"
+        ></button>
+      </div>
+    </section>
+
+    <section class='controls' *ngIf="!isViewMode">
+      <button (click)="reportOnSuccess()" [disabled]="!order.hasReport || form.invalid" pButton type="button" label="Доложить о выполнении" class="p-button-success"></button>
+      <button (click)='saveChanges()' [disabled]="form.invalid" pButton type="button" label="Сохранить"></button>
+      <button (click)="reportOnFailure()" [disabled]="!order.hasReport || form.invalid" pButton type="button" label="Доложить о невыполнении" class="p-button-danger"></button>
+      <button (click)='cancelChanges()' pButton type="button" label="Отмена" class="p-button-text p-button-plain"></button>
+    </section>
+  </form>
+</p-scrollPanel>

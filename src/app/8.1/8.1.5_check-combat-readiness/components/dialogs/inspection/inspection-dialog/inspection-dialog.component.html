@@ -1,0 +1,133 @@
+<form
+  class='dialog'
+  [formGroup]='dialogFormParams'>
+  <p-tabView>
+    <p-tabPanel>
+      <div *ngIf='mode==="view" && config.data.importedDialogData?.status?.name !=="Отменена"' class='card'>
+        <p-steps [model]='items' [activeIndex]='activeIndex' [readonly]='true'></p-steps>
+      </div>
+      <div *ngIf='mode==="view" && config.data.importedDialogData?.status?.name ==="Отменена"' class='card'>
+        <p-steps [model]='cancelItems' [activeIndex]='1' [readonly]='true'></p-steps>
+      </div>
+      <div class='content'>
+        <div class='col-row' *ngIf='mode==="view"'>
+          <button
+            pButton
+            (click)='openHistoryCheckDialog()'
+            class='history-of-change-button'
+            label='История изменений..'>
+          </button>
+        </div>
+        <p class='joint-fields-text'>Проверямая структура</p>
+        <div class='col-row'>
+          <p-button class='select-tree-button'
+                    [label]='formData?.structure ? formData.structure?.label : "Выбрать"'
+                    (onClick)='openCheckingStructureDialog()' icon='pi pi-chevron-down' iconPos='right'
+                    [disabled]='mode==="view"'></p-button>
+        </div>
+        <p *ngIf='currentAccessLevel !== "command"' class='joint-fields-text'>Подразделение</p>
+        <div *ngIf='currentAccessLevel !== "command"' class='col-row'>
+          <p-button class='select-tree-button'
+                    [label]='formData.subdivision ? formData.subdivision?.label : "Выбрать"'
+                    (onClick)='openSubdivisionDialog()' icon='pi pi-chevron-down' iconPos='right'
+                    [disabled]='mode==="view" || !formData.structure'></p-button>
+        </div>
+        <p class='joint-fields-text'>Планируемый срок проверки</p>
+        <div class='dual-field col-row'>
+             <span class='pi-float-label dialog-span-left'>
+                  <p-calendar
+                    [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2150" inputId="navigators"
+                    (onSelect)='dateStartIsChanged = true'
+                    [showIcon]='true'
+                    appendTo='body'
+                    formControlName='dateStart'
+                    class='ui-inputtext resize-calendar'
+                    dateFormat='dd.mm.yy'
+                    firstDayOfWeek='1'
+                    [readonlyInput]='true'
+                    [disabled]='mode==="view"'>
+               </p-calendar>
+              </span>
+          <span class='dialog-span-center'></span>
+          <span class='pi-float-label dialog-span-right'>
+                 <p-calendar
+                   [monthNavigator]="true" [yearNavigator]="true" yearRange="2020:2150" inputId="navigators"
+                   (onSelect)='dateEndIsChanged = true'
+                   [showIcon]='true'
+                   appendTo='body'
+                   formControlName='dateEnd'
+                   class='ui-inputtext resize-calendar'
+                   dateFormat='dd.mm.yy'
+                   firstDayOfWeek='1'
+                   [readonlyInput]='true'
+                   [disabled]='mode==="view"'>
+                 </p-calendar>
+              </span>
+        </div>
+<!--        <app-documents *ngIf='(documents?.length > 0) && mode==="view" && config.data.importedDialogData?.status?.name !=="Отменена"' [isViewMode]='true' [documentsToShow]='documents ? documents: []' ></app-documents>-->
+<!--        <p class='joint-fields-text transfer-textarea-space'-->
+<!--           *ngIf='mode==="view" && config.data.importedDialogData?.status?.name ==="Отменена"'>Причина отмены-->
+<!--          проверки</p>-->
+
+<!--        <div class='col-row' *ngIf='mode==="view" && config.data.importedDialogData?.status?.name ==="Отменена"'>-->
+<!--          <textarea class='reason-textarea' [value]='config.data.importedDialogData?.result' [autoResize]='true' [disabled]='true' pInputTextarea></textarea>-->
+<!--        </div>-->
+<!--        <app-documents-->
+<!--          *ngIf='mode==="view" && (config.data?.importedDialogData?.documents?.length > 0) && config.data.importedDialogData?.status?.name ==="Отменена"'-->
+<!--          [isViewMode]='true' [documentsToShow]='documents ? documents: []' ></app-documents>-->
+        <div style='height: 60px'></div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</form>
+<p-footer style='position: fixed; bottom: 20px' *ngIf='config.data.importedDialogData?.status?.name !=="Отменена"'>
+  <div class='col-row'>
+    <div class='ui-toolbar-group-left'>
+      <div>
+        <button
+          *ngIf='mode==="create"'
+          class='edit-button'
+          pButton
+          (click)='submit()'
+          label='Добавить'>
+        </button>
+        <button
+          *ngIf='mode==="edit"'
+          class='edit-button'
+          pButton
+          (click)='submit()'
+          label='Изменить'>
+        </button>
+        <button
+          *ngIf='mode==="view" && selectedSchedule?.status?.name ==="Создан" && roleModelService.userPermissions$.value["access.edit_planned_inspection"]'
+          class='edit-button'
+          pButton
+          (click)='changeModeToEdit()'
+          label='Редактировать'>
+        </button>
+      </div>
+      <button
+        *ngIf='mode==="view" && selectedSchedule?.status?.name ==="Создан" && roleModelService.userPermissions$.value["access.delete_planned_inspection"]'
+        (click)='deleteInspection()'
+        class='delete-dialog-button footer-buttons'
+        label='Удалить'
+        pButton>
+      </button>
+      <button
+        *ngIf='mode==="view" && selectedSchedule?.status?.name !=="Создан" && roleModelService.userPermissions$.value["access.cancel_planned_inspection"]'
+        (click)='openCancelInspectionDialog()'
+        class='inspection-cancel-dialog-button'
+        label='Отменить'
+        pButton>
+      </button>
+      <button
+        pButton
+        *ngIf='mode==="view" && selectedSchedule?.status?.name !=="Создан" && roleModelService.userPermissions$.value["access.transfer_planned_inspection"]'
+        class='transfer-dialog-button footer-buttons'
+        label='Перенести'
+        type='button'
+        (click)='openTransferInspectionDialog()'>
+      </button>
+    </div>
+  </div>
+</p-footer>

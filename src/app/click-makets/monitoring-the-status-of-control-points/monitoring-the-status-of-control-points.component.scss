@@ -1,0 +1,23 @@
+:host ::ng-deep {
+
+  .dialogDiaplay4 .p-dialog .p-dialog-header,
+  .dialogDiaplay2 .p-dialog .p-dialog-header,
+  .dialogDisplay5 .p-dialog .p-dialog-header {
+    height: 56px;
+    background: #F5F6F8;
+    box-shadow: inset 0px -1px 0px #e1e3e8;
+  }
+
+  .dialogDiaplay4 .p-dialog .p-dialog-content {
+    padding: 0;
+  }
+
+  .dialogdisplayTab1 .p-dialog .p-dialog-footer {
+    border-top: 1px solid #E1E3E8 !important;
+  }
+
+}
+
+.margin-button {
+  margin-left: 40px
+}

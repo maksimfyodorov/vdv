@@ -1,0 +1,37 @@
+
+<form [formGroup]="checkForm" novalidate>
+    <main>
+      <div class="row">
+        <div class="inspection-period">
+          <p class="title">
+            Текущий срок проверки:
+          </p>
+          <p class="black">с {{checkForm.controls['currentInspectionStartDate'].value}} г. по {{checkForm.controls['currentInspectionEndDate'].value}} года</p>
+        </div>
+      </div>
+      <div class="row">
+        <app-documents (currentDocumentList)='currentDocumentList = $event' [documentsToShow]='documents ? documents: []' ></app-documents>
+      </div>
+      <div class="row">
+        <div class="vertical-block width-max">
+          <p class="date">Причина отмены проверки</p>
+          <textarea [autoResize]='true' pInputTextarea formControlName="result"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="wrap-warning-container">
+          Вы действительно хотите отменить проверку?
+        </div>
+      </div>
+
+    </main>
+    <div class='ui-toolbar-group-left'>
+        <button
+          pButton
+          label='Отмена'
+          (click)='submitCancel()'
+          class='cancel-wrng-button'
+          type='submit'>
+        </button>
+    </div>
+ </form>

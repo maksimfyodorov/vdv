@@ -1,0 +1,8 @@
+<p-dropdown [options]='options'
+            optionValue='id'
+            optionLabel='name'
+            placeholder='Введите номер войсковой части'
+            [editable]='true'
+            [(ngModel)]='militaryUnitId'
+            (onChange)='queryChange($event)'>
+</p-dropdown>

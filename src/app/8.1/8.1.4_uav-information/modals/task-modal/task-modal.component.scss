@@ -1,0 +1,20 @@
+:host::ng-deep.modal-container {
+  height: 100%;
+  width: 100%;
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none!important;
+  }
+
+  .p-tabview {
+    height: 100%;
+  }
+
+  .p-tabview-panels {
+    height: 97%;
+
+    .p-tabview-panel {
+      height: 100%;
+    }
+  }
+}

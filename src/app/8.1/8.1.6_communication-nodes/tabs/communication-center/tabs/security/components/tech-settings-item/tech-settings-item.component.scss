@@ -1,0 +1,26 @@
+.tech-settings-item {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.autocomplete {
+  width: 100%;
+}
+
+.numeric-input {
+  max-width: 60px;
+  flex: 1;
+}
+
+.delete-button {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+:host ::ng-deep {
+  .p-button {
+    padding: 7px 9px;
+  }
+}

@@ -1,0 +1,35 @@
+.action {
+    width: 200px;
+}
+
+.table_container {
+    margin-top: 30px;
+}
+
+#cancel {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+  }
+
+.icons_wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+.pi-trash {
+    cursor: pointer;
+  }
+
+.selected {
+    td {
+      background: #f7f7f7;
+    }
+  }
+  
+:host::ng-deep {
+    tr.unselected:hover {
+      cursor: pointer;
+      background-color: #f7f7f7;
+    }
+  }

@@ -1,0 +1,176 @@
+<form [formGroup]="form"
+      (ngSubmit)="addParatrooper()"
+      [appLoader]="loader.isLoading$"
+>
+  <div class="wrapper">
+    <div class="modal__title">
+      <div class="modal__title_subdivision">
+        <h5>Подразделение</h5>
+        <p-dropdown [options]="subdivisions"
+                    formControlName="subdivisions"
+                    placeholder="Выбрать" optionLabel="label"
+                    [showClear]="true"
+                    (onChange)="getParatroopers()"
+                    emptyMessage="Результаты не найдены"
+        ></p-dropdown>
+      </div>
+      <div class="modal__title_units-count">
+        <h5>Колличество</h5>
+        <input id="disabled-input_subdivision-count"
+               type="text" pInputText
+               [disabled]="true"
+               [(ngModel)]="subdivisionMilitaryCount"
+               [ngModelOptions]="{standalone: true}"
+        />
+      </div>
+      <div class="modal__title_date">
+        <h5>Время готовности "Ч+"</h5>
+        <app-time-input
+          [initConfig]="{month: false,day: false,hour: true, minute: false,seconds: false}"
+          [timeChFlag]="true"
+          formControlName="ready_time"
+        >
+        </app-time-input>
+      </div>
+    </div>
+    <div class="modal__subtitle">
+      <div class="modal__subtitle_date">
+        <h5>Дата десантирования</h5>
+        <p-calendar [showIcon]="true"
+                    dateFormat="dd.mm.yy"
+                    firstDayOfWeek='1'
+                    formControlName="desant_date"
+        ></p-calendar>
+      </div>
+      <div class="modal__subtitle_jump-info">
+        <h5>Летательное средство</h5>
+        <input id="disabled-input_airplane-type"
+               type="text"
+               pInputText [disabled]="true"
+               [(ngModel)]="airplaneType.name"
+               [ngModelOptions]="{standalone: true}"
+        />
+        <span class="element__airplane">
+        <i class="pi pi-exclamation-circle"></i>
+        <small class="element__airplane__capacity">вместимость {{airplaneType?.capacity_ls}} чел.</small>
+      </span>
+      </div>
+      <div class="modal__subtitle_jump-info">
+        <h5>Колличество вылетов</h5>
+        <input type="number"
+               pInputText
+               [(ngModel)]="departuresNumber"
+               [ngModelOptions]="{standalone: true}"
+        />
+        <span class="element__airplane">
+        <i class="pi pi-exclamation-circle"></i>
+        <small class="element__airplane__capacity">Реком-е кол-во вылетов: {{departuresNumberRecommended}}</small>
+      </span>
+      </div>
+    </div>
+    <div class="modal__search">
+<span class="p-input-icon-right">
+    <i class="pi pi-search"></i>
+    <input placeholder="Поиск" type="text" pInputText/>
+</span>
+      <div class="modal__search__dropdown">
+        <h5>Парашют</h5>
+        <p-dropdown [options]="parachuteSystems"
+                    formControlName="parachute_system"
+                    placeholder="Выбрать"
+                    optionLabel="name"
+                    [showClear]="true"
+                    emptyMessage="Результаты не найдены"
+        ></p-dropdown>
+      </div>
+      <div class="modal__search__calendar">
+        <h5>Дата укладки(общ)</h5>
+        <p-calendar
+          formControlName="date_picking_general"
+          [showIcon]="true"
+          dateFormat="dd.mm.yy"
+          firstDayOfWeek='1'
+          (onSelect)="setDatePackingGeneral($event)"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="modal__table">
+      <p-table [value]="paratroopers"
+               [(selection)]="selectedParatroopers"
+               selectionMode="multiple"
+               [rowHover]="true"
+               [rows]="5"
+               [showCurrentPageReport]="false"
+               [totalRecords]="totalParatroopers"
+               [paginator]="paratroopers"
+               (onRowSelect)="calculateOnRow($event)"
+               (onHeaderCheckboxToggle)="calculateOnHeaderRow($event)"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th>Звание</th>
+            <th>ФИО</th>
+            <th>Кол-во прыжков</th>
+            <th>Подразделение</th>
+            <th>Инв. № Парашюта</th>
+            <th>Дата укладки</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-paratrooper>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="paratrooper" style="width: 3rem"></p-tableCheckbox>
+            </td>
+            <td>{{paratrooper?.military_man?.rank?.name}}</td>
+            <td>{{setParatroopersFullName(paratrooper?.military_man?.name, paratrooper?.military_man?.middle_name, paratrooper?.military_man?.surname)}}</td>
+            <td>{{paratrooper?.jump_count || 0}}</td>
+            <td>{{paratrooper?.military_man?.division?.label}}</td>
+            <td>
+              <div class="modal__table_input">
+                <p class="input__text">Осн.</p>
+                <span class="element__vvst">{{paratrooper?.vvst_fixation_main?.number}}</span>
+                <span class="element__select"><i class="pi pi-ellipsis-h icon-pointer"
+                                                 (click)="showSelectionMenu()"></i></span>
+
+              </div>
+              <div class="modal__table_input">
+                <p class="input__text">Зап.</p>
+                <span class="element__vvst">{{paratrooper?.vvst_fixation_reserve?.number}}</span>
+                <span class="element__select"><i class="pi pi-ellipsis-h icon-pointer"
+                                                 (click)="showSelectionMenu()"></i></span>
+              </div>
+            </td>
+            <td>
+              <div class="modal__table_date">
+                <p-calendar [(ngModel)]="paratrooper.date_parachute_packing_main"
+                            [showIcon]="true"
+                            dateFormat="dd.mm.yy"
+                            firstDayOfWeek='1'
+                            [ngModelOptions]="{standalone: true}"
+                ></p-calendar>
+              </div>
+              <div class="modal__table_date">
+                <p-calendar [(ngModel)]="paratrooper.date_parachute_packing_reserve"
+                            [showIcon]="true"
+                            dateFormat="dd.mm.yy"
+                            firstDayOfWeek='1'
+                            [ngModelOptions]="{standalone: true}"
+                ></p-calendar>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="modal__confirm">
+      <p-button type="submit"
+                label="Добавить"
+      ></p-button>
+      <button pButton pRipple type="button" label="Отмена" class="p-button-text p-button-plain"
+              (click)="closeModal()"></button>
+    </div>
+  </div>
+</form>

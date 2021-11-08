@@ -1,0 +1,22 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.blue {
+    color: #228be6;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+th {
+    width: 120px;
+    height: 40px;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    background: #F5F6F8;
+}
+

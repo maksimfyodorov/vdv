@@ -1,0 +1,67 @@
+<section class="wrapper">
+  <app-nodes-hierarchy
+    switchLabel="БП"
+    (switchToggle)="toggleHierarchyMode($event)"
+    [selectedItem]="selectedHierarchyItem"
+    [dataSource]="hierarchyDataSource"
+  >
+    <app-ospo-hierarchy-folder #folder></app-ospo-hierarchy-folder>
+  </app-nodes-hierarchy>
+
+  <section class="security">
+    <div class="top">
+      <div class="top_left">
+        <h2 *ngIf="selectedHierarchyItem?.call_sign">Расчёт обеспеченности УС {{selectedHierarchyItem.call_sign}}</h2>
+        <h2 *ngIf='selectedHierarchyItem?.point === "center"'>
+          Расчёт обеспеченности центра {{selectedHierarchyItem.number}} {{selectedHierarchyItem.center_type.name}}
+        </h2>
+        <h2 *ngIf='selectedHierarchyItem?.point === "bp"'>
+          Расчёт обеспеченности {{selectedHierarchyItem.number}} {{selectedHierarchyItem.type.name}}
+        </h2>
+      </div>
+      <div class="top_right">
+        <span class="p-float-label">
+          <p-calendar
+            inputId="calendar"
+            (onSelect)="getSecurityHierarchy()"
+            (onClearClick)="getSecurityHierarchy()"
+            dateFormat="dd.mm.yy"
+            firstDayOfWeek="1"
+            [disabled]="!tableDataSource?.hierarchy"
+            [(ngModel)]="filteredDate"
+            showIcon="true"
+            showButtonBar="true"
+            [maxDate]="maxDate"
+          ></p-calendar>
+          <label for="calendar">Выберите дату</label>
+        </span>
+        <div class="inputswitch-container">
+          <span>Техника</span>
+          <p-inputSwitch [(ngModel)]="techMode" (onChange)="getSecurityHierarchy()"></p-inputSwitch>
+        </div>
+        <app-documents-formalized groupName="8.1.6"></app-documents-formalized>
+        <button
+          pButton
+          [label]="hasReport ? 'Доклад сформирован' : 'Сформировать доклад'"
+          [disabled]="hasReport"
+          type="button"
+          icon="pi pi-file"
+          (click)="generateReport()"
+        ></button>
+        <i class="pi pi-question-circle"></i>
+      </div>
+    </div>
+    <app-security-table
+      (addTech)="addTech($event)"
+      (editTech)="editTech($event)"
+      (updateStatus)="updateStatus($event)"
+      (deleteTech)="deleteTech($event)"
+      [cols]="cols"
+      [dataSource]="tableDataSource"
+      [viewSecurityItem]="techMode"
+      [disabled]="disabledTable"
+      class="table"
+    >
+    </app-security-table>
+  </section>
+</section>

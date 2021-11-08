@@ -1,0 +1,88 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  width: 735px;
+  height: calc(100vh - 100px);
+
+  padding: 1rem 3rem;
+
+  box-shadow: 8px 0 16px -10px #ccc;
+}
+
+.select-buttons {
+  display: flex;
+  border: 0.5px solid #0d89ec;
+
+  ::ng-deep .p-button {
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+  }
+}
+
+.status-badge {
+  color: white;
+  background: orange;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.dialog {
+  width: 45rem;
+  height: auto;
+
+  ::ng-deep .p-inputtext {
+    width: 20rem;
+  }
+
+  ::ng-deep .p-calendar {
+    width: 20rem;
+  }
+
+  ::ng-deep .p-dropdown {
+    width: 20rem;
+  }
+}
+
+.ui-canvas-caption {
+  position: absolute;
+  top: 100px;
+  left: 1250px;
+}
+
+.ui-canvas-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 850px;
+
+  width: 1000px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ui-canvas-edit-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ui-canvas-equipment-list {
+  position: absolute;
+  top: 220px;
+  left: 1250px;
+  width: 20rem;
+
+  ::ng-deep .p-dropdown {
+    width: 20rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}

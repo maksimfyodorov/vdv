@@ -1,0 +1,298 @@
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host::ng-deep.flight-plans__content {
+  .map-content {
+    display: flex;
+    align-items: flex-start;
+
+    ::ng-deep.input__search {
+      height: 56px;
+      width: 100%;
+      margin-bottom: 15px;
+
+      &__wrap {
+        padding: 0 20px 0 20px;
+      }
+
+      .search-icon {
+        font-size: 20px;
+        margin-top: -.7rem;
+      }
+
+      .pi.pi-times {
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.5;
+          transition: .3s;
+        }
+      }
+
+      input {
+        height: 56px;
+        width: 100%;
+      }
+    }
+
+    &__tasks-wrapper {
+      width: 550px;
+      text-align: center;
+    }
+
+    &__tasks {
+      min-width: 330px;
+      width: 100%;
+      text-align: right;
+      height: calc(100vh - 356px);
+      overflow: auto;
+      scrollbar-width: none;
+
+
+      .flight-task {
+        border-bottom: 1px solid #E1E3E8;
+        padding: 15px 30px 10px 25px;
+        cursor: pointer;
+
+        &:hover {
+          background: #E1E3E8;
+        }
+
+        &__type {
+          display: block;
+          width: 100%;
+          text-align: left;
+          font-weight: bold;
+        }
+
+        &__row-wrap {
+          @include flexCenter;
+          justify-content: space-between;
+          text-align: left;
+
+          .task-status {
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 12px;
+            padding: 2px 8px;
+          }
+
+          .completed {
+            background: #82C91E;
+          }
+
+          .planned {
+            background: #1971C2;
+          }
+
+          .new {
+            background: #959EA9;
+          }
+
+          .not_completed {
+            background: #F03E3E;
+          }
+        }
+      }
+    }
+
+    &__map {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      max-height: calc(100vh - 287px);
+      overflow-y: hidden;
+
+      .button-wrap {
+        position: absolute;
+        z-index: 1000;
+        top: 25px;
+        left: 50px;
+
+        .pi {
+          font-size: 17px;
+        }
+
+        button {
+          width: 40px;
+          height: 40px;
+          border: none;
+          background: white;
+          color: black;
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+
+  .delete {
+    button {
+      background: #E03131;
+      border-color: #E03131;
+    }
+  }
+
+  .outline {
+    button {
+      background: none;
+      color: #228BE6;
+    }
+  }
+
+  .print-track-point-status {
+    color: #fff;
+    white-space: nowrap;
+  }
+}
+
+.document {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .title {
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    display: none;
+  }
+
+  .application {
+    text-align: end;
+    display: none;
+  }
+
+  .document-wrap {
+    display: flex;
+  }
+
+  .document-info {
+    margin-right: 10px;
+    display: none;
+
+    .coordinate-table {
+      border: 1px solid black;
+      border-collapse: collapse;
+
+      td, th {
+        border: 1px solid black;
+        width: 200px;
+        text-align: center;
+      }
+    }
+  }
+
+  .signature {
+    display: none;
+    margin-top: 50px;
+    width: 100%;
+
+    table {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 100%;
+
+      td, th {
+        border: 1px solid black;
+        width: 200px;
+        text-align: center;
+      }
+
+      td, th {
+        &:first-child {
+          text-align: right;
+        }
+      }
+
+      td, th {
+        &:last-child {
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+:host::ng-deep {
+  .p-scrollpanel {
+    height: calc(100vh - 358px);
+
+    .p-scrollpanel-content {
+      padding: 0 0 18px 0;
+    }
+  }
+
+  .selected-task {
+    background: #D0EBFF!important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+@media print {
+  .task-create, .filter {
+    display: none;
+  }
+
+  ::ng-deep {
+    .p-dialog, .p-dialog-mask.p-component-overlay {
+      display: none;
+    }
+  }
+
+  .document {
+    position: absolute;
+    background: #fff;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+
+    .title {
+      display: block;
+    }
+
+    .application {
+      color: #1C1F24!important;
+      font-style: italic;
+      display: block;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .document-info {
+      display: block;
+    }
+
+    .print-track-point-status {
+      color: #fff;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .passed {
+      background: #82C91E !important;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .with_error {
+      background: #FAB005 !important;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .not_passed {
+      background: #F03E3E !important;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .signature {
+      display: block;
+    }
+  }
+}

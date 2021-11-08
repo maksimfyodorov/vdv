@@ -1,0 +1,67 @@
+<div class="aside">
+  <div class="aside__title-row">
+    <p class="aside__text aside__text_title">
+      {{group?.name}}
+    </p>
+    <p class="aside__text aside__text_small aside__text_blue" (click)="change()">
+      Редактировать
+    </p>
+  </div>
+
+  <div class="aside__box">
+
+    <div class="aside__card">
+      <div class="aside__wrap-box">
+        <p class="aside__text aside__text_small">
+          Раздeл группы
+        </p>
+        <p class="aside__text">
+          {{group?.section?.name}}
+        </p>
+      </div>
+    </div>
+
+    <div class="aside__card">
+
+      <div class="aside__wrap-box">
+        <p class="aside__text aside__text_small">
+          Номер
+        </p>
+        <p class="aside__text">
+          {{group?.number}}
+        </p>
+      </div>
+
+      <div class="aside__wrap-box">
+        <p class="aside__text aside__text_small">
+          Форма группы
+        </p>
+        <p class="aside__text" *ngFor="let form of group.forms">
+            {{form.name}}
+        </p>
+      </div>
+
+      <div class="aside__wrap-box">
+        <p class="aside__text aside__text_small">
+          Характер группы
+        </p>
+        <p class="aside__text">
+          {{group?.character?.name}}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="aside__card">
+      <div class="aside__wrap-box">
+        <p class="aside__text aside__text_small">
+          Отслеживание
+        </p>
+        <p class="aside__text" *ngFor="let track of group.tracks">
+          {{ track.type + ',' + ' ' + (track.month ? track.month : '') + ' ' + (track.day ? track.day + ',' : '')  + ' ' + track?.time }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

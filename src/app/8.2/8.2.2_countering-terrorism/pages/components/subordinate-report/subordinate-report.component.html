@@ -1,0 +1,112 @@
+<div     
+    [formGroup]="tableFilterForm"
+    class="container"
+>
+    <div class="row content-space-between small-container">
+        <div class="row">
+            Дата с
+            <p-calendar
+                (onSelect)="onSearch()"
+                formControlName="date_from"
+                dateFormat="dd.mm.yy"
+                [showIcon]="true"
+            ></p-calendar>
+            по
+            <p-calendar
+                (onSelect)="onSearch()"
+                formControlName="date_until"
+                dateFormat="dd.mm.yy"
+                [showIcon]="true"
+            ></p-calendar>
+        </div>
+        <div>
+            <input
+                formControlName="number"
+                type="text"
+                class="input"
+                placeholder="Поиск"
+                (ngModelChange)='onSearch()'
+            >
+        </div>
+    </div>
+    <div class="small-container">
+        <p-table
+            #dt
+            [value]='list'
+            [paginator]='true'
+            [rows]='pageSize'
+            [totalRecords]='totalRecords'
+            [lazy]='true'
+            [(selection)]='selectedBill'
+            [rowHover]='true'
+            dataKey='uuid'
+            (onPage)='paginate($event)'
+        >
+            <ng-template pTemplate='header'>
+                <tr>
+                    <th class="checkbox">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th class="number">№ п/п</th>
+                    <th class="list">Ведомость</th>
+                    <th class="status">Статус</th>
+                    <th class="made">Создал</th>
+                    <th class="date">Дата</th>
+                    <th class="btn"></th>
+                    <th class="btn"></th>
+                </tr>
+            </ng-template>
+            <ng-template
+                pTemplate='body'
+                let-product
+                let-i='rowIndex'
+            >
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]='product'></p-tableCheckbox>
+                    </td>
+                    <td>{{product.number}}</td>
+                    <td>Ведомость № {{i + 1}} от {{changeTypeOfDate(product.date)}}</td>
+                    <td>
+                        <div class="status-data" [class.reported]="product.status?.status === 'COMPLETED' ">
+                            <i class="pi pi-check"></i>
+                            {{ product.status?.status === 'COMPLETED' ? 'Доложено' :  'Формируется' }}
+                        </div>
+                    </td>
+                    <td>{{product.user?.full_name}}</td>
+                    <td>{{changeTypeOfDate(product.date)}}</td>
+                    <td class="gray">
+                        <button
+                            pButton
+                            pRipple
+                            icon='pi pi-pencil'
+                            class="p-button-rounded p-button-text gray"
+                            (click)='editProduct(product)'
+                        ></button>
+                    </td>
+                    <td>
+                        <button
+                            pButton
+                            pRipple
+                            icon='pi pi-trash'
+                            class="p-button-rounded p-button-text gray"
+                            (click)='deleteProduct(product)'
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div>
+        <div class="row end">
+            <div
+                (click)="cancelSubordinate()"
+                class="cancel-btn"
+            >Отмена</div>
+            <div
+                (click)="addSubordinate()"
+                class="add-btn"
+            >Добавить</div>
+        </div>
+    </div>
+</div>

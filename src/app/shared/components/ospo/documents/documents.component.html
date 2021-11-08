@@ -1,0 +1,203 @@
+<div class='documents' [style.padding]='hasNullifiedPaddings && "0px"'>
+  <div class='documents__header' [style.marginTop]='hasNullifiedPaddings && "0px"'>
+    <h3 class='documents__title'
+        [ngStyle]='{
+          paddingLeft: hasNullifiedPaddings && "0px",
+          color: isMainDocument && "#2196F3"
+    }'>
+      {{title || 'Документы'}}
+      <span class='documents__count' *ngIf='documentsToShow?.length'>
+        {{documentsToShow?.length}}
+      </span>
+    </h3>
+    <div class='documents__attache-btn-wrapper' *ngIf='!hasHiddenBlocks'>
+      <p-button
+        *ngIf='!documentsToShowByGroup'
+        [disabled]="isViewMode"
+        [style.display]='attachMode && documentsToShow.length === 1 ? "none" : "block"'
+        styleClass='p-button-outlined documents__attache-btn'
+        icon='pi pi-plus'
+        (onClick)='attacheDocuments()'
+      ></p-button>
+    </div>
+  </div>
+  <div class='documents-container'
+       *ngIf='documentsToShow'>
+    <div class='documents-container__row' *ngFor='let d of documentsToShow'>
+      <div class='document' *ngIf='d.files?.length === 1; else bigDocument'>
+        <div class='document__data'>
+          <img class='document__icon' src='../../../../../../assets/img/file.svg' />
+          <span>{{ d.files[0].name }}</span>
+        </div>
+        <div class='action-container'>
+          <div [pTooltip]='"<strong>в/ч 62295, " + d.user?.full_name + "</strong><br>"+
+                              "Дата загрузки: <strong>"+ d.created_at +
+                              "</strong><br>Номер и дата документа: <strong>№"+d.number+" "+d.date+"</strong>"'
+               [escape]='false'
+               tabindex='99'
+               tooltipEvent='focus'
+               tooltipStyleClass='document__tooltip'
+               tooltipPosition='bottom'
+               class='pi pi-question-circle document__info'>
+          </div>
+          <p-button styleClass='p-button-rounded p-button-text'
+                    icon='pi pi-download'
+                    (onClick)='downloadFile(d, d.files[0])'>
+          </p-button>
+          <p-button *ngIf='documentsToShow  && isViewMode === false'
+                    styleClass='p-button-rounded p-button-text p-button-danger'
+                    icon='pi pi-trash'
+                    (onClick)='onRemove(d)'>
+          </p-button>
+        </div>
+      </div>
+      <ng-template #bigDocument>
+        <div class='document'>
+          <mat-expansion-panel togglePosition='before'>
+
+            <mat-expansion-panel-header>
+              <div class='document__title'>
+                <span>{{d.name}}</span>
+                <div class='document__button-bar'>
+                  <div [pTooltip]='"<strong>в/ч 62295, " + d.user?.full_name + "</strong><br>"+
+                              "Дата загрузки: <strong>"+ d.created_at +
+                              "</strong><br>Номер и дата документа: <strong>№"+d.number+" "+d.date+"</strong>"'
+                       [escape]='false'
+                       tabindex='99'
+                       tooltipEvent='focus'
+                       tooltipStyleClass='document__tooltip'
+                       tooltipPosition='bottom'
+                       class='pi pi-question-circle document__info'
+                       (click)='$event.stopPropagation()'>
+                  </div>
+                  <p-button styleClass='p-button-rounded p-button-text'
+                            icon='pi pi-download'
+                            (onClick)='downloadDocument(d)'
+                            (click)='$event.stopPropagation()'>
+                  </p-button>
+                  <p-button *ngIf='documentsToShow  && isViewMode === false'
+                            styleClass='p-button-rounded p-button-text p-button-danger'
+                            icon='pi pi-trash'
+                            (onClick)='onRemove(d)'
+                            (click)='$event.stopPropagation()'>
+                  </p-button>
+                </div>
+              </div>
+            </mat-expansion-panel-header>
+
+            <div class='file' *ngFor='let f of d.files'>
+              <div class='file__title'>
+                <img class='file__icon' src='../../../../../../assets/img/file.svg' />
+                <span class='file__name'>{{f.name}}</span>
+              </div>
+              <p-button styleClass='p-button-rounded p-button-text'
+                        icon='pi pi-download'
+                        (onClick)='downloadFile(d, f)'>
+              </p-button>
+            </div>
+
+          </mat-expansion-panel>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <div class='documents-container' *ngIf='documentsToShowByGroup'>
+    <div *ngFor='let group of documentsToShowByGroup; let index = index'>
+      <mat-expansion-panel togglePosition='before'>
+        <mat-expansion-panel-header>
+          <div class='documents__category'>{{group.group_name}}</div>
+        </mat-expansion-panel-header>
+        <div class='documents__category'>
+          <div class='documents__attache-btn-container'
+               *ngIf='index === documentsToShowByGroup.length -1'>
+            <p-button styleClass='documents__attache-btn_big p-button-outlined documents__attache-btn'
+                      icon='pi pi-plus'
+                      label='Добавить документ'
+                      (onClick)='attacheDocuments(index)'>
+            </p-button>
+          </div>
+          <div *ngFor='let d of group.documents'>
+            <div class='documents-container__row'>
+              <div class='document' *ngIf='d.files.length === 1; else bigDocument'>
+                <div class='document__data'>
+                  <img class='document__icon' src='../../../../../../assets/img/file.svg' />
+                  <span>{{ d.files[0].name }}</span>
+                </div>
+                <div class='action-container'>
+                  <div [pTooltip]='"<strong>в/ч 62295, " + d.user?.full_name + "</strong><br>"+
+                              "Дата загрузки: <strong>"+ d.created_at +
+                              "</strong><br>Номер и дата документа: <strong>№"+d.number+" "+d.date+"</strong>"'
+                       [escape]='false'
+                       tabindex='99'
+                       tooltipEvent='focus'
+                       tooltipStyleClass='document__tooltip'
+                       tooltipPosition='bottom'
+                       class='pi pi-question-circle document__info'>
+                  </div>
+                  <p-button styleClass='p-button-rounded p-button-text'
+                            icon='pi pi-download'
+                            (onClick)='downloadFile(d, d.files[0])'>
+                  </p-button>
+                  <p-button *ngIf='index === documentsToShowByGroup.length -1  && isViewMode === false'
+                            styleClass='p-button-rounded p-button-text p-button-danger'
+                            icon='pi pi-trash'
+                            (onClick)='onRemove(d, index)'>
+                  </p-button>
+                </div>
+              </div>
+              <ng-template #bigDocument>
+                <div class='document'>
+                  <mat-expansion-panel togglePosition='before'>
+                    <mat-expansion-panel-header>
+                      <div class='document__title'>
+                        <span>{{d.name}}</span>
+                        <div class='document__button-bar'>
+                          <div [pTooltip]='"<strong>в/ч 62295, " + d.user?.full_name + "</strong><br>"+
+                              "Дата загрузки: <strong>"+ d.created_at +
+                              "</strong><br>Номер и дата документа: <strong>№"+d.number+" "+d.date+"</strong>"'
+                               [escape]='false'
+                               tabindex='99'
+                               tooltipEvent='focus'
+                               tooltipStyleClass='document__tooltip'
+                               tooltipPosition='bottom'
+                               class='pi pi-question-circle document__info'
+                               (click)='$event.stopPropagation()'>
+                          </div>
+                          <p-button styleClass='p-button-rounded p-button-text'
+                                    icon='pi pi-download'
+                                    (onClick)='downloadDocument(d)'
+                                    (click)='$event.stopPropagation()'>
+                          </p-button>
+                          <p-button styleClass='p-button-rounded p-button-text p-button-danger'
+                                    *ngIf='index === documentsToShowByGroup.length -1 && isViewMode === false'
+                                    icon='pi pi-trash'
+                                    (onClick)='onRemove(d, index)'
+                                    (click)='$event.stopPropagation()'>
+                          </p-button>
+                        </div>
+                      </div>
+                    </mat-expansion-panel-header>
+
+                    <div class='file' *ngFor='let f of d.files'>
+                      <div class='file__title'>
+                        <img class='file__icon' src='../../../../../../assets/img/file.svg' />
+                        <span class='file__name'>{{f.name}}</span>
+                      </div>
+                      <p-button styleClass='p-button-rounded p-button-text'
+                                icon='pi pi-download'
+                                (onClick)='downloadFile(d, f)'>
+                      </p-button>
+                    </div>
+
+                  </mat-expansion-panel>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</div>

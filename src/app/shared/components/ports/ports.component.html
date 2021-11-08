@@ -1,0 +1,77 @@
+<div class='ports'>
+  <div *ngIf='showAddPortButton' class='ports__add-button'>
+    <p-button styleClass='p-button-outlined' label='+ Добавить порт' (onClick)='onAddPort()'></p-button>
+  </div>
+  <p-table styleClass='p-datatable-sm p-datatable-gridlines' [value]='ports' dataKey='uuid' editMode='row'>
+    <ng-template pTemplate='header'>
+      <tr>
+        <th *ngIf='showPortSelect' style='width: 55px'></th>
+        <th style='width: 55px'>№</th>
+        <th>Наименование</th>
+        <th>IP адрес</th>
+        <th>Канал связи</th>
+        <th style='width: 150px'>Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate='body' let-port let-editing='editing' let-rowIndex='rowIndex'>
+      <tr [pEditableRow]='port'>
+        <td *ngIf='showPortSelect'>
+          <div class='port__td-data-wrapper'>
+            <p-tableRadioButton [disabled]='!port.uuid' [value]='port'></p-tableRadioButton>
+          </div>
+        </td>
+        <td>
+          <div class='port__td-data-wrapper'>
+            {{rowIndex + 1}}
+          </div>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate='input'>
+              <input pInputText type='text' [(ngModel)]='port.name' required>
+            </ng-template>
+            <ng-template pTemplate='output'>
+              <div class='port__td-data-wrapper'>
+                {{port.name}}
+              </div>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate='input'>
+              <input pInputText type='text' [(ngModel)]='port.ip' required>
+            </ng-template>
+            <ng-template pTemplate='output'>
+              <div class='port__td-data-wrapper'>
+                {{port.ip}}
+              </div>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate='input'>
+              <input pInputText type='text' [(ngModel)]='port.channel' required>
+            </ng-template>
+            <ng-template pTemplate='output'>
+              <div class='port__td-data-wrapper'>
+                {{port.channel}}
+              </div>
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style='text-align:center'>
+          <p-button *ngIf='!editing' icon='pi pi-pencil' styleClass='p-button-rounded p-button-secondary p-button-text'
+                    pInitEditableRow (onClick)='onPortEditInit(port)'></p-button>
+          <p-button *ngIf='editing' icon='pi pi-check' styleClass='p-button-rounded p-button-text p-button-success'
+                    pSaveEditableRow (onClick)='onPortEditSave(port)'></p-button>
+          <p-button *ngIf='editing && port.hasOwnProperty("uuid")' icon='pi pi-times' styleClass='p-button-rounded p-button-text p-button-danger'
+                    pCancelEditableRow (onClick)='onPortEditCancel(port, rowIndex)'></p-button>
+          <p-button icon='pi pi-trash' styleClass='p-button-rounded p-button-danger p-button-text'
+                    (onClick)='onDeletePort(port, rowIndex)'></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

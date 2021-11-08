@@ -1,0 +1,69 @@
+<p class='logo'>Общие сведения</p>
+<p class='paragraph'>№ документа</p>
+<p>
+    <input
+        class='input'
+        type='text'
+        pInputText
+        (blur)="saveThis()"
+        [(ngModel)]='inputNumber'
+    />
+</p>
+<p class='paragraph'>Дата</p>
+<p>
+    <p-calendar
+        (onClose)="saveThis()"
+        [(ngModel)]='creationDate'
+        dateFormat="dd.mm.yy"
+    ></p-calendar>
+</p>
+<p class='paragraph'>Пункт управления</p>
+<p>
+    <app-editable-autocomplete
+        [dataSource]='controlPoints'
+        [selectedSuggestion]='choseControlPoint'
+        (selectSuggestion)='selectType($event)'
+        (editItem)='editType($event)'
+        (deleteItem)='deleteType($event)'
+        (createItem)='createType($event)'
+        [searchField]='"name"'
+        [displayField]='"name"'
+    ></app-editable-autocomplete>
+</p>
+<p class='paragraph'>Карта</p>
+<p>
+    <input
+        class='input'
+        type='text'
+        pInputText
+        [(ngModel)]='coordinates'
+        (blur)="saveThis()"
+        (click)='setCoordinate()'
+    />
+</p>
+<p class='paragraph'>Издание</p>
+<p>
+    <p-calendar
+        (onClose)="saveThis()"
+        [(ngModel)]='issueDate'
+        dateFormat="dd.mm.yy"
+    ></p-calendar>
+</p>
+<p class='paragraph'>Воинская часть</p>
+<p>
+    <input
+        class='input'
+        type='text'
+        pInputText
+        disabled='true'
+        [(ngModel)]='militaryUnitId'
+    />
+</p>
+
+<p-button
+    label='Состав'
+    icon='pi pi-arrow-right'
+    iconPos='right'
+    routerLink='../composition'
+    [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+></p-button>

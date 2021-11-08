@@ -1,0 +1,55 @@
+<ng-container *ngFor='let item of _data'>
+  <div
+    (click)='$event.stopPropagation(); selectionChanged(item)'
+    *ngIf='_sidebarExpanded else folded'>
+    <div
+      class='folder'
+      *ngIf='item.expanded'>
+      <div class='folder_background'>
+        <div *ngFor='let level of _deepLevel' class='folder_dot'></div>
+      </div>
+      <div [ngClass]='{ selected: selectedItem?.id === item.id }' class='content'>
+        <div class='content_description'>
+          <button *ngIf='item.children?.length' (click)='$event.stopPropagation(); toggleExpanding(item)'
+                  class='expand-button'>
+            <i class='pi {{isChildExpanded(item) ? "pi-angle-down" : "pi-angle-right"}}'></i>
+          </button>
+          <div class='content_name'>{{item.label}}</div>
+          <div class='content__optional-values' *ngIf='item.hasOwnProperty("totalRatio") && item.hasOwnProperty("valueRatio")'>
+            {{item.valueRatio + "/" + item.totalRatio}}
+          </div>
+          <div class='content__optional-values' *ngIf='item.hasOwnProperty("securityPercent") && item.hasOwnProperty("staffingPercent")'>
+            {{"О: " + item.securityPercent + "% У: " + item.staffingPercent + "%"}}<img *ngIf='item.isMobile' alt='car_icon' src='../../../../../../../../assets/img/icons/car.svg'>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #folded>
+    <div [ngClass]='{ folded_selected: selectedItem?.id === item.id }' *ngIf='item.expanded' (click)='$event.stopPropagation(); selectionChanged(item)' class='folded'>
+      <div class='folded_content'>
+        <div class='content'>
+          <div class='content_description'>
+            <span class='content_name'>{{item.label}}</span>
+            <div *ngIf='item.hasOwnProperty("totalRatio") && item.hasOwnProperty("valueRatio")'>
+              {{item.valueRatio + "/" + item.totalRatio}}
+            </div>
+            <div class='content__optional-values' *ngIf='item.hasOwnProperty("securityPercent") && item.hasOwnProperty("staffingPercent")'>
+              {{"О: " + item.securityPercent + " У: " + item.staffingPercent}}<img *ngIf='item.isMobile' alt='car_icon' src='../../../../../../../../assets/img/icons/car.svg'>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <app-hierarchy-folder
+    [selectedItem]='selectedItem'
+    *ngIf='item.children'
+    [sidebarExpanded]='_sidebarExpanded'
+    [data]='item?.children'
+    [deepLevel]='_deepLevel'
+  ></app-hierarchy-folder>
+</ng-container>
+

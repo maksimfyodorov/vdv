@@ -1,0 +1,46 @@
+<div class='p-d-flex p-flex-column flex-gap-2'>
+  <div class='p-d-flex p-ai-center p-jc-between'>
+      <span class='tab-caption'
+      >Расчёт укомплектованности {{
+        completenessHierarchy?.hierarchy?.children?.length > 0 ? completenessHierarchy?.hierarchy?.children[0]?.label : ''}}
+      </span>
+    <div class='p-d-flex p-jc-end flex-gap-1'>
+      <button pButton label='Печать' type='button' icon='pi pi-print' class='p-button-outlined'></button>
+      <button
+        pButton
+        [label]="hasReport ? 'Доклад сформирован' : 'Сформировать доклад'"
+        [disabled]='hasReport'
+        type='button'
+        icon='pi pi-file'
+        (click)='generateReport()'
+      ></button>
+    </div>
+  </div>
+  <div>
+      <span class='p-float-label'>
+        <p-calendar
+          inputId='calendar'
+          (onSelect)='getCompletenessHierarchy()'
+          (onClearClick)='getCompletenessHierarchy()'
+          dateFormat='dd.mm.yy'
+          firstDayOfWeek='1'
+          [disabled]='!selectedHierarchyItem'
+          [(ngModel)]='filteredDate'
+          [maxDate]='maxDate'
+          showIcon='true'
+          showButtonBar='true'
+        ></p-calendar>
+        <label for='calendar'>Выберите дату</label>
+      </span>
+  </div>
+  <app-completeness-table
+    [disabled]='disabledTable'
+    [hierarchy]='completenessHierarchy'
+    [hierarchyMode]='hierarchMode'
+    (deleteRecordShdkEmitter)='deleteRecordShdk($event)'
+    (deleteMilitaryManEmitter)='deleteMilitaryMan($event)'
+    (createNewShdkEmitter)='createNewShdk($event)'
+    (updateMilitaryManEmitter)='updateMilitaryMan($event)'
+    (changeStatusEmitter)='changeStatus($event)'
+  ></app-completeness-table>
+</div>

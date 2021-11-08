@@ -1,0 +1,27 @@
+<div class='add-post-button-container'>
+  <div class='add-post-button-wrapper' pTooltip='Вы не можете настраивать смены в выбранной в/ч' [tooltipDisabled]='isChangingPostPermitted'>
+    <button pButton label='Добавить пост'
+            icon='pi pi-plus'
+            class='p-button-outlined'
+            (click)='addPost()'
+            [disabled]='!isChangingPostPermitted'
+    ></button>
+  </div>
+</div>
+<div class='content'>
+  <div class='row'>
+    <div class='form-container' *ngFor='let post of posts; index as i'>
+      <app-setting-section-form
+        [formData]='post'
+        [formIndex]='i'
+        [isLoading]='isLoading'
+        (added)="onAdded($event)"
+        (deletedOldPost)="onDeletedOldPost($event)"
+        (deletedNewPost)="onDeletedNewPost($event)"
+        (updated)="onUpdated($event)"
+        [isChangingPostPermitted]='isChangingPostPermitted'
+      ></app-setting-section-form>
+    </div>
+  </div>
+</div>
+

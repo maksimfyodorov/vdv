@@ -1,0 +1,31 @@
+<div class='uav-content'>
+  <div class='uav-content__side-bar' [appLoader]="loader.isLoading$" [spinnerSize]="40">
+    <app-nodes-hierarchy
+      [dataSource]='militaryUnitTree'
+
+    >
+      <app-uav-node-folder
+        [selectedItem]="selectionTreeService.militaryUnitId"
+        #folder></app-uav-node-folder>
+    </app-nodes-hierarchy>
+  </div>
+
+  <div class='uav-content__main-content main-content'>
+
+    <div class='main-content__breadcrumbs'>
+      <app-breadcrumbs [model]='breadcrumbsLabels'></app-breadcrumbs>
+    </div>
+
+    <p-tabView
+      class='main-tabs tab-wrapper'
+      [activeIndex]='tabIndex'
+      (onChange)='tabViewHandle($event)'
+      styleClass='main-tabs'
+    >
+      <p-tabPanel header='План полетов'></p-tabPanel>
+      <p-tabPanel header='Состояние БЛА'></p-tabPanel>
+    </p-tabView>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

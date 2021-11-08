@@ -1,0 +1,21 @@
+<p-button label="Назад к списку мероприятий"
+          styleClass="p-button-link"
+          icon="pi pi-chevron-left"
+          (click)="showMain()"
+          routerLink="../main"
+></p-button>
+<h3>{{newEventService.title || "Новое мероприятие"}}</h3>
+<div class="wrapper">
+  <div class="new-event__container_left">
+    <p-tabMenu [model]="items"
+               [activeItem] = "items[newEventService.activeTab]"
+    ></p-tabMenu>
+    <router-outlet></router-outlet>
+
+
+  </div>
+  <div class="new-event__container_right">
+  <app-new-event-card></app-new-event-card>
+  </div>
+
+</div>

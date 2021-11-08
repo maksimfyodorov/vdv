@@ -1,0 +1,584 @@
+:host {
+  ::ng-deep {
+    .p-dialog .p-dialog-footer {
+      border: 1px solid #E1E3E8;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .dialog {
+      max-height: 700px !important;
+    }
+
+    .confirm-accept-button {
+      width: 91px !important;
+      height: 40px;
+      background: #E03131;
+      border-radius: 4px;
+      border-color: #E03131;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .edit-button {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 8px 24px;
+      text-align: center;
+      height: 40px;
+      background: #228BE6;
+      border-radius: 4px;
+    }
+
+    .delete-dialog-button {
+      background: #E03131;
+      border-radius: 4px;
+      border-color: #E03131;
+      width: 106px !important;
+      height: 40px !important;
+      margin-right: 10px;
+    }
+
+    .reject-accept-button {
+      width: 120px !important;
+      height: 40px;
+      background: white;
+      border-radius: 4px;
+      border-color: white;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #959EA9;
+    }
+
+    .confirm-accept-button:hover {
+      background: #f52323;
+      border-color: #f52323;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .reject-accept-button:hover {
+      background: white;
+      border-color: white;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #454951;
+    }
+
+    .p-dialog.p-confirm-dialog .p-confirm-dialog-message {
+      margin-left: 0;
+      width: 320px !important;
+      padding-right: 20px;
+    }
+
+    .p-dialog .p-dialog-header {
+      padding-top: 24px;
+      padding-bottom: 15px;
+    }
+
+    .dialog {
+      margin: 3px;
+      width: 500px;
+
+      .pi-float-label {
+        font-family: Noto Sans;
+        width: 100%;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        color: #68737F;
+      }
+
+      .p-dialog-content {
+        padding-right: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+      }
+
+      .p-dialog-header {
+        font-family: Noto Sans;
+        padding: 24px 20px 2px 16px;
+      }
+
+      .ui-inputtext {
+        font-family: Noto Sans;
+        margin-top: 10px;
+        width: 100%;
+        resize: none;
+        height: 36px;
+      }
+
+      .p-button-icon-left {
+        font-size: 0.65rem;
+      }
+
+      .dialog-field-header {
+        font-family: Noto Sans;
+        color: #252B34;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 26px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .dialog-field-header-low {
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        color: #000000;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .dialog-field-header-low-blue {
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
+        color: #228BE6;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .resize-calendar .p-calendar {
+        margin-top: 10px;
+      }
+
+      .dialog-span-left {
+        width: 50% !important;
+        text-align: start;
+      }
+
+      .joint-fields-text {
+        font-family: Noto Sans;
+        color: #68737F;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0;
+      }
+
+      .dual-field {
+        padding: 0 !important;
+      }
+
+      .dialog-span-center {
+        width: 15px !important;
+      }
+
+      .dialog-span-right {
+        width: 50% !important;
+        text-align: start;
+
+      }
+
+      .dialog-span-full {
+        width: 100% !important;
+      }
+
+      .dialog-dropdown .p-dropdown {
+        width: 100% !important;
+        margin-top: 4px;
+      }
+
+      .ui-dropdown {
+        width: 100% !important;
+      }
+
+      .ui-inputtextarea {
+        margin-top: 4px;
+        width: 100%;
+        resize: vertical;
+        height: 68px;
+
+      }
+
+      .p-tabview-nav {
+        display: none;
+      }
+
+      .p-float-label {
+        width: 100%;
+      }
+
+      .ui-toolbar-group-right {
+        padding: 0 3px;
+        text-align: right !important;
+        margin: 10px 0;
+      }
+
+      ngx-dropzone {
+        height: 100px !important;
+        margin: 0;
+      }
+
+      .ui-tabview .ui-tabview-panels .ui-tabview-panel {
+        padding: 10px 0;
+      }
+
+      .col-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+
+      .p-dialog-title {
+        font-style: normal !important;
+        font-weight: 600 !important;
+        font-size: 20px !important;
+        line-height: 24px !important;
+        color: #252B34 !important;
+      }
+
+      .calendar-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        p-calendar:nth-child(2) {
+          margin-left: 20px;
+        }
+      }
+
+      .p-datepicker table td > span {
+        width: 1.4rem;
+        height: 1.4rem;
+        font-size: 16px;
+      }
+
+      .p-datepicker table td {
+        padding: 0.2rem;
+      }
+
+      .p-calendar .p-datepicker {
+        width: 220px;
+      }
+
+      .p-calendar .p-button {
+        background-color: white;
+        border: 1px solid #ced4da;
+        border-left-color: white;
+      }
+
+      .p-button-icon.pi-calendar {
+        color: #959EA9;
+      }
+
+      .p-datepicker table th {
+        padding: 0.2rem;
+      }
+
+      .p-datepicker .p-datepicker-header {
+        padding: 0;
+      }
+
+      .check-alert-block {
+        background: #FFE3E3;
+        border: 1px solid #FF6B6B;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+
+      .check-alert-text {
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        color: #E03131;
+        margin-left: 25px;
+        margin-right: 25px;
+      }
+
+      .ui-steps .ui-steps-item {
+        width: 25%;
+      }
+
+      .ui-steps.steps-custom {
+        margin-bottom: 30px;
+      }
+
+      .ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+        padding: 0 1em;
+        overflow: visible;
+      }
+
+      .ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+        background-color: #0081c2;
+        color: #FFFFFF;
+        display: inline-block;
+        width: 36px;
+        border-radius: 50%;
+        margin-top: -14px;
+        margin-bottom: 10px;
+      }
+
+      .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
+        color: #555555;
+      }
+
+      .history-of-change-button {
+        border: 1.5px solid #228BE6;
+        border-radius: 4px;
+        height: 30px;
+        background-color: white;
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 18px;
+        color: #228BE6;
+      }
+
+      .p-steps-title {
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #252B34;
+      }
+
+      .edit-button {
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 8px 24px;
+        text-align: center;
+        height: 40px;
+        background: #228BE6;
+        border-radius: 4px;
+      }
+
+      .answers {
+        margin-top: 20px;
+      }
+
+      .inner-accordion .p-accordion .p-accordion-header .p-accordion-header-link {
+        color: #495057;
+        background: white;
+        border: none;
+      }
+
+      .p-accordion .p-accordion-header .p-accordion-header-link {
+        background: white;
+        border-color: #E1E3E8;
+      }
+
+      .p-accordion .p-accordion-content {
+        border: none;
+        padding: 0;
+      }
+
+      .inner-accordion .p-accordion p-accordiontab .p-accordion-tab {
+        border: 1px solid #E1E3E8 !important;
+      }
+
+      .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+        box-shadow: none;
+        border-color: #E1E3E8;
+      }
+
+      .p-accordion-header-link.ng-tns-c79-41 {
+        display: none;
+      }
+
+      .accordion-header .p-accordion .p-accordiontab .p-accordion-tab {
+        border: none;
+      }
+
+      .inner-accordion .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+        box-shadow: none;
+        border-color: #E1E3E8;
+        color: #228BE6;
+      }
+
+      .answer-button .p-button {
+        background-color: white;
+        border-color: white;
+        color: #252B34;
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        padding-left: 0;
+      }
+
+      .answer-button .p-button:focus {
+        box-shadow: none;
+        border-color: white;
+      }
+
+      .answer-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .add-answer-button .p-button {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        background-color: white;
+        color: #228BE6;
+        border: 1px solid #228BE6;
+        opacity: 0.4;
+        padding: 0;
+        width: 25px;
+        height: 25px;
+      }
+
+      .answer-text {
+        padding-left: 40px;
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .accordion-edit-button {
+        margin-bottom: 10px;
+        justify-content: flex-end;
+        margin-right: 15px;
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .p-multiselect {
+        display: flex;
+      }
+
+      .multi-select-commission-members {
+        width: 100% !important;
+      }
+
+      .p-multiselect .p-multiselect-label {
+        white-space: normal;
+      }
+
+    }
+
+    .p-tabview .p-tabview-panels {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    .p-inputtext {
+      width: 100% !important;
+    }
+
+    .header-space {
+      margin-top: 25px;
+    }
+
+    .select-tree-button .p-button {
+      width: 500px;
+      text-align: left;
+
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      background-color: white;
+      color: #252B34;
+      border: 1px solid #C7CDD3;
+    }
+
+    .ui-toolbar-group-left {
+      font-family: Noto Sans;
+      margin-top: 10px;
+      align-content: space-between;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .inspection-cancel-dialog-button {
+      background: white;
+      color: #E03131;
+      padding-left: 14px;
+      border-radius: 4px;
+      border-color: #E03131;
+      width: 106px !important;
+      height: 40px !important;
+    }
+
+    .inspection-cancel-dialog-button:hover {
+      background: #B81A1A;
+      border-radius: 4px;
+      border-color: #B81A1A;
+      align-content: space-between;
+    }
+
+    .ui-toolbar-group-left .p-button {
+      font-family: Noto Sans;
+      height: 40px;
+    }
+
+    .footer-buttons {
+      margin-left: 10px;
+    }
+
+    .transfer-dialog-button {
+      margin-right: 10px;
+      background: white;
+      color: #529bdb;
+      padding-left: 10px;
+      border-radius: 4px;
+      border-color: #529bdb;
+      height: 40px !important;
+    }
+
+    .transfer-dialog-button:hover {
+      background: #529bdb;
+      border-radius: 4px;
+      border-color: #529bdb;
+      align-content: space-between;
+    }
+
+    .not-bg-button{
+      margin-left: 10px;
+      margin-right: 10px;
+      background: white;
+      color: #E03131;
+      padding-left: 14px;
+      border-radius: 4px;
+      border-color: #E03131;
+      height: 40px !important;
+    }
+
+    .not-bg-button:hover {
+      background: #B81A1A;
+      border-radius: 4px;
+      border-color: #B81A1A;
+      align-content: space-between;
+    }
+
+  }
+}

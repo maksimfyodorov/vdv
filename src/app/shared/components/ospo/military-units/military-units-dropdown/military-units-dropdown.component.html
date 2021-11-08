@@ -1,0 +1,33 @@
+<ng-content></ng-content>
+<div class='militaryUnits__dropdown dropdown'>
+  <div #selectButton class='dropdown__select-button'
+       [ngClass]='{"dropdown__select-button_disabled": disabled}'
+       (click)='!disabled && op.toggle($event); op.style = {minWidth: selectButton.offsetWidth+"px"}'
+  >
+    <button *ngIf='!disabled'
+            (click)='$event.stopPropagation(); clearSelectedMilitaryUnits()' (mousedown)='$event.stopPropagation()'
+            (mouseup)='$event.stopPropagation()' class='dropdown__clear-button'>
+      <i class='pi pi-times'></i>
+    </button>
+    {{shownMilitaryUnitsLabels ? shownMilitaryUnitsLabels : "Выберите..."}}
+  </div>
+</div>
+<p-overlayPanel #op appendTo='body' styleClass='dropdown__panel'>
+  <ng-template pTemplate>
+    <span class='p-input-icon-right dropdown__search'>
+      <i class='pi pi-search'></i>
+      <input pInputText [(ngModel)]='searchValue' (ngModelChange)='searchValueChange($event)' placeholder='Поиск'>
+    </span>
+    <p-scrollPanel [style]="{height: '200px'}">
+      <p-tree [value]='militaryUnits'
+              [selectionMode]='selectionMode'
+              [propagateSelectionDown]='false'
+              [propagateSelectionUp]='false'
+              [(selection)]='selectedMilitaryUnits'>
+        <ng-template let-militaryUnit pTemplate='default'>
+          <span [ngClass]='{dropdown__item_disabled: militaryUnit.selectable === false}'>{{militaryUnit.label}}</span>
+        </ng-template>
+      </p-tree>
+    </p-scrollPanel>
+  </ng-template>
+</p-overlayPanel>

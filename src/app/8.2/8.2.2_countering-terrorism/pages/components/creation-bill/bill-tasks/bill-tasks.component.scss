@@ -1,0 +1,150 @@
+.button {
+    width: 310px;
+    height: 78px;
+    border: 1.5px solid #228be6;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #228be6;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &__edit {
+        width: 198px;
+        height: 78px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        color: #f08c00;
+        border: 1px solid #f08c00;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    &__report {
+        width: 198px;
+        height: 80px;
+        border-radius: 4px;
+        color: #228be6;
+        border: 1px solid #228be6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+    &__report-back {
+        width: 198px;
+        height: 80px;
+        border-radius: 4px;
+        color: white;
+        border: 1px solid #228be6;
+        background: #228be6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+    }
+}
+
+.firstColumn {
+    margin-top: 8px;
+}
+
+.secondColumn {
+    margin: 0 30px;
+}
+
+.container {
+    &__main {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 90%;
+        margin-left: 75px;
+        &_document {
+            width: 650px;
+            height: 234px;
+            border: 1.5px solid #228be6;
+            border-radius: 4px;
+        }
+        &_documents {
+            width: 650px;
+            height: 234px;
+            border: 1.5px solid #e1e3e8;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            cursor: default;
+            color: #252b34;
+            padding: 16px;
+        }
+        &_report {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 650px;
+        }
+    }
+}
+
+.logo {
+    font-size: 12px;
+    color: #252b34;
+    line-height: 20px;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-top: 8px;
+    align-items: center;
+}
+
+.status {
+    margin-left: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+hr {
+    border: 1px solid #e1e3e8;
+    width: 95%;
+}
+
+.delete-doc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.pointer {
+    color: #c7cdd3;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dashed {
+    border-bottom: 1px dashed #c7cdd3;
+    flex-grow: 1;
+    height: 15px;
+}
+
+.doc-dialog {
+    color: #228be6;
+    cursor: pointer;
+}
+
+i {
+    margin-right: 5px;
+}

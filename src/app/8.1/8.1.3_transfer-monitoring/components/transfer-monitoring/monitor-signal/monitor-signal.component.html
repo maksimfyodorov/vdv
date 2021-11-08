@@ -1,0 +1,101 @@
+<div class="row between">
+    <div class="row">
+        <button
+            pButton
+            label="Создать"
+            icon="pi pi-plus"
+            iconPos="left"
+            class="margins"
+            (click)="addPlan()"
+        ></button>
+        <p-dropdown
+            class="margins"
+            [options]="plan"
+            [(ngModel)]="selectedPlan"
+            (onChange)="selectPlan()"
+            optionLabel="name"
+        >
+        </p-dropdown>
+        <button
+            pButton
+            *ngIf="editFlag; else editBtn"
+            label="Сохранить"
+            icon="pi pi-save"
+            iconPos="left"
+            class="p-button-success margins"
+            (click)="changeEditFlag()"
+        ></button>
+        <button
+            pButton
+            [disabled]="!selectedPlan"
+            icon="pi pi-trash"
+            iconPos="left"
+            class="p-button-danger p-button-outlined margins"
+            (click)="deletePlan()"
+        ></button>
+        <button
+            pButton
+            [disabled]="!selectedPlan"
+            icon="pi pi-book"
+            iconPos="left"
+            class="p-button-outlined margins"
+            (click)="showHistory()"
+        ></button>
+        <button
+            pButton
+            label="Печать"
+            icon="pi pi-print"
+            iconPos="left"
+            class="p-button-outlined margins"
+        ></button>
+    </div>
+    <div>
+        <button
+            pButton
+            *ngIf="!addVfFlag"
+            [disabled]="!selectedPlan"
+            label="Добавить ВФ в план"
+            icon="pi pi-plus"
+            iconPos="left"
+            class="margins"
+            (click)="addVfFlag = !addVfFlag"
+        ></button>
+        <div
+            class="column"
+            *ngIf="addVfFlag"
+        >
+            <button
+                pButton
+                *ngIf="addVfFlag"
+                label="Сигнал о всБГ"
+                icon="pi pi-sun"
+                iconPos="left"
+                class="p-button-danger"
+                (click)="timerFlag = true"
+            ></button>
+            <app-event-timer
+                class="absolute"
+                *ngIf="timerFlag"
+            ></app-event-timer>
+        </div>
+    </div>
+</div>
+<div *ngIf="selectedPlan">
+    <app-transfer-timline></app-transfer-timline>
+    <app-event-table
+        *ngIf="addVfFlag"
+        [editFlag]="editFlag"
+    ></app-event-table>
+</div>
+
+<ng-template #editBtn>
+    <button
+        pButton
+        [disabled]="!selectedPlan"
+        label="Редактировать"
+        icon="pi pi-pencil"
+        iconPos="left"
+        class="p-button-outlined margins"
+        (click)="changeEditFlag()"
+    ></button>
+</ng-template>

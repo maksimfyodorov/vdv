@@ -1,0 +1,257 @@
+<div class="wrapper">
+  <div class="card__head">
+    <div class="card__container_title">
+      <h3>Название нового мероприятия</h3>
+      <div class="card__all-info">
+        <div class="card__info">
+          <div class="card__info_title">
+            <span class="element__event_state"><i class="pi pi-calendar"></i>В плане</span>
+            <span class="element__event_military">11одшбр</span>
+            <span class="element__event_military">в/ч 30031</span>
+          </div>
+          <div class="card__info_date">
+            <div class="card__container_date">
+              <span class="element__event_date">09.06.2021</span>
+              <span class="element__event_date">-</span>
+              <span class="element__event_date">14.06.2021</span>
+            </div>
+            <span class="element__event_day">6 дней</span>
+          </div>
+        </div>
+        <div class="card__info_general">
+          <div class="card__info_general_jumps">
+            <h5>Прыжки</h5>
+            <div class="card__info_general_jumps_container">
+              <span class="element__jumps_planned">125</span>
+              <span class="element__jumps_slash">/</span>
+              <span class="element__jumps_done">0</span>
+              <!--              <p-badge value="1" severity="danger"></p-badge>-->
+            </div>
+          </div>
+          <div class="card__info_general_jumps_equip">
+            <h5>ВВСТ</h5>
+            <div class="card_info_general_jumps_container">
+              <span class="element__jumps_planned">12</span>
+              <span class="element__jumps_slash">/</span>
+              <span class="element__jumps_done">6</span>
+              <!--              <p-badge value="0" severity="danger"></p-badge>-->
+            </div>
+          </div>
+          <div class="card__info_general_jumps_equip">
+            <h5>Грузы</h5>
+            <div class="events__info_general_jumps_container">
+              <span class="element__jumps_planned">10</span>
+              <span class="element__jumps_slash">/</span>
+              <span class="element__jumps_done">5</span>
+              <!--              <p-badge value="0" severity="danger"></p-badge>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card__title_show-card">
+      <i class="pi pi-angle-down" (click)="changeOpenState()" *ngIf="!expandOpenStateEvent"
+         style="padding: 0"></i>
+      <i class="pi pi-angle-up" (click)="changeOpenState()" *ngIf="expandOpenStateEvent"
+         style="padding: 0"></i>
+    </div>
+  </div>
+  <div class="card__container__full" *ngIf="expandOpenStateEvent">
+    <p-dropdown [options]="tasks"
+                [(ngModel)]="selectedTask"
+                placeholder="Все задачи"
+                optionLabel="name"
+                [showClear]="true"
+                emptyMessage="Результаты не найдены"
+    ></p-dropdown>
+    <div class="card__container__full__airdrome-list">
+      <div class="card__container__full__airdrome">
+        <div class="staff__coordinates">
+          <div class="staff__coordinates_departure">
+            <div class="staff__coordinates_airports_title">
+              <img src="assets/img/icons/airplane.svg">
+              <span class="element_airport_name">Чкаловский</span>
+            </div>
+            <div class="staff__coordinates_airports_name">
+              <span class="element_airport_region">Московская обл.</span>
+            </div>
+          </div>
+          <span class="element__arrow-right"><i class="pi pi-arrow-right"></i></span>
+          <div class="staff__coordinates_landing">
+            <div class="staff__coordinates_airports_title">
+              <img src="assets/img/icons/parachute.svg">
+              <span class="element_airport_name">59° 23′ 45″ с.ш., 56° 44′ 00″ в.д.</span>
+            </div>
+            <div class="staff__coordinates_airports_name">
+              <span class="element_airport_region">Тульская обл.</span>
+            </div>
+          </div>
+        </div>
+        <div class="card__container__full__airdrome__show">
+          <i class="pi pi-angle-down" (click)="changeOpenStateAirdrome()" *ngIf="!openStateAirdrome"
+             style="padding: 0"></i>
+          <i class="pi pi-angle-up" (click)="changeOpenStateAirdrome()" *ngIf="openStateAirdrome"
+             style="padding: 0"></i>
+        </div>
+      </div>
+      <div class="card__container__full__airdrome__expanded" *ngIf="openStateAirdrome">
+        <p-tabView>
+          <p-tabPanel header="06.07">
+            <div class="card__container__full__airdrome__expanded__info">
+              <div class="card__jumps_airplane">
+                <div class="card__jumps_airplane_inner">
+                  <span class="element__airplane_name">Ил-76</span>
+                  <span class="element__airplane_num-of-flights">6 вылетов</span>
+                  <span class="element__request"><i class="pi pi-exclamation-circle" style="color: #FFFFFF; padding-right: 4px"></i>Заявка отсутсвует</span>
+                  <p-button label="Заявка" styleClass="p-button-link"></p-button>
+                </div>
+              </div>
+              <div class="card__jumps_airplane">
+                <div class="card__jumps_airplane_inner">
+                  <span class="element__airplane_name">Ми-8</span>
+                  <span class="element__airplane_num-of-flights">125 вылетов</span>
+                  <span class="element__request"><i class="pi pi-exclamation-circle"
+                                                    style="color: #FFFFFF; padding-right: 4px"></i>Заявка отсутсвует</span>
+                  <p-button label="Заявка" styleClass="p-button-link"></p-button>
+                </div>
+              </div>
+              <div class="card__jumps_count">
+                <div class="card__jumps_count_inner">
+                  <div class="card__jumps_count_all">
+                    <h6>Прыжки</h6>
+                    <span class="element__jumps_card_planned">2500</span>
+                    <span class="element__jumps_card_slash">/</span>
+                    <span class="element__jumps_card_done">2500</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                  <div class="card__jumps_count_tech">
+                    <h6>ВВСТ</h6>
+                    <span class="element__jumps_card_planned">10</span>
+                    <span class="element__jumps_card_slash">/</span>
+                    <span class="element__jumps_card_done">5</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                  <div class="card__jumps_count_tech">
+                    <h6>Грузы</h6>
+                    <span class="element__jumps_card_planned">10</span>
+                    <span class="element__jumps_card_slash">/</span>
+                    <span class="element__jumps_card_done">5</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                  <div class="card__jumps_count_status">
+                    <span class="element__report"><i class="pi pi-exclamation-circle" style="color: #FAB005; padding-right: 4px"></i>Нет доклада о готовности</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card__military-units">
+                <div class="card__military-units_inner">
+                        <span class="element__military-unit_all"
+                              (click)="showAllMilitaryUnit()">Все подразделения</span>
+                  <span class="element__military-unit">
+<!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                   21оро</span>
+                  <span class="element__military-unit">
+<!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                   47бр</span>
+                  <span class="element__military-unit">
+<!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                   25рс</span>
+                </div>
+              </div>
+              <div class="card__staff">
+                <h6>Личный состав</h6>
+                <div class="card__staff_task">
+                  <div class="card__staff_task_title">
+                    <div class="card__staff_task_name">
+                      <span class="element__task_title">Задача 4</span>
+                    </div>
+                    <div class="card__staff_task_tech">
+                      <span class="element__task_tech">Д10</span>
+                    </div>
+                    <div class="card__staff_task_jumps">
+                      <span class="element__staff_task_planned">2500</span>
+                      <span class="element__staff_task_slash">/</span>
+                      <span class="element__staff_task_done">2500</span>
+                      <!--                     <p-badge value="2" severity="danger"></p-badge>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="card__staff_task_subtitle">
+                  <div class="card__staff_task_subtitle_info">
+                    <span class="element__task_subtitle">Вылет №1</span>
+                    <span class="element__task_subtitle_airplane">Ил-76</span>
+                    <i class="pi pi-minus"></i>
+                    <span class="element__task_subtitle">12:45</span>
+                  </div>
+                  <div class="card__staff_task_subtitle_jumps">
+                    <span class="element__staff_task_planned">2500</span>
+                    <span class="element__staff_task_slash">/</span>
+                    <span class="element__staff_task_done">2500</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                </div>
+                <div class="card__staff_task_subtitle">
+                  <div class="card__staff_task_subtitle_info">
+                    <span class="element__task_subtitle">Вылет №2</span>
+                    <span class="element__task_subtitle_airplane">Ил-76</span>
+                    <i class="pi pi-minus"></i>
+                    <span class="element__task_subtitle">12:45</span>
+                  </div>
+                  <div class="card__staff_task_subtitle_jumps">
+                    <span class="element__staff_task_planned">2500</span>
+                    <span class="element__staff_task_slash">/</span>
+                    <span class="element__staff_task_done">2500</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                </div>
+              </div>
+              <div class="card__vvst">
+                <h6>ВВСТ</h6>
+                <div class="card__staff_task_title">
+                  <div class="card__staff_task_name">
+                    <span class="element__task_title">ЛС десантируемый вслед за техникой</span>
+                  </div>
+                  <div class="card__staff_task_tech">
+                    <span class="element__task_tech">Д10</span>
+                  </div>
+                  <div class="card__staff_task_jumps">
+                    <span class="element__staff_task_planned">10</span>
+                    <span class="element__staff_task_slash">/</span>
+                    <span class="element__staff_task_done">5</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                </div>
+                <div class="card__staff_task_title">
+                  <div class="card__staff_task_name">
+                    <span class="element__task_title">Десантирование внутри боевой машины</span>
+                  </div>
+                  <div class="card__staff_task_tech">
+                  </div>
+                  <div class="card__staff_task_jumps">
+                    <span class="element__staff_task_planned">10</span>
+                    <span class="element__staff_task_slash">/</span>
+                    <span class="element__staff_task_done">5</span>
+                    <!--                   <p-badge value="2" severity="danger"></p-badge>-->
+                  </div>
+                </div>
+              </div>
+              <div class="card__cargo">
+                <h6>Грузы</h6>
+              </div>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="07.07">
+            <div class="card__container__full__airdrome__expanded__info">
+
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="08.07">
+            <div class="card__container__full__airdrome__expanded__info">
+
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

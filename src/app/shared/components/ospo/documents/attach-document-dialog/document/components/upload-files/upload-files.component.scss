@@ -1,0 +1,102 @@
+@import "../../../../../../../../../styles/primeng-fix-style";
+
+ngx-dropzone,
+.custom-dropzone {
+  height: 80px;
+}
+
+.custom-dropzone {
+	height: 250px;
+	background: #333;
+	color: #fff;
+	border: 5px dashed rgb(235, 79, 79);
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  border: 5px solid rgb(235, 79, 79);
+}
+
+.title {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #68737F;
+  margin: 4px 0;
+}
+
+.title_bold {
+  font-weight: bold;
+  line-height: 26px;
+  color: #252B34;
+}
+
+.title_large {
+  font-size: 16px;
+}
+
+.label {
+  color: #228BE6;
+  margin-left: 10px;
+
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.file {
+  color: black;
+  margin-left: 22px;
+}
+
+.files-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.files-container__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.file-data {
+  display: flex;
+  align-items: center;
+}
+
+.red {
+  color: red;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon__small {
+  width: 16px;
+  height: 16px;
+}
+
+.icon__small_margin {
+  margin-right: 16px;
+}
+
+:host ::ng-deep {
+  .mat-expansion-panel-header {
+    font-weight: bold;
+    & > span > span > span {
+      color: #969ea8;
+    }
+  }
+}

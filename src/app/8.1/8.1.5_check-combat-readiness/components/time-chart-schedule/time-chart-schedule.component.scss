@@ -1,0 +1,82 @@
+:host {
+  ::ng-deep {
+    .month {
+      color: #252B34;
+      font-size: 16px !important;
+      border: unset !important;
+      border: 1px solid #e1e3e8 !important;
+    }
+
+    .week {
+      color: black;
+      font-size: 14px !important;
+      // border-right-width: 3px !important;
+      border-color: #e1e3e8 !important;
+      white-space: nowrap;
+      background-color: white;
+    }
+
+    .day {
+      background-color: white;
+      border-top: unset !important;
+      border-color: #e1e3e8 !important;
+      color: #68737F;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 20px;
+      font-size: 12px !important;
+    }
+
+    .item-grouping {
+      background-color: #ffffff;
+    }
+
+    .timetable-header {
+      height: auto !important;
+      max-height: 100px;
+      background-color: #fff;
+      padding-bottom: 0 !important;
+    }
+
+    .item {
+      border-radius: 4px !important;
+      border-width: 1px !important;
+    }
+
+    .today {
+      color: white;
+    }
+
+    .item:hover {
+      -webkit-filter: brightness(100%) !important;
+      filter: brightness(100%) !important;
+      transform: scaleY(1) !important;
+      max-width: unset !important;
+      z-index: 999;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      transition: .2s ease-in-out;
+      opacity: .95;
+    }
+
+    .months {
+      background-color: white;
+    }
+
+    .weeks {
+      background-color: white;
+    }
+
+    .days {
+      background-color: lavender;
+    }
+
+    .week-offset {
+      background-color: white;
+      border-color: #e1e3e8 !important;
+    }
+
+
+  }
+
+}

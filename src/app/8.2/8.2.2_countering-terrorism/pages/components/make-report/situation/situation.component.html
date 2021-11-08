@@ -1,0 +1,155 @@
+<div [formGroup]="situationForm">
+    <div class='message'>
+        Обстановка в районах дислокации гарнизонов, военных городков и воинских частей.
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Вывод о наличии и опасности террористических угроз</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="conclusionAboutPresenceOfThreatsFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div *ngIf="this.situationForm.controls['conclusionAboutPresenceOfThreatsFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'Вывод о наличии и опасности террористических угроз')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Вывод о наличии и опасности террористических угроз',this.situationForm.controls['conclusionAboutPresenceOfThreats'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Вывод о наличии и опасности террористических угроз')"
+                pInputTextarea
+                formControlName="conclusionAboutPresenceOfThreats"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Районы</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="districtsFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="row text">
+            Районы с наиболее неблагоприятной обстановкой и социальной напряженности, наличие деструктивных религиозных
+            движений. Предполагаемое количество, состав и характер действий террористических групп.
+        </div>
+        <div *ngIf="this.situationForm.controls['districtsFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(1, 'Районы')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Районы',this.situationForm.controls['districts'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Районы')"
+                pInputTextarea
+                formControlName="districts"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Критически опасные объекты</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="criticalFacilitiesFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="row text">
+            Перечень критически важных и потенциально опасных объектов, подчиненных (оперативно подчиненных)
+            командиру
+            соединения (воинской части).
+        </div>
+
+        <div *ngIf="this.situationForm.controls['criticalFacilitiesFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(2, 'Критически опасные объекты')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Критически опасные объекты',this.situationForm.controls['criticalFacilities'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Критически опасные объекты')"
+                pInputTextarea
+                formControlName="criticalFacilities"
+            ></textarea>
+        </div>
+
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Криминальная обстановка</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="criminalSituationFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="row text">
+            Состояние криминогенной обстановки (в том числе происшествия (преступления) террористического характера,
+            имевшие
+            место в отчетном периоде (в соответствии с приказом командующего Воздушно-десантными войсками от 30 июня
+            2014 г.
+            No143 дсп)).
+        </div>
+        <div>
+            <div *ngIf="this.situationForm.controls['criminalSituationFlag'].value">
+                <div class="row contentSpaceBetween">
+                    <div
+                        class="btn width145"
+                        (click)="openReportDialog(3, 'Криминальная обстановка')"
+                    >Заполнить из шаблона</div>
+                    <div
+                        class="btn"
+                        (click)="sendTemplate('Криминальная обстановка',this.situationForm.controls['criminalSituation'].value)"
+                    >Сохранить шаблон</div>
+                </div>
+                <textarea
+                    (blur)="sendSingleReportRecord('Криминальная обстановка')"
+                    pInputTextarea
+                    formControlName="criminalSituation"
+                ></textarea>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='left'
+            (click)='reducePageIndex()'
+            routerLink='/countering-terrorism/make-report/composition'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+        <p-button
+            label='Подготовка Антитеррор'
+            icon='pi pi-arrow-right'
+            iconPos='right'
+            (click)='addPageIndex()'
+            routerLink='/countering-terrorism/make-report/preparation-antiterror'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+    </div>
+</div>

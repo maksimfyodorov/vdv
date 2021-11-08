@@ -1,0 +1,113 @@
+@import 'styles/custom-material-theme';
+
+.undefined-inspection {
+  border-color: #959ea9;
+  background-color: #959ea9;
+  color: white;
+}
+
+.BG-inspection {
+  border-color: #82c91e;
+  background-color: #82c91e;
+  color: white;
+}
+
+.not-BG-inspection {
+  border-color: #fa5252;
+  background-color: #fa5252;
+  color: white;
+}
+
+.planed-inspections {
+  border-color: #339af0;
+  background-color: #339af0;
+  color: white;
+}
+
+.on-execute-inspections {
+  border-color: #fab005;
+  background-color: #fab005;
+  color: white;
+}
+
+.completed-inspections {
+  border-color: #22b8cf;
+  background-color: #22b8cf;
+  color: white;
+}
+
+.canceled-inspections {
+  border-color: #c92a2a;
+  background-color: #c92a2a;
+  color: white;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('./assets/fonts/OpenSans-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Noto Sans;
+  src: local('Noto Sans Regular'), local('NotoSans-Regular'),
+  url('assets/fonts/NotoSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Noto Sans;
+  src: url(./assets/fonts/NotoSans-Italic.ttf) format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src: local('Noto Sans SemiBold'), local('NotoSans-SemiBold'),
+  url('assets/fonts/NotoSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans', sans-serif !important;
+  font-size: 14px !important;
+  color: var(--text-color) !important;
+}
+
+.p-component {
+  font-family: 'Noto Sans', sans-serif !important;
+  font-size: 14px !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  line-height: 20px;
+}
+
+.flex-gap-1 {
+  gap: 1rem;
+}
+
+.flex-gap-2 {
+  gap: 2rem;
+}
+
+ues-map {
+  .panel__wrapper {
+    .panel {
+      box-sizing: content-box;
+    }
+  }
+}
+
+
+// style for custom dropdowns
+@import 'styles/dropdown-overlay-panel';
+
+// style for overlay mask of sidebar menu
+@import 'styles/sidebar-mask';

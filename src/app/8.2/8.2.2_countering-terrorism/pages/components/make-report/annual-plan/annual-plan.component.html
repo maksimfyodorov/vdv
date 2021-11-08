@@ -1,0 +1,53 @@
+<div [formGroup]="planForm">
+    <div class='message'>
+        Выполнение «Плана мероприятий по противодействию терроризму в Воздушно- десантных войсках на год».Представляется
+        информация об исполнении мероприятий плана со сроками исполнения «Постоянно» и «В течение года» с обязательной
+        ссылкой на пункты плана.
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">План подготовки личнного состава по противодействию терроризму</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="planFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div *ngIf="this.planForm.controls['planFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'План подготовки личнного состава по противодействию терроризму')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('План подготовки личнного состава по противодействию терроризму',this.planForm.controls['plan'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendAllReportRecords()"
+                pInputTextarea
+                formControlName="plan"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='left'
+            (click)='reducePageIndex()'
+            routerLink='/countering-terrorism/make-report/preparation-antiterror'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+        <p-button
+            label='Защита и охрана'
+            icon='pi pi-arrow-right'
+            iconPos='right'
+            (click)='addPageIndex()'
+            routerLink='/countering-terrorism/make-report/protection-security'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+:host::ng-deep .add__airfields-button {
+  .p-button {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+.icons_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.airfield__name {
+  width: 675px;
+  height: 40px;
+}
+
+.coordinates {
+  width: 275px;
+  height: 40px;
+}
+
+.actions {
+  width: 150px;
+  height: 40px;
+}
+
+#cancel {
+  width: 192px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.table_container {
+  margin-top: 25px;
+}
+
+.coordinates {
+  cursor: pointer;
+}
+
+.coordinates__container {
+  display: flex;
+}
+
+.target {
+  margin-left: 5px;
+}
+.pi-trash {
+  cursor: pointer;
+}

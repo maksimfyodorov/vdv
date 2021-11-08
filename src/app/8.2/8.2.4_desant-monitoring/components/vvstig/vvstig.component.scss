@@ -1,0 +1,27 @@
+:host::ng-deep {
+    .p-calendar-w-btn .p-datepicker-trigger {
+    background: white;
+    color: #959EA9;
+    border-color: #C7CDD3;
+    border-left: none;
+    }
+    
+    .calendar {
+    margin-right: 16px;
+    .p-inputtext {
+    width: 202px;
+    height: 40px;
+    }
+    }
+    
+    .search__input {
+    width: 267px;
+    height: 40px;
+    padding: 8px 8px 8px 16px;
+    }
+    }
+    
+    .inputs__wrapper {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    }

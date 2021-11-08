@@ -1,0 +1,38 @@
+.trigger {
+  display: grid;
+  column-gap: 8px;
+  grid-template: 1fr 1fr / 1fr 120px;
+  grid-template-areas: 'host-trigger delete' 'status-on-triggered doReport';
+  border-bottom: 1px solid #E1E3E8;
+
+  &__host-trigger {
+    margin-bottom: 12px;
+    grid-area: host-trigger;
+  }
+
+  &__status-on-triggered {
+    grid-area: status-on-triggered;
+  }
+
+  &__delete {
+    grid-area: delete;
+    align-self: center;
+    margin-top: 12px;
+  }
+
+  &__doReport {
+    grid-area: doReport;
+    align-self: center;
+    padding-top: 10px;
+
+    label {
+      margin-left: 8px;
+    }
+  }
+}
+
+.label {
+  display: block;
+  color: #68737F;
+  margin-bottom: 4px;
+}

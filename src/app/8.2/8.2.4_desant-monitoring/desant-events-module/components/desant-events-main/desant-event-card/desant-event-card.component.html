@@ -1,0 +1,295 @@
+<p-paginator [rows]="row"
+             [totalRecords]="allEventsCount"
+             (onPageChange)="showNextPage($event.page)"
+             *ngIf="allPage > 1"></p-paginator>
+<div [appLoader]="loader.isLoading$">
+  <div [ngClass]="allPage > 1 ?  '': 'set-margin'">
+    <div class="events__container" *ngFor="let eventList of desantEventsList;let i = index">
+      <div class="events__container_content">
+        <div class="events__title">
+          <h4>{{eventList?.name}}</h4>
+          <div class="events__icons">
+            <i class="pi pi-pencil"
+               (click)="changeEvent(eventList)"
+               routerLink="../new-or-change"
+               [queryParams]="{'uuid': eventList.uuid}"
+            ></i>
+            <i class="pi pi-trash" (click)="deleteEvent(eventList.uuid)"></i>
+            <i class="pi pi-list" (click)="openEventHistory(eventList.uuid)"></i>
+            <i class="pi pi-check-circle" (click)="setReadyState(eventList.uuid)"></i>
+          </div>
+        </div>
+        <div class="events__info">
+          <div class="events__info_container">
+            <div class="events__info_title">
+              <span class="element__event_state"><i class="pi pi-calendar"></i>{{eventList?.event_status}}</span>
+              <span class="element__event_military">11одшбр</span>
+              <span class="element__event_military">в/ч №{{eventList?.military_unit?.number}}</span>
+            </div>
+            <div class="events__info_date">
+              <div class="events__container_date">
+                <span class="element__event_date">{{eventList?.date_start_plan | date : 'dd.MM.yyyy'}}</span>
+                <span class="element__event_date">-</span>
+                <span class="element__event_date">{{eventList?.date_end_plan | date: 'dd.MM.yyyy'}}</span>
+              </div>
+              <span class="element__event_day">{{eventDuration(eventList?.date_start_plan, eventList?.date_end_plan)}}
+                д.</span>
+            </div>
+          </div>
+          <div class="events__info_general">
+            <div class="events__info_general_jumps">
+              <h5>Прыжки</h5>
+              <div class="events__info_general_jumps_container">
+                <span class="element__jumps_planned">{{eventList?.jump_count_total || 0}}</span>
+                <span class="element__jumps_slash">/</span>
+                <span class="element__jumps_done">1000</span>
+<!--                <p-badge value="1" severity="danger"></p-badge>-->
+              </div>
+            </div>
+            <div class="events__info_general_jumps_equip">
+              <h5>ВВСТ</h5>
+              <div class="events__info_general_jumps_container">
+                <span class="element__jumps_planned">10</span>
+                <span class="element__jumps_slash">/</span>
+                <span class="element__jumps_done">6</span>
+<!--                <p-badge value="1" severity="danger"></p-badge>-->
+              </div>
+            </div>
+            <div class="events__info_general_jumps_equip">
+              <h5>Грузы</h5>
+              <div class="events__info_general_jumps_container">
+                <span class="element__jumps_planned">10</span>
+                <span class="element__jumps_slash">/</span>
+                <span class="element__jumps_done">5</span>
+                <p-badge value="1" severity="danger"></p-badge>
+              </div>
+            </div>
+          </div>
+          <div class="events__title_show-card">
+            <i class="pi pi-angle-down" (click)="changeOpenState(eventList.uuid)" *ngIf="!expandOpenStateEvent[i]"
+               style="padding: 0"></i>
+            <i class="pi pi-angle-up" (click)="changeOpenState(eventList.uuid)" *ngIf="expandOpenStateEvent[i]"
+               style="padding: 0"></i>
+          </div>
+        </div>
+      </div>
+      <div class="full-info" *ngIf="expandOpenStateEvent[i]">
+        <div class="full-info_wrapper">
+          <div class="full-info_container_left">
+            <div class="full-info_subject">
+              <p-dropdown [options]="tasks"
+                          [(ngModel)]="selectedTask"
+                          placeholder="Все задачи"
+                          optionLabel="name"
+                          [showClear]="true"
+              ></p-dropdown>
+            </div>
+            <div class="full-info_airports" (click)="chooseAirport(eventList.uuid)"
+                 [ngStyle]="{'background-color':chooseAirportStyle ? '#F5F6F8': '#FFFFFF'}">
+              <div class="full-info_airports_container">
+                <div class="full-info_airports_title">
+                  <img src="../../../../../../../assets/img/icons/airplane.svg">
+                  <div class="full-info_airports_name">
+                    <span>Чкаловский</span>
+                    <span class="element_airports_region">Московская обл.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="full-info_airports_container">
+                <div class="full-info_airports_title">
+                  <img src="../../../../../../../assets/img/icons/parachute.svg">
+                  <div class="full-info_airports_name">
+                    <span>59° 23′ 45″ с.ш., 56° 44′ 00″ в.д.</span>
+                    <span class="element_airports_region">Тульская обл.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="full-info_airports" (click)="chooseAirport(eventList.uuid)"
+                 [ngStyle]="{'background-color':chooseAirportStyle ? '#F5F6F8': '#FFFFFF'}">
+              <div class="full-info_airports_container">
+                <div class="full-info_airports_title">
+                  <img src="../../../../../../../assets/img/icons/airplane.svg">
+                  <div class="full-info_airports_name">
+                    <span>Кубинка</span>
+                    <span class="element_airports_region">Московская обл.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="full-info_airports_container">
+                <div class="full-info_airports_title">
+                  <img src="../../../../../../../assets/img/icons/parachute.svg">
+                  <div class="full-info_airports_name">
+                    <span>59° 23′ 45″ с.ш., 56° 44′ 00″ в.д.</span>
+                    <span class="element_airports_region">Тульская обл.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="full-info_container_right">
+            <p-tabView>
+              <p-tabPanel header="09.06 ср.">
+                <div class="card">
+                  <div class="card__container">
+                    <div class="card__jumps_airplane">
+                      <div class="card__jumps_airplane_inner">
+                        <span class="element__airplane_name">Ил-76</span>
+                        <span class="element__airplane_num-of-flights">6 вылетов</span>
+                        <span class="element__request"><i class="pi pi-exclamation-circle" style="color: #FFFFFF; padding-right: 4px"></i>Заявка отсутсвует</span>
+                        <p-button label="Заявка" styleClass="p-button-link"></p-button>
+                      </div>
+                    </div>
+                    <div class="card__jumps_airplane">
+                      <div class="card__jumps_airplane_inner">
+                        <span class="element__airplane_name">Ми-8</span>
+                        <span class="element__airplane_num-of-flights">125 вылетов</span>
+                        <span class="element__request"><i class="pi pi-exclamation-circle" style="color: #FFFFFF; padding-right: 4px"></i>Заявка отсутсвует</span>
+                        <p-button label="Заявка" styleClass="p-button-link"></p-button>
+                      </div>
+                    </div>
+                    <div class="card__jumps_count">
+                      <div class="card__jumps_count_inner">
+                        <div class="card__jumps_count_all">
+                          <h6>Прыжки</h6>
+                          <span class="element__jumps_card_planned">2500</span>
+                          <span class="element__jumps_card_slash">/</span>
+                          <span class="element__jumps_card_done">2500</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                        <div class="card__jumps_count_tech">
+                          <h6>ВВСТ</h6>
+                          <span class="element__jumps_card_planned">10</span>
+                          <span class="element__jumps_card_slash">/</span>
+                          <span class="element__jumps_card_done">5</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                        <div class="card__jumps_count_tech">
+                          <h6>Грузы</h6>
+                          <span class="element__jumps_card_planned">10</span>
+                          <span class="element__jumps_card_slash">/</span>
+                          <span class="element__jumps_card_done">5</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                        <div class="card__jumps_count_status">
+                          <span class="element__report"><i class="pi pi-exclamation-circle" style="color: #FAB005"></i>Нет доклада о готовности</span>
+                          <span class="element__report_button" (click)="showReport()">Доклад</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card__military-units">
+                      <div class="card__military-units_inner">
+                        <span class="element__military-unit_all"
+                              (click)="showAllMilitaryUnit()">Все подразделения</span>
+                        <span class="element__military-unit">21оро</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        <span class="element__military-unit">47бр</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        <span class="element__military-unit">
+<!--                          <p-badge value="2" severity="danger"></p-badge> -->
+                          25рс</span>
+                      </div>
+                    </div>
+                    <div class="card__staff">
+                      <h6>Личный состав</h6>
+                      <div class="card__staff_task">
+                        <div class="card__staff_task_title">
+                          <div class="card__staff_task_name">
+                            <span class="element__task_title">Задача 4</span>
+                            <span> <i class="pi pi-angle-up" *ngIf="openStateTask" (click)="openTaskInfo()"></i> </span>
+                            <span> <i class="pi pi-angle-down" *ngIf="!openStateTask"
+                                      (click)="openTaskInfo()"></i> </span>
+                          </div>
+                          <div class="card__staff_task_tech">
+                            <span class="element__task_tech">Д10</span>
+                          </div>
+                          <div class="card__staff_task_jumps">
+                            <span class="element__staff_task_planned">2500</span>
+                            <span class="element__staff_task_slash">/</span>
+                            <span class="element__staff_task_done">2500</span>
+<!--                            <p-badge value="2" severity="danger"></p-badge>-->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card__staff_task_subtitle" *ngIf="openStateTask">
+                        <div class="card__staff_task_subtitle_info">
+                          <span class="element__task_subtitle">Вылет №1</span>
+                          <span class="element__task_subtitle_airplane">Ил-76</span>
+                          <i class="pi pi-minus"></i>
+                          <span class="element__task_subtitle">12:45</span>
+                        </div>
+                        <div class="card__staff_task_subtitle_jumps">
+                          <span class="element__staff_task_planned">2500</span>
+                          <span class="element__staff_task_slash">/</span>
+                          <span class="element__staff_task_done">2500</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                      </div>
+                      <div class="card__staff_task_subtitle" *ngIf="openStateTask">
+                        <div class="card__staff_task_subtitle_info">
+                          <span class="element__task_subtitle">Вылет №2</span>
+                          <span class="element__task_subtitle_airplane">Ил-76</span>
+                          <i class="pi pi-minus"></i>
+                          <span class="element__task_subtitle">12:45</span>
+                        </div>
+                        <div class="card__staff_task_subtitle_jumps">
+                          <span class="element__staff_task_planned">2500</span>
+                          <span class="element__staff_task_slash">/</span>
+                          <span class="element__staff_task_done">2500</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card__vvst">
+                      <h6>ВВСТ</h6>
+                      <div class="card__staff_task_title">
+                        <div class="card__staff_task_name">
+                          <span class="element__task_title">ЛС десантируемый вслед за техникой</span>
+                        </div>
+                        <div class="card__staff_task_tech">
+                          <span class="element__task_tech">Д10</span>
+                        </div>
+                        <div class="card__staff_task_jumps">
+                          <span class="element__staff_task_planned">10</span>
+                          <span class="element__staff_task_slash">/</span>
+                          <span class="element__staff_task_done">5</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                      </div>
+                      <div class="card__staff_task_title">
+                        <div class="card__staff_task_name">
+                          <span class="element__task_title">Десантирование внутри боевой машины</span>
+                        </div>
+                        <div class="card__staff_task_tech">
+                        </div>
+                        <div class="card__staff_task_jumps">
+                          <span class="element__staff_task_planned">10</span>
+                          <span class="element__staff_task_slash">/</span>
+                          <span class="element__staff_task_done">5</span>
+<!--                          <p-badge value="2" severity="danger"></p-badge>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card__cargo">
+                      <h6>Грузы</h6>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+              <p-tabPanel header="10.06 чт.">
+
+              </p-tabPanel>
+              <p-tabPanel header="11.06 пт.">
+
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

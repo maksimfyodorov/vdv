@@ -1,0 +1,35 @@
+:host::ng-deep {
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .month-choice .p-dropdown {
+    width: 240px;
+  }
+
+  .month-select {
+    padding: 20px 0;
+  }
+
+  .month-selector-button .p-button {
+    color: #6c757d;
+    width: 160px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: white;
+    border: 1px solid #C7CDD3;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+
+  .post-select {
+    width: fit-content;
+  }
+
+  .p-tabview-panels {
+    padding-left: 0;
+  }
+
+}

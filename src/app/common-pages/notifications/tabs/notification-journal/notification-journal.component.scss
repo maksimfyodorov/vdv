@@ -1,0 +1,148 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: -18px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+
+  &_left {
+    display: flex;
+    gap: 12px;
+  }
+
+  &_right {
+    display: flex;
+    gap: 12px;
+  }
+}
+
+.empty-table {
+  width: 300px;
+  text-align: center;
+  margin: 30px auto;
+}
+
+.message__link {
+  cursor: pointer;
+  color: #0b7ad1;
+}
+
+:host ::ng-deep {
+
+  .p-tabmenu-nav {
+    .p-menuitem-link:focus {
+      box-shadow: none !important;
+    }
+  }
+  .tab-menu {
+    width: 100%;
+    margin-top: 3px;
+    ul {
+      margin: 2px;
+      display: flex;
+      justify-content: space-between;
+      li {
+        flex: 1;
+        a {
+          margin: auto;
+          span {
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}
+.table {
+  .header-checkbox {
+    width: 64px;
+  }
+
+  .header__date {
+    width: 200px;
+  }
+
+  .header__sender {
+    width: 300px;
+    @media (max-width: 1300px) {
+      width: 200px;
+    }
+  }
+
+  .header__type {
+    width: 200px;
+  }
+
+  .header__controls {
+    width: 60px;
+  }
+
+  .message {
+    display: flex;
+    gap: 12px;
+
+    &_controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      .on {
+        color: #228BE6;
+      }
+
+      .marked {
+        color: #F08C00;
+      }
+
+      i:last-of-type {
+        cursor: pointer;
+      }
+    }
+
+    &_text {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .date {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .type {
+    display: flex;
+    justify-content: space-between;
+
+    &_status {
+      color: white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 12px;
+    }
+
+    .success {
+      background: #82C91E;
+    }
+
+    .error {
+      background: #F03E3E;
+    }
+
+    .warning {
+      background: #FCC419;
+    }
+
+    .system {
+      background: #228BE6;
+    }
+  }
+}

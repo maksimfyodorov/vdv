@@ -1,0 +1,75 @@
+:host::ng-deep.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  p {
+    font-weight: bold;
+    margin: 15px 0 5px 0;
+    font-size: 14px;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .half-width {
+    width: 50%;
+  }
+
+  .input-wrap {
+    label {
+      color: #68737F;
+      display: block;
+      font-size: 12px;
+    }
+
+    .coordinates {
+      width: 143px;
+    }
+
+    .p-calendar {
+      .p-datepicker-trigger {
+        color: #959EA9;
+        background: none;
+        border-color: #ced4da;
+        border-left: none;
+        border-right: 1px solid #ced4da !important;
+      }
+
+      .p-component {
+        cursor: pointer;
+        border-right: none;
+
+        &:hover {
+          border-color: #ced4da;
+        }
+
+        &:focus {
+          box-shadow: none;
+          border-color: #ced4da;
+        }
+      }
+    }
+
+    #input-order {
+      margin-right: 10px;
+    }
+  }
+
+  .modal-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 15px;
+  }
+
+  .button-wrap {
+    justify-content: flex-start;
+
+    button {
+      margin-right: 10px;
+    }
+  }
+}

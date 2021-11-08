@@ -1,0 +1,78 @@
+@import "../../../../../../../styles/variables/variables";
+@import "../../../../../../../styles/primeng-fix-style";
+
+.document {
+  width: 100%;
+
+  &__header {
+    width: 100%;
+    margin: 16px 0;
+    padding: 0 8px;
+  }
+
+  &__upload {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  &__accordion {
+    width: 100%;
+  }
+
+  &__button-bar {
+    width: 100%;
+    gap: 8px;
+  }
+
+  &__button-bar_bottom {
+    margin-top: 10px;
+  }
+
+  &__row {
+    border-bottom: 1px solid #E1E3E8;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  &__summary {
+    margin: 0;
+
+    h4 {
+      line-height: 2rem;
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__field-title {
+    font-size: 12px;
+    line-height: 18px;
+    color: #959EA9;
+    margin-bottom: 5px;
+  }
+}
+
+:host ::ng-deep {
+  .p-datepicker {
+    margin-left: 2px;
+    top: -318px!important;
+    transform-origin: bottom center !important;
+    table {
+      td {
+        padding: 0;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,14 @@
+<app-mat-dialog-wrap>
+  <ng-container ngProjectAs='title'>
+    <span>{{node.military_unit.label}}</span> <span *ngIf='node.division'>, {{node.division.label}}</span>
+  </ng-container>
+
+  <ng-container ngProjectAs='body'>
+    <ul>
+      <li><b>Тип связи: </b> <span>{{ node.connection_type.name }}</span></li>
+      <li><b>Позывной: </b> <span>{{ node.call_sign }}</span></li>
+      <li><b>Координаты: </b> <span>{{ node.coordinate.mark }}</span></li>
+    </ul>
+  </ng-container>
+</app-mat-dialog-wrap>
+

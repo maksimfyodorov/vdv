@@ -1,0 +1,101 @@
+<div class='modal-content'>
+  <div cdkDropList class='box-wrap' (cdkDropListDropped)='drop($event)'>
+    <div class='point-box' *ngFor='let point of trackPoints' cdkDrag>
+      <div class='main-info'>
+        <div class='indicators-group'>
+          <div class='indicators-wrap'>
+            <div class='position {{point.status}}'>{{createIndex(point)}}</div>
+            <i
+              [style.visibility]="data.mode?.mode === 'create' && !data.mode?.subordinate || data.mode?.mode === 'new' && !data.mode?.subordinate ? 'visible' : 'hidden'"
+              cdkDragHandle
+              class='pi pi-bars drag'></i>
+          </div>
+
+          <div class='indicators-wrap input-wrap'>
+            <label for='coordinates'>Координаты</label>
+            <div id='coordinates'>{{ point.object_geom?.coordinates}}</div>
+          </div>
+        </div>
+
+        <div class='indicators-group'>
+          <div class='indicators-wrap input-wrap'>
+            <label for='height'>Высота</label>
+            <div id='height'>{{point.height}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class='point-box__buttons-row'>
+        <span>{{point.name}}</span>
+
+        <div class='buttons-row'>
+          <ng-container *ngTemplateOutlet="getTemplate(); context: {$implicit: point}"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button *ngIf="checkTaskMode(['new', 'create']) && !data.mode.subordinate" (click)="addPoint()" pButton
+            type='button'
+            icon='pi pi-plus-circle' label='Добавить точку' class='p-button-outlined add-point'></button>
+
+    <div class='modal-row button-wrap'>
+
+      <div *ngIf="checkTaskMode(['planned']); else defaultButtonTemplate">
+
+        <button [disabled]="data.mode?.subordinate" pButton type='button'
+                (click)="actionEmit.emit('completed')" class='status success passed' icon="pi pi-check" iconPos="left"
+                label='Завершить задание'></button>
+
+        <button [disabled]="data.mode?.subordinate" pButton type='button'
+                (click)="actionEmit.emit('new')"
+                label='Сохранить'></button>
+
+        <button [disabled]="data.mode?.subordinate" pButton type='button'
+                (click)="actionEmit.emit('not_completed')" class='status error not_passed'
+                label='Доложить о не выполнении'></button>
+
+        <button pButton type='button'
+                (click)="actionEmit.emit('print')" class='p-button-outlined' icon='pi pi-print'
+                label='Печать'></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #defaultTemplate let-point>
+  <i *ngIf="!form.disabled" (click)="editPoint(point)" class='icon pi pi-pencil action'></i>
+  <i *ngIf="!form.disabled" (click)="confirm(point)" class='icon pi pi-trash action'></i>
+</ng-template>
+
+<ng-template #flightWasStartTemplate let-point>
+  <div class='status success' (click)="changeStatus(point, 'passed')"
+       [ngClass]='{passed: point.status === "passed"}'><i class='pi pi-check'></i>Пройдена
+  </div>
+  <div class='status warning' (click)="changeStatus(point, 'with_error')"
+       [ngClass]='{"with_error": point.status === "with_error"}'><i class='pi pi-check'></i>С погрешностью
+  </div>
+  <div class='status error' (click)="changeStatus(point, 'not_passed')"
+       [ngClass]='{"not_passed": point.status === "not_passed"}'><i class='pi pi-times'></i>Не пройдена
+  </div>
+</ng-template>
+
+<ng-template #flightWasCompletedTemplate let-point>
+  <div class='status complete-point {{point.status}}'><i
+    class='pi {{pointStatus[point.status]?.icon}}'></i>
+    {{pointStatus[point.status]?.text}}</div>
+</ng-template>
+
+<ng-template #defaultButtonTemplate>
+  <button *ngIf="checkTaskMode(['create', 'new'])" [disabled]="data.mode?.subordinate"
+          (click)="actionEmit.emit(data.mode?.mode)" pButton type='button'
+          label='Сохранить'></button>
+
+  <button *ngIf="!checkTaskMode(['create'])" pButton type='button'
+          (click)="actionEmit.emit('print')" icon='pi pi-print' class='p-button-outlined'
+          label='Печать'></button>
+
+  <button *ngIf="!checkTaskMode(['create']) && !form.disabled" pButton type='button' [disabled]="data.mode?.subordinate"
+          (click)="actionEmit.emit('delete')" class='p-button-outlined p-button-danger' icon='pi pi-trash'></button>
+</ng-template>

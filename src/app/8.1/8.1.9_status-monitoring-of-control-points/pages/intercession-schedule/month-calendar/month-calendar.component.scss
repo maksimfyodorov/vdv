@@ -1,0 +1,23 @@
+:host ::ng-deep {
+  .month-button .p-button {
+    width: 100px !important;
+    margin: 10px;
+    color: #161616;
+    border-color: #c1c7cd;
+    height: 50px;
+  }
+
+  .month-block {
+    justify-content: center;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    margin: 20px 8px 10px;
+    flex-wrap: wrap;
+  }
+
+  .year-selector {
+    display: flex;
+    justify-content: center;
+  }
+}

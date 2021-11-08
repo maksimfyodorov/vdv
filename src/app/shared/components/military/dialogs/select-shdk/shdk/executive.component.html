@@ -1,0 +1,117 @@
+<div class="wrapper" [appLoader]="loader.isLoading$">
+    <p-table
+      #MilitaryMenTable
+      [value]="militaries"
+      [(selection)]="selectedMilitaries"
+      selectionMode="{{selectionMode}}"
+      styleClass="p-datatable-customers"
+      [rowHover]="true"
+      [rows]="5"
+      [showCurrentPageReport]="false"
+      [totalRecords]="totalRecords"
+      [paginator]="true"
+      currentPageReportTemplate="{first}-{last}"
+      [filterDelay]="1000"
+      [globalFilterFields]="['rank.name', 'surname','name','middle_name', 'appointment.name', 'division.label' ,'rank.category.name']"
+      [lazy]="true"
+      (onLazyLoad)="loadMilitaries($event)"
+      [scrollable]="true"
+      scrollHeight="400px"
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-right">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="MilitaryMenTable.filterGlobal($event.target.value, 'contains')"
+              placeholder="Поиск"
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th [style.width]="'5%'" *ngIf="selectionMode==='multiple'">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th [style.width]="'5%'" *ngIf="selectionMode==='single'"></th>
+          <th pSortableColumn="rank.name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Воинское звание
+              <p-sortIcon field="rank.name"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="surname">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Фамилия Имя Отчество
+              <p-sortIcon field="surname"></p-sortIcon>
+            </div>
+          </th>
+          <th pSortableColumn="appointment.name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Должность
+              <p-sortIcon field="appointment.name"></p-sortIcon>
+              <p-columnFilter type="text" field="militaryPost" display="menu" class="p-ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th pSortableColumn="division.label">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Подразделение
+              <p-sortIcon field="date"></p-sortIcon>
+              <p-columnFilter type="text" field="division.label" display="menu" class="p-ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th pSortableColumn="rank.category.name">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Категория
+              <p-sortIcon field="category"></p-sortIcon>
+              <p-columnFilter type="text" field="rank.category.name" display="menu" class="p-ml-auto"></p-columnFilter>
+            </div>
+          </th></tr
+      ></ng-template>
+
+      <ng-template pTemplate="body" let-military>
+        <tr class="p-selectable-row">
+          <td [style.width]="'5%'" *ngIf="selectionMode==='multiple'">
+            <p-tableCheckbox [value]="military"></p-tableCheckbox>
+          </td>
+          <td [style.width]="'5%'" *ngIf="selectionMode==='single'">
+            <p-tableRadioButton [value]="military"></p-tableRadioButton>
+          </td>
+          <td>
+            <span> {{military.rank?.name}}</span>
+          </td>
+          <td>
+            <span>{{military.military_man.surname}} {{military.military_man.name}} {{military.military_man.middle_name}}</span>
+          </td>
+          <td>
+            <span>{{military.appointment?.name}}</span>
+          </td>
+          <td>
+            <span>{{military.division?.label || '-'}}</span>
+          </td>
+          <td>
+            <span>{{military?.rank?.category?.alias}}</span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8">Военнослужащие не найдены</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="button">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Отмена"
+        class="p-button-text p-button-plain"
+        (click)="closeTeamMembers()"
+      ></button>
+      <p-button label="Выбрать" (onClick)="addTeamMembers()"></p-button>
+    </div>
+  </div>

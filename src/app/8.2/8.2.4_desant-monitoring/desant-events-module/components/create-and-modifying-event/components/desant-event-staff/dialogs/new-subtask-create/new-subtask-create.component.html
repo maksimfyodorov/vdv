@@ -1,0 +1,90 @@
+<div [appLoader]="loader.isLoading$">
+<div class="wrapper">
+  <p-table [value]="completingTableInfo" dataKey="uuid">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:3rem"></th>
+        <th>Дата</th>
+        <th>ВФ</th>
+        <th>Задача</th>
+        <th>Кол-во ЛС</th>
+        <th>Парашют</th>
+        <th>Прыжков</th>
+        <th style="width:8rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-completing let-expanded="expanded">
+      <tr>
+        <td style="width:3rem">
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="completing"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
+        </td>
+        <td>{{completing.date_plan | date: 'dd.MM.yyyy'}}</td>
+        <td>{{completing?.division?.complicated_name}}</td>
+        <td>Десантирование</td>
+        <td>{{completing.paratrooper_count_total || '-'}}</td>
+        <td>Д10</td>
+        <td>{{completing.jump_count_total || '-'}}</td>
+        <td>
+          <div class="subdivisions__table_icons">
+            <p-button label="Добавить" (click)="addSubTask(completing.uuid)"></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-completing>
+      <tr>
+        <td colspan="7">
+          <div class="table__expanded">
+            <p-table [value]="completing.subtask_list" dataKey="uuid">
+              <ng-template pTemplate="header">
+      <tr>
+        <th style="width:14px"></th>
+        <th>Дата</th>
+        <th>ВФ</th>
+        <th>Задача</th>
+        <th>Кол-во ЛС</th>
+        <th>Парашют</th>
+        <th>Прыжков</th>
+        <th style="width:8rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-subtask>
+      <tr>
+        <td style="width:14px"></td>
+        <td>{{subtask.date_start_plan | date: 'dd.MM.yyyy'}} -{{subtask.date_end_plan | date: 'dd.MM.yyyy'}} </td>
+        <td>156 двд</td>
+        <td>Укладка</td>
+        <td>-</td>
+        <td>Д10</td>
+        <td>-</td>
+        <td style="width:8rem">
+          <div class="buttons__wrapper">
+            <i class="pi pi-check-circle"  (click)="setSubtaskReadyState(subtask?.uuid)"></i>
+            <i class="pi pi-pencil"  (click)="changeSubtask(subtask?.uuid)"></i>
+            <i class="pi pi-trash"  (click)="deleteSubtask(subtask?.uuid)"></i>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">У данной задачи пока ещё нет подзадач</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+</td>
+</tr>
+</ng-template>
+</p-table>
+</div>
+</div>
+
+

@@ -1,0 +1,47 @@
+:host::ng-deep {
+  .documents {
+    padding: 0!important;
+
+    .documents__title {
+      padding: 0!important;
+    }
+  }
+}
+.sub-title {
+  margin-top: 0!important;
+}
+
+.label {
+  font-size: 12px;
+  color: #68737F;
+}
+
+.note {
+  width: 100%;
+
+  textarea {
+    width: 100%;
+  }
+}
+
+.modal-row {
+  justify-content: flex-start!important;
+}
+
+.status-label {
+  margin-right: 10px!important;
+}
+
+.completed {
+  color: #82C91E;
+}
+
+.not_completed {
+  color: #F03E3E;
+}
+
+:host::ng-deep {
+  .input-wrap {
+    margin-right: 10px!important;
+  }
+}

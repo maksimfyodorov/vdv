@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <div class="modal__title">
+    <div class="modal__title_subdivision">
+      <h5>Подразделение</h5>
+      <p-dropdown [options]="subdivisions" [(ngModel)]="selectedSubdivisions" placeholder="Выбрать" optionLabel="name"
+                  [showClear]="true"></p-dropdown>
+    </div>
+    <div class="modal__title_units-count">
+      <h5>Колличество</h5>
+      <input id="disabled-input_subdivision-count" type="text" pInputText [disabled]="true" [(ngModel)]="subdivisionMilitaryCount"/>
+    </div>
+    <div class="modal__title_subdivision">
+      <h5>Парашют</h5>
+      <p-dropdown [options]="parachuteSystems" [(ngModel)]="selectedParachuteSystem" placeholder="Выбрать"
+                  optionLabel="name" [showClear]="true"></p-dropdown>
+    </div>
+    <div class="modal__title_date">
+      <h5>Дата"</h5>
+      <p-calendar [(ngModel)]="desantDate" [showIcon]="true" inputId="icon"></p-calendar>
+    </div>
+  </div>
+  <div class="modal__search">
+<span class="p-input-icon-right">
+    <i class="pi pi-search"></i>
+    <input placeholder="Поиск" type="text" pInputText/>
+</span>
+  </div>
+  <div class="modal__table">
+    <p-table [value]="paratroopers">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+          <th>Звание</th>
+          <th>ФИО</th>
+          <th>Подразделение</th>
+          <th>Допуск</th>
+          <th>Инв. № Парашюта</th>
+          <th>Дата укладки</th>
+          <th style="width: 3rem">
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-paratrooper>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

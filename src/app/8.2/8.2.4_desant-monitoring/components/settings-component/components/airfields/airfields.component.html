@@ -1,0 +1,102 @@
+<div  [appLoader]="loader.isLoading$" class="main__container">
+  <app-new-airfields (addNewAirfield)="getNewAirfield()"  *ngIf="newAirfields== true"></app-new-airfields>
+<div class="add__airfields__container">
+  <p-button
+    (click)="addAirfields()"
+    class="add__airfields-button"
+    label=" + Добавить аэродром"
+    *ngIf="newAirfields== false"
+  ></p-button>
+  <button
+    pButton
+    pRipple
+    id="cancel"
+    type="button"
+    (click)="deleteAirfields()"
+    label="Отмена"
+    *ngIf="newAirfields== true"
+    class=" p-button-danger"
+  ></button>
+</div>
+<div class="table_container">
+  <p-table dataKey="uuid" editMode="row" [value]="airfields" >  
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="airfield__name">Наименование аэродрома</th>
+        <th class="coordinates">Координаты</th>
+        <th class="actions">Действия</th>
+      </tr>
+    </ng-template>
+    <ng-template 
+      pTemplate="body" 
+      let-editing="editing"
+      let-airfield 
+      let-ri="rowIndex">
+      <tr [pEditableRow]="airfield"  [ngClass]="editing == true ? 'selected' : 'unselected'">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input 
+                pInputText 
+                class="nameChange__input" 
+                type="text"
+                [(ngModel)]="airfield.name"/>
+            </ng-template>
+            <ng-template pTemplate="output">{{airfield.name}} </ng-template>
+          </p-cellEditor>
+        </td>
+        <td class="coordinates" >
+         <div class="coordinates__container">
+          {{airfield.coordinates.x+ '-' +airfield.coordinates.y }}
+          <img  *ngIf="editing" (click)="setCoordinate(ri)" class="target"  src="../../../../../../../assets/img/icons/coordinates.svg" alt="target">
+         </div>
+        </td>
+        <td>
+          <div 
+            class="edit" 
+            onclick="event.stopPropagation()">
+            <div class="icons_wrapper">
+              <button
+                *ngIf="!editing"
+                pButton
+                pRipple
+                type="button"
+                (click)="onRowEditInit(airfield)"
+                pInitEditableRow
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text"
+              ></button>
+              <i 
+                *ngIf="!editing" 
+                (click)="deleteAirfield(airfield)" 
+                class="pi pi-trash"> 
+              </i>
+            </div>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              (click)="onRowEditSave(airfield)"
+              pSaveEditableRow
+              icon="pi pi-check"
+              class="p-button-rounded p-button-text p-button-success p-mr-2"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel(airfield, ri)"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+</div>

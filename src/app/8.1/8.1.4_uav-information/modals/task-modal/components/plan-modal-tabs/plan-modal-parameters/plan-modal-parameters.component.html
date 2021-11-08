@@ -1,0 +1,50 @@
+<div class='modal-content' [formGroup]='form'>
+  <div class=''>
+    <div class='modal-row'>
+      <div class='input-wrap'>
+        <label for='input-order'>Распоряжение</label>
+        <input id='input-order' [value]='document?.name || ""' readonly class='coordinates' type='text' pInputText>
+      </div>
+
+      <div class='input-wrap'>
+        <label for='input-command'>Приказ №</label>
+        <input id='input-command' [value]='document?.number || ""' readonly class='coordinates' type='text' pInputText>
+      </div>
+
+      <button [style.visibility]="form.disabled ? 'hidden' :  'visible'" pButton type='button' label='Выбрать...' class='p-button-text' (click)='openDocumentsModal()'></button>
+
+    </div>
+
+    <div class='modal-row'>
+      <div class='input-wrap full-width'>
+        <label for='select-uav'>БПЛА</label>
+        <p-dropdown id='select-uav' formControlName="bpla_uuid" [autoDisplayFirst]="false" [emptyMessage]="'Список пуст'" [options]="bpla" optionValue="uuid" optionLabel='vvst_sample_name' class='half-width' ></p-dropdown>
+      </div>
+    </div>
+
+    <div class='modal-row'>
+      <div class='input-wrap full-width' style='margin-right: 10px'>
+        <label for='select-subdivision'>Подразделение</label>
+        <p-dropdown id='select-subdivision' formControlName="division_id" [selectId]="'10045243'" optionValue="id" [options]="divisions" [autoDisplayFirst]="false" [emptyMessage]="'Список пуст'" optionLabel='label'></p-dropdown>
+      </div>
+
+      <div class='input-wrap full-width'>
+        <label for='select-operator'>Оператор</label>
+        <p-dropdown id='select-operator' [options]="operators" [autoDisplayFirst]="false" [emptyMessage]="'Список пуст'" formControlName="operator_uuid" optionValue="uuid" optionLabel='fio'></p-dropdown>
+      </div>
+    </div>
+
+    <div class='modal-row'>
+      <div class='input-wrap full-width'>
+        <label for='input-target'>Цель полёта</label>
+        <textarea id='input-target' class='full-width' formControlName='target_flight' [rows]='5' [cols]='30' pInputTextarea></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class='modal-row button-wrap'>
+    <button pButton *ngIf="!form.disabled" (click)="actionEmit.emit(data.mode.mode)" type='button' label='Сохранить'></button>
+    <button pButton *ngIf="!checkTaskMode(['create'])" (click)="actionEmit.emit('print')" type='button' icon='pi pi-print' label='Печать' class='p-button-outlined'></button>
+    <button pButton *ngIf="!checkTaskMode(['create']) && !form.disabled" (click)="actionEmit.emit('delete')" type='button' class='p-button-outlined p-button-danger' icon='pi pi-trash'></button>
+  </div>
+</div>

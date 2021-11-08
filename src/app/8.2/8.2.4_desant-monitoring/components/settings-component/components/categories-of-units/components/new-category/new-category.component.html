@@ -1,0 +1,15 @@
+<div class="input__wrapper">
+    <input
+        type="text"
+        pInputText
+        class="category__name-input"
+        placeholder="Введите название категории"
+        [(ngModel)]="newCategoryName"
+    />
+</div>
+<p-button
+    class="save__category-button"
+    label="Сохранить категорию"
+    (click)="saveCategory()"
+>
+</p-button>

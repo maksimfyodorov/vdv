@@ -1,0 +1,11 @@
+<div class="select-button-group">
+  <div
+    *ngFor="let item of items"
+    [class]="
+      item.isActive ? 'select-button select-button-active' : 'select-button'
+    "
+    (click)="selectButtonItem(item)"
+  >
+    <i [class]="item.icon"></i>
+  </div>
+</div>

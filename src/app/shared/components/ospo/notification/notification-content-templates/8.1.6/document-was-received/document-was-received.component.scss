@@ -1,0 +1,10 @@
+.notification-body {
+  &__wrapper {
+    width: 340px;
+  }
+  &__link {
+    color: #398BE2;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+}

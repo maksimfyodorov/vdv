@@ -1,0 +1,141 @@
+.editable-autocomplete {
+  width: 100%;
+  position: relative;
+
+  &_clear-text-button {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    color: #959EA9;
+    transition: .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      color: black;
+    }
+  }
+  &_dropdown-button {
+    width: 40px;
+    height: 100%;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    color: #959EA9;
+    transition: .3s;
+
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > span {
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+}
+
+.controls {
+  &_button {
+    background: none;
+    border: none;
+    outline: none;
+    margin-left: 6px;
+    cursor: pointer;
+    color: #228BE6;
+
+    &--red {
+      color: #FF6B6B;
+    }
+  }
+}
+
+.not-exists {
+  position: absolute;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border: 1px solid #C7CDD3;
+  border-radius: 4px;
+  padding: 16px;
+  z-index:  100;
+
+  &_text {
+    color: #68737F;
+    padding-left: 20px;
+    font-size: 14px;
+  }
+
+  &_button-text {
+    font-size: 14px;
+  }
+
+  &_icon {
+    font-size: 12px;
+    padding-right: 6px;
+  }
+}
+
+.edit-menu {
+  position: absolute;
+  background: white;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border: 1px solid #C7CDD3;
+  border-radius: 4px;
+  padding: 16px;
+  z-index:  100;
+}
+
+:host ::ng-deep {
+  .wrap_box p-button p{
+    height: 30px;
+  }
+  .p-autocomplete-panel {
+    max-width: 100%;
+  }
+
+  .p-autocomplete-item > div > span {
+    max-width: 100%;
+  }
+
+  .p-autocomplete {
+    background: #fff;
+    border: 1px solid #C7CDD3;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .p-autocomplete-input {
+    border: none;
+    padding-right: 40px;
+    padding-left: 40px;
+    outline: none;
+  }
+
+  .p-inputtext:enabled:focus {
+    box-shadow: unset;
+  }
+
+  .p-autocomplete-dd .p-autocomplete-dropdown {
+    display: none;
+  }
+}

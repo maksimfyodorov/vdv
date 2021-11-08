@@ -1,0 +1,28 @@
+.input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 40px;
+  min-width: 347px;
+  border: 1px solid #C7CDD3;
+  border-radius: 3px;
+}
+
+:host {
+  ::ng-deep {
+    .icon-pointer {
+      cursor: pointer;
+    }
+  }
+
+  .text {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #252B34;
+    margin: 4px 0;
+  }
+}

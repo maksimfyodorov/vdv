@@ -1,0 +1,24 @@
+<div class="inputs__container">
+    <input
+      type="text"
+      pInputText
+      class="airfield__name__input"
+      placeholder="Введите наименование аэродрома"
+      [(ngModel)]="airfieldName"
+    />   
+    <div *ngIf="selectedCoordinate" class="coordinate">
+      {{selectedCoordinate.x+ " - " +selectedCoordinate.y}}
+    </div>
+    <button
+     (click)="setCoordinate()"
+      pButton
+      type="button"
+      label="Выбрать координаты"
+    ></button>
+  </div>
+  <p-button 
+    (click)="onSubmit()"
+    type="submit"
+    class="save__airfield-button" 
+    label="Сохранить аэродром"> 
+  </p-button>

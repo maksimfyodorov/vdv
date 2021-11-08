@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <p-table [value]="changeHistory" [resizableColumns]="false" styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pResizableColumn>Дата изменений</th>
+        <th pResizableColumn>Пользователь</th>
+        <th pResizableColumn>Действие</th>
+        <th pResizableColumn>Статус</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-cameraInfo>
+      <tr>
+        <td>{{cameraInfo?.changeCameraDate | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+        <td>{{cameraInfo?.user}}</td>
+        <td>{{cameraInfo?.action}}</td>
+        <td>
+          <div class="table__item">
+            <span class="{{cameraInfo?.status}}">
+              <i class="{{statuses[cameraInfo?.status]?.icon}}"></i>
+            {{statuses[cameraInfo?.status]?.title}}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

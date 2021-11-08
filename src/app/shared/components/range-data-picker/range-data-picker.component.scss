@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 316px;
+}
+
+.date-picker {
+  width: 154px;
+  position: relative;
+
+  &_icon {
+    color: #959EA9;
+    position: absolute;
+    right: 8px;
+    top: 9px;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,215 @@
+@import '../../../common/mixins/calendar';
+
+::ng-deep.commander-orders-overflow-hidden {
+  overflow: hidden;
+}
+
+:host::ng-deep.add-order-form {
+  width: 650px;
+  padding-bottom: 20px;
+
+  .title,
+  .executor__title,
+  .co-executor__title,
+  .group-title {
+    font-size: 12px;
+    color: #252B34;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 4px;
+  }
+
+  .group-title {
+    color: #000;
+    margin-bottom: 2px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .customer {
+    margin-bottom: 20px;
+
+    .p-dropdown {
+      width: 100%;
+    }
+  }
+
+  .name {
+    margin-bottom: 20px;
+
+    textarea {
+      border-color: #ced4da;
+      width: 100%;
+      margin-top: 16px;
+      padding: .5rem;
+      outline: none;
+      border-radius: 3px;
+      color: #495057;
+      font-family: 'Noto Sans', sans-serif !important;
+
+      &:hover {
+        border-color: #2196F3;
+      }
+
+      &:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.2rem #a6d5fa;
+      }
+
+      &:disabled {
+        color: #C7CDD3;
+      }
+
+      &:disabled:hover {
+        border-color: #ced4da;
+      }
+
+      &:disabled::placeholder {
+        color: #C7CDD3;
+      }
+    }
+  }
+
+  .document-info {
+    display: flex;
+    margin-bottom: 40px;
+    gap: 10px;
+
+    .p-calendar {
+      @include calendar;
+    }
+  }
+
+  .document-number {
+    input {
+      width: 210px;
+    }
+  }
+
+  .execution-date {
+    margin-bottom: 40px;
+
+    .p-calendar {
+      @include calendar;
+      width: 100%;
+    }
+  }
+
+  .executors {
+    margin-bottom: 40px;
+
+    .delete-btn {
+      float: right;
+    }
+  }
+
+  .executor,
+  .co-executor {
+    margin-bottom: 16px;
+
+    &__container {
+      display: flex;
+      gap: 26px;
+
+      p.title {
+        margin-top: 1px;
+      }
+    }
+
+    &__administration,
+    &__military-man {
+      width: 50%;
+    }
+
+    &__user-icon {
+      margin: 5px 0 0 0;
+      font-size: 12px;
+      color: #959EA9;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+
+    .input {
+      min-width: 218px;
+      height: 36px;
+      width: 100%;
+    }
+  }
+
+  .dislocation-point {
+    margin-bottom: 40px;
+
+    & input:disabled {
+      cursor: default;
+    }
+  }
+
+  .additional-docs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    button:nth-child(2) {
+      flex-grow: 1;
+      position: relative;
+
+      .p-button-icon {
+        position: absolute;
+        left: 42px;
+      }
+    }
+  }
+
+  .attached-docs {
+    margin-bottom: 50px;
+
+    .title {
+      font-size: 14px;
+      color: #252B34;
+    }
+
+    &__item:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+:host::ng-deep {
+  .p-scrollpanel .p-scrollpanel-bar {
+    background: #ced4da;
+    margin-left: 14px;
+  }
+
+  .p-scrollpanel-content {
+    padding: 0;
+    padding-right: 5px;
+  }
+
+  .p-input-icon-right {
+    width: 100%;
+
+    .pi-ellipsis-h {
+      pointer-events: none;
+    }
+
+    input {
+      cursor: pointer;
+    }
+  }
+
+  @include calendar-weekend;
+}
+
+._disabled {
+  color: #C7CDD3;
+  cursor: default;
+}

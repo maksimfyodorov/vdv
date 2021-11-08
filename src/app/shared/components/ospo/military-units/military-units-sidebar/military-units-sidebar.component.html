@@ -1,0 +1,15 @@
+<div class='military-units-sidebar__wrapper'>
+  <div *ngIf='nodesHierarchy.sidebarExpanded' [appLoader]='loaderService.isLoading$'
+       class='military-units-sidebar__loader'></div>
+  <app-nodes-hierarchy #nodesHierarchy
+                       [dataSource]='militaryUnitsHierarchy'
+                       [selectedItem]='hierarchy.selectedItem$ | async'
+                       switchLabel='Подразделения'
+                       (switchToggle)='onToggleDisplayDivision($event)'
+                       (emitSidebarExpand)='onSidebarExpand($event)'
+                       [showDivisionsSwitch]='showDivisionsSwitch'
+                       [isSwitchChecked]='false'>
+
+    <app-hierarchy-folder #folder></app-hierarchy-folder>
+  </app-nodes-hierarchy>
+</div>

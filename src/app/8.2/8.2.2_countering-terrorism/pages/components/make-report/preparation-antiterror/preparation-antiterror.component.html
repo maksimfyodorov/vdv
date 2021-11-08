@@ -1,0 +1,158 @@
+<div [formGroup]="preparationForm">
+    <div class='message'>
+        Организация подготовки должностных лиц оперативных групп «Антитеррор», сил и средств, выделенных для
+        противодействия
+        терроризму.</div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Учения НАК</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="teachingsNakFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Участие в учениях, командно-штабных тренировках, проведенных под руководством Национального
+            антитеррористического комитета и оперативных штабов в субъектах Российской Федерации.
+        </div>
+        <div *ngIf="this.preparationForm.controls['teachingsNakFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'Учения НАК')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Учения НАК',this.preparationForm.controls['teachingsNak'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Учения НАК')"
+                pInputTextarea
+                formControlName="teachingsNak"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Учения под руководством командующего ВДВ</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="teachingsComanderFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Учения, сборы, показные и инструкторско-методические занятия, командно-штабные тренировки, проведенные в
+            отчетном периоде по плану и под руководством командующего ВДВ.
+        </div>
+        <div *ngIf="this.preparationForm.controls['teachingsComanderFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(1,'Учение под руководством командующего ВДВ')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Учение под руководством командующего ВДВ',this.preparationForm.controls['teachingsComander'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Учение под руководством командующего ВДВ')"
+                pInputTextarea
+                formControlName="teachingsComander"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Командно-штабные учения</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="commandPostExerciseFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Учения, командно-штабные тренировки, проведенные в отчетном периоде под руководством начальников зон
+            противодействия терроризму и начальников территориальных гарнизонов. Еженедельные, ежемесячные и
+            ежеквартальные практические тренировки с мобильными резервами командующих войсками военных округов,
+            резервами начальников зон противодействия терроризму и начальников территориальных гарнизонов, с
+            подразделениями антитеррора местных гарнизонов и воинских частей.
+        </div>
+        <div *ngIf="this.preparationForm.controls['commandPostExerciseFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(2,'Командно-штабные учения')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Командно-штабные учения',this.preparationForm.controls['commandPostExercise'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Командно-штабные учения')"
+                pInputTextarea
+                formControlName="commandPostExercise"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Ежемесячные демонстративные тренировки</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="monthlyDemonstrationWorkoutsFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Ежемесячные (последняя пятница каждого месяца) демонстративные тренировки в масштабах
+            гарнизонов (военных городков) с выводом техники подразделений антитеррора и усиления в районы КТП (КTП), с
+            использованием средств имитации и холостых боеприпасов, отработкой приемов рукопашного боя и действий
+            подразделений, предназначенных для ликвидации последствий террористических актов (в том числе медицинских
+            пожарных команд, подразделений спецобработки войск РХБ3 подразделений).
+        </div>
+        <div *ngIf="this.preparationForm.controls['monthlyDemonstrationWorkoutsFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(3,'Ежемесячные демонстративные тренировки')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Ежемесячные демонстративные тренировки',this.preparationForm.controls['monthlyDemonstrationWorkouts'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Ежемесячные демонстративные тренировки')"
+                pInputTextarea
+                formControlName="monthlyDemonstrationWorkouts"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='left'
+            (click)='reducePageIndex()'
+            routerLink='../situation'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+        <p-button
+            label='Годовой план'
+            icon='pi pi-arrow-right'
+            iconPos='right'
+            routerLink='../annual-plan'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+            (click)='addPageIndex()'
+        ></p-button>
+    </div>
+</div>

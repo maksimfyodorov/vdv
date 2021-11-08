@@ -1,0 +1,15 @@
+<p-button styleClass='p-button-outlined documents__button'
+          icon='pi pi-print'
+          label='Печать'
+          (onClick)='documentsFormalizedOverlay.toggle($event)'
+></p-button>
+
+<p-overlayPanel #documentsFormalizedOverlay appendTo='body' class="dropdown__panel" styleClass='dropdown__panel'>
+  <ng-template pTemplate>
+    <ul class='document-list'>
+      <li class='document' *ngFor='let document of documents'>
+        <div (click)='openDocument(document)' [ngClass]='{document__name_disabled: document.disabled}' class='document__name'>{{document.name}}</div>
+      </li>
+    </ul>
+  </ng-template>
+</p-overlayPanel>

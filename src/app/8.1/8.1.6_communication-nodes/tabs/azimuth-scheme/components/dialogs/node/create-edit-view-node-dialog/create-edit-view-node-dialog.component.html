@@ -1,0 +1,109 @@
+<div [appLoader]='loader.isLoading$' class='node-dialog'>
+  <p-scrollPanel [style]="{width: '100%', height: '60vh'}">
+    <form [formGroup]='nodeForm'
+          class='node-dialog__form node-form p-fluid p-formgrid p-grid'>
+      <div class='p-field p-col-12 p-md-12'>
+        <label><small>В/ч</small></label>
+        <app-military-units-dropdown formControlName='military_unit'></app-military-units-dropdown>
+      </div>
+      <div class='p-field p-col-12 p-md-12'>
+        <label><small>Подразделение</small></label>
+        <app-military-units-dropdown [accessLevels]='[acceptedDivisions]' formControlName='division'
+                                     [showDivisionOf]='showDivisionsOf'></app-military-units-dropdown>
+      </div>
+      <div class='p-field p-col-12 p-md-12'>
+        <label for='callSign'><small>Позывной</small></label>
+        <input type='text'
+               id='callSign'
+               pInputText
+               formControlName='call_sign' />
+      </div>
+      <div class='p-field p-col-12 p-md-12'>
+        <label for='connectionType'><small>Тип связи</small></label>
+        <p-dropdown id='connectionType'
+                    [options]='connectionTypes'
+                    optionLabel='name'
+                    formControlName='connection_type'
+                    placeholder='Выберите...'>
+        </p-dropdown>
+      </div>
+      <div class='node-form__title'>Тип УС</div>
+      <div class='node-form__radio-set radio-set p-field p-col-12 p-md-12  p-d-flex p-ai-center'>
+        <p-radioButton *ngFor='let item of nodeTypes'
+                       [label]='item.name'
+                       [value]='item'
+                       class='radio-set__item'
+                       formControlName='node_type'>
+        </p-radioButton>
+      </div>
+      <div class='node-form__title'>Координаты</div>
+      <div class='p-field p-col-12 p-md-12 p-d-flex p-ai-center'>
+        <p *ngIf='coordinate?.mark' pInputText class='node-form__coordinate'>{{coordinate?.mark}}</p>
+        <p *ngIf='coordinate?.x && !coordinate?.mark' pInputText class='node-form__coordinate'>{{coordinate?.x}}
+          , {{coordinate?.y}}</p>
+        <p *ngIf='!coordinate' pInputText class='node-form__coordinate'>Выберите метку</p>
+        <p-button styleClass='p-button-outlined'
+                  icon='pi pi-map-marker'
+                  [disabled]='mode === "view"'
+                  (onClick)='setCoordinate()'>
+        </p-button>
+      </div>
+      <div class='node-form__title'>Вид</div>
+      <div class='node-form__radio-set radio-set p-field p-col-12 p-md-12'>
+        <p-radioButton *ngFor='let item of nodeKinds' class='radio-set__item'
+                       [value]='item'
+                       [label]='item.name'
+                       formControlName='node_kind'>
+        </p-radioButton>
+      </div>
+      <div *ngIf='isMobile' class='p-field p-col-12 p-md-5'>
+        <label for='deployTime'><small>Дата и время развертывания</small></label>
+        <p-calendar id='deployTime'
+                    dateFormat='yy-mm-dd'
+                    [showSeconds]='true'
+                    dataType='string'
+                    showTime='true'
+                    hourFormat='24'
+                    showIcon='true'
+                    formControlName='deploy_time'>
+        </p-calendar>
+      </div>
+    </form>
+    <div *ngIf='mode !== "create"'
+         class='node-dialog__staffing node-staffing p-col-8 p-grid'>
+      <div class='p-col-6'>
+        <span class='node-staffing__label'>Обеспеченность</span>
+      </div>
+      <p-progressBar class='p-col-6' [value]='60'></p-progressBar>
+      <div class='p-col-6'>
+        <span class='node-staffing__label'>Укомплектованность</span>
+      </div>
+      <p-progressBar class='p-col-6' [value]='40'></p-progressBar>
+    </div>
+  </p-scrollPanel>
+  <div class='node-dialog__controls p-d-flex p-jc-between'>
+    <div>
+      <p-button *ngIf='mode !== "view"'
+                label='Сохранить'
+                [disabled]='nodeForm.invalid'
+                icon='pi pi-save'
+                (onClick)='saveNode()'>
+      </p-button>
+      <p-button *ngIf='mode === "view"'
+                label='Редактировать'
+                icon='pi pi-pencil'
+                (onClick)='editNode()'>
+      </p-button>
+      <p-button styleClass='p-button-secondary p-button-text'
+                label='Отмена'
+                (onClick)='cancelDialog()'>
+      </p-button>
+    </div>
+    <p-button *ngIf='mode === "edit" || mode === "view"'
+              [disabled]='!!nodeService.getConnectedDirections(node).length'
+              styleClass='p-button-danger'
+              icon='pi pi-trash'
+              (onClick)='deleteNode()'>
+    </p-button>
+  </div>
+</div>

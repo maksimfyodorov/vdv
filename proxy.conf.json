@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "http://1pak-vdv06.int.aorti.tech/",
+    "secure": false,
+    "headers": {"Authorization": "Basic a3ZkdjAxOjQwOTQwODl4"}
+  }
+}

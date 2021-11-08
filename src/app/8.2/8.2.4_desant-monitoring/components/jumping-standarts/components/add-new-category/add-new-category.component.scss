@@ -1,0 +1,19 @@
+#cancel {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+    margin-top: 30px;
+  }
+
+:host::ng-deep .category-dropdown {
+  .p-component{
+    width: 500px;
+  }  
+}
+
+.save-button {
+  width: 192px;
+  height: 40px;
+  border-radius: 4px;
+  margin-left: 15px;
+}

@@ -1,0 +1,22 @@
+<input
+    pInputText
+    type="text"
+    [(ngModel)]="planName"
+>
+<div>
+    <button
+        pButton
+        pRipple
+        type="button"
+        label="Сохранить"
+        (click)="closeDialog()"
+    ></button>
+    <button
+        pButton
+        pRipple
+        type="button"
+        label="Отмена"
+        class="p-button-secondary p-button-text"
+        (click)="closeDialog()"
+    ></button>
+</div>

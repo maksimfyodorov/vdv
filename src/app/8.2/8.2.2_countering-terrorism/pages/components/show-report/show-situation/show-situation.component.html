@@ -1,0 +1,98 @@
+<div class="container">
+    <div class="logo">
+        Вывод о наличии и опасности террористических угроз
+    </div>
+    <div
+        *ngIf="situation.terroristThreats"
+        class="text"
+    >
+        {{situation.terroristThreats}}
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!situation.terroristThreats"
+    >
+        Данные не предоставленны.
+    </div>
+    <div class="logo">
+        Районы
+    </div>
+    <div class="message">
+        Районы с наиболее неблагоприятной обстановкой и социальной напряженности, наличие деструктивных религиозных
+        движений. Предполагаемое количество, состав и характер действий террористических групп.
+    </div>
+    <div *ngIf="situation.districts">
+        <div *ngFor="let item of situation.districts">
+            <div class="obj">
+                {{item.name}}
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!situation.districts"
+    >
+        Данные не предоставленны.
+    </div>
+    <div class="logo">
+        Критически опасные объекты
+    </div>
+    <div class="message">
+        Перечень критически важных и потенциально опасных объектов, подчиненных (оперативно подчиненных) командиру
+        соединения (воинской части).
+    </div>
+    <div *ngIf="situation.criticalObjects">
+        <div *ngFor="let item of situation.criticalObjects">
+            <div class="row">
+                <div class="width50">{{item.name}}</div>
+                <div class="width50 blue">{{item.coordinates}}</div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!situation.criticalObjects"
+    >
+        Данные не предоставленны.
+    </div>
+    <div class="logo">
+        Криминальная обстановка
+    </div>
+    <div class="message">
+        Состояние криминогенной обстановки (в том числе происшествия (преступления) террористического характера, имевшие
+        место в отчетном периоде (в соответствии с приказом командующего Воздушно-десантными войсками от 30 июня 2014 г.
+        No143 дсп).
+    </div>
+    <div
+        *ngIf="situation.criminal"
+        class="text"
+    >
+        {{situation.criminal}}
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!situation.criminal"
+    >
+        Данные не предоставленны.
+    </div>
+</div>
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        (click)='reducePageIndex()'
+        routerLink='../composition'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+    <p-button
+        label='Подготовка Антитеррор'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        (click)='addPageIndex()'
+        routerLink='../preparation-antiterror'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+</div>

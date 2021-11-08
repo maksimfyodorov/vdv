@@ -1,0 +1,39 @@
+<ng-container *ngFor="let item of _data">
+  <div (click)="onClick(item)" *ngIf="_sidebarExpanded else folded">
+    <div class="folder {{getClass(item)}}" *ngIf="_folderExpanded || !_sidebarExpanded">
+      <div class="folder_background ">
+        <div *ngFor="let level of _deepLevel" class="folder_dot"></div>
+      </div>
+      <div [ngClass]='{ selected: selectedItem?.uuid === item.id, "singe-folder": !item.children }' class="content">
+        <div class="content_description">
+          <button *ngIf="item.children?.length" (click)="toggleExpanding($event)" class="expand-button">
+            <i class='pi {{isChildExpanded ? "pi-angle-down" : "pi-angle-right"}}'></i>
+          </button>
+
+          {{item.label}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #folded>
+    <div (click)="onClick(item)" class="folded {{getFoldedClass(item)}}">
+      <div [ngClass]="{ selected: selectedItem?.uuid === item.id }" class="folded_content">
+        <div class="content {{getFoldedClass(item)}}">
+          <div class="content_description">
+            <span class="content_name">{{item.label}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <app-monitoring-node-folder
+    [selectedItem]="selectedItem"
+    *ngIf="item.children"
+    [folderExpanded]="isChildExpanded"
+    [sidebarExpanded]="_sidebarExpanded"
+    [data]="item?.children"
+    [deepLevel]="_deepLevel"
+  ></app-monitoring-node-folder>
+</ng-container>

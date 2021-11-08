@@ -1,0 +1,68 @@
+<form
+  *ngIf="mode === 'add'"
+  class='form__coordinates'
+  [formGroup]='form'
+>
+  <app-coordinates
+    [isReadOnly]='true'
+    [modeCoordinate]="'degrees'"
+    [formCoordinates]="form.get('element_geom')"
+  ></app-coordinates>
+
+  <div>
+    <div>
+      <h5 class='row_title' >
+        Название отметки
+      </h5>
+
+      <mat-form-field
+        class='full-autocomplete'
+        [appearance]="'outline'">
+        <input
+          type='text'
+          matInput
+          formControlName='mark'
+        >
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class='row' *ngIf='height'>
+    <div>
+      <h5 class='row_title' >
+        Высота
+      </h5>
+
+      <mat-form-field
+        class='full-autocomplete'
+        [appearance]="'outline'">
+        <input
+          type='number'
+          formControlName='height'
+          matInput
+        >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class='controls'>
+    <p-button
+      [disabled]='form.invalid'
+      (onClick)='save()'
+      label='Сохранить'>
+    </p-button>
+
+    <p-button
+      (onClick)="mode = 'view'; "
+      class='button white'>
+      Отмена
+    </p-button>
+  </div>
+</form>
+
+
+<div *ngIf="mode === 'view'">
+  <p-button
+    (onClick)="mode = 'add'; "
+    label='Добавить отметку'>
+  </p-button>
+</div>

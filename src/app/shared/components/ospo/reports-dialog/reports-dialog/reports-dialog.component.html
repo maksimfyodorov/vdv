@@ -1,0 +1,116 @@
+<div class="dialog__wrapper">
+  <span class="p-input-icon-right">
+    <i class="pi pi-search"></i>
+    <input
+      class="search__input"
+      type="text"
+      pInputText
+      placeholder="Поиск"
+    />
+  </span>
+  <p-table
+    [lazy]="true"
+    (onLazyLoad)="loadReports($event)"
+    [loading]="loading"
+    [scrollable]="true"
+    scrollHeight="400px"
+    [paginator]="true"
+    [rows]="3"
+    [value]="reports"
+    [totalRecords]="totalRecords"
+    dataKey="uuid"
+    editMode="row"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>№ п/п</th>
+        <th>Отчет</th>
+        <th *ngIf="!config?.data?.uuid">Пользователь</th>
+        <th>Действие</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-report
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr
+        [pEditableRow]="report"
+        [ngClass]="selectedReport == report ? 'selected' : 'unselected'"
+        (click)="chooseReport(report)"
+      >
+        <td class="sequentialNumber">{{config?.data?.uuid ? ri + 1 : report.sequentialNumber}}</td>
+        <td class="report">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <textarea
+                pInputTextarea
+                type="text"
+                [(ngModel)]="config?.data?.uuid ? report.text : report.report"
+              ></textarea>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{config?.data?.uuid ? report.text : report.report}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td
+          *ngIf="!config?.data?.uuid"
+          class="user"
+        >{{report.user}}</td>
+        <td
+          class="table__buttons"
+          style="text-align:center"
+          onclick="event.stopPropagation()"
+        >
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            (click)="onRowEditInit(report)"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-text"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            (click)="onRowEditSave(report)"
+            icon="pi pi-check"
+            class="p-button-rounded p-button-text p-button-success p-mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            (click)="onRowEditCancel(report, ri)"
+            icon="pi pi-times"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<button
+  pButton
+  class="save__button"
+  type="button"
+  label="Выбрать"
+  (click)="save()"
+></button>
+<button
+  pButton
+  (click)="close()"
+  pRipple
+  type="button"
+  label="Отмена"
+  class="p-button-secondary p-button-text cancel__button"
+></button>

@@ -1,0 +1,39 @@
+<div class='bla-state__wrapper'>
+  <p-table [value]="blas" styleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th></th>
+        <th>По штату</th>
+        <th>По списку</th>
+        <th>Излиш.</th>
+        <th>Не дост.</th>
+        <th>Сломано</th>
+        <th>Полетов</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-bla>
+      <tr>
+        <td>{{bla.name}}</td>
+        <td>{{bla.staff}}</td>
+        <td>{{bla.list}}</td>
+        <td>{{bla.excess}}</td>
+        <td>{{bla.lack}}</td>
+        <td>{{bla.broken}}</td>
+        <td>{{bla.flights.total}}/<span>{{bla.flights.done}}</span></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate='footer'>
+      <tr>
+        <td>Итого</td>
+        <td>{{total(blas, "staff")}}</td>
+        <td>{{total(blas, "list")}}</td>
+        <td>{{total(blas, "excess")}}</td>
+        <td>{{total(blas, "lack")}}</td>
+        <td>{{total(blas, "broken")}}</td>
+        <td>{{total(blas, "flights", "total")}}/<span>{{total(blas, "flights", "done")}}</span></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf='true' class='bla-state__link' (click)='openLink(data.link)'>Подробнее</div>
+</div>

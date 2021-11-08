@@ -1,0 +1,68 @@
+<div class="content">
+    <div class="row space-between border">
+        <div class="row">
+            <div
+                class="btn"
+                (click)="open()"
+            >
+                <i
+                    *ngIf="!selected"
+                    class="pi pi-angle-right"
+                ></i>
+                <i
+                    *ngIf="selected"
+                    class="pi pi-angle-down"
+                ></i>
+            </div>
+            <div>
+                <div class="black">
+                    {{header}}
+                </div>
+                <div class="blue">
+                    {{footer}}
+                </div>
+            </div>
+        </div>
+        <div
+            *ngIf="completeCreationFlag"
+            class="row"
+        >
+            <div class="block">
+                <div class="logo">Итоги по донесению</div>
+                <div class="data">Военных городков: {{reportResults?.militaryCity}}</div>
+            </div>
+            <div class="block">
+                <div class="data">режим В</div>
+                <div class="text">{{reportResults?.modeB}}</div>
+            </div>
+            <div class="block">
+                <div class="data">режим АБ</div>
+                <div class="text">{{reportResults?.modeAV}}</div>
+            </div>
+            <div class="block">
+                <div class="data">ЛС</div>
+                <div class="text">{{reportResults?.ls}}</div>
+            </div>
+            <div class="block">
+                <div class="data">ВВТ АТ</div>
+                <div class="text">{{reportResults?.vvAT}}</div>
+            </div>
+            <div class="block">
+                <div class="data">ВВТ БТ</div>
+                <div class="text">{{reportResults?.vvBT}}</div>
+            </div>
+            <div class="block">
+                <div
+                    class="btn-for-little-data"
+                    [routerLink]="['../create', { outlets: { modal: 'short-data' }}]"
+                    [queryParams]="{'uuid': summaryUuid}"
+                >
+                    <i class="pi pi-chart-bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [@accordionItemContentAnimation]="state">
+        <ng-content></ng-content>
+    </div>
+</div>

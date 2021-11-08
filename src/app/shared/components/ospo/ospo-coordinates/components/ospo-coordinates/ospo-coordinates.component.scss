@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .map-wrapper {
+    position: relative;
+    width: 700px;
+    height: 624px;
+  }
+
+  .left-block {
+    width: 730px;
+    margin-right: 30px;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+
+  .button {
+    margin-left: 16px;
+  }
+}

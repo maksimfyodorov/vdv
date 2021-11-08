@@ -1,0 +1,142 @@
+@import '../../../../../../styles/variables/colors';
+
+.military-units {
+  max-width: 1127px;
+  &__search {
+  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 28px;
+    width: 100%;
+    gap: 10px;
+    border-top: 1px solid #E1E3E8;
+  }
+}
+
+.search {
+  max-width: 580px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  &__input {
+    flex: 1 1 370px;
+    & > input {
+      width: 100%;
+    }
+  }
+  .show-units {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    &__label {
+      white-space: nowrap;
+    }
+  }
+}
+
+
+
+:host::ng-deep {
+  .p-dialog-content {
+    overflow: visible;
+  }
+  .p-datatable{
+    &-thead > tr > th,
+    &-tbody > tr > td {
+      background: white !important;
+    }
+    .p-datatable{
+      &-thead {
+        tr {
+          th {
+            position: relative;
+            &:first-child {
+              width: 34px;
+            }
+            &:nth-child(3) {
+              width: 300px;
+            }
+            &:nth-child(4) {
+              width: 150px;
+            }
+            &:nth-child(5) {
+              width: 150px;
+            }
+            &:nth-child(6) {
+              width: 210px;
+            }
+            p-sorticon {
+              position: absolute;
+              top: calc(50% - 10px);
+              right: 14px;
+            }
+          }
+        }
+      }
+    }
+    &.p-datatable-gridlines {
+      .p-paginator-bottom {
+        border: none;
+      }
+    }
+    &.p-datatable-sm .p-datatable-thead  th {
+      background: none;
+    }
+  }
+
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+    .p-paginator-pages {
+      .p-paginator-page{
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "\e900";
+        }
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

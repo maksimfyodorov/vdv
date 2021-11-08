@@ -1,0 +1,79 @@
+<div class="wrapper" [appLoader]="loader.isLoading$">
+  <div class="modal__title">
+    <div class="modal__title_subdivision">
+      <h5>Подразделение</h5>
+      <p-dropdown [options]="subdivisions"
+                  [(ngModel)]="selectedSubdivisions"
+                  placeholder="Выбрать" optionLabel="label"
+                  [showClear]="true"
+                  (onChange)="getParatroopers()"
+                  class="subdivisions-dropdown"
+                  emptyMessage="Результаты не найдены"
+      ></p-dropdown>
+    </div>
+    <div class="modal__title_units-count">
+      <h5>Колличество</h5>
+      <input id="disabled-input_subdivision-count" type="text" pInputText [disabled]="true"
+             [(ngModel)]="subdivisionMilitaryCount"/>
+    </div>
+    <div class="modal__radiobutton">
+      <div *ngFor="let state of dayPeriod" class="p-field-checkbox">
+        <p-radioButton name="category" [value]="state" [(ngModel)]="selectedDayPeriod"></p-radioButton>
+        <label [for]="state?.name">{{state?.name}}</label>
+      </div>
+    </div>
+    <div class="modal__search">
+<span class="p-input-icon-right">
+    <i class="pi pi-search"></i>
+    <input placeholder="Поиск"
+           type="text"
+           pInputText
+           class="modal__input-search"
+    />
+</span>
+    </div>
+  </div>
+  <div class="modal__table">
+    <p-table [value]="paratroopers"
+             [(selection)]="selectedParatroopers"
+             selectionMode="multiple"
+             [rowHover]="true"
+             [rows]="5"
+             [showCurrentPageReport]="false"
+             [totalRecords]="totalParatroopers"
+             [paginator]="paratroopers">
+<!--             (onRowSelect)="calculateOnRow($event)"-->
+<!--             (onHeaderCheckboxToggle)="calculateOnHeaderRow($event)"-->
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ФИО</th>
+          <th>Звание</th>
+          <th>Должность</th>
+          <th>Подразделение</th>
+          <th>Выполнение</th>
+          <th>Оценка</th>
+          <th>Причина невыполнения</th>
+          <th>Повторный прыжок</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-paratrooper>
+        <tr>
+          <td>{{setParatroopersFullName(paratrooper?.military_man?.name, paratrooper?.military_man?.middle_name, paratrooper?.military_man?.surname)}}</td>
+          <td>{{paratrooper?.military_man?.rank?.name}}</td>
+          <td>{{paratrooper?.military_man?.appointment?.name}}</td>
+          <td>{{paratrooper?.military_man?.division?.label}}</td>
+          <td>Выполнен</td>
+          <td>Отлично</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="modal__confirm">
+    <p-button label="Добавить" (click)="addParatrooper()"></p-button>
+    <button pButton pRipple type="button" label="Отмена" class="p-button-text p-button-plain"
+            (click)="closeModal()"></button>
+  </div>
+</div>

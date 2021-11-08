@@ -1,0 +1,73 @@
+<div class='direction-dialog'>
+  <p-scrollPanel [style]="{width: '100%', height: '60vh'}">
+    <div class='direction-dialog__title'>Тип направления связи</div>
+    <div class='direction-dialog__radio-set radio-set'>
+      <p-radioButton *ngFor='let item of types' class='radio-set__item'
+                     [value]='item'
+                     [label]='item.name'
+                     [(ngModel)]='currentType'>
+      </p-radioButton>
+    </div>
+    <div class='p-d-flex p-ai-center p-jc-between p-mb-4'>
+      <div class='direction-dialog__common-title'>
+        Каналы
+        <span>{{channels.length}}</span>
+      </div>
+      <p-button styleClass='p-button-outlined'
+                label='+ Добавить'
+                (onClick)='addChannel()'>
+
+      </p-button>
+    </div>
+    <div *ngFor='let item of sortedChannels | keyvalue'
+          class='direction-dialog__channel-list channel-list'>
+      <div class='channel-list__category'>
+        <div class='channel-list__title direction-dialog__title p-d-flex p-ai-center p-jc-start'>
+          <div [ngClass]='{"channel-list__accordion-button_collapsed": accordionIsCollapsed[item.key]}'
+               class='channel-list__accordion-button'
+               (click)='toggleAccordion(item.key)'>
+          </div>
+          <div class='channel-list__type-name'>{{item.key}}</div>
+          <span>{{item.value.length}}</span>
+        </div>
+        <div class='channel-list__channels'
+             [ngClass]='{"channel-list__channels_collapsed": accordionIsCollapsed[item.key]}'>
+          <div *ngFor='let channel of item.value'
+               class='channel-list__channel  p-d-flex p-ai-center p-jc-between'>
+            <span>{{channel['connection_number']}}</span>
+            <div class='channel-list__controls'>
+              <p-button (onClick)='editChannel(channel)'
+                        styleClass='p-button-rounded p-button-text'
+                        icon='pi pi-pencil'>
+              </p-button>
+              <p-button (onClick)='deleteChannel(channel)'
+                        styleClass='p-button-danger p-button-text'
+                        icon='pi pi-trash'>
+              </p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </p-scrollPanel>
+  <div class='direction-dialog__controls p-d-flex p-jc-between'>
+    <div>
+      <p-button label='Сохранить'
+                icon='pi pi-save'
+                [disabled]='!currentType'
+                (onClick)='saveDirection()'>
+      </p-button>
+      <p-button styleClass='p-button-secondary p-button-text'
+                label='Отмена'
+                (onClick)='cancelDialog()'>
+      </p-button>
+    </div>
+    <p-button *ngIf='mode === "edit"'
+              styleClass='p-button-danger'
+              icon='pi pi-trash'
+              (onClick)='deleteDirection()'>
+    </p-button>
+  </div>
+</div>

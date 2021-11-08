@@ -1,0 +1,108 @@
+<section [appLoader]='loader.isLoading$' class='wrapper'>
+  <div class='top-bar'>
+    <div class='top-bar_left'>
+      <p-button *ngIf='activeTab !== "favorites" && activeTab !== "deleted"'
+                (onClick)='markSelectedAsFavorite()'
+                icon='pi pi-bookmark'
+                label='В избранное'
+                [disabled]='!selectedNotifications'
+      ></p-button>
+    </div>
+    <div class='top-bar_right'>
+      <p-button *ngIf='activeTab !== "deleted"'
+                (onClick)='deleteSelected()'
+                icon='pi pi-trash'
+                label='Удалить'
+                styleClass='p-button-outlined p-button-danger'
+                [disabled]='!selectedNotifications'
+      ></p-button>
+    </div>
+  </div>
+
+  <p-tabMenu #tab class='tab-menu' [model]='menuItems' [activeItem]='menuItems[0]' (click)='onTabClick(tab)'>
+    <ng-template pTemplate='item' let-item>
+      <span>
+        {{filterTypes[item.label]}}
+      </span>
+    </ng-template>
+  </p-tabMenu>
+  <p-table #notificationTable class='table' [(selection)]='selectedNotifications' [value]='notifications' [lazy]='true'
+           [paginator]='true' [rows]='10'
+           [totalRecords]='totalRecords' (onLazyLoad)='getNotifications($event)'>
+    <ng-template pTemplate='header'>
+      <tr>
+        <th class='header-checkbox'>
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th class='header__messages'>
+          Сообщения
+        </th>
+        <th class='header__date' pSortableColumn='date'>
+          Дата
+          <p-sortIcon field='date'></p-sortIcon>
+        </th>
+        <th class='header__sender' pSortableColumn='sender'>
+          Отправитель
+          <p-sortIcon field='sender'></p-sortIcon>
+        </th>
+        <th class='header__type' pSortableColumn='type'>
+          Тип
+          <p-sortIcon field='type'></p-sortIcon>
+        </th>
+        <th class='header__controls'></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate='body' let-item>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]='item'></p-tableCheckbox>
+        </td>
+        <td>
+          <div class='message'>
+            <div class='message_controls'>
+              <i [ngClass]='{
+              marked: item.status === "favorites"
+              }' (click)='markAsFavorite(item); $event.stopPropagation()' class='pi pi-bookmark'></i>
+            </div>
+            <div class='message_text'>
+              <strong>{{item.title}}</strong>
+              <span>{{item.text}}</span>
+              <span class='message__link'>{{linkTypes[item.link.link_type]}}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class='date'>
+            <span>{{getRelativeTime(item.date)}} в {{item.date | date: 'H:mm'}}</span>
+            <span>{{item.date | date: 'd.M.yyyy'}}</span>
+          </div>
+        </td>
+        <td>
+          <div class='message_text'>
+            <span>{{item.sender?.rank}} {{item.sender?.fio}}</span>
+            <span>{{item.sender?.military_unit}}</span>
+          </div>
+        </td>
+        <td>
+          <div class='type'>
+            <div [ngClass]='item.type' class='type_status'>
+              <strong>{{types[item.type]}}</strong>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p-button *ngIf='activeTab !== "deleted"'
+                    (onClick)='deleteNotification(item)'
+                    icon='pi pi-trash'
+                    styleClass='p-button-secondary p-button-text'
+          >
+          </p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate='emptymessage'>
+      <h3 class='empty-table'>Нет уведомлений</h3>
+    </ng-template>
+  </p-table>
+</section>

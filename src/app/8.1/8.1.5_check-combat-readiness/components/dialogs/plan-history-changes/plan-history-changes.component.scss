@@ -1,0 +1,73 @@
+.wrapper {
+  width: 918px;
+}
+
+:host ::ng-deep {
+  .p-datatable .p-datatable-thead > tr > th {
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252B34;
+    padding: 10px 0 10px 16px;
+  }
+
+  .p-datatable.p-datatable-sm .p-datatable-tbody > tr > td {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252B34;
+    padding: 10px 0 10px 16px;
+  }
+
+  .p-datatable.p-datatable-sm .p-datatable-tbody > tr > td:nth-child(4) {
+      display: flex;
+      justify-content: center;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 18px;
+  }
+}
+
+.plan-history-status {
+  display: inline-block;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.plan-status-icon {
+  margin-right: 7px;
+  font-size: 0.8em;
+}
+
+.new {
+  background: #339AF0;
+}
+
+.removed {
+  background: #FA5252;
+}
+
+.planned {
+  background: #339AF0;
+}
+
+.on_confirmation {
+  background: #FCC419;
+}
+
+.confirmed {
+  background: #22B8CF;
+}
+
+.approved {
+  background: #82C91E;
+}

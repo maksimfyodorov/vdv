@@ -1,0 +1,23 @@
+<div class="container">
+    <p-tree
+        [value]="dataSource"
+        [(selection)]="selectedItem"
+        label="name"
+        selectionMode="single"
+    >
+        <ng-template
+            let-node
+            pTemplate="default"
+        >
+            <div
+                class="treeNode"
+                (click)="selectItem(node)"
+            >
+                {{node.name}}
+            </div>
+        </ng-template>
+    </p-tree>
+    <div class="btn" (click)="addMilitaryCity()">
+        + Добавить военный городок
+    </div>
+</div>

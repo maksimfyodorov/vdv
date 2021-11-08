@@ -1,0 +1,9 @@
+.context-menu {
+  width: 10rem;
+  background: #ffffff;
+  box-shadow: 0 0 5px #ccc;
+
+  & > button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,226 @@
+::ng-deep {
+  // Стилизация материал полей | Start
+  mat-form-field.full-autocomplete {
+    width: 100%;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0!important;
+  }
+
+  .mat-dialog-content {
+    padding: 0!important;
+    margin: 0!important;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(21, 22, 23, 0.25);
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background: #1516170b;
+    }
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.55em 0 1em 0;
+  }
+  // Стилизация материал полей | Finish
+
+
+  .button-icon button {
+    margin-right: 0!important;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field {
+    line-height: 1.1;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    top: 7px!important;
+    bottom: 3px!important;
+  }
+}
+
+:host {
+  ::ng-deep {
+
+    .button-icon {
+      width: 35px;
+      margin-left: auto;
+      margin-bottom: 5px;
+
+      button {
+        width: 35px !important;
+        background-color: #FFFFFF;
+
+        .pi {
+          color: #2196F3;
+        }
+      }
+
+      &:hover {
+        .pi {
+          color: #ffffff;
+        }
+      }
+
+      &.warning {
+      }
+    }
+  }
+}
+
+
+:host {
+  ::ng-deep {
+
+    .align-item-center-title {
+      margin: 0 30px 0 0;
+      padding: 0;
+      white-space: nowrap;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #68737F;
+    }
+
+    .row-wrapper {
+      display: flex;
+      max-width: 100%;
+      align-items: flex-end;
+      margin-bottom: 16px;
+    }
+
+    .row-title {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #252B34;
+      margin: 0 0 16px 0;
+    }
+
+    .align-items-center {
+      align-items: center;
+    }
+
+    .field-wrapper {
+      width: 100%;
+    }
+
+    .field-title {
+      width: 100%;
+      margin: 0 0 2px 0;
+      padding: 0;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      color: #68737F;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    mat-form-field[aria-readonly="true"] {
+      .mat-form-field-outline {
+        background-color: #F5F6F8;
+      }
+    }
+
+    .mat-dialog-container {
+      padding: 10px;
+    }
+
+    .mat-dialog-title,
+    .mat-dialog-content,
+    .mat-dialog-actions {
+
+      width: 100%;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    .mat-dialog-title {
+      font-family: Noto Sans, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 22px;
+      padding-right: 25px;
+      margin-top: -5px;
+    }
+
+    .mat-dialog-actions {
+      margin-bottom: -18px;
+    }
+
+    .button-close {
+      color: #959EA9;
+      line-height: 20px;
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      right: -5px;
+      top: 0;
+
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+
+    p-button {
+      button {
+        font-size: 14px;
+        font-weight: 400;
+        margin-right: 16px;
+      }
+
+      &.white {
+        button {
+          background: #FFFFFF;
+          border: 1px solid #FFFFFF;
+          color: #959EA9;
+
+          &:hover {
+            background-color: #d7d7d7;
+            border: 1px solid #FFFFFF;
+            color: #494949;
+          }
+
+          &:enabled:hover {
+            background: #FFFFFF!important;
+          }
+        }
+      }
+
+      .pi {
+        font-size: 12px;
+      }
+    }
+
+    .mat-radio-button {
+      margin-right: 50px;
+      .mat-radio-ripple {
+        display: none;
+      }
+    }
+  }
+}
+

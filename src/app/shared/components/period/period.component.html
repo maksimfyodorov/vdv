@@ -1,0 +1,56 @@
+<div class='period'>
+  <form [formGroup]='form' class='period__form'>
+
+    <p-dropdown id='period'
+                [options]='periodTypes'
+                optionLabel='name'
+                optionValue='value'
+                class='period'
+                [autoDisplayFirst]='false'
+                placeholder=''
+                formControlName='type'>
+    </p-dropdown>
+
+    <p-dropdown *ngIf='type === "weekly"'
+                [autoDisplayFirst]='false'
+                [options]='daysOfWeek'
+                optionLabel='name'
+                optionValue='value'
+                class='weekly'
+                formControlName='day_of_week'>
+    </p-dropdown>
+    <p-dropdown *ngIf='type === "yearly"'
+                [autoDisplayFirst]='false'
+                [options]='monthsOfYear'
+                optionLabel='name'
+                optionValue='value'
+                class='yearly'
+                formControlName='monthOfYear'>
+    </p-dropdown>
+    <p-dropdown *ngIf='(type === "monthly") || (type === "yearly" && isActualization == true)'
+                [autoDisplayFirst]='false'
+                [options]='days'
+                class='day'
+                formControlName='day'>
+    </p-dropdown>
+    <span class='p-input-icon-right'
+          *ngIf='(type !== "hourly")'>
+      <i class='pi pi-clock'></i>
+      <p-inputMask mask='99:99'
+                   [placeholder]='"__:__"'
+                   formControlName='time'>
+      </p-inputMask>
+    </span>
+    <span class='p-input-icon-right'
+          *ngIf='(type === "hourly")'>
+      <i class='pi pi-clock'></i>
+      <p-inputNumber min='5'
+                     max='59'
+                     size='2'
+                     formControlName='minute'
+                     mode="decimal"
+      >
+      </p-inputNumber>
+    </span>
+  </form>
+</div>

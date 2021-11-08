@@ -1,0 +1,73 @@
+<div class='document'>
+  <div class='document__header header p-d-flex p-ai-center p-jc-between'>
+    <div class='document__title'>{{ document?.name}}</div>
+    <p-button
+      styleClass='p-button-text'
+      (click)='switchDocumentMode("edit")'
+    >Редактировать
+    </p-button>
+  </div>
+    <p-scrollPanel [style]='{width: "100%", height: "540px"}'>
+      <div class='document__body'>
+        <app-upload-files [filesToShow]='filesToShow'
+                          [readMode]='true'
+                          [documentId]='this.document?.uuid'>
+        </app-upload-files>
+        <div class='p-grid'>
+          <div class='p-d-flex p-jc-between document__row p-col-12 p-md-12'>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Вид</div>
+              <div class=''>{{ document?.kind?.name }}</div>
+            </div>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Номер</div>
+              <div class=''>{{ document?.number }}</div>
+            </div>
+          </div>
+          <div class='document__row p-col-12 p-md-12'>
+            <div class='p-field p-col-12 p-md-12'>
+              <div class='document__field-title'>Тип</div>
+              <div class=''> {{ document?.type?.name }} </div>
+            </div>
+          </div>
+          <div class='p-d-flex p-jc-between document__row p-col-12 p-md-12'>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Войсковая часть</div>
+              <div class=''>№{{ document?.military_unit?.common_number_name }}</div>
+            </div>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Дата</div>
+              <div class=''>{{ document?.date }}</div>
+            </div>
+          </div>
+          <div class='p-d-flex p-jc-between document__row p-col-12 p-md-12'>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Загрузил</div>
+              <div class=''>{{ document?.user?.full_name }}</div>
+            </div>
+            <div class='p-field p-col-12 p-md-6'>
+              <div class='document__field-title'>Дата загрузки</div>
+              <div class=''>{{ document?.created_at }}</div>
+            </div>
+          </div>
+          <div class='p-d-flex p-jc-between document__row p-col-12 p-md-12'>
+            <div class='document__summary p-field p-col-12 p-md-12'>
+              <h4>Краткое описание</h4>
+              <p>{{ document?.summary }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-scrollPanel>
+  <div class='p-d-flex p-ai-center p-jc-between document__button-bar_bottom'>
+    <p-button styleClass='p-button-danger p-button-outlined'
+              icon='pi pi-trash'
+              (onClick)='delete()'>
+    </p-button>
+    <p-button styleClass='p-button-outlined'
+              label='Скачать файлы'
+              icon='pi pi-download'
+              (onClick)='downloadFiles()'>
+    </p-button>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+:host::ng-deep {
+  .p-dropdown {
+    width: 250px !important;
+  }
+
+  .accept-button {
+    margin-left: 10px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 500px;
+  }
+
+  .militaryMan-fullname {
+    margin: 2px 0;
+  }
+
+  .military-man-block {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .military-man-block:hover {
+    background-color: #E2F2FF;
+  }
+
+  .right-block {
+    width: 40%;
+    justify-content: right;
+    text-align: left;
+  }
+
+  .left-block {
+    justify-content: left;
+    text-align: left;
+    width: 60%;
+    margin-right: 30%;
+  }
+
+  .day-count-text {
+    margin: 0;
+    color: #959EA9;
+  }
+
+  .militaryMan-day-count {
+    margin: 0;
+    color: #959EA9;
+  }
+
+  .militaryMan-status {
+    margin: 0;
+    color: red;
+  }
+
+  .militaryMan-rank {
+    color: #959EA9;
+    margin: 2px 0;
+  }
+
+  .militaryMan-name {
+    margin: 2px 0;
+  }
+
+  .militaryMan-number {
+    margin: 2px 0;
+    color: #92d03a;
+  }
+}

@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="logo">
+        Учения НАК
+    </div>
+    <div class="message">
+        Участие в учениях, командно-штабных тренировках, проведенных под руководством Национального
+        антитеррористического
+        комитета и оперативных штабов в субъектах Российской Федерации.
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!preparationAntiterror.teachingsNak"
+    >
+        Данные не предоставленны.
+    </div>
+    <div *ngIf="preparationAntiterror.teachingsNak">
+        {{preparationAntiterror.teachingsNak}}
+    </div>
+
+    <div class="logo">
+        Командно-штабные учения
+    </div>
+    <div class="message">
+        Учения, командно-штабные тренировки, проведенные в отчетном периоде под руководством начальников зон
+        противодействия терроризму и начальников территориальных гарнизонов. Еженедельные, ежемесячные и ежеквартальные
+        практические тренировки с мобильными резервами командующих войсками военных округов, резервами начальников зон
+        противодействия терроризму и начальников территориальных гарнизонов, с подразделениями антитеррора местных
+        гарнизонов и воинских частей.
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!preparationAntiterror.teachingsComander"
+    >
+        Данные не предоставленны.
+    </div>
+    <div *ngIf="preparationAntiterror.teachingsComander">
+        {{preparationAntiterror.teachingsComander}}
+    </div>
+
+    <div class="logo">
+        Учения под руководством командующего ВДВ
+    </div>
+    <div class="message">
+        Учения, сборы, показные и инструкторско-методические занятия, командно-штабные тренировки, проведенные в
+        отчетном периоде по плану и под руководством командующего ВДВ.
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!preparationAntiterror.commandPostExercise"
+    >
+        Данные не предоставленны.
+    </div>
+    <div *ngIf="preparationAntiterror.commandPostExercise">
+        {{preparationAntiterror.commandPostExercise}}
+    </div>
+
+    <div class="logo">
+        Ежемесячные демонстративные тренировки
+    </div>
+    <div class="message">
+        Ежемесячные (последняя пятница каждого месяца) демонстративные тренировки в масштабах гарнизонов (военных
+        городков) с выводом техники подразделений антитеррора и усиления в районы КТП (КTП), с использованием средств
+        имитации и холостых боеприпасов, отработкой приемов рукопашного боя и действий подразделений, предназначенных
+        для ликвидации последствий террористических актов (в том числе медицинских пожарных команд, подразделений
+        спецобработки войск РХБ3 подразделений).
+    </div>
+    <div
+        class="no-data"
+        *ngIf="!preparationAntiterror.monthlyDemonstrationWorkouts"
+    >
+        Данные не предоставленны.
+    </div>
+    <div *ngIf="preparationAntiterror.monthlyDemonstrationWorkouts">
+        {{preparationAntiterror.monthlyDemonstrationWorkouts}}
+    </div>
+</div>
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        (click)='reducePageIndex()'
+        routerLink='../situation'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+    <p-button
+        label='Годовой план'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        routerLink='../annual-plan'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='addPageIndex()'
+    ></p-button>
+</div>

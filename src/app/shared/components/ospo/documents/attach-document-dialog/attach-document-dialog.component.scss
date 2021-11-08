@@ -1,0 +1,124 @@
+@import '../../../../../../styles/variables/variables';
+
+.attach-document {
+  &__container {
+
+  }
+  &__documents {
+    max-width: 996px;
+    padding: 12px 16px 16px 16px;
+    border: 1px solid #E1E3E8;
+    border-left: none;
+    border-right: none;
+  }
+
+  &__document {
+    max-width: 650px;
+    padding: 0 0 16px 16px;
+    border: 1px solid #E1E3E8;
+    border-right: none;
+  }
+  &__new-document-button {
+    margin-top: -47px;
+    text-align: right;
+  }
+
+  &__button-container {
+    margin-top: 24px;
+  }
+}
+
+.table-documents {
+  &__th_checkbox {
+    width: 3rem;
+  }
+  &__th_kind {
+    width: 8rem;
+  }
+  &__th_name {
+
+  }
+  &__th_military-unit {
+    width: 10rem;
+  }
+  &__th_date {
+    width: 7rem;
+  }
+  &__th_number {
+    width: 6rem;
+  }
+}
+
+:host::ng-deep {
+  .p-dialog-content {
+    overflow: visible;
+  }
+  .p-datatable{
+    &-thead > tr > th,
+    &-tbody > tr > td {
+      background: white !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+    }
+    &.p-datatable-gridlines {
+      .p-paginator-bottom {
+        border: none;
+      }
+    }
+    &.p-datatable-sm .p-datatable-thead  th {
+      background: none;
+    }
+  }
+
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+    .p-paginator-pages {
+      .p-paginator-page{
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "\e900";
+        }
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

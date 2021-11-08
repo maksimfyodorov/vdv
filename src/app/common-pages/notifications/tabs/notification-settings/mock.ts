@@ -1,0 +1,148 @@
+import { Irz, User } from './interfaces/interfaces';
+
+export const USERS: User[] = [
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac130004',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac130005',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac130006',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac137',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac138',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac139',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1310',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13011',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13012',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1313',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1314',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242a15',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac116',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13017',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac118',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13019',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13020',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac130021',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1322',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1323',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac24',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac13025',
+    title: 'п-к',
+    name: 'А. Иванов',
+    position: 'Начальник службы РАВ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac130026',
+    title: 'м-р',
+    name: 'А. Сидоров',
+    position: 'Начальник службы РХБЗ',
+  },
+  {
+    uuid: 'b7cbe984-e306-11eb-ba80-0242ac1327',
+    title: 'л-т',
+    name: 'С. Петров',
+    position: 'Начальник склада',
+  },
+];

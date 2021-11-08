@@ -1,0 +1,16 @@
+:host {
+  height: 80%;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  .error {
+    font-size: 80px;
+  }
+
+  .message {
+    font-size: 40px;
+  }
+}

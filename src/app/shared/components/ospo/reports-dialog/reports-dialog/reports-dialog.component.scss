@@ -1,0 +1,164 @@
+:host ::ng-deep {
+  p-celleditor{
+    word-break: break-all;
+  }
+}
+
+:host::ng-deep .save__button {
+  width: 148px;
+  height: 40px;
+  margin-right: 7px;
+}
+
+:host::ng-deep .p-inputtextarea {
+  width: 670px;
+  height: 120px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-scrollable-header {
+  background-color: #fff;
+}
+
+:host::ng-deep .p-datatable .p-datatable-scrollable-footer {
+  background-color: #fff;
+}
+
+:host::ng-deep {
+  .search__input {
+    width: 1005px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+:host::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  color: #252b34;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background-color: #fff;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :first-child {
+  width: 70px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(2) {
+  width: 681px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(3) {
+  width: 130px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :last-child {
+  width: 104px;
+}
+
+:host::ng-deep .sequentialNumber {
+  width: 54px;
+}
+
+:host::ng-deep .report {
+  width: 632px;
+}
+
+:host::ng-deep .user {
+  width: 103px;
+}
+
+:host::ng-deep .table__buttons {
+  width: 102px;
+}
+
+:host::ng-deep .p-datatable table {
+  margin-top: 16px;
+}
+
+:host::ng-deep {
+  tr.unselected:hover {
+    cursor: pointer ;
+    background-color: #f7f7f7;
+  }
+}
+
+:host ::ng-deep {
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 10px;
+    .p-paginator-pages {
+      .p-paginator-page {
+        &.p-highlight {
+          background: #2196f3;
+          border-color: #2196f3;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: #2196f3;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: #2196f3;
+        background: white;
+      }
+      span {
+        &::before {
+          content: '\e900';
+        }
+        &::after {
+          content: 'Назад';
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: #2196f3;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: #2196f3;
+        background: white;
+      }
+      span {
+        &::before {
+          content: 'Вперед';
+          margin: 0 13px;
+        }
+        &::after {
+          content: '\e901';
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+.dialog__wrapper {
+  height: fit-content;
+  margin-bottom: 20px;
+}
+
+.icons__container {
+  display: flex;
+  padding: 0 18px;
+}
+
+.pi-pencil {
+  cursor: pointer;
+}
+
+.pi-trash {
+  cursor: pointer;
+}
+
+.selected {
+  td {
+    background: #c6e1f7;
+  }
+}

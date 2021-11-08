@@ -1,0 +1,61 @@
+:host::ng-deep {
+  .p-calendar-w-btn {
+    height: 10px;
+  }
+}
+
+:host::ng-deep .p-calendar {
+  height: 40px;
+}
+
+.container {
+  margin-right: 20px;
+}
+
+.inputs__wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.date__input {
+  margin-right: 20px;
+}
+
+.flex__column_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input__title {
+  margin-bottom: 5px;
+}
+
+.content__wrapper {
+  height: 430px;
+  padding: 32px 24px;
+}
+
+.text__area__title {
+  margin-top: 20px;
+}
+
+textarea {
+  min-width: 563px;
+  height: 227px;
+  margin-right: 16px;
+}
+
+.flex__row__wrapper {
+  display: flex;
+}
+
+.p-button-outlined {
+  width: 185px;
+  height: 32px;
+  margin-bottom: 16px;  
+}
+
+.save__button {
+    margin-top: 16px;
+    margin-right: 10px;
+}

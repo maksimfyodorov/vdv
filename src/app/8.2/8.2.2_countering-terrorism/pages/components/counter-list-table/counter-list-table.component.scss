@@ -1,0 +1,74 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    &__buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        &_search {
+            display: flex;
+            flex-direction: row;
+            font-size: 14px;
+            line-height: 20px;
+            align-items: center;
+            margin-bottom: 10px;
+            div {
+                margin: 0 5px;
+            }
+            p-calendar {
+                margin: 0 5px;
+            }
+        }
+    }
+    &__table {
+        width: 60%;
+    }
+}
+
+.checkbox {
+    width: 48px;
+}
+
+.number {
+    width: 64px;
+}
+
+.list {
+    width: 300px;
+}
+
+.status {
+    width: 148px;
+}
+
+.made {
+    width: 132px;
+}
+
+.btn {
+    width: 48px;
+}
+
+.status-data {
+    width: 120px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 8px;
+    background: #5c7cfa;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ffffff;
+}
+
+.reported {
+    background: #82c91e;
+}
+
+i {
+    margin-right: 3px;
+}

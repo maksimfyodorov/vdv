@@ -1,0 +1,120 @@
+<section class='orders-list'>
+  <h2 class='orders-list__hidden-title'>Список поручений</h2>
+  <ul class='orders-list__list' *ngIf="orders.length else noOrders" >
+    <li class='order' *ngFor='let order of orders'>
+
+      <div class='order__content'>
+        <div class='order__container'>
+          <div class='order__info'>
+            <p class='order__date-of-creation'>{{order.date_of_receipt | date:'dd.MM.YYYY'}}<span>{{order.incoming_number}}</span></p>
+            <h3 class='order__title'>{{order.name}}</h3>
+            <p class='order__description'>{{order.description}}</p>
+            <p class='order__author'>
+              {{order.executor.shdk.rank.name}}
+              {{order.executor.shdk.military_man.surname}}
+              {{order.executor.shdk.military_man.name | slice:0:1}}.{{order.executor.shdk.military_man.middle_name | slice:0:1}}.
+            </p>
+            <p class='order__administration'>{{order.executor.military_unit?.name}}</p>
+            <p-tag class='order__term-of-execution _status_{{order.status?.color}}'
+                   value="{{order.term_of_execution | date:'dd.MM.YYYY'}}"
+                   icon='pi pi-clock'
+            ></p-tag>
+          </div>
+
+          <div class='order__buttons'>
+            <button *ngIf="!order.isExecuted" (click)='openExecuteOrderDialog(order)' [disabled]="!order.status" pButton type='button' label='Исполнить' icon='pi pi-check' class='p-button-outlined order__execute-btn'></button>
+          </div>
+
+        </div>
+
+        <div class="order__documents">
+          <button (click)='order.documentsAreHidden = !order.documentsAreHidden'
+                  pButton
+                  type='button'
+                  label='Документы: поручения ({{order.orderDocumentsTotal}}), решений ({{order.decisionsDocumentsTotal}}), исполнения ({{order.executionDocumentsTotal}})'
+                  [icon]="order.documentsAreHidden ? 'pi pi-angle-right' : 'pi pi-angle-down'"
+                  class="p-button-link"
+          ></button>
+
+          <section class='order__documents-list' [@openClose]="!order.documentsAreHidden ? 'open' : 'closed'">
+            <div class='order__attached-docs'
+                 *ngIf='order.document.length || order.additional_documents.length'>
+              <h3 class='title'>Документы поручения</h3>
+              <app-documents *ngIf='order.document.length'
+                             title='Поручение'
+                             [isMainDocument]=true
+                             [hasHiddenBlocks]=true
+                             [hasNullifiedPaddings]=true
+                             [documentsToShow]='order.document'
+                             (currentDocumentList)='orderInDocumentsChanged($event, order)'
+                             [isViewMode]='true'
+              ></app-documents>
+              <app-documents *ngIf='order.additional_documents?.length'
+                             title='Дополнительные документы'
+                             [hasHiddenBlocks]=true
+                             [hasNullifiedPaddings]=true
+                             [documentsToShow]='order.additional_documents'
+                             (currentDocumentList)='orderDocumentsChanged($event, order)'
+                             [isViewMode]='true'
+              ></app-documents>
+            </div>
+
+            <div class='order__attached-docs' *ngIf='order.decisionsDocumentsTotal'>
+              <h3 class='title'>Документы решений</h3>
+              <div class='order__attached-docs-wrapper' *ngFor='let decision of order.decisions'>
+                <app-documents *ngIf='decision.documents.length'
+                               [title]='decision.name'
+                               [hasHiddenBlocks]=true
+                               [hasNullifiedPaddings]=true
+                               [documentsToShow]='decision.documents'
+                               (currentDocumentList)='decisionDocumentsChanged($event, order, decision)'
+                               [isViewMode]='true'
+                ></app-documents>
+              </div>
+            </div>
+
+            <div class='order__attached-docs'
+                 *ngIf='order.report?.document?.length || order.report?.additional_documents?.length'>
+              <h3 class='title'>Документы исполнения</h3>
+              <app-documents *ngIf='order.report?.document.length'
+                             title='Доклад'
+                             [isMainDocument]=true
+                             [hasHiddenBlocks]=true
+                             [hasNullifiedPaddings]=true
+                             [documentsToShow]='order.report?.document'
+                             (currentDocumentList)='reportInDocumentsChanged($event, order)'
+                             [isViewMode]='true'
+              ></app-documents>
+              <app-documents *ngIf='order.report?.additional_documents?.length'
+                             title='Дополнительные документы'
+                             [hasHiddenBlocks]=true
+                             [hasNullifiedPaddings]=true
+                             [documentsToShow]='order.report?.additional_documents'
+                             (currentDocumentList)='executionDocumentsChanged($event, order)'
+                             [isViewMode]='true'
+              ></app-documents>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class='order__stepper'>
+        <app-stepper [orderTitle]='order.name'
+                     [orderStatus]='order.status?.color'
+                     [decisions]='order.decisions'
+                     [order]='order'
+                     (newDecision)='addDecision($event, order)'
+                     (editedDecision)='updateDecision($event, order)'
+                     (orderWithoutReport)="updateOrder($event, order)"
+        ></app-stepper>
+      </div>
+
+    </li>
+  </ul>
+
+</section>
+
+
+<ng-template #noOrders>
+  <p>Поручения отсутствуют...</p>
+</ng-template>

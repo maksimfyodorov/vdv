@@ -1,0 +1,24 @@
+<div class='container'>
+  <h2
+    mat-dialog-title
+    cdkDrag
+    cdkDragRootElement='.cdk-overlay-pane'
+    cdkDragHandle>
+    <ng-content select='title'></ng-content>
+  </h2>
+
+  <button
+    mat-icon-button
+    (click)="closeDialog()"
+    class='button-close'>
+    <i class='pi pi-times'></i>
+  </button>
+
+  <mat-dialog-content class='mat-typography'>
+    <ng-content select='body'></ng-content>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <ng-content select='footer-buttons'></ng-content>
+  </mat-dialog-actions>
+</div>

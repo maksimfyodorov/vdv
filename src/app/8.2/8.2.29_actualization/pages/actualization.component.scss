@@ -1,0 +1,387 @@
+:host ::ng-deep {
+  .loading-block {
+    text-align: center;
+    height: 100%;
+  }
+
+  .p-password {
+    .p-inputtext {
+      width: 100%;
+    }
+  }
+
+  .row {
+    p-dropdown {
+      &:nth-child(1) {
+        .p-dropdown {
+          width: 101px;
+        }
+      }
+      &:nth-child(2) {
+        .p-dropdown {
+          width: 214px;
+        }
+      }
+    }
+  }
+
+  .p-datatable {
+    table {
+      width: inherit !important;
+    }
+
+    .p-paginator-bottom {
+      height: 64px;
+    }
+
+    .p-datatable-thead > tr > th {
+      color: #252b34;
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .p-datatable-tbody > tr > td {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(1),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(1) {
+      width: 53px !important;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(2),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(2) {
+      width: 55px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(3),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(3) {
+      width: 506px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(4),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(4) {
+      width: 360px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(5),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(5) {
+      width: 80px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(6),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(6) {
+      width: 152px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(7),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(7) {
+      width: 166px;
+    }
+
+    .p-datatable-tbody > tr > td:nth-child(8),
+    .p-datatable .p-datatable-thead > tr > th:nth-child(8) {
+      width: 125px;
+    }
+
+    .p-datatable-tbody > tr > td {
+      height: 58px;
+    }
+  }
+
+  .settings-container {
+    display: flex;
+    flex-direction: row;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &__text {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #228be6;
+
+      &_margin-left {
+        margin-left: 9px;
+      }
+    }
+
+    &_margin-top {
+      margin-top: 48px;
+    }
+  }
+
+  .buttons {
+    .p-button {
+      &:first-child {
+        border: none;
+        color: #959ea9;
+      }
+      &:last-child {
+        border: none;
+        color: #000;
+      }
+      &:hover {
+        background: none;
+        color: #959ea9;
+      }
+      .p-button-icon-only {
+        padding: 0;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .p-button {
+    background: #fff;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #228be6;
+  }
+
+  .p-dropdown {
+    line-height: 20px;
+  }
+}
+
+.row-content {
+  display: flex;
+  flex-direction: column;
+
+  &_text {
+    font-size: 14px;
+    margin: 0;
+  }
+  &_gray {
+    word-break: break-word;
+    color: gray;
+  }
+}
+
+:host ::ng-deep {
+  .ng-tns-c49-8 .p-dialog-mask .p-component-overlay .p-dialog-mask-scrollblocker {
+    overflow: scroll !important;
+  }
+}
+
+.page {
+  display: flex;
+  flex-direction: row;
+
+  height: calc(100vh - 100px);
+}
+
+main {
+  width: 80vw;
+  min-width: 50vw;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+}
+
+aside {
+  width: 20vw;
+  min-width: 20vw;
+
+  padding: 32px 32px 0 32px;
+  background: white;
+
+  .aside-content {
+    font-family: Noto Sans;
+    font-style: normal;
+
+    &__wrap-content {
+      display: flex;
+      flex-direction: column;
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &_small {
+        display: flex;
+        flex-direction: column;
+
+        .p-inputtext {
+          width: 156px;
+        }
+      }
+
+      &_left {
+        margin-left: 8px;
+      }
+    }
+
+    &_title {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+    }
+  }
+}
+
+.wrapppp {
+  display: flex;
+  flex-direction: row;
+}
+
+.page_mrg-left {
+  margin-left: 16px;
+}
+
+.title {
+  font-family: Noto Sans;
+  font-style: normal;
+}
+
+.title-page {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  color: #252b34;
+}
+
+.content {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  color: #252b34;
+  margin-left: 24px;
+}
+
+.header-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-container {
+  display: flex;
+}
+
+.header-buttons {
+  margin-right: 24px;
+}
+
+.document-formalized {
+  align-self: flex-end;
+}
+
+.btn {
+  display: flex;
+  cursor: pointer;
+}
+
+.regulation {
+  margin-top: 15px;
+  color: #228be6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.anchor {
+  color: #949ea8;
+  display: flex;
+}
+
+.d_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  display: flex;
+  flex-direction: row;
+}
+
+.spinner-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.delRegulation {
+  // margin-left: 140px;
+  color: #949ea8;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  background: white;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border: 1px solid #c7cdd3;
+  border-radius: 4px;
+  z-index: 100;
+
+  &_padding-not-exists-box {
+    padding: 16px;
+  }
+
+  &_padding-edit-box {
+    padding: 15px;
+    width: 310px;
+  }
+
+  &__text {
+    font-size: 14px;
+  }
+
+  &__text_color {
+    color: #228be6;
+  }
+
+  &__text_padding {
+    padding-left: 20px;
+  }
+
+  &_icon {
+    font-size: 12px;
+  }
+
+  &_icon_padding {
+    padding-right: 6px;
+  }
+}
+
+.delCheck {
+  color: #949ea8;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.logoCheck {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.connection-error {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: red;
+}

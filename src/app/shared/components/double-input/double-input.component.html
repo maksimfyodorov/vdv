@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th class='double-input-header left-input ' style='border-radius: 5px 0 0 0'>№ поста</th>
+    <th class='double-input-header right-input' style='border-radius: 0 5px 0 0'>Количество смен</th>
+  </tr>
+  <tr>
+    <td class='double-input-body left-input' style='border-radius: 0 0 0 5px'>
+      <p-inputNumber [(ngModel)]='valueLeft'></p-inputNumber>
+    </td>
+    <td class='double-input-body right-input' style='border-radius: 0 0 5px 0'>
+      <p-inputNumber [(ngModel)]='valueRight' mode='decimal' [showButtons]='true'>
+      </p-inputNumber>
+    </td>
+  </tr>
+</table>

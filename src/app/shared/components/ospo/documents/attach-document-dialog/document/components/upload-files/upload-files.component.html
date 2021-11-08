@@ -1,0 +1,41 @@
+<main>
+  <ngx-dropzone *ngIf='!readMode' (change)='onSelect($event)'>
+    <ngx-dropzone-label>
+      <i class='pi pi-paperclip'></i>
+      <span class='label'>Выберите</span> или перетяните файлы сюда
+    </ngx-dropzone-label>
+  </ngx-dropzone>
+  <mat-expansion-panel togglePosition='before'>
+    <mat-expansion-panel-header>
+      <span>
+        Файлы <span>{{filesToShow.length}}</span>
+      </span>
+    </mat-expansion-panel-header>
+    <div class='files-container' *ngIf='filesToShow.length'>
+      <div class='files-container__row' *ngFor='let f of filesToShow'>
+        <div class='file-data'>
+          <img class='icon' src='../../../../../../../../../assets/img/file.svg' />
+          <span class='file'>
+					<span>{{ f.name }}</span>
+				</span>
+        </div>
+        <div class='action-container'>
+          <p-button *ngIf='readMode'
+                    styleClass='p-button-rounded p-button-text'
+                    icon='pi pi-download'
+                    (onClick)='downloadFile(f)'>
+          </p-button>
+          <p-button *ngIf='!readMode'
+                    styleClass='p-button-rounded p-button-text p-button-danger'
+                    icon='pi pi-trash'
+                    (onClick)='onRemove(f)'>
+          </p-button>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</main>
+
+
+
+

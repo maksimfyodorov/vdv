@@ -1,0 +1,17 @@
+.form__coordinates {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+}
+
+.controls {
+  align-self: flex-end;
+  margin: 6px 16px;
+
+  .button {
+    margin-left: 16px;
+  }
+}

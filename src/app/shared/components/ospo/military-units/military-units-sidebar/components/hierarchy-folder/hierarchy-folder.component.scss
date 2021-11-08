@@ -1,0 +1,139 @@
+.folder {
+  position: relative;
+  border: 3px solid white;
+  border-left: 3px solid #82C91E;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+
+  &_background {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  &_dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #E1E3E8;
+    margin: 18px;
+  }
+
+  &_dot:not(&_dot:last-of-type) {
+    margin-right: 8px;
+  }
+
+  &_dot:first-of-type {
+    display: none;
+  }
+}
+
+.content {
+  padding: 6px 10px 6px 6px;
+  background: #F5F6F8;
+  min-height: 40px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &_description {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__optional-values {
+    color: #959EA9;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    img {
+      margin-left: 5px;
+      width: 17.5px;
+      height: 11.88px;
+    }
+  }
+
+  &_name {
+    margin-left: 12px;
+  }
+
+  &_formation {
+    margin-left: 6px;
+    color: #959EA9;
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    color: #959EA9;
+    margin: 0 12px;
+    min-width: 50px;
+  }
+}
+
+.expand-button {
+  margin: 0 -6px 0 8px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.folded {
+  min-height: 37px;
+  width: 36px;
+  background: #82C91E;
+  border-radius: 8px;
+  margin-bottom: 3px;
+
+  .content {
+    padding: 6px;
+    background: #82C91E;
+    color: white;
+    border-radius: 8px;
+    min-height: 34px;
+    font-size: 14px;
+
+    &_description {
+      display: flex;
+    }
+
+    &_formation {
+      margin-left: 6px;
+      color: white;
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      margin: 0 12px;
+      color: white;
+      min-width: 52px;
+    }
+  }
+
+  &_content {
+    display: none;
+  }
+}
+
+.selected {
+  box-shadow: -3px 0px 0px 0px rgba(34, 139, 230, 1);
+}
+
+.folded_selected {
+  border-left: 3px solid rgba(34, 139, 230, 1);
+}
+
+@keyframes appear {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}

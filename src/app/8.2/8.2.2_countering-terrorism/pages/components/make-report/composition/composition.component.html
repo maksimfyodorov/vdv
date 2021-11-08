@@ -1,0 +1,97 @@
+<div class='message'>
+    Состав, положение, состояние сил и средств, назначенных для решения задач по противодействию терроризму и
+    ликвидации
+    последствий террористических актов.
+</div>
+<div class='logo'>
+    Руководящий состав
+</div>
+<div
+    *ngIf='!addPositionFlag'
+    class='btn'
+    (click)='addPositionFlag = true;'
+>
+    <i class='pi pi-user'></i>
+    Добавить должность
+</div>
+<div
+    class='container'
+    *ngIf='addPositionFlag'
+>
+    <div class='row'>
+        <div class='bold row__number'>№</div>
+        <div class='bold row__col'>Должность</div>
+        <div class='bold row__col'>Ответственный за противодействие терроризму</div>
+        <div class='bold row__col'>Телефоны</div>
+    </div>
+    <hr>
+    <div class='row'>
+        <div class='row__number'>
+            {{1}}
+        </div>
+        <input
+            class='input'
+            type='text'
+            pInputText
+            [(ngModel)]='positionList'
+        />
+    </div>
+    <hr>
+    <div
+        class='addPosition'
+        (click)='postExecutiveStaff()'
+    >
+        Отправить
+    </div>
+</div>
+<div class='logo'>Состояние сил и средств</div>
+<div
+    class='btn'
+    *ngIf='!militaryCityFlag'
+    (click)='militaryCityFlag = true'
+>
+    <i class='pi pi-home'></i>
+    Добавить военный городок
+</div>
+<div *ngIf='militaryCityFlag'>
+    <app-military-city
+        [report]='report'
+        [bchsData]='bchs'
+    ></app-military-city>
+</div>
+<div class='point'>
+    <div class='point__head'>Мобильные резервы командующих войсками военных округов</div>
+    <div class='point__text'>Состав(численность личного состава, вооружения, боевой и специальной техники), дислокация,
+        сроки готовности
+        ротных и батальонных тактических групп, выделяемых в состав группировок сил и средств оперативных штабов</div>
+</div>
+<div class='point'>
+    <div class='point__head'>«Антитеррор»</div>
+    <div class='point__text'>Состав оперативных групп «Антитеррор»</div>
+</div>
+<div class='point'>
+    <div class='point__head'>Роты и батальоны тактических групп</div>
+    <div class='point__text'>Состав (численность личного состава, вооружения, боевой и специальной техники), дислокация,
+        сроки готовности
+        ротных и батальонных тактических групп, выделяемых в состав группировок сил и средств оперативных штабов в
+        субъектах Российской Федерации, для участия в контртеррористических операциях</div>
+</div>
+
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        [routerLink]="['/', 'countering-terrorism','make-report','general-information']"
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)="reducePageIndex()"
+    ></p-button>
+    <p-button
+        label='Обстановка'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        routerLink='/countering-terrorism/make-report/situation'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='addPageIndex()'
+    ></p-button>
+</div>

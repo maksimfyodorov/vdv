@@ -1,0 +1,161 @@
+:host::ng-deep .academic-year {
+  .p-inputtext {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #959ea9;
+  }
+  .p-dropdown {
+    width: 144px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .p-dropdown-trigger-icon {
+    color: #959ea9;
+  }
+}
+
+:host::ng-deep .period {
+  .p-inputtext {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #959ea9;
+  }
+  .p-dropdown {
+    width: 144px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .p-dropdown-trigger-icon {
+    color: #959ea9;
+  }
+}
+
+:host::ng-deep .add-category-button {
+  .p-button {
+    width: 189px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+:host::ng-deep .form-report-button {
+  .p-button {
+    width: 231px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+:host::ng-deep {
+  .p-datatable .p-datatable-tbody > tr > td:nth-child(3) {
+    text-align: center;
+  }
+  .p-datatable .p-datatable-tbody > tr > td:nth-child(4) {
+    text-align: center;
+  }
+}
+
+:host::ng-deep .subdivisions-container {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(21, 22, 23, 0.25);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: #1516170b;
+  }
+}
+
+.underscore {
+  width: 33px;
+  border-bottom: 1px solid ;
+  margin-left: 3px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #252b34;
+  margin-bottom: 25px;
+}
+
+.inputs-wrapper {
+  margin-bottom: 20px;
+}
+
+.inputs-wrapper > * {
+  margin-right: 15px;
+}
+
+.military-category {
+  width: 300px;
+  height: 81px;
+  display: flex;
+  align-items: center;
+}
+
+.category-name {
+width: 227px ;
+}
+
+i {
+  margin-left: 7px;
+}
+
+.subdivisions {
+  width: 160px;
+  max-height: 60px;
+}
+
+.state-count {
+  width: 145px;
+  height: 60px;
+}
+
+.subdivisions-container {
+  height: 48px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.jump-rate {
+  width: 153px;
+  height: 60px;
+}
+
+.subdivisions-wrapper {
+  font-size: 12px;
+  display: flex;
+  align-items: baseline;
+  
+}
+
+.table-container {
+  width: 750px;
+}
+
+#cancel {
+  width: 192px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+:host::ng-deep .jump-rate-input  {
+  .p-inputnumber-input {
+    width: 100%;
+  }
+  
+}

@@ -1,0 +1,20 @@
+<div #contextMenuRef *ngIf="contextMenuVisible" class="context-menu" [style]="contextMenuStyle">
+  <button
+    *ngFor="let item of items"
+    pButton
+    pRipple
+    type="button"
+    [label]="item.name"
+    class="p-button-text"
+    (click)="item.callback(selectedItem); hideContextMenu()"
+  ></button>
+  <!-- <button
+    *ngFor="let item of items"
+    pButton
+    pRipple
+    type="button"
+    [label]="item.name"
+    class="p-button-outlined"
+    (click)="item.callback(selectedItem); hideContextMenu()"
+  ></button> -->
+</div>

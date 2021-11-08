@@ -1,0 +1,44 @@
+<div class='days'>
+  <table *ngFor='let postValue of postsValues'>
+    <tr>
+      <th class='input-header'>{{postValue?.date_plan.getDate()}}</th>
+    </tr>
+    <tr>
+      <td *ngIf='canEdit' class='input-body'>
+        <p-dropdown
+          [options]='shift'
+          [disabled]='!isEdit'
+          optionLabel='number'
+          (onChange)='shiftChanged($event, postValue)'
+          [(ngModel)]='postValue.shift'
+        >
+        </p-dropdown>
+      </td>
+      <td *ngIf='!canEdit' class='no-edit-body'>
+        <div> {{postValue?.shift?.number}}</div>
+      </td>
+    </tr>
+    <tr *ngFor='let admittanceMen of postValue?.admittance_men'>
+      <td [class]=' postValue.admittance_men ? "militaryMan-body": ""'>
+        <div class='right-militaryMan-block'>
+          <i class="pi pi-book" style="font-size: 14px; color: #4fa2eb"></i>
+        </div>
+        <div class='center-militaryMan-block'>
+          <p class='militaryMan-name'>{{admittanceMen?.position}}</p>
+          <p class='militaryMan-rank'>{{admittanceMen?.rank}}</p>
+          <p class='militaryMan-fullname'>{{admittanceMen?.full_name}}</p>
+          <p class='militaryMan-number'>{{admittanceMen?.admittance_name}}</p>
+        </div>
+        <div class='left-militaryMan-block'>
+          <i *ngIf='isEdit' (click)='editMilitaryMan(admittanceMen, postValue)' class="pi pi-pencil" style="font-size: 14px; color: #959EA9; margin-right: 10px"></i>
+          <i *ngIf='isEdit' (click)='deleteMilitaryMan(admittanceMen, postValue)' class="pi pi-trash" style="font-size: 14px; color: #959EA9"></i>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td *ngIf='isEdit' class='input-body'>
+        <p class='add-military-man-button' (click)='addAdmittanceMen(postValue)'>+ добавить военнослужащего</p>
+      </td>
+    </tr>
+  </table>
+</div>

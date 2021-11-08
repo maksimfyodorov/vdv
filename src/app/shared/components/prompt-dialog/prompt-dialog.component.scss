@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  margin: 6px 0;
+  min-width: 500px;
+}
+
+.label {
+  font-size: 14px;
+  color: #7c8086;
+  margin-bottom: 4px;
+}
+
+.input {
+  width: 98%;
+}
+
+.controls {
+  margin-top: 32px;
+  display: flex;
+
+  &_button {
+    margin-right: 16px;
+  }
+}

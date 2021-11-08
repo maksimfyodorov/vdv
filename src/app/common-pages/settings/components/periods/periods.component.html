@@ -1,0 +1,74 @@
+<section class='settings__periods periods' [appLoader]='loaderService.isLoading$'>
+  <div class='periods__header'>
+    <h3 class='periods__title'>Периоды</h3>
+    <p-button styleClass='p-button-sm p-button-outlined'
+              icon='pi pi-plus'
+              label='Добавить'
+              (onClick)='addPeriod()'
+    ></p-button>
+  </div>
+  <div class='periods__list'>
+    <div *ngFor='let period of periods; let i = index' class='periods__item period'>
+      <div class='period__year'>
+        <label for='year'>Год</label>
+        <p-inputNumber [min]='1900'
+                       [max]='2100'
+                       [useGrouping]='false'
+                       id='year'
+                       [disabled]='period.disabled'
+                       [(ngModel)]='period.year'
+        ></p-inputNumber>
+      </div>
+      <div class='period__type'>
+        <label for='type'>Период</label>
+        <p-dropdown id='type'
+                    [options]='periodTypes'
+                    [disabled]='period.disabled'
+                    [(ngModel)]='period.name'
+                    [autoDisplayFirst]='false'
+        ></p-dropdown>
+      </div>
+      <div class='period__start-date'>
+        <label for='startDate'>Дата начала</label>
+        <p-calendar id='startDate'
+                    showIcon='true'
+                    dateFormat='dd.mm.yy'
+                    [disabled]='period.disabled'
+                    [(ngModel)]='period.start_date'
+                    firstDayOfWeek='1'
+        ></p-calendar>
+      </div>
+      <div class='period__end-date'>
+        <label for='endDate'>Дата окончания</label>
+        <p-calendar id='endDate'
+                    showIcon='true'
+                    dateFormat='dd.mm.yy'
+                    [disabled]='period.disabled'
+                    [(ngModel)]='period.end_date'
+                    firstDayOfWeek='1'
+        ></p-calendar>
+      </div>
+      <div class='period__controls'>
+        <p-button *ngIf='period.uuid && period.disabled'
+                  styleClass='p-button-text'
+                  icon='pi pi-pencil'
+                  (onClick)='enableEditMode(i)'
+        ></p-button>
+        <p-button *ngIf='!period.disabled && period.uuid || !period.disabled && !period.uuid'
+                  styleClass='p-button-text p-button-success'
+                  icon='pi pi-check'
+                  (onClick)='applyChanges(period, i)'
+        ></p-button>
+        <p-button *ngIf='!period.disabled && period.uuid'
+                  styleClass='p-button-text p-button-danger'
+                  icon='pi pi-times'
+                  (onClick)='cancelChanges(i)'
+        ></p-button>
+        <p-button styleClass='p-button-text p-button-danger'
+                  icon='pi pi-trash'
+                  (onClick)='deletePeriod(i)'
+        ></p-button>
+      </div>
+    </div>
+  </div>
+</section>

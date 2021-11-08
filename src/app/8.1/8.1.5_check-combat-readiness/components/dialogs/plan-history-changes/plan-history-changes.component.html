@@ -1,0 +1,21 @@
+<section class='wrapper' [appLoader]="loader.isLoading$" [spinnerSize]="50">
+  <p-table [value]="planHistoryChanges" autoLayout='true'  styleClass='p-datatable-gridlines p-datatable-sm'>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="date">Дата и время <p-sortIcon field="date"></p-sortIcon></th>
+        <th>Пользователь</th>
+        <th>Действие</th>
+        <th pSortableColumn="status">Статус <p-sortIcon field="status"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-planEditHistory>
+      <tr>
+        <td>{{planEditHistory.date}}</td>
+        <td>{{planEditHistory.user}}</td>
+        <td>{{planEditHistory.action}}</td>
+        <td>{{planEditHistory?.status?.name || planEditHistory?.status_name}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>

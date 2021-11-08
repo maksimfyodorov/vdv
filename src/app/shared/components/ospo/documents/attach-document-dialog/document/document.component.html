@@ -1,0 +1,96 @@
+<div class="document">
+  <div class="document__body">
+    <div class="document__header p-d-flex p-jc-between p-ai-center">
+      <div class="document__title">{{title}}</div>
+    </div>
+    <p-scrollPanel [style]="{width: '100%', height: '540px'}">
+      <form class="p-fluid p-formgrid p-grid" [formGroup]="newDocumentForm" (submit)="save()">
+        <div class="document__upload">
+          <app-upload-files (changed)="applyFiles($event)" [readMode]='mode === "view"' [filesToShow]="filesToShow">
+          </app-upload-files>
+        </div>
+        <div class="document__kind p-field p-col-12 p-md-6">
+          <label for="kind"><small>Вид</small></label>
+          <p-dropdown
+            id="kind"
+            [options]="kinds"
+            optionLabel="name"
+            optionValue="uuid"
+            formControlName="kind"
+            placeholder="Выберите..."
+            (onChange)="setKind($event)"
+          >
+          </p-dropdown>
+        </div>
+        <div class="document__type p-field p-col-12 p-md-6">
+          <label for="type"><small>Тип</small></label>
+          <app-editable-autocomplete
+            id="type"
+            [disabled]="isTypeDisabled"
+            [dataSource]="types"
+            [searchField]='"name"'
+            [displayField]='"name"'
+            [selectedSuggestion]="selectedType"
+            (deleteItem)="deleteType($event)"
+            (selectSuggestion)="selectType($event)"
+            (editItem)="editType($event)"
+            (createItem)="createType($event)"
+          >
+          </app-editable-autocomplete>
+        </div>
+        <div class="document__name p-field p-col-12 p-md-12">
+          <label for="name"><small>Название</small></label>
+          <input id="name" pInputText formControlName="name" placeholder="Введите..." />
+        </div>
+        <div class="document__date p-field p-col-12 p-md-6">
+          <label for="date"><small>Дата</small></label>
+          <div class="overflow-wrapper">
+            <p-calendar
+              id="date"
+              firstDayOfWeek="1"
+              dateFormat="yy-mm-dd"
+              formControlName="date"
+              showIcon="true"
+              dataType="string"
+              placeholder="Выберите..."
+              [defaultDate]="defaultDate"
+            >
+            </p-calendar>
+          </div>
+        </div>
+        <div class="document__number p-field p-col-12 p-md-6">
+          <label for="number"><small>Номер</small></label>
+          <input id="number" pInputText formControlName="number" placeholder="Введите..." />
+        </div>
+        <div class="p-field p-col-12 p-md-12">
+          <label for="militaryUnit"><small>Войсковая часть</small></label>
+          <app-military-units-dropdown-flat id="militaryUnit" formControlName="military_unit_id"></app-military-units-dropdown-flat>
+        </div>
+        <div class="p-field p-col-12 p-md-12">
+          <label for="summary"><small>Краткое описание</small></label>
+          <textarea pInputTextarea id="summary" autoResize="false" formControlName="summary" placeholder="Введите...">
+          </textarea>
+        </div>
+      </form>
+    </p-scrollPanel>
+    <div class="document__button-bar p-d-flex p-jc-between">
+      <p-button
+        *ngIf='mode === "view" || mode === "edit"'
+        styleClass="p-button-danger p-button-outlined"
+        icon="pi pi-trash"
+        type="button"
+        (onClick)="callDeleteDialog()"
+      ></p-button>
+      <p-button
+        *ngIf='mode === "create" || mode === "edit"'
+        [disabled]="newDocumentForm.invalid || !this.filesToShow.length"
+        styleClass="p-button-outlined"
+        icon="pi pi-save"
+        iconPos="left"
+        label="Сохранить"
+        type="button"
+        (onClick)="save()"
+      ></p-button>
+    </div>
+  </div>
+</div>

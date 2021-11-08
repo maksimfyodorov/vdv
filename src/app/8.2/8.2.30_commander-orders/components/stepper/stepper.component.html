@@ -1,0 +1,91 @@
+<section class='stepper'>
+  <div class='stepper__start'>
+    <div class="stepper__start-container" *ngIf="!orderStatus">
+      <h4 class='title _disabled _has_tip' [title]="orderTitle || 'Поручение'">{{orderTitle || 'Поручение'}}</h4>
+      <div class='number _disabled'>1</div>
+    </div>
+
+    <div class="stepper__start-container" *ngIf="orderStatus">
+      <h4 class='title _status_{{orderStatus}} _has_tip' [title]="orderTitle || 'Поручение'">{{orderTitle || 'Поручение'}}</h4>
+      <div class='number _status_{{orderStatus}}'>1</div>
+    </div>
+
+    <div class='controls' *ngIf="!order.isExecuted || order.isExecuted && currentAccessLevel === 'command'">
+      <button (click)='openEditOrderDialog()'
+              [icon]="order.status && currentAccessLevel !== 'command' ? 'pi pi-eye' : 'pi pi-pencil'"
+              class="p-button-outlined"
+              pButton
+              type="button"
+      ></button>
+      <button (click)='deleteOrder()' [disabled]='order.status?.color && currentAccessLevel !== "command"' pButton type="button" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+
+    <div class='controls' *ngIf="order.isExecuted && currentAccessLevel !== 'command'">
+      <button (click)='openEditOrderDialog()'
+              [icon]="'pi pi-eye'"
+              class="p-button-outlined"
+              pButton
+              type="button"
+      ></button>
+    </div>
+  </div>
+
+  <div class='stepper__middle-element' *ngFor='let decision of decisions; index as i'>
+    <div class="stepper__middle-element-container" *ngIf="!order.status">
+      <h4 class='title _disabled _has_tip' [title]="decision.name">{{decision.name}}</h4>
+      <div class='number _disabled'>{{i + 2}}</div>
+    </div>
+
+    <div class="stepper__middle-element-container" *ngIf="order.status">
+      <h4 class='title _status_{{decision.status.code}} _has_tip' [title]="decision.name">{{decision.name}}</h4>
+      <div class='number _status_{{decision.status.code}}'>{{i + 2}}</div>
+    </div>
+
+    <div class='controls' *ngIf="!order.isExecuted || order.isExecuted && currentAccessLevel === 'command'">
+      <button (click)='openEditDecisionDialog(decision)'
+              [icon]="decision.status.code !== 'blue' && this.currentAccessLevel !== 'command' ? 'pi pi-eye' : 'pi pi-pencil'"
+              class="p-button-outlined"
+              pButton
+              type="button"
+      ></button>
+      <button (click)='deleteDecision(decision)' [disabled]="decision.status.code !== 'blue' && currentAccessLevel !== 'command'" pButton type="button" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+
+    <div class='controls' *ngIf="order.isExecuted && currentAccessLevel !== 'command'">
+      <button (click)='openEditDecisionDialog(decision)'
+              [icon]="'pi pi-eye'"
+              class="p-button-outlined"
+              pButton
+              type="button"
+      ></button>
+    </div>
+  </div>
+
+  <button *ngIf="!order.isExecuted" (click)='openAddDecisionDialog()' pButton type="button" icon='pi pi-plus-circle' label="решение" class="p-button-outlined stepper__add-decision"></button>
+
+  <div class='stepper__end'>
+    <div class="stepper__end-container" *ngIf="!order.isExecuted">
+      <h4  class='title _disabled'>Исполнено</h4>
+      <div class='number _disabled'>{{decisions.length + 2}}</div>
+    </div>
+
+    <div class="stepper__end-container" *ngIf="order.isExecuted">
+      <h4 class='title _status_{{orderStatus}}'>{{orderStatus === 'green' && 'Исполнено' || orderStatus === 'red' && 'Не исполнено'}}</h4>
+      <div class='number _status_{{orderStatus}}'>{{decisions.length + 2}}</div>
+    </div>
+
+    <div class='controls' *ngIf="!order.isExecuted || order.isExecuted && currentAccessLevel === 'command'">
+      <button (click)='openExecuteOrderDialog()' [disabled]="!order.hasReport" pButton type="button" icon="pi pi-pencil" class="p-button-outlined"></button>
+      <button (click)='deleteExecution()' [disabled]="!order.hasReport" pButton type="button" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+    </div>
+
+    <div class='controls' *ngIf="order.isExecuted && currentAccessLevel !== 'command'">
+      <button (click)='openExecuteOrderDialog()'
+              [icon]="'pi pi-eye'"
+              class="p-button-outlined"
+              pButton
+              type="button"
+      ></button>
+    </div>
+  </div>
+</section>

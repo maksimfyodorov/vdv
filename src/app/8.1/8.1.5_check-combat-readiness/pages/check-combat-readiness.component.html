@@ -1,0 +1,109 @@
+<section [appLoader]='loaderService.isLoading$' class='wrapper'>
+  <div class='header'>
+    <app-breadcrumbs [model]='breadcrumbsLabels'></app-breadcrumbs>
+    <div class='header_status'>
+    </div>
+  </div>
+  <button class='hidden-print-button' pButton [useExistingCss]='true' printSectionId='print-section' ngxPrint>print</button>
+  <div class='check-plan'>
+    <div class='check-plan_description'>
+      <div class='check-plan_status'>
+        <h2>График проверок по плану</h2>
+        <i
+          [pTooltip]='selectedSchedule?.status.name'
+          tooltipPosition='top'
+          class='pi {{statusIcons[selectedSchedule?.status.code]}} {{selectedSchedule?.status.code}}'>
+        </i>
+      </div>
+      <div class='check-plan_filter'>
+        <label class='check-plan_label'>
+          <span>Учебный год</span>
+          <p-dropdown
+            id='select_year_shedules'
+            (onChange)='selectedScheduleChanged($event)'
+            class='dropdown'
+            [(ngModel)]='selectedYear'
+            placeholder='Выберите учебный год'
+            optionLabel='year'
+            emptyMessage='Не найдено'
+            [options]='inspectionSchedules'>
+            <ng-template let-schedule pTemplate='selectedItem'>
+              <div>
+                <span>{{schedule.year}}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </label>
+      </div>
+    </div>
+    <div class='check-plan_controls'>
+      <p-button
+        *ngIf='roleModelService.userPermissions$?.value["access.add_schedule"]'
+        (onClick)='createSchedule()'>
+        <i class='pi pi-plus'></i>
+        Создать график
+      </p-button>
+      <p-button
+        (onClick)='openHistoryChangesDialog()'
+        *ngIf='selectedSchedule'>
+        История изменений
+      </p-button>
+      <app-documents-formalized groupName='8.1.5'></app-documents-formalized>
+      <p-button
+        *ngIf='roleModelService.userPermissions$.value["access.save_schedule"]'
+        (onClick)='openSaveScheduleDialog(selectedSchedule?.year)'
+        styleClass='p-button'>
+        Сохранить
+      </p-button>
+      <p-button
+        *ngIf='roleModelService.userPermissions$.value["access.delete_schedule"] && selectedSchedule && selectedSchedule?.status?.name !== "Сохранен"'
+        (onClick)='deleteSchedule()' styleClass='p-button-danger'>
+        <img alt='' src='../../../../assets/img/icons/main-delete-white.svg' />
+        Удалить график
+      </p-button>
+    </div>
+  </div>
+  <div class='check-list'>
+    <div *ngIf='selectedSchedule' class='check-list_description'>
+      <h2>Фильтры проверок</h2>
+      <div class='check-list_filter'>
+        <app-military-units-dropdown class='filter-element-offset' style='max-width: 400px'
+                                     [(ngModel)]='selectedMuFilterParams'
+                                     selectionMode='checkbox'></app-military-units-dropdown>
+        <p-button label='Применить' class='filter-element-offset'
+                  (onClick)='getInspectionAudits(selectedSchedule.uuid)'></p-button>
+        <label class='check-list_label'>
+          <app-range-data-picker [importedDateValues]='filterDateValues'
+                                 (datePicked)='changeDateRange($event)'></app-range-data-picker>
+        </label>
+      </div>
+    </div>
+    <div class='check-list_controls'>
+      <div *ngIf='selectedSchedule?.status?.name !== "Сохранен" && selectedSchedule'>
+        <p-button
+          *ngIf='roleModelService.userPermissions$.value["access.add_planned_inspection"]'
+          (onClick)='openInspectionDialog()'>
+          <i class='pi pi-plus'></i>Добавить проверку
+        </p-button>
+      </div>
+      <div *ngIf='selectedSchedule?.status?.name === "Сохранен" && selectedSchedule'>
+        <p-button
+          *ngIf='roleModelService.userPermissions$.value["access.start_sudden_inspection"] && !timeChartScheduleService.loadingOpeningDialog'
+          (onClick)='openDutyShiftInspectionDialog()'>
+          <i class='pi pi-plus'></i>Добавить внезапную проверку
+        </p-button>
+      </div>
+    </div>
+  </div>
+  <app-time-chart-schedule *ngIf='selectedSchedule && !isRefresh' #schedule (needTableUpdate)='updateTable()'
+                           id='print-section'></app-time-chart-schedule>
+  <div *ngIf='!selectedSchedule' class='no-schedule-selected-block'>
+    <p class='no-schedule-selected-text'>Для отображения графика выберите учебный год</p>
+  </div>
+  <div *ngIf='isLoadingInspections' class='loading-block'>
+    <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass='custom-spinner' strokeWidth='8'
+                       fill='#EEEEEE' animationDuration='.5s'></p-progressSpinner>
+  </div>
+</section>
+<div style='margin-bottom: 100px'>
+</div>

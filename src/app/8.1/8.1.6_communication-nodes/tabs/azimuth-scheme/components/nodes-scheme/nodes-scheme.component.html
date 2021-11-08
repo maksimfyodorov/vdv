@@ -1,0 +1,41 @@
+<div #container class='canvas' >
+  <div class='controls'>
+    <button [ngClass]='{selected: userInputService.userInputMode === "hand"}'
+            (click)='changeUserInput("hand")'
+            class='button'>
+      <img class='button_icon' src='../../../../../../../assets/img/icons/hand.svg' alt=''/>
+    </button>
+    <button [ngClass]='{selected: userInputService.userInputMode === "cursor"}'
+            (click)='changeUserInput("cursor")'
+            class='button'>
+      <img class='button_icon' src='../../../../../../../assets/img/icons/cursor.svg' alt=''/>
+    </button>
+    <button [ngClass]='{selected: userInputService.userInputMode === "connection"}'
+            (click)='changeUserInput("connection")'
+            class='button'>
+      <img class='button_icon' src='../../../../../../../assets/img/icons/direction.svg' alt=''/>
+    </button>
+  </div>
+  <div class='controls controls--right'>
+    <button (mousedown)='$event.stopPropagation()' (click)='print()' class='button'>
+      <i class='pi pi-print'></i>
+    </button>
+    <button (mousedown)='$event.stopPropagation()' (click)='createNode()' class='button'>
+      <i class='pi pi-plus'></i>
+    </button>
+    <button (mousedown)='$event.stopPropagation()' [ngClass]='{pulse: nodesService.saveIsNeeded$ | async}' (click)='save()' class='button'>
+      <i class='pi pi-save'></i>
+    </button>
+  </div>
+  <div class='controls controls--middle' >
+    <button (mousedown)='$event.stopPropagation(); camera.zoomIn()' class='button'>
+      <i class='pi pi-plus'></i>
+    </button>
+    <button (mousedown)='$event.stopPropagation(); camera.zoomOut()' class='button'>
+      <i class='pi pi-minus'></i>
+    </button>
+    <button [disabled]='!displayNodes.length' (mousedown)='$event.stopPropagation(); fit()' class='button'>
+      <img class='button_icon' src='../../../../../../../assets/img/icons/fit.svg' alt=''/>
+    </button>
+  </div>
+</div>

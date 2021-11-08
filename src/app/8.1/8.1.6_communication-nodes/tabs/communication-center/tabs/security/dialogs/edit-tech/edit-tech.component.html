@@ -1,0 +1,96 @@
+<p-tabMenu [model]="tabItems" [activeItem]="activeTabItem"></p-tabMenu>
+<div [ngSwitch]="activeTabItem">
+  <ng-template [ngSwitchCase]="tabItems[0]">
+    <section [formGroup]="form" class="wrapper">
+      <div class="row">
+        <div class="row_inline-input row_inline-input-text">
+          <small>Заводской номер</small>
+          <input formControlName="number" pInputText />
+        </div>
+        <div class="row_inline-input row_inline-input-year">
+          <small>Год изготовления</small>
+          <input formControlName="year" type="number" pInputText />
+        </div>
+        <div class="row_inline-input row_inline-input-text">
+          <small>Образец ВВСТ</small>
+          <input [value]="config?.data?.parent?.name" disabled pInputText />
+        </div>
+      </div>
+      <div class="coordinate-row">
+        <small>Текущее местонахождение</small>
+        <div class="coordinate">
+          <p *ngIf="form.get('coordinate')?.value?.mark" pInputText>{{form.get('coordinate')?.value?.mark}}</p>
+          <p *ngIf="form.get('coordinate')?.value?.x && !form.get('coordinate').value?.mark" pInputText>
+            {{form.get('coordinate')?.value?.x}} , {{form.get('coordinate').value?.y}}
+          </p>
+          <p *ngIf="!form.get('coordinate')?.value" pInputText>Выберите метку</p>
+          <p-button
+            styleClass="p-button-outlined"
+            icon="pi pi-map-marker"
+            [disabled]="form.get('uuid')?.value"
+            (onClick)="openCoorditanesDialog()"
+          >
+          </p-button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="row_inline-input row_inline-input-text">
+          <small>Примечание</small>
+          <textarea formControlName="note" class="row_textarea" pInputTextarea></textarea>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+  <ng-template [ngSwitchCase]="tabItems[1]">
+    <section class="wrapper">
+      <div class="row row_title">
+        <h3>Информационные порты</h3>
+        <button
+          pButton
+          (click)="ports.addPort()"
+          class="add-port-button p-button-outlined"
+          icon="pi pi-plus"
+          label="Добавить порт"
+        ></button>
+      </div>
+      <app-security-ports #ports [ports]='form.get("ports").value' (changed)="portsChanged($event)">
+      </app-security-ports>
+    </section>
+  </ng-template>
+  <ng-template [ngSwitchCase]="tabItems[2]">
+    <section class="wrapper">
+      <app-documents
+        [documentsToShow]='form?.get("documents").value'
+        (currentDocumentList)="documentsChanged($event)"
+      ></app-documents>
+    </section>
+  </ng-template>
+  <ng-template [ngSwitchCase]="tabItems[3]">
+    <section class="wrapper">
+      <div class="header">
+        <p>Ремонты</p>
+        <button
+          *ngIf="!hasRepair"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-plus"
+          class="p-button-outlined"
+          (click)="createRepair()"
+        ></button>
+      </div>
+      <div class="repair-list">
+        <app-repair-form
+          *ngFor="let repairForm of form.get('repairs').controls; let i = index"
+          [formGroup]="repairForm"
+          [index]="i"
+        >
+        </app-repair-form>
+      </div>
+    </section>
+  </ng-template>
+  <div class="controls">
+    <p-button [disabled]="form.invalid" (onClick)="save()" label="Сохранить"></p-button>
+    <p-button (onClick)="close()" styleClass="p-button-outlined" label="Отмена"></p-button>
+  </div>
+</div>

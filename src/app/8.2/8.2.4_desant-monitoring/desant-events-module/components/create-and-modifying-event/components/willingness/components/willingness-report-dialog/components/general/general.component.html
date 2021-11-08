@@ -1,0 +1,249 @@
+<div class="content__wrapper">
+  <div class="inputs_wrapper">
+    <div class="flex__column_wrapper">
+      <span class="input__title">Дата доклада</span>
+      <p-calendar class="date__input"></p-calendar>
+    </div>
+    <div class="flex__column_wrapper">
+      <span class="input__title">Время доклада</span>
+      <p-calendar
+        class="time__input"
+        [timeOnly]="true"
+      ></p-calendar>
+    </div>
+    <div class="flex__column_wrapper">
+      <span class="input__title">Аэродром взлёта - Площадка</span>
+      <p-dropdown
+        class="airfield__dropdown"
+        placeholder="Выбрать"
+      ></p-dropdown>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Руководитель десантирования </span>
+      <span *ngIf="!selectedPerson.landingLead; else selectedLandingLead">Должность, звание, Ф. И. О.</span>
+      <ng-template #selectedLandingLead>
+        <span>
+          {{showSelectedPersonInfo('landingLead')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show('landingLead', 'single')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Руководитель прыжков</span>
+      <span *ngIf="!selectedPerson.jumpingLead; else selectedJumpingLead">Должность, звание, Ф. И. О.</span>
+      <ng-template #selectedJumpingLead>
+        <span>
+          {{showSelectedPersonInfo('jumpingLead')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show('jumpingLead','single')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Помощник руководителя прыжков</span>
+      <span *ngIf="!selectedPerson.jumpLeadAssistant; else selectedJumpLeadAssistant">Должность, звание, Ф. И. О.</span>
+      <ng-template #selectedJumpLeadAssistant>
+        <span>
+          {{showSelectedPersonInfo('jumpLeadAssistant')}}
+        </span>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show('jumpLeadAssistant', 'single')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Ответственные за видеосъёмку</span>
+      <div
+        *ngIf="!selectedOperator.length; else selectedOperators"
+        class="duty__officer"
+      >
+        <span>Должность, звание, Ф. И. О.</span>
+        <span>Должность, звание, Ф. И. О.</span>
+      </div>
+      <ng-template #selectedOperators>
+        <div *ngFor="let operator of selectedOperator">
+          <div class="operator__container">
+            - {{operator.appointment.name}},
+            {{operator.rank.name}},
+            {{operator.surname}}
+            {{operator.name}}
+            {{operator.middle_name}}
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="show(null, 'multiple')"
+      ></button>
+    </div>
+  </div>
+  <div class="choose__wrapper">
+    <div class="flex__column_wrapper">
+      <span class="title">Инструктаж должностных лиц проводил:</span>
+    </div>
+    <div class="button_wrapper">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Выбрать"
+        class="p-button-outlined"
+        (click)="showInstructorDialog()"
+      ></button>
+    </div>
+  </div>
+  <p-table
+    dataKey="uuid"
+    editMode="row"
+    [value]="tableData"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="instructor">Инструктор</th>
+        <th class="date">Дата и время инструктажа</th>
+        <th class="note">Примечание</th>
+        <th class="action">Действие</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-editing="editing"
+      let-ri="rowIndex"
+      let-data
+    >
+      <tr
+        [pEditableRow]="data"
+        [ngClass]="editing ? 'selected' : 'unselected'"
+      >
+        <td class="instructor">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                class="instructor__input"
+                type="text"
+                [(ngModel)]="data?.instructor?.military_man.name"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{data?.instructor?.military_man?.name}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                class="nameChange__input"
+                type="text"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{data.date | date:'M.d.yyyy' }} {{data.time | date: 'h:mm'}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                class="reportChange__input"
+                type="text"
+                [(ngModel)]="data.selectedReport"
+              />
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{data?.selectedReport}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div
+            class="edit"
+            onclick="event.stopPropagation()"
+          >
+            <div class="icons_wrapper">
+              <button
+                *ngIf="!editing"
+                pButton
+                pRipple
+                type="button"
+                (click)="onRowEditInit()"
+                pInitEditableRow
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text"
+              ></button>
+              <i
+                *ngIf="!editing"
+                class="pi pi-trash"
+              >
+              </i>
+            </div>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              (click)="onRowEditSave()"
+              pSaveEditableRow
+              icon="pi pi-check"
+              class="p-button-rounded p-button-text p-button-success p-mr-2"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel()"
+              icon="pi pi-times"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+</div>

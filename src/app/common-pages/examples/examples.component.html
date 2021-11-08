@@ -1,0 +1,146 @@
+<div class='examples__wrapper'>
+  <h2 class='examples__title'>Примеры переиспользуемых компонентов</h2>
+  <section class='examples__section section'>
+    <h3 class='section__title'>Документы</h3>
+    <div class='p-grid p-ai-stretch vertical-container'>
+      <div class='p-col'>
+        <div class='section__description'>
+          <pre>
+Компонент работает с массивом документов или с массивом групп.
+
+Вход:
+
+@Input isViewMode - режим просмотра без добавления, удаления документов
+@Input documentsToShow - массив документов для отображения
+@Input documentsToShowByGroup - массив объектов групп:
+            group_name: string;
+            documents: Document[];
+Выход:
+@Output detachDocument - возвращает объект открепленного документа
+@Output attachDocument - возвращает объект прикрепленного документа
+@Output currentDocumentList - возвращает массив объектов документов
+
+
+AttachDocumentDialog
+При вызове диалога можно передать конфиг. В поле data добавляем объект с необязательными полями:
+selectedDocuments - массив документов, которые будут выделены. если мод single, то один документ
+attachMode: 'single'  - если хотим получить диалог с радиобаттонами
+          </pre>
+        </div>
+      </div>
+      <div class='p-col'>
+        <div class='section__mock'>
+          <div class='documents'>
+            <div class='documents__component'>
+              <app-documents [documentsToShowByGroup]='documentsByGroup'>
+              </app-documents>
+            </div>
+            <div class='documents__component'>
+              <app-documents irzGroupUuid='1fa4a88c-4202-4cd6-b55e-af0596ccf5ec'
+                             kindUuid='4960cd7a-5922-4b9a-8259-ff080d219d87'
+                             [disableFilters]='false'
+                             [documentsToShow]='documents'>
+              </app-documents>
+            </div>
+            <div class='documents__component'>
+              <h3>Вызов модального окна AttachDocumentDialog</h3>
+              <p-button icon='pi pi-plus' styleClass='p-button p-button-outlined' (onClick)='openAttachDocuments()'></p-button>
+            </div>
+            <div class='documents__component'>
+              <h3>Вызов модального окна "История изменений статуса камеры" </h3>
+              <p-button icon='pi pi-plus' styleClass='p-button p-button-outlined' (onClick)='openCameraHistory()'></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='section cuf'>
+    <h3 class='section__title'>ОСПО КУФ</h3>
+    <div class='p-grid p-ai-stretch vertical-container'>
+      <div class='p-col'>
+        <div class='section__description'>
+          <pre>
+          </pre>
+        </div>
+      </div>
+      <div class='p-col'>
+        <div class='section__mock'>
+          <p-button (onClick)='openCuf()' label='CUF'></p-button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='section cuf'>
+    <h3 class='section__title'>Уведомления</h3>
+    <div class='p-grid p-ai-stretch vertical-container'>
+      <div class='p-col'>
+        <div class='section__description'>
+          <pre>
+          </pre>
+        </div>
+      </div>
+      <div class='p-col'>
+        <div class='section__mock'>
+          <p-button (onClick)='showToast()' label='Показать сообщение'></p-button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='section'>
+    <h3 class='section__title'>ОСПО Формирования</h3>
+    <div class='p-grid p-ai-stretch vertical-container'>
+      <div class='p-col'>
+        <div class='section__description'>
+          <pre>
+Dropdown:
+            selectionMode='checkbox'  - позволяет делать множественный выбор
+            formControlName='militaryUnit' - компонент работает как formcontrol
+            accessLevels=[1,2,3] - параметр для ограничения доступных MU
+          </pre>
+          <pre>
+            app-military-units-dropdown-flat:
+            formControlName='militaryUnit' - компонент работает как formcontrol
+            работает с id воинского формирования
+          </pre>
+        </div>
+      </div>
+      <div class='p-col'>
+        <div class='section__mock'>
+          <p-button (onClick)='openMilitaryUnits()' label='Military Units Modal'></p-button>
+          <div class='military-unit-dropdown'>
+            <form [formGroup]='mUForm' style='width: 100%'>
+             <div class='p-d-flex p-jc-center'>
+               <div class='p-mr-2'>
+                 <app-military-units-dropdown
+                   showDivisionOf='10045242'
+                   selectionMode='checkbox'
+                   formControlName='militaryUnit'>
+                 </app-military-units-dropdown>
+               </div>
+               <div class='p-mr-2'>
+                 <app-military-units-dropdown
+                   selectionMode='checkbox'
+                   formControlName='militaryDivision'>
+                 </app-military-units-dropdown>
+               </div>
+               <div class='p-mr-2'>
+                 <app-military-units-dropdown-flat></app-military-units-dropdown-flat>
+               </div>
+             </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <app-military-units-sidebar (selectMilitaryUnitChanged)='onSelectMilitaryUnit($event)'
+                                ></app-military-units-sidebar>
+
+
+  </section>
+</div>
+
+
+

@@ -1,0 +1,22 @@
+.data {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time {
+    width: 237px;
+}
+
+:host ::ng-deep .p-overlaypanel {
+     top: 0px !important;
+     left: 0px !important;
+}
+
+::ng-deep {
+    .p-dialog-content {
+        overflow: visible !important;
+    }
+}

@@ -1,0 +1,15 @@
+Инструкция по установке VDV
+
+- Загрузить vdv.zip с Nexus репозитория
+- Распаковать zip архив во временную папку
+- Скачать и настроить Apache
+
+sudo apt install apache2
+
+- Скопировать содержимое zip архива в `/var/www/html`
+
+- Перезапустить сервис apache
+
+sudo service apache2 restart
+
+- Проект доступен в браузере по адресу `localhost`

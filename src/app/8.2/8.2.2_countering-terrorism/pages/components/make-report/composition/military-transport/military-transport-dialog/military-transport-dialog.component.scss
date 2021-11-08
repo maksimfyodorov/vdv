@@ -1,0 +1,50 @@
+:host ::ng-deep {
+    .p-calendar {
+        width: 202px;
+        height: 40px;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.btn {
+    margin-left: 20px;
+    width: 180px;
+    height: 40px;
+    border: 1px solid #228be6;
+    border-radius: 4px;
+    color: #228be6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.margin{
+    margin-top: 10px;
+}
+
+.marginBtn{
+    margin-left: 10px;
+}
+
+input {
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+    width: 444px;
+    height: 40px;
+    margin: 10px 0 10px 0;
+}

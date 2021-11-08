@@ -1,0 +1,146 @@
+@mixin stepper-item-config {
+  width: 150px;
+  margin-right: 15px;
+  position: relative;
+}
+
+.stepper {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 60px;
+
+  .title {
+    margin: 0 0 4px 0;
+    padding: 0;
+
+    &._has_tip {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      cursor: help;
+    }
+  }
+
+  .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    color: #fff;
+    position: relative;
+    margin-bottom: 10px;
+
+    &::before {
+      position: absolute;
+      left: 23px;
+      content: '';
+      width: 143px;
+      height: 2px;
+    }
+
+    &._status_blue {
+      background: #228BE6;
+
+      &::before {
+        background: #228BE6;
+      }
+    }
+
+    &._status_yellow {
+      background: #FF922B;
+
+      &::before {
+        background: #FF922B;
+      }
+    }
+
+    &._status_green {
+      background: #82C91E;
+
+      &::before {
+        background: #82C91E;
+      }
+    }
+
+    &._status_red {
+      background: #FA5252;
+
+      &::before {
+        background: #FA5252;
+      }
+    }
+
+    &._disabled {
+      border: 2px solid #E1E3E8;
+    }
+
+    &._disabled::before {
+      background: #E1E3E8;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+
+    button {
+      width: 25px;
+      height: 25px;
+      padding: 0px;
+    }
+  }
+
+  &__start {
+    @include stepper-item-config;
+  }
+
+  &__middle-element {
+    @include stepper-item-config;
+  }
+
+  &__add-decision {
+    height: 68px;
+    background: #fff;
+    z-index: 1;
+
+    &:hover {
+      background: #fff !important;
+      box-shadow: 0 0 0 0.2rem #a6d5fa;
+    }
+
+    &:disabled {
+      box-shadow: unset;
+    }
+  }
+
+  &__end {
+    @include stepper-item-config;
+    margin-right: 0;
+    margin-left: 15px;
+    text-align: right;
+
+    .title {
+      right: 0;
+    }
+
+    .number {
+      margin-left: auto;
+
+      &::before {
+        left: -143px;
+      }
+    }
+
+    .controls {
+      float: right;
+    }
+  }
+}
+
+._disabled {
+  color: #959EA9 !important;
+  background: transparent !important;
+}

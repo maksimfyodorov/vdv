@@ -1,0 +1,135 @@
+
+    <div class="aside">
+
+      <div class="aside-title">
+          <p class="aside__text aside__text_title">
+            {{title}}
+          </p>
+      </div>
+
+      <div class="aside-content">
+
+          <div class="aside-content__card">
+              <div class="aside__wrap-box">
+                <p class="aside__text aside__text_small">
+                  Раздeл группы
+                </p>
+                <app-editable-autocomplete
+                  [dataSource]='sectionGroups'
+                  [selectedSuggestion]='selectedSectionGroup'
+                  (selectSuggestion)='selectInputItemSection($event)'
+                  (editItem)='editInputItem($event, "sectionGroups")'
+                  (deleteItem)='deleteInputItem($event, "sectionGroups")'
+                  (createItem)='addInputItem($event, "sectionGroups")'
+                  [searchField]="'name'"
+                  [displayField]="'name'"
+                ></app-editable-autocomplete>
+                <div class='popup popup_padding-edit-box' *ngIf='is_edit'>
+                  <p class='edit-menu_text'>Редактирование значения:</p>
+                  <div class="wrap_box">
+                    <input type="text" placeholder="Заменить на.." pInputText [(ngModel)]="selectedSectionGroup.name"/>
+                    <p-button (onClick)='saveEditableItem("sectionGroups")' styleClass='p-button-text'>
+                      <i class='popup_icon popup_icon_padding pi pi-plus'></i>
+                      <span class='popup__text popup__text_color'>Cохранить</span>
+                    </p-button>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="aside-content__card">
+              <div class="aside__wrap-box">
+                <p class="aside__text aside__text_small">
+                  Наименование группы
+                </p>
+                <input type="text"
+                  pInputText
+                  class="p-inputtext-sm"
+                  [(ngModel)]="group.name"
+                  placeholder="План подготовки на учебный год">
+              </div>
+          </div>
+
+          <div class="aside-content__card">
+
+              <div class="aside__wrap-box">
+                <p class="aside__text aside__text_small">
+                  Номер
+                </p>
+                <input type="text" pInputText [(ngModel)]="group.number"/>
+              </div>
+
+              <div class="aside__wrap-box">
+                <p class="aside__text aside__text_small">
+                  Форма группы
+                </p>
+                <app-form-group
+                  [values]="group.forms"
+                  (onChangedValue)="setValueInfGroupForm($event)"
+                ></app-form-group>
+              </div>
+
+              <div class="aside__wrap-box">
+                <p class="aside__text aside__text_small">
+                  Характер группы
+                </p>
+                <app-editable-autocomplete
+                  [dataSource]='characterGroups'
+                  [selectedSuggestion]='selectedCharacterGroup'
+                  (selectSuggestion)='selectInputItem($event)'
+                  (editItem)='editInputItem($event, "characterGroups")'
+                  (deleteItem)='deleteInputItem($event, "characterGroups")'
+                  (createItem)='addInputItem($event, "characterGroups")'
+                  [searchField]="'name'"
+                  [displayField]="'name'"
+                ></app-editable-autocomplete>
+                <div class='popup popup_padding-edit-box' *ngIf='is_edit3'>
+                  <p class='edit-menu_text'>Редактирование значения:</p>
+                  <div class="wrap_box">
+                    <input type="text" placeholder="Заменить на.." pInputText [(ngModel)]="selectedCharacterGroup.name"/>
+                    <p-button (onClick)='saveEditableItem("characterGroups")' styleClass='p-button-text'>
+                      <i class='popup_icon popup_icon_padding pi pi-plus'></i>
+                      <span class='popup__text popup__text_color'>Cохранить</span>
+                    </p-button>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+
+          <div class="aside-content__card">
+              <div class="aside__title-row">
+                <p class="aside__text aside__text_bold aside__text_black aside__text_margin">
+                  Отслеживание
+                </p>
+              </div>
+          </div>
+
+          <form [formGroup]="periodForm" novalidate>
+              <div
+                class="aside-content__card"
+                formArrayName="period"
+                *ngFor="let item of periodForm?.get('period')['controls']; let i = index;">
+
+                  <app-period id='period' [formControlName]="i" [isActualization]="true"></app-period>
+                  <p-button styleClass="btn-margin" (click)="removePeriodRecord(i)" icon="pi pi-trash" iconPos="left"></p-button>
+
+              </div>
+          </form>
+
+          <div class="aside-content__card">
+
+              <div class="add-btn">
+                <a class="href"(click)="addPeriodRecord()">+Добавить</a>
+              </div>
+
+          </div>
+
+          <div class="action-container">
+            <p-button label="Сохранить" [disabled]="disableButton" (click)="save()"></p-button>
+            <p-button label="Отмена" (click)="close($event)"></p-button>
+          </div>
+
+      </div>
+
+    </div>

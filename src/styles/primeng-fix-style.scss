@@ -1,0 +1,104 @@
+@import "src/styles/variables/_variables";
+
+:host {
+  ::ng-deep {
+
+    .p-autocomplete {
+      border: 1px solid #ced4da;
+      border-radius: 3px;
+
+      &-input {
+        border: none;
+      }
+
+      &-dropdown,
+      &-dropdown:hover {
+        background: white;
+        color: #6c757d;
+        border: none;
+      }
+
+      &:hover {
+        border-color: $primary-color;
+      }
+
+      &:focus {
+
+        border-color: #64b5f6;
+      }
+
+      &:active {
+        box-shadow: 0 0 0 1px #93cbf9;
+      }
+
+      .p-button:focus {
+        border: 1px solid #64b5f6;
+      }
+    }
+
+    .p-radiobutton .p-radiobutton-box {
+      background: white;
+
+      .p-radiobutton-icon {
+        height: 8px;
+        width: 8px;
+        background: $primary-color;
+      }
+    }
+
+    .p-scrollpanel-bar {
+      background: $primary-color;
+      width: 5px;
+    }
+
+    .p-calendar-w-btn {
+      input {
+        border-right: none;
+      }
+
+      .p-datepicker-trigger,
+      .p-datepicker-trigger:hover {
+        background: white;
+        color: #959EA9;
+        border-color: #C7CDD3;
+        border-left: none;
+      }
+    }
+
+    .p-progressbar {
+      width: 100px;
+      background: #F5F6F8;
+
+      &-label {
+        text-align: left !important;
+        padding-left: 10px;
+      }
+
+      &-value {
+        background: #D5F69B;
+      }
+    }
+
+
+    ngx-dropzone {
+      border: 2px dashed #74C0FC;
+    }
+
+    .mat-expansion-panel {
+      width: 100%;
+      &:not([class*=mat-elevation-z]) {
+        box-shadow: none !important;
+      }
+      &-header {
+        height: 40px;
+        padding: 0 0 0 10px;
+        &:hover {
+          background: inherit!important;
+        }
+      }
+      &-body {
+        padding: 0 4px;
+      }
+    }
+  }
+}

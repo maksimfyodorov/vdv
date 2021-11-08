@@ -1,0 +1,89 @@
+@mixin flexStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+:host::ng-deep.uav-content {
+  @include flexStart;
+  width: 100%;
+  height: calc(100vh - 100px);
+
+  &__main-content {
+    margin-top: 25px;
+    width: 100vw;
+    overflow: hidden;
+
+    .main-content__breadcrumbs {
+      margin-bottom: 18px!important;
+      margin-left: 20px;
+    }
+
+
+    .main-tabs > ul {
+      display: flex;
+      width: fit-content;
+
+      li {
+        margin-right: 8px;
+
+        a {
+          background: #F5F6F8 !important;
+          border: 1px solid #E1E3E8 !important;
+          border-radius: 4px 4px 0 0 !important;
+        }
+
+        &.p-highlight {
+          a {
+            background: #FFFFFF !important;
+            border: 1px solid #E1E3E8 !important;
+            color: #252B34!important;
+            border-bottom: none!important;
+          }
+        }
+
+      }
+    }
+  }
+
+  .tab-wrapper {
+    margin: 16px 0 0 0;
+    width: 100%;
+
+    .p-tabview-nav-link {
+      background-color: red;
+    }
+
+    .ues-map .p-tabview-panel {
+      position: relative;
+      height: 75vh;
+    }
+
+    .p-tabview-panels {
+      padding-left: 0;
+      padding-bottom: 0!important;
+      padding-right: 0;
+    }
+
+    .p-tabview .p-tabview-nav {
+      border-width: 0;
+      margin-left: 20px;
+
+      li {
+        outline: none;
+
+        .p-tabview-nav-link {
+          border: 1px solid #EBEAEE;
+          border-radius: 0;
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 400;
+          padding: 10px 16px;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}

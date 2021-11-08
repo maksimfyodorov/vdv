@@ -1,0 +1,28 @@
+.header_row {
+  & > th {
+    background-color: transparent;
+  }
+}
+
+.highlight_values {
+  & > th {
+    color: #826ef4;
+  }
+}
+
+.table {
+  .gray_row {
+    * > th,
+    td {
+      font-weight: 700;
+      background-color: #f5f6f8 !important;
+    }
+  }
+  .mm_row {
+    * > th,
+    td {
+      font-weight: 600;
+      background-color: #f5f6f8 !important;
+    }
+  }
+}

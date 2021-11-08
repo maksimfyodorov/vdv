@@ -1,0 +1,5 @@
+<p-tree [value]="dataSource" [(selection)]="selectedItem" label="name" selectionMode="single">
+  <ng-template let-node pTemplate="default">
+    <div class="treeNode" (click)="selectItem(node)">{{node.name | namePipe}}</div>
+  </ng-template>
+</p-tree>

@@ -1,0 +1,65 @@
+<p-table
+  #dt
+  [columns]='cols'
+  [value]='marks'
+  [paginator]='true'
+  [rows]='7'
+  [showCurrentPageReport]='true'
+  selectionMode='single'
+  (onRowSelect)='selectMark($event)'
+  (onRowUnselect)='unselectedMark()'
+>
+  <ng-template pTemplate='caption'>
+    <div class='p-d-flex'>
+      <span class='p-input-icon-left p-ml-auto'>
+                    <i class='pi pi-search'></i>
+                <input
+                  pInputText
+                  type='text'
+                  (input)="dt.filterGlobal($event?.target?.value, 'contains')"
+                  placeholder='Поиск отметки' />
+                </span>
+    </div>
+  </ng-template>
+
+  <ng-template
+    pTemplate='header'
+    let-columns>
+    <tr>
+      <th *ngFor='let col of columns'>
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate='body'
+    let-rowData
+    let-columns='columns'>
+    <tr [pSelectableRow]='rowData'>
+      <td *ngFor='let col of columns'>
+        <ng-container *ngIf="col.field !== 'actions' && col.field !== 'object_geom'">
+          {{ rowData[col.field] }}
+        </ng-container>
+
+        <ng-container *ngIf="col.field === 'actions'">
+          <p-button
+            class='action'
+            (click)='clickActionButton(button.emit, rowData)'
+            *ngFor='let button of rowData[col.field]'
+            [style.display]="'inline'"
+          >
+            <i
+              [class]='button.icon'
+              [style.fontSize]="button?.size ? button?.size : '12px'"
+              [style.color]="button?.color ? button?.color : '#228BE6'"
+            ></i>
+          </p-button>
+        </ng-container>
+
+        <ng-container *ngIf="col.field === 'object_geom'">
+          {{ rowData[col.field].coordinates | MercatorToHDMS }}
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

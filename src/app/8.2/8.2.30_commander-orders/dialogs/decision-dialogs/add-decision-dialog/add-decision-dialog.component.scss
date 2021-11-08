@@ -1,0 +1,98 @@
+@import '../../../common/mixins/calendar';
+
+p,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+:host::ng-deep.add-decision-form {
+  font-size: 12px;
+  padding-bottom: 25px;
+  padding-right: 14px;
+
+  .summary__text {
+    color: #000;
+    margin: 14px 0;
+  }
+
+  .execution-date {
+    margin-bottom: 40px;
+
+    .p-calendar {
+      @include calendar;
+    }
+  }
+
+  .attached-docs {
+    margin-bottom: 40px;
+
+    button:last-child {
+      margin-left: 10px;
+    }
+  }
+
+  .accepted-decision,
+  .execution-progress {
+    margin-top: 14px;
+    margin-bottom: 40px;
+
+    textarea {
+      border-color: #ced4da;
+      width: 100%;
+      padding: .5rem;
+      outline: none;
+      border-radius: 3px;
+      color: #495057;
+
+      &:hover {
+        border-color: #2196F3;
+      }
+
+      &:focus {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 0.2rem #a6d5fa;
+      }
+
+      &:disabled {
+        color: #C7CDD3;
+      }
+
+      &:disabled:hover {
+        border-color: #ced4da;
+      }
+
+      &:disabled::placeholder {
+        color: #C7CDD3;
+      }
+    }
+  }
+
+  .accepted-decision {
+    margin-bottom: 0;
+  }
+
+  .controls {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+:host::ng-deep {
+  .p-scrollpanel .p-scrollpanel-bar {
+    background: #ced4da;
+    margin-left: 14px;
+  }
+
+  .p-scrollpanel-content {
+    padding: 0;
+    padding-right: 5px;
+  }
+
+  @include calendar-weekend;
+}

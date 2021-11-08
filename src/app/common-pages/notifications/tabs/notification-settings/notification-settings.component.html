@@ -1,0 +1,50 @@
+<div class='settings'>
+  <h3 class='settings__title'>Настройка уведомлений</h3>
+  <div class='settings__body'>
+    <div class='settings__users-list users-list'>
+      <span class='p-input-icon-right users-list__search'>
+        <i class='pi pi-search'></i>
+        <input type='text' [formControl]='searchName' pInputText placeholder='Поиск'>
+      </span>
+      <ul class='users'>
+        <li *ngFor='let user of users'
+            class='users__item item'
+            [ngClass]='{"users__item_selected": user.uuid === selectedUserUuid}'
+            (click)='selectUser(user.uuid)'
+        >
+          <div class='item__name'>{{user.name}}</div>
+        </li>
+      </ul>
+    </div>
+    <div class='settings__permissions permissions'>
+      <p-table [value]='irzs' dataKey='uuid' class='permissions__table' styleClass='p-datatable-sm'>
+        <ng-template pTemplate='header'>
+          <tr>
+            <th>Событие</th>
+            <th>Уведомления</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate='body' let-irz let-expanded='expanded'>
+          <tr>
+            <td>
+              <button type='button' pButton pRipple [pRowToggler]='irz'
+                      class='p-button-text p-button-rounded p-button-plain'
+                      [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+              {{irz.name}}
+            </td>
+            <td>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate='rowexpansion' let-irz>
+          <tr *ngFor='let setting of irz.settings' class='permissions__event-row'>
+            <td>{{setting.event_name}}</td>
+            <td>
+              <p-checkbox [binary]='true' (onChange)='changeSetting(setting)' [(ngModel)]='setting.is_send'></p-checkbox>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+.select-button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.select-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 4rem;
+  height: 4rem;
+  border: 2.5px solid #ccc;
+  border-radius: 0.25rem;
+  background: #ffffff;
+
+  & > * {
+    font-size: 2rem;
+    color: #228be6;
+  }
+}
+
+.select-button-active {
+  background: #228be6;
+  & > * {
+    color: #ffffff;
+  }
+}
+
+.select-button:hover {
+  background: #228be6;
+  cursor: pointer;
+
+  & > * {
+    color: #ffffff;
+  }
+}

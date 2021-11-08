@@ -1,0 +1,57 @@
+<!--<p-table [value]='values' [rows]='20'>-->
+<!--  <ng-template pTemplate='header'>-->
+<!--    <tr>-->
+<!--      <th>№</th>-->
+<!--      <th>В/Ч</th>-->
+<!--      <th>Пост</th>-->
+<!--      <th>Смена</th>-->
+<!--      <th>Должность</th>-->
+<!--      <th>Должен заступить</th>-->
+<!--      <th>Заступил</th>-->
+<!--      <th>Комментарий</th>-->
+<!--      <th></th>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate='body' let-value>-->
+<!--    <tr>-->
+<!--      <td>{{value.number}}</td>-->
+<!--      <td>{{value.MU}}</td>-->
+<!--      <td>{{value.post}}</td>-->
+<!--      <td>{{value.workShift}}</td>-->
+<!--      <td>{{value.rank}}</td>-->
+<!--      <td>-->
+<!--        <div class='should-intercede-container'>-->
+<!--          <p class='should-intercede-rank'>{{value.shouldIntercede?.rank}}</p>-->
+<!--          <p class='should-intercede-name'>{{value.shouldIntercede?.name}}</p>-->
+<!--          <p class='should-intercede-number'>{{value.shouldIntercede?.number}}</p>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <div *ngIf='value.interceded' class='should-intercede-container'>-->
+<!--          <p class='should-intercede-rank'>{{value.interceded?.rank}}</p>-->
+<!--          <p class='should-intercede-name'>{{value.interceded?.name}}</p>-->
+<!--          <p class='should-intercede-number'>{{value.interceded?.number}}</p>-->
+<!--        </div>-->
+<!--        <p-button (onClick)='intercede(value, true);' *ngIf='!value.interceded' label='Заступить'></p-button>-->
+<!--        <p-dropdown-->
+<!--          class='choice-another-dropdown'-->
+<!--          *ngIf='!value.interceded'-->
+<!--          [(ngModel)]='value.interceded'-->
+<!--          (onChange)='intercede(value, false)'-->
+<!--          [options]='executivePerson' optionLabel='name'-->
+<!--          label='Заступить'></p-dropdown>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <textarea *ngIf='value.interceded' style='width: 120px' pInputTextarea-->
+<!--                  [(ngModel)]='value.comment'></textarea>-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <div *ngIf='value.interceded' style='margin-left: 30px'>-->
+<!--          <i *ngIf='value.isEdit' (click)='save(value)' class='pi pi-save icon-button'></i>-->
+<!--          <i *ngIf='!value.isEdit' (click)='edit(value)' class='pi pi-pencil icon-button'></i>-->
+<!--          <i class='pi pi-trash icon-button' (click)='delete(value)'></i>-->
+<!--        </div>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--</p-table>-->

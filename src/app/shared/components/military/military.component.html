@@ -1,0 +1,9 @@
+<section>
+  <p class="text">
+    <ng-content></ng-content>
+  </p>
+  <div class="input">
+    <p class="input__text">{{selectedMilitaryMen ? selectedMilitaryMen : 'Выбрать военнослужащего...'}}</p>
+    <i class="pi pi-ellipsis-h icon-pointer" (click)="!disabled && showSelectionMenu()"></i>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<div class='content'>
+  <form [formGroup]='form' (ngSubmit)='addSoldier()'>
+    <label for='shiftPosition' class='dropdown shift-position header'>Должность в смене</label>
+    <p-dropdown id='shiftPosition'
+                [options]='data'
+                optionValue='id'
+                optionLabel='shiftPosition'
+                placeholder='Выбрать'
+                formControlName='shiftPosition'
+    >
+    </p-dropdown>
+    <span class='dropdown shift-position header'>Военнослужащий</span>
+    <p-dropdown id='soldierName'
+                [options]='data'
+                optionValue='id'
+                optionLabel='name'
+                placeholder='Выбрать'
+                formControlName='soldierName'
+    >
+    </p-dropdown>
+    <div class='radio-buttons-container'>
+      <span class='radio-buttons-header'>Допуск</span>
+      <div class="p-field-radiobutton">
+        <p-radioButton name="shiftAdmission" value="admitted" inputId="admitted" formControlName='shiftAdmission'></p-radioButton>
+        <label for="admitted">допущен</label>
+      </div>
+      <div class="p-field-radiobutton">
+        <p-radioButton name="shiftAdmission" value="non-admitted" inputId="non-admitted" formControlName='shiftAdmission'></p-radioButton>
+        <label for="non-admitted">не допущен</label>
+      </div>
+    </div>
+    <div class='buttons-container'>
+      <button pButton
+              pRipple
+              type="submit"
+              class="p-button-info"
+              label='Добавить'
+      ></button>
+      <button pButton
+              type="button"
+              class="p-button-text p-button-plain"
+              label='Отмена'
+              (click)='closeDialog()'
+      ></button>
+    </div>
+  </form>
+</div>

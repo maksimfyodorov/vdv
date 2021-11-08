@@ -1,0 +1,79 @@
+:host {
+  ::ng-deep {
+    .ui-toolbar-group-left {
+      font-family: Noto Sans;
+      margin-top: 10px;
+    }
+
+    .ui-toolbar-group-left .p-button {
+      font-family: Noto Sans;
+    }
+
+    .cancel-dialog-button {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 40px;
+      width: 54px !important;
+      background-color: white;
+      color: #7c8086;
+      border-color: white;
+    }
+
+    .cancel-dialog-button:hover {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 40px;
+      width: 54px !important;
+      background-color: white;
+      color: #868f99;
+      border-color: white;
+    }
+
+    .edit-button {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 8px 24px;
+      width: 117px !important;
+      text-align: center;
+      height: 40px;
+      background: #228BE6;
+      border-radius: 4px;
+    }
+
+    .edit-button:hover {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 8px 24px;
+      width: 117px !important;
+      text-align: center;
+      height: 40px;
+      background: #1e7fd2;
+      border-radius: 4px;
+    }
+
+    .p-tree {
+      border: none;
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  color: #7c8086;
+}

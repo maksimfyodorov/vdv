@@ -1,0 +1,142 @@
+main {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+p {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  color: #68737F;
+  margin: 4px 0;
+}
+
+app-upload-files {
+  width: 100%;
+}
+
+.black {
+  color: black;
+}
+
+.end-date-calendar {
+  margin-left: 25px;
+}
+
+.inspection-period {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 500px;
+  margin-top: 16px;
+}
+
+.vertical-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.width-max {
+  width: 100%;
+}
+
+.wrap-warning-container {
+  background: #FFE3E3;
+  border: 1px solid #FF6B6B;
+  border-radius: 4px;
+  height: 64px;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  padding-left: 25px;
+  color: #E03131;
+}
+
+.title-bold {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #252B34;
+}
+
+:host {
+  ::ng-deep {
+
+    .cancel-dialog-button:hover {
+      background: none;
+    }
+
+    .row .p-calendar-w-btn .p-inputtext {
+      border-right: none;
+    }
+
+    .row span .p-button {
+      background: none;
+      color: #959EA9;
+      border: 1px solid #ced4da;
+      border-left: none;
+    }
+
+    .create-button {
+      background: none;
+      border: 2px solid #228BE6;
+      color: #228BE6;
+    }
+
+    .p-calendar {
+      width: 240px;
+    }
+
+    .ui-toolbar-group-left {
+      font-family: Noto Sans;
+      margin-top: 16px;
+    }
+
+    .ui-toolbar-group-left .p-button {
+      font-family: Noto Sans;
+      width: 153px;
+      height: 40px;
+    }
+
+    .ui-toolbar-group-left .p-button:nth-child(2) {
+      margin-left: 10px;
+    }
+
+    .cancel-dialog-button {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      background-color: white;
+      color: #959EA9;
+      border-color: white;
+    }
+
+    .cancel-dialog-button:hover {
+      color: #454951;
+    }
+
+    .cancel-wrng-button {
+      color: white;
+      background: #e02929;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .cancel-wrng-button:hover {
+      background: #f72e2e;
+      color: #fffdfd;
+    }
+  }
+}

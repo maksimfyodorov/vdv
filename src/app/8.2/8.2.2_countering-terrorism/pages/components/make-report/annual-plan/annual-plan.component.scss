@@ -1,0 +1,150 @@
+.message {
+    width: 952px;
+    height: 86px;
+    background: rgba(208, 235, 255, 0.4);
+    border: 1px solid #d0ebff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 16px 0 0 16px;
+    font-size: 12px;
+    color: #252b34;
+    margin-bottom: 10px;
+}
+
+.criticalFacilities {
+    width: 448px;
+    height: 40px;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+    padding: 8px 8px 8px 16px;
+}
+
+.row {
+    width: 952px;
+    display: flex;
+    flex-direction: row;
+}
+
+.contentSpaceBetween {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #252b34;
+}
+
+.btn {
+    width: 115px;
+    color: #228be6;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.text {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #484f59;
+    width: 952px;
+}
+
+.width145 {
+    width: 145px;
+}
+
+.item {
+    width: 952px;
+    display: flex;
+    align-items: baseline;
+}
+
+.description {
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.points {
+    width: 100%;
+    height: 0;
+    border-bottom: 1px dotted #c7cdd3;
+}
+
+.precio {
+    flex-shrink: 0;
+    cursor: pointer;
+    color: #959ea9;
+}
+
+.index {
+    width: 87px;
+    height: 56px;
+}
+
+.paragraph {
+    width: 103px;
+    height: 56px;
+}
+
+.event {
+    width: 544px;
+    height: 56px;
+}
+
+.status {
+    width: 170px;
+    height: 56px;
+}
+
+.trash {
+    width: 48px;
+    height: 56px;
+}
+
+.paragraphInput {
+    width: 80px;
+    height: 40px;
+}
+
+.eventInput {
+    width: 528px;
+    height: 40px;
+}
+
+.statusInput {
+    width: 130px;
+    height: 40px;
+}
+
+.textStyle {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252b34;
+}
+
+hr {
+    height: 1px;
+    color: #c7cdd3;
+    background: #c7cdd3;
+    border: 0;
+    margin: 0;
+    width: 952px;
+}
+
+textarea {
+    width: 952px;
+    height: 72px;
+}

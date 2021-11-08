@@ -1,0 +1,280 @@
+@import 'src/styles/primeng-fix-style';
+@import '../../../../../../../../8.2/8.2.30_commander-orders/common/mixins/calendar';
+
+.saved-documents {
+  min-height: 500px;
+  user-select: none;
+  font-family: Noto Sans, sans-serif;
+}
+
+.settings {
+  margin-bottom: 30px;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    & + & {
+      margin-top: 40px;
+    }
+
+    &-title-row {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    &-periods-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-inner-container {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  &__period,
+  &__date,
+  &__week,
+  &__month,
+  &__year {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__period {
+    width: 200px;
+    position: relative;
+
+    label {
+      position: absolute;
+      top: -20px;
+    }
+  }
+
+  &__periods {
+    display: flex;
+    gap: 20px;
+    position: relative;
+
+    &-input {
+      width: 200px;
+      position: relative;
+
+      label {
+        position: absolute;
+        top: -20px;
+      }
+    }
+
+    &-input-tip {
+      margin: 0;
+      padding: 0;
+      font-size: 11px;
+      position: absolute;
+      bottom: -20px;
+      color: #959EA9;
+
+      i {
+        font-size: 11px;
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.category {
+  margin-bottom: 16px;
+
+  &__title {
+    color: #495057;
+
+    span {
+      color: #969ea8;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    &-user-icon {
+      margin: 5px 0 0 0;
+      font-size: 12px;
+      color: #959EA9;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 14px;
+  margin: 8px 0;
+  padding: 0;
+
+  &__asterisk {
+    color: #D32F2F !important;
+  }
+}
+
+.delete-button {
+  color: #F03E3E;
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+:host ::ng-deep {
+  @include calendar-weekend;
+
+  .mat-expansion-panel-header {
+    margin-bottom: 10px;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+  .mat-content {
+    justify-content: space-between;
+  }
+
+  .p-inputtext {
+    width: 100%;
+  }
+
+  .p-calendar:hover {
+    button {
+      border-color: #2196F3;
+    }
+  }
+
+  .p-inputtext:enabled:focus + button {
+    border-color: #2196F3;
+  }
+
+  .p-button:focus {
+    box-shadow: none !important;
+  }
+
+  .p-button {
+    transition: none !important;
+  }
+
+  .p-inputtext:enabled:focus {
+    box-shadow: none;
+  }
+
+  .category__item-container {
+    width: 100%;
+
+    .input {
+      height: 36px;
+      width: 100%;
+    }
+  }
+
+  .settings__period .p-dropdown,
+  .settings__periods-input .p-dropdown {
+    width: 100%;
+  }
+}
+
+:host::ng-deep.military-units {
+  display: flex;
+
+  &__left-side {
+    width: 50%;
+    padding: 0 10px 10px 0;
+  }
+
+  &__right-side {
+    width: 50%;
+    padding: 0 0 10px 10px;
+    border-left: 1px solid #C4C4C4;
+
+    button {
+      float: right;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    margin: 15px 0 0;
+
+    i:last-child {
+      pointer-events: none;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  &__clear-search-button {
+    cursor: pointer;
+
+    &:hover + input {
+      border-color: #2196F3;
+    }
+  }
+
+  &__form-array-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 55px 0 0;
+  }
+
+  &__form-array-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      margin-left: 10px;
+      max-width: 33px;
+      width: 100%;
+    }
+  }
+
+  .mat-slide-toggle {
+    float: right;
+    user-select: none;
+  }
+
+  .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+    background-color: #2196F3;
+  }
+
+  .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
+    background-color: #fff;
+  }
+
+  .mat-slide-toggle .mat-slide-toggle-ripple {
+    display: none;
+  }
+}
+
+::ng-deep .document-formalized-military-units__dropdown {
+  max-width: unset !important;
+}

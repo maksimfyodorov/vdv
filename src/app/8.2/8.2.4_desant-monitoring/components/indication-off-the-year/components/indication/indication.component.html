@@ -1,0 +1,30 @@
+<div class="indication__wrapper">
+  <div class="input__text__wrapper">
+    <div class="label">Указание {{indicationIndex + 1}}</div>
+    <div class="delete__button">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Удалить"
+        class="p-button-danger p-button-text"
+        (click)="deleteIndication()"
+      ></button>
+    </div>
+    <textarea pInputTextarea [(ngModel)]="selectedReport"></textarea>
+  </div>
+  <div class="buttons__wrapper">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Выбрать  из  шаблонов"
+      class="p-button-outlined"
+      (click)="show()"
+    ></button>
+    <button pButton pRipple type="button" label="Сохранить шаблон" class="p-button-outlined"></button>
+  </div>
+  <div class="documents__component">
+    <app-documents [documentsToShow]="documents"> </app-documents>
+  </div>
+</div>

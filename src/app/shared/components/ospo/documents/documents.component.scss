@@ -1,0 +1,162 @@
+@import "../../../../../styles/primeng-fix-style";
+
+.documents {
+  padding: 10px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  &__category {
+    color: #398BE2;
+    font-weight: bold;
+  }
+
+  &__title {
+    padding: 0 10px;
+    font-size: 16px;
+    margin: 0 !important;
+  }
+
+  &__count {
+    color: #969ea8;
+  }
+
+  &__attache-btn-container {
+    margin: 10px 0;
+    max-width: fit-content;
+  }
+  &__category {
+    margin: 10px 0;
+  }
+}
+
+
+.document {
+  margin: 5px 0;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #E1E3E8;
+  flex-wrap: wrap;
+
+
+
+  &__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button-bar {
+    display: flex;
+  }
+
+  &__data {
+    display: flex;
+    align-items: center;
+    span {
+      overflow: hidden;
+    }
+  }
+
+  &__icon {
+    margin-right: 20px;
+  }
+
+  &__tooltip {
+    left: 100px;
+
+    .ui-tooltip-text {
+      width: 100em;
+    }
+  }
+
+  &__info {
+    margin: 10.85px;
+    color: #228BE6;
+  }
+
+  &_single-file {
+    border: 1px solid #E1E3E8;
+  }
+
+  .mat-expansion-panel-header {
+    height: unset !important;
+  }
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+
+  &__icon {
+    margin-right: 20px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    display: flex;
+    align-items: center;
+  }
+
+
+}
+
+:host ::ng-deep {
+
+  .p-tooltip {
+    max-width: fit-content;
+  }
+
+  .p-header {
+    width: 100%;
+  }
+
+  .p-accordion {
+
+    .p-accordion-header:not(.p-highlight):not(.p-disabled):hover .p-accordion-header-link {
+      background: #FFFFFF !important;
+    }
+
+    .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+      font-weight: normal;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .p-accordion-header .p-accordion-header-link {
+      font-weight: normal;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    &-header-link {
+      padding: 0 !important;
+    }
+
+    &-content {
+      padding: 0 !important;
+    }
+
+    &-tab {
+      width: 100%;
+    }
+  }
+
+}

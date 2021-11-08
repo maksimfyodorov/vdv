@@ -1,0 +1,28 @@
+.video-settings-page {
+  width: calc(100vw - 800px);
+
+  padding: 2rem;
+
+  ::ng-deep .p-inputtext {
+    width: 20rem;
+  }
+
+  ::ng-deep .p-dropdown {
+    width: 20rem;
+  }
+
+  ::ng-deep .p-calendar {
+    width: 20rem;
+  }
+}
+
+.nav-btns {
+  display: flex;
+  border: 0.5px solid #0d89ec;
+
+  ::ng-deep .p-button {
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+  }
+}

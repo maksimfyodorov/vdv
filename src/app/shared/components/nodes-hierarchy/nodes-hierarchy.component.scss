@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  box-shadow: 4px 0 12px -2px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+
+.folded {
+  min-width: 65px;
+  width: 65px;
+}
+
+.title {
+  margin-left: 18px;
+  min-height: 67px;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 18px);
+}
+
+.hierarchy {
+  margin: 0 16px 16px;
+}
+
+.expand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  &__button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+
+
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  gap: 8px;
+  margin-right: 24px;
+  h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+
+:host::ng-deep {
+  .p-scrollpanel {
+    height: calc(100vh - 167px);
+  }
+}

@@ -1,0 +1,23 @@
+<h1 class="settings__title">Настройки</h1>
+<p-tabView>
+    <p-tabPanel header='Задачи десантирования'>
+      <ng-template pTemplate='content'>
+        <app-landing-tasks></app-landing-tasks>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Воздушные суда'>
+      <ng-template pTemplate='content'>
+        <app-aircraft></app-aircraft>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Аэродромы'>
+      <ng-template pTemplate='content'>
+        <app-airfields></app-airfields>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Категории подразделений'>
+      <ng-template pTemplate='content'>
+        <app-categories-of-units></app-categories-of-units>
+      </ng-template>
+    </p-tabPanel>
+</p-tabView>

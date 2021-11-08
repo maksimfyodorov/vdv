@@ -1,0 +1,82 @@
+<form class="orders-filter" [formGroup]="form">
+  <h2 class="title">Фильтр</h2>
+
+  <section class="dates">
+    <h3 class="section-title">Дата поступления</h3>
+    <div class="dates__container">
+      <div class="input-wrap" style="width: 45%">
+        <p-calendar [showIcon]="true"
+                    formControlName="rd_start"
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon="pi pi-calendar"
+        ></p-calendar>
+      </div>
+      &#8212;
+      <div class="input-wrap" style="width: 45%">
+        <p-calendar [showIcon]="true"
+                    formControlName="rd_end"
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon="pi pi-calendar"
+        ></p-calendar>
+      </div>
+    </div>
+  </section>
+
+  <section class="dates">
+    <h3 class="section-title">Срок исполнения</h3>
+    <div class="dates__container">
+      <div class="input-wrap" style="width: 45%">
+        <p-calendar [showIcon]="true"
+                    formControlName="ed_start"
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon="pi pi-calendar"
+        ></p-calendar>
+      </div>
+      &#8212;
+      <div class="input-wrap" style="width: 45%">
+        <p-calendar [showIcon]="true"
+                    formControlName="ed_end"
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon="pi pi-calendar"
+        ></p-calendar>
+      </div>
+    </div>
+  </section>
+
+  <section class="order-status" formArrayName="status">
+    <h3 class="section-title">Статус задания</h3>
+    <mat-checkbox *ngFor="let checkbox of checkboxes"
+                  [checked]="statusesModel.isSelected(checkbox.status)"
+                  (change)="statusesModel.toggle(checkbox.status)"
+                  [disableRipple]="true"
+                  color="primary"
+    >
+      {{checkbox.label}}
+    </mat-checkbox>
+  </section>
+
+  <section class="executor-section">
+    <div class="administration">
+      <h3 class="section-title">Управление</h3>
+      <app-military-units-dropdown-flat formControlName="mu"></app-military-units-dropdown-flat>
+    </div>
+
+    <div class="executor">
+      <h3 class="section-title">Исполнитель</h3>
+      <app-military class="section-title" [loadExecutive]="true" formControlName="executor"></app-military>
+      <p class="executor__user-icon" *ngIf="form.get('executor').value?.appointment">
+        <i class="pi pi-user"></i>
+        {{form.get('executor').value?.appointment}}
+      </p>
+    </div>
+  </section>
+
+  <section class="buttons">
+    <button (click)="filterOrders()" [disabled]="isFormEmpty" label="Применить" pButton></button>
+    <p-button (click)="resetForm()" [disabled]="isFormEmpty" label="Сбросить" class="clear-button"></p-button>
+  </section>
+</form>

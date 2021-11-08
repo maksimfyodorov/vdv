@@ -1,0 +1,142 @@
+<div [formGroup]="teachingForm">
+    <div class='message'>
+        Участие органов управления и войск (сил) в мероприятиях военного международной антитеррористической
+        деятельности.Участие в международных учениях и тренировках.
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo head">Учения</div>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Участие в международных учениях и тренировках</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="internationalExercisesFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Состояние криминогенной обстановки (в том числе происшествия (преступления) террористического характера,
+            имевшие
+            место в отчетном периоде (в соответствии с приказом командующего Воздушно-десантными войсками от 30 июня
+            2014 г.
+            No143 дсп).
+        </div>
+        <div *ngIf="this.teachingForm.controls['internationalExercisesFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'Участие в международных учениях и тренировках')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Участие в международных учениях и тренировках',this.teachingForm.controls['internationalExercises'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Участие в международных учениях и тренировках')"
+                pInputTextarea
+                formControlName="internationalExercises"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Участие в штабных переговорах</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="participationStaffFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Участие в штабных переговорах, консультациях, рабочих встречах, мероприятиях по обмену опытом и
+            международного военного сотрудничества.
+        </div>
+        <div *ngIf="this.teachingForm.controls['participationStaffFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(1,'Участие в штабных переговорах')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Участие в штабных переговорах',this.teachingForm.controls['participationStaff'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Участие в штабных переговорах')"
+                pInputTextarea
+                formControlName="participationStaff"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo">Участие в разработке международных нормативно-правовых и иных документов</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="developmentParticipationFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div *ngIf="this.teachingForm.controls['developmentParticipationFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(2,'Участие в разработке международных нормативно-правовых и иных документов')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Участие в разработке международных нормативно-правовых и иных документов',this.teachingForm.controls['developmentParticipation'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Участие в разработке международных нормативно-правовых и иных документов')"
+                pInputTextarea
+                formControlName="developmentParticipation"
+            ></textarea>
+        </div>
+        <div class="row contentSpaceBetween">
+            <div class="logo head">Проблемные вопросы</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="problematicIssuesFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div *ngIf="this.teachingForm.controls['problematicIssuesFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(3,'Проблемные вопросы')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Проблемные вопросы',this.teachingForm.controls['problematicIssues'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Проблемные вопросы')"
+                pInputTextarea
+                formControlName="problematicIssues"
+            ></textarea>
+        </div>
+    </div>
+    <div class="con">
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='right'
+            routerLink='/countering-terrorism/make-report/verification'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+            (click)='reducePageIndex()'
+        ></p-button>
+        <p-button
+            label='Завершить'
+            [routerLink]="['/countering-terrorism/create']"
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+            (click)='create()'
+        ></p-button>
+    </div>
+</div>

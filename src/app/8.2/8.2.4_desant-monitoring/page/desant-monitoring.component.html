@@ -1,0 +1,16 @@
+<div class='desant-monitoring__military-unit-sidebar'>
+  <app-military-units-sidebar (selectMilitaryUnitChanged)='setCurrentMilitaryUnit($event)'></app-military-units-sidebar>
+</div>
+<div class="desant-monitoring__tab_wrapper">
+<div class='desant-monitoring__wrapper'>
+  <p-tabMenu [model]="items"
+             [activeItem] = "items[desantTabsService.activeTabIndex]"
+  ></p-tabMenu>
+  <router-outlet></router-outlet>
+</div>
+  <div class="desant-monitoring__print">
+    <app-documents-formalized groupName='8.2.4'></app-documents-formalized>
+  </div>
+</div>
+
+

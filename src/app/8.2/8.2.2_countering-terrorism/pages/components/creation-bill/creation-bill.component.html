@@ -1,0 +1,35 @@
+<app-bill-cell></app-bill-cell>
+<div class="container">
+    <div
+        *ngIf="completeCreationFlag"
+        class="row"
+    >
+        <div class="block">
+            <div class="logo">Итоги по донесению</div>
+            <div class="data">Военных городков: {{reportResults.militaryCity}}</div>
+        </div>
+        <div class="block">
+            <div class="data">режим В</div>
+            <div class="text">{{reportResults.modeB}}</div>
+        </div>
+        <div class="block">
+            <div class="data">режим АБ</div>
+            <div class="text">{{reportResults.modeAV}}</div>
+        </div>
+        <div class="block">
+            <div class="data">ЛС</div>
+            <div class="text">{{reportResults.ls}}</div>
+        </div>
+        <div class="block">
+            <div class="data">ВВТ АТ</div>
+            <div class="text">{{reportResults.vvAT}}</div>
+        </div>
+        <div class="block">
+            <div class="data">ВВТ БТ</div>
+            <div class="text">{{reportResults.vvBT}}</div>
+        </div>
+    </div>
+</div>
+<div class="modal">
+    <router-outlet name="modal"></router-outlet>
+</div>

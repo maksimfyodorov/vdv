@@ -1,0 +1,59 @@
+:host::ng-deep .academic__year {
+  .p-inputtext {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #959ea9;
+  }
+  .p-dropdown {
+    width: 144px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .p-dropdown-trigger-icon {
+    color: #959ea9;
+  }
+}
+
+:host::ng-deep .period {
+  .p-inputtext {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #959ea9;
+  }
+  .p-dropdown {
+    width: 144px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  .p-dropdown-trigger-icon {
+    color: #959ea9;
+  }
+}
+
+:host::ng-deep .add__indication-button {
+  .p-button {
+    width: 189px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+.academic__year {
+  margin-right: 16px;
+}
+
+.period {
+  margin-right: 16px;
+}
+
+.inputs__wrapper {
+  margin-bottom: 32px;
+}
+
+.container {
+  margin-top: 40px;
+}

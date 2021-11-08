@@ -1,0 +1,9 @@
+.error {
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #E1E3E8;
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+}

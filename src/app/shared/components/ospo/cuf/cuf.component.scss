@@ -1,0 +1,52 @@
+.cuf {
+  min-width: 580px;
+  max-width: 700px;
+
+  &__title {
+    margin: 0 0 12px 0;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid #E1E3E8;
+
+  }
+
+  &__message {
+    margin-right: 128px;
+
+    label {
+      display: block;
+      color: #68737F;
+      margin-bottom: 4px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+  }
+}
+
+
+.types {
+  margin-bottom: 10px;
+  &__item {
+    padding: 6px 0;
+
+    p-radiobutton {
+      margin-right: 8px;
+    }
+  }
+}
+
+.pi-stop:before {
+  content: "\00d8";
+}
+
+:host ::ng-deep {
+  .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none !important;
+  }
+}

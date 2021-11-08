@@ -1,0 +1,113 @@
+<form [formGroup]='form' (ngSubmit)='onSubmit()'>
+  <fieldset [disabled]='!isChangingPostPermitted'>
+    <div class="posts-shifts-wrapper">
+      <div class='post-shifts'>
+
+        <div class='post-number-container'>
+          <div class='post-number-header-container caption'>
+            № Поста
+          </div>
+          <div class='post-number-input-container'>
+            <input type="text" pInputText formControlName='number' class='post-number-input'/>
+          </div>
+        </div>
+
+        <div class='shifts-container'>
+          <div class='shifts-header-container caption'>
+            <span>Количество смен</span>
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-plus-circle"
+              class="p-button-rounded p-button-text"
+              (click)='addShift()'
+              [disabled]='!isChangingPostPermitted'
+            ></button>
+          </div>
+          <div class='shifts-inputs-container'>
+            <div class='shift-container empty' *ngIf='shifts.length === 0'>
+              <span>Смены отсутствуют</span>
+            </div>
+            <div formArrayName='shifts' class='shift-container' *ngFor="let shift of shifts.controls; index as i">
+              <div class='shift-input-container' [formGroupName]="i">
+                <input type="text" pInputText formControlName='number' />
+                <div class="delete-shift-button-wrapper"
+                    pTooltip="Нельзя удалить все смены"
+                    [tooltipDisabled]="shifts.length !== 1"
+                >
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-text p-button-plain"
+                    (click)='deleteShift(i)'
+                    [disabled]='shifts.length === 1 || !isChangingPostPermitted'
+                  ></button>
+                </div>
+
+              </div>
+              <div class='on-duty-info' *ngIf='shift.get("uuid")'>
+                <i class="pi pi-info-circle"></i>
+                <span>  {{shift.get('days').value}} дн. {{shift.get('men').value}} дежурных</span>
+              </div>
+            </div>
+          </div>
+          <div class='alert shifts'>
+            <span *ngIf='form.errors?.shiftNamesMatch'>Названия смен не должны повторяться</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="inputs-container">
+      <span class="p-float-label">
+        <input type="text" pInputText formControlName='atsMo'  id='atsMo[{{formIndex}}]' />
+        <label for='atsMo[{{formIndex}}]'>АТС МО</label>
+      </span>
+      <span class="p-float-label">
+        <input type="text" pInputText formControlName='atsR' id='atsR[{{formIndex}}]' />
+        <label for='atsR[{{formIndex}}]'>АТС-Р</label>
+      </span>
+      <span class="p-float-label">
+        <input type="text" pInputText formControlName='zsSpd' id='zsSpd[{{formIndex}}]' />
+        <label for='zsSpd[{{formIndex}}]'>ЗС СПД</label>
+      </span>
+      <span class="p-float-label">
+        <input type="text" pInputText formControlName='msOek' id='msOek[{{formIndex}}]' />
+        <label for='msOek[{{formIndex}}]'>МС ОЭК</label>
+      </span>
+      <span class="p-float-label">
+        <input type="text" pInputText formControlName='zvks' id='zvks[{{formIndex}}]' />
+        <label for='zvks[{{formIndex}}]'>ЗВКС</label>
+      </span>
+    </div>
+
+    <div class='alert all'>
+      <span *ngIf='form.invalid && form.dirty'>Заполните все поля, чтобы сохранить пост</span>
+    </div>
+    <div class='buttons-container'>
+    <button pButton
+            label='Удалить пост'
+            icon='pi pi-trash'
+            class='p-button-outlined p-button-danger'
+            type='button'
+            (click)='deletePost()'
+            [loading]='isLoading'
+            [disabled]='!isChangingPostPermitted'
+    ></button>
+    <button *ngIf='form.dirty || !form.value.uuid'
+            pButton
+            label='Сохранить'
+            icon='pi pi-save'
+            class='p-button-outlined'
+            type='submit'
+            [disabled]='form.invalid'
+            [loading]='isLoading'
+    ></button>
+  </div>
+  </fieldset>
+
+</form>

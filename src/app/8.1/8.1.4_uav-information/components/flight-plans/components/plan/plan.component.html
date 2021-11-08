@@ -1,0 +1,55 @@
+<div class='period'>
+  <div class='period__inputs' [formGroup]='periodForm'>
+    <div class='input-wrap'>
+      <label for='year'>Учебный год</label>
+      <p-dropdown formControlName='year'
+                  [options]='arrayOfYear'
+                  [autoDisplayFirst]='false'
+                  [emptyMessage]='"Нет данных для отображения"'
+                  (onChange)='yearChanges($event)'
+                  id='year'></p-dropdown>
+    </div>
+
+    <div class='input-wrap'>
+      <label for='season'>Период</label>
+      <p-dropdown id='season'
+                  formControlName='period'
+                  [autoDisplayFirst]='false'
+                  [options]='arrayOfPeriodByYear'
+                  optionLabel='name'
+                  optionValue='uuid'
+                  (onChange)='periodChanges($event)'
+                  [emptyMessage]='"Нет данных для отображения"'></p-dropdown>
+    </div>
+
+    <div class='input-wrap'>
+      <label for='type'>Документы</label>
+      <input class='documents' [disabled]='!planData?.uuid' [value]='getLabelOfDocuments()'
+             (click)='openDocumentsModal()' id='type' readonly type='text'
+             pInputText />
+      <i class='pi pi-ellipsis-h icon-choose'></i>
+    </div>
+  </div>
+
+  <div class='period__btns'
+       *ngIf='planService.militaryUnitId == selectionTreeService.selectionTreeSubject.value[0]?.id; else subordinatesTemplate'>
+    <p-button *ngIf='planData?.status === "not_created"' (onClick)='createPlan()' label='Создать' icon='pi pi-plus'
+              iconPos='left'></p-button>
+    <p-button *ngIf='planData?.status === "created"' (onClick)='changePlanStatusOnDelete()' label='Удалить план'
+              icon='pi pi-trash'
+              class='delete' iconPos='left'></p-button>
+    <p-button *ngIf='planData?.status === "created" && roleService.userPermissions$.value["access.delete_plan"]'
+              (onClick)='deletePlan()' label='Удалить план полностью' icon='pi pi-trash'
+              class='delete' iconPos='left'></p-button>
+    <p-button *ngIf='planData && planData?.status !== "not_created"' label='История ...' (click)='checkHistory()'
+              class='outline'></p-button>
+    <p-button *ngIf='planData?.status === "created"' (onClick)='savePlan()' label='Сохранить'></p-button>
+  </div>
+</div>
+
+<ng-template #subordinatesTemplate>
+  <div class='period__btns'>
+    <p-button *ngIf='planData && planData?.status !== "not_created"' label='История ...' (click)='checkHistory()'
+              class='outline'></p-button>
+  </div>
+</ng-template>

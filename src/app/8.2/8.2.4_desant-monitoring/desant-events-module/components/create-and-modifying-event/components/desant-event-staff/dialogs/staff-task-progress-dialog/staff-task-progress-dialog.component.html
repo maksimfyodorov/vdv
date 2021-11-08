@@ -1,0 +1,106 @@
+<p-tabView>
+  <p-tabPanel header="Общее">
+    <div class="modal">
+      <div class="modal__general">
+        <div class="modal__general_container">
+          <h5>Дата выполнения:</h5>
+          <div class="modal__general_container_date">
+            <div class="modal__general_container_inner">
+              <p-calendar [(ngModel)]="dateStartTask"
+                          [showIcon]="true"
+                          class="calendar"
+              ></p-calendar>
+            </div>
+            <div class="modal__general_container_inner">
+              <h5></h5>
+              <p-calendar [(ngModel)]="timeStartTask"
+                          [timeOnly]="true"
+                          [showIcon]="true"
+                          icon="pi pi-clock"
+                          class="calendar"
+              ></p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="modal__general_container">
+          <div class="modal__general_container_date">
+            <div class="modal__general_container_inner">
+              <h5>Аэропорт взлета:</h5>
+              <input id="disabled-input-disabled-airdrome_landing" type="text" pInputText [disabled]="true" [(ngModel)]="airdromeStart" />
+            </div>
+            <div class="modal__general_container_inner">
+              <h5>Площадка приземления</h5>
+              <input id="disabled-input-disabled-landing-area" type="text" pInputText [disabled]="true" [(ngModel)]="landingArea" />
+            </div>
+          </div>
+        </div>
+        <div class="modal__general_container">
+          <div class="modal__general_container_date">
+            <div class="modal__general_container_inner">
+              <h5>Летательное средство</h5>
+              <input id="disabled-input-airplane" type="text" pInputText [disabled]="true" [(ngModel)]="airplane" />
+            </div>
+            <div class="modal__general_container_inner">
+              <h5>Место специальных мероприятий</h5>
+              <span class="p-input-icon-right">
+          <i class="pi pi-map-marker" (click)="openCoordinateModal()"></i>
+           <input type="text" pInputText [(ngModel)]="selectedLandingAria"/>
+          </span>
+            </div>
+          </div>
+        </div>
+        <div class="p-field-checkbox">
+          <p-checkbox [(ngModel)]="banOtherAirplane" binary="true" inputId="binary"></p-checkbox>
+          <label for="binary">Запрещается совершать прыжки из других летательных средств</label>
+        </div>
+        <div class="p-field-checkbox">
+          <p-checkbox [(ngModel)]="stateVDT" binary="true" inputId="binary"></p-checkbox>
+          <label for="binary">ВДТ сработала штатно</label>
+        </div>
+        <div class="p-field-checkbox">
+          <p-checkbox [(ngModel)]="sportState" binary="true" inputId="binary"></p-checkbox>
+          <label for="binary">Спортивная задача</label>
+        </div>
+        <div class="modal__report__text-aria">
+          <h5>Доклад по задаче</h5>
+          <textarea rows="5" cols="30" pInputTextarea></textarea>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Подразделения">
+    <div class="modal">
+      <div class="subdivisions__button">
+        <button pButton pRipple type="button" label="Добавить" class="p-button-outlined" icon="pi pi-plus" (click)="addDesantSubdivision('subdivisions')"></button>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Происшествия">
+    <div class="modal">
+      <div class="modal__incidents">
+        <div class="p-field-checkbox">
+          <p-checkbox [(ngModel)]="incidentsPresence" binary="true" inputId="binary"></p-checkbox>
+          <label for="binary">Наличие происшествий / травм / инцидентов</label>
+        </div>
+        <span class="element__incidient-title">Отказы в работе парашютных систем</span>
+        <div class="subdivisions__button">
+          <button pButton pRipple type="button" label="Добавить" class="p-button-outlined" icon="pi pi-plus" (click)="addDesantSubdivision('incidient')"></button>
+        </div>
+      </div>
+
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Документы">
+    <div class="modal">
+      <app-documents [documentsToShow]="documents" [title]=titleDoc></app-documents>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+<div class="modal__report__buttons">
+  <p-button label="Задача выполнена"></p-button>
+  <button pButton pRipple type="button" label="Этап выполнен" class="p-button-outlined"></button>
+  <button pButton pRipple type="button" label="Задача не выполнена" class="p-button-danger"></button>
+  <button pButton pRipple type="button" label="Отмена" class="p-button-text p-button-plain"
+          (click)="closeModal()"></button>
+</div>
+

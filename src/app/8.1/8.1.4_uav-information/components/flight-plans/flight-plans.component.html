@@ -1,0 +1,154 @@
+<div class='flight-plans__content' [appLoader]="loader.isLoading$">
+
+  <app-plan #plan></app-plan>
+
+  <div class='map-content'>
+    <div class='map-content__tasks-wrapper'>
+      <ng-container
+        *ngTemplateOutlet="isFilterModeSelected ? filterTemplate : taskTemplate"
+      ></ng-container>
+    </div>
+
+    <div class="document" appMapResize [mapContext]="olService.map">
+      <p class="application">Приложение 4</p>
+      <h2 class="title">Донесение по полетному заданию</h2>
+      <div class="document-wrap">
+        <div class="document-info">
+          <p><b>В/формирование:</b> Боевые подразделения</p>
+          <p><b>Оператор:</b> {{planService.task?.operator?.fio || '-'}}</p>
+          <p><b>Задание:</b> {{planService.task?.name || '-'}}</p>
+          <p><b>Время полета - план:</b> с {{planService.task?.start_flight_plan  | date: 'dd.MM.yy HH:mm'}}
+            по {{planService.task?.end_flight_plan | date: 'dd.MM.yy HH:mm'}}</p>
+          <p><b>Время полета - факт: </b>с {{planService.task?.start_flight_fact  | date: 'dd.MM.yy HH:mm'}}
+            по {{planService.task?.end_flight_fact  | date: 'dd.MM.yy HH:mm'}}</p>
+          <p><b>БЛА: </b>{{planService.task?.bpla?.number}}</p>
+          <p><b>Позывной:</b> {{planService.task?.bpla?.vvst_sample_name}}</p>
+          <p><b>Точки трассы:</b></p>
+
+          <table class="coordinate-table">
+            <tr>
+              <th>Координаты задания:</th>
+              <th>Отметка выполнения:</th>
+            </tr>
+
+            <tr *ngFor="let point of planService.task?.coordinates_track_points">
+              <td>{{point?.x}} {{point.y}}</td>
+              <td>
+                <div class="print-track-point-status {{point.status}}">{{getPrintTrackPointTitle(point.status)}}</div>
+              </td>
+            </tr>
+          </table>
+
+          <p><b>Примечание по полету: </b>{{planService.task?.note || '-'}}</p>
+        </div>
+        <div class='map-content__map'>
+          <div class='button-wrap'>
+            <p-button icon='pi pi-sliders-v' (onClick)="changeMode()" class='outline filter'
+                      iconPos='left'></p-button>
+            <p-button *ngIf="planComponent?.planData?.uuid && planComponent?.planData?.status === 'created'" icon='pi pi-plus'
+                      (onClick)='openTaskModalByMode({mode: "create"})' class='outline task-create'
+                      iconPos='left'></p-button>
+          </div>
+          <ues-map>
+            <app-ol-map-init></app-ol-map-init>
+            <app-marks></app-marks>
+            <ues-main-toolbar></ues-main-toolbar>
+          </ues-map>
+        </div>
+      </div>
+      <div *ngIf="authService.currentUser$ | async as currentUser" class="signature">
+        <table>
+          <tr>
+            <th>начальник службы РАВ</th>
+            <th></th>
+            <th>гв капитан {{currentUser.full_name}}</th>
+          </tr>
+          <tr>
+            <td>(Должность)</td>
+            <td>(Подпись)</td>
+            <td>(воинское звание, инициал имени, фамилия)</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #taskTemplate>
+  <div class="map-content__tasks-wrapper" *ngIf="tasks?.length === 0;">
+    Список заданий пуст
+  </div>
+
+  <div *ngIf="tasks?.length > 0;">
+    <div class="input__search__wrap">
+      <span class='p-input-icon-right input__search'>
+        <i *ngIf="inputText; else searchIcon" (click)='clearText()' class="pi pi-times"></i>
+        <input (input)="onInput($event)"
+               appInputDelay
+               [delayTime]='500'
+               (delayInput)='filterTasks($event)'
+               [value]="inputText ? inputText : ''"
+               type='text'
+               pInputText
+               placeholder='Поиск заданий'
+        >
+      </span>
+    </div>
+    <div class='map-content__tasks' (scroll)='scroll($event)'>
+      <div class='flight-task' *ngFor='let task of tasks' (click)="routeByTask(task)"
+           [ngClass]="{'selected-task': selectedTask?.uuid === task.uuid}">
+        <span class='flight-task__type'>{{task?.name}}</span>
+
+        <div class='flight-task__row-wrap'>
+          <p>{{task.date_created | date: 'dd.MM.yyyy HH:mm'}}</p>
+          <div class='task-status {{task.status_name}}'>{{statusesTexts[task.status_name]}}</div>
+        </div>
+
+        <div class='flight-task__row-wrap'>
+          <p>БПЛА: {{task.bpla?.vvst_sample_name || 'Не назн.'}}</p>
+          <p>Оператор: {{task.operator?.fio || 'Не назн.'}}</p>
+        </div>
+
+        <div class="flight-task__row-wrap">
+          <span>Номер: {{task.bpla?.number || 'не назн.'}}</span>
+        </div>
+
+        <div
+          *ngIf="planService.militaryUnitId == selectionTreeService.selectionTreeSubject.value[0]?.id; else subordinatesTaskViewTemplate">
+          <p-button *ngIf='task.status_name === "new"' label='Редактировать' icon='pi pi-pencil' class='outline'
+                    (onClick)="openTaskModalByMode({mode: task.status_name}, task.uuid)"
+                    iconPos='left'></p-button>
+          <p-button *ngIf='task.status_name === "planned"' label='Выполнить' icon='pi pi-check' class='outline'
+                    (onClick)="openTaskModalByMode({mode: task.status_name}, task.uuid)"
+                    iconPos='left'></p-button>
+          <p-button *ngIf='task.status_name === "completed" || task.status_name === "not_completed"' label='Просмотр'
+                    icon='pi pi-eye'
+                    class='outline'
+                    (onClick)="openTaskModalByMode({mode: task.status_name}, task.uuid)"
+                    iconPos='left'></p-button>
+        </div>
+
+        <ng-template #subordinatesTaskViewTemplate>
+          <p-button label='Просмотр'
+                    icon='pi pi-eye'
+                    class='outline'
+                    (onClick)="openTaskModalByMode({mode: task.status_name, subordinate: true}, task.uuid)"
+                    iconPos='left'></p-button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #filterTemplate>
+  <app-search-side-bar
+    appNgIfEmitter (templateLoaded)="filterTemplateLoaded($event)"
+    (searchApplyHandler)='applyFilter($event)'
+  ></app-search-side-bar>
+</ng-template>
+
+<ng-template #searchIcon>
+  <i class="pi pi-search search-icon"></i>
+</ng-template>

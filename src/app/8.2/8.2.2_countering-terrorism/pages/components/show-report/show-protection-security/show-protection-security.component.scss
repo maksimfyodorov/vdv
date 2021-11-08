@@ -1,0 +1,33 @@
+.logo {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #252b34;
+    margin-top: 10px;
+}
+
+.message {
+    font-size: 12px;
+    line-height: 18px;
+    color: #484f59;
+    margin: 10px 0;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 24px;
+    color: #252b34;
+}
+
+.container {
+    width: 952px;
+}
+
+.no-data {
+    width: 945px;
+    height: 52px;
+    background: rgba(255, 224, 102, 0.4);
+    border: 1px solid #ffe066;
+    border-radius: 4px;
+    padding: 14px 16px;
+}

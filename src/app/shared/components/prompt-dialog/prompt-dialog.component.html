@@ -1,0 +1,10 @@
+<section class='wrapper' >
+  <div class='content'>
+    <p class='label' >Введите новое значение</p>
+    <input class='input' [(ngModel)]='value' type='text' pInputText />
+  </div>
+  <div class='controls'>
+    <p-button (onClick)='save()' class='controls_button'>Сохранить</p-button>
+    <p-button (onClick)='close()' styleClass='p-button-text' class='controls_button' >Отменить</p-button>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<div class='cuf' [appLoader]='loader.isLoading$'>
+  <h3 class='cuf__title'>Контроль работы</h3>
+
+  <form class='cuf__form' [formGroup]='cufForm'>
+    <div class='cuf__message'>
+      <label for='message' class='label'>Сообщение</label>
+      <textarea pInputTextarea id='message' [rows]='3' autoResize='autoResize' formControlName='message'></textarea>
+    </div>
+    <div class='cuf__types types'>
+      <div class='types__item'>
+        <p-radioButton id='manual' name='type' value='manual' formControlName="type"></p-radioButton>
+        <label for='manual'>Ручной контроль</label>
+      </div>
+      <div class='types__item'>
+        <p-radioButton id='cuf' name='type' value='cuf' formControlName="type"></p-radioButton>
+        <label for='cuf'>Контроль КУФ</label>
+      </div>
+    </div>
+    <app-manual-control *ngIf='cufForm.get("type").value === "manual"'
+                        formControlName='status_uuid'>
+    </app-manual-control>
+    <app-cuf-control *ngIf='cufForm.get("type").value === "cuf"'
+                     [cufForm]='cufForm'
+                     (onTriggerAdd)='pushTriggerControl()'
+                     (onPeriodAdd)='pushPeriod()'
+                     (onDeleteTrigger)='deleteTriggerControl($event)'
+                     (onDeletePeriod)='deletePeriod($event)'
+    ></app-cuf-control>
+  </form>
+  <div class='cuf__footer'>
+    <p-button icon='pi pi-save' label='Сохранить'
+              [disabled]='cufForm.invalid'
+              (onClick)='save()'>
+    </p-button>
+    <p-button styleClass='p-button-outlined'
+              *ngIf='cufForm.get("type").value === "manual"'
+              icon='pi pi-send'
+              label='Сохранить и доложить'
+              [disabled]='cufForm.invalid'
+              (onClick)='saveAndNotify()'>
+    </p-button>
+  </div>
+</div>

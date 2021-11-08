@@ -1,0 +1,25 @@
+<input
+    class="disabled-input"
+    type="text"
+    [formControl]="info"
+>
+<div
+    class="frame"
+    (click)="openData()"
+>
+    <div *ngIf="info.value?.length; else formValue">
+        {{info.value?.length}}
+    </div>
+    <div>
+        <i class="pi pi-ellipsis-h"></i>
+    </div>
+</div>
+
+<ng-template #formValue>
+    <div *ngIf="info.value">
+        {{info.value}}
+    </div>
+    <div *ngIf="!info.value">
+        0
+    </div>
+</ng-template>

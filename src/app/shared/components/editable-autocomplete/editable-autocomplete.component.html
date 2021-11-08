@@ -1,0 +1,50 @@
+<section class='editable-autocomplete' >
+  <p-autoComplete appendTo='body'
+                  [(ngModel)]="selectedSuggestion"
+                  [suggestions]="suggestions"
+                  (completeMethod)="complete($event)"
+                  (onSelect)='this.emitSelectSuggestion($event)'
+                  [field]='displayField'
+                  [dropdown]="true"
+                  [disabled]='disabled || disable'
+                  placeholder={{placeholder}}>
+  <ng-template let-item pTemplate="item">
+    <div class="item">
+      <span>{{item[displayField]}}</span>
+      <div *ngIf='item.editable !== false' class='controls'>
+        <button *ngIf='canEdit'
+                class='controls_button'
+                type='button'
+                (mousedown)='$event.stopPropagation()'
+                (mouseup)='$event.stopPropagation()'
+                (click)='$event.stopPropagation(); emitEditItem(item)'
+                pButton
+                icon='pi pi-pencil'
+        ></button>
+        <button *ngIf='canRemove'
+                [disabled]='item.hasOwnProperty("deleteable") && !item?.deleteable'
+                class='controls_button controls_button--red'
+                type='button'
+                (mousedown)='$event.stopPropagation()'
+                (mouseup)='$event.stopPropagation()'
+                (click)='$event.stopPropagation(); emitDeleteItem(item)'
+                pButton
+                icon="pi pi-trash"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+  </p-autoComplete>
+  <button type="button" class="editable-autocomplete_clear-text-button" (click)="$event.stopPropagation(); clearText()">
+    <i class="pi pi-times"></i>
+  </button>
+  <button type="button" class="editable-autocomplete_dropdown-button" (click)="$event.stopPropagation(); openDropdown()">
+    <i class="p-button-icon pi pi-chevron-down"></i>
+  </button>
+  <div class='not-exists' *ngIf='!suggestions.length && this.query'>
+    <p class='not-exists_text'>Результата нет</p>
+    <p-button *ngIf='canCreate' (onClick)='emitCreateItem()' styleClass='p-button-text'>
+      <i class='not-exists_icon pi pi-plus'></i><span class='not-exists_button-text'>Добавить(сохранить)</span>
+    </p-button>
+  </div>
+</section>

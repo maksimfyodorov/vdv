@@ -1,0 +1,36 @@
+<section [appLoader]="loader.isLoading$" class="table">
+  <p-treeTable #table [autoLayout]="true" [value]="dataSource?.hierarchy" [columns]="cols">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th [style.background]='"transparent"' *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+      <tr>
+        <th *ngFor="let col of columns, let i = index">
+          <ng-container *ngIf="i === 0 else values">
+            <strong>Всего</strong>
+          </ng-container>
+          <ng-template #values>
+            {{dataSource?.total[col.field]}}
+          </ng-template>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowNode>
+      <tr [ngClass]='{gray: rowNode.node.point === "cn" || rowNode.node.point === "mu"}' class="table_row">
+        <td *ngFor="let col of cols; let i = index">
+          <div class="table_cell">
+            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+            <ng-container
+              *ngTemplateOutlet="getTemplate(col.template); context: {$implicit: { node: rowNode.node, viewSecurityItem: viewSecurityItem, disabled: disabled }}"
+            ></ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</section>
+
+<app-security-table-templates (eventHandler)="doAction($event)" #tableTemplates></app-security-table-templates>

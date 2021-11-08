@@ -1,0 +1,57 @@
+.manual-control {
+  margin-bottom: 10px;
+  &__title {
+    display: block;
+    color: #68737F;
+    margin-bottom: 4px;
+  }
+}
+
+.actions {
+  width: fit-content;
+  display: grid;
+  grid-gap: 8px;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr;
+  &__action {
+    width: 154px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #C7CDD3;
+    border-radius: 2px;
+    cursor: pointer;
+    i {
+      margin-right: 10px;
+    }
+  }
+}
+
+.action {
+  &_selected {
+    background: #D0EBFF;
+    border-color: #74C0FC;
+    &.action_accident,
+    &.action_preaccident {
+      background: #FFC9C9;
+      border-color: #E03131;
+    }
+  }
+  &_planned {
+    & > i { color: #228BE6 }
+  }
+  &_normal {
+    & > i { color: #66A80F }
+  }
+  &_stop {
+    & > i { color: #7E66FF }
+  }
+  &_preaccident {
+    & > i { color: #F08C00 }
+  }
+  &_accident {
+    grid-column: 1 / span 2;
+    width: 100%;
+    & > i { color: #E03131 }
+  }
+}

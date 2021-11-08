@@ -1,0 +1,17 @@
+<div class='content'>
+  <div *ngFor='let militaryMan of militaryMen' class='military-man-block'
+  (click)='selectMilitaryMan(militaryMan)'>
+    <div class='left-block'>
+      <p class='militaryMan-name'>{{militaryMan?.position}}</p>
+      <p class='militaryMan-rank'>{{militaryMan?.rank}}</p>
+      <p class='militaryMan-fullname'>{{militaryMan?.full_name}}</p>
+      <p class='militaryMan-number'>{{militaryMan?.admittance_name}}</p>
+    </div>
+    <div class='right-block'>
+      <p class='day-count-text'>не заступал</p>
+      <p class='militaryMan-day-count'>{{militaryMan?.dayCount}}</p>
+      <p class='militaryMan-status'>{{militaryMan?.admittance_status}}</p>
+    </div>
+  </div>
+</div>
+

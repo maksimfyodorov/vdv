@@ -1,0 +1,17 @@
+<section class='wrapper' >
+  <app-military-units-sidebar [showDivisionsSwitch]='false' (selectMilitaryUnitChanged)='changeMilitaryUnit($event)'></app-military-units-sidebar>
+  <section class='content' >
+    <app-breadcrumbs class='content_breadcrumbs' [model]='breadcrumbsLabels'></app-breadcrumbs>
+    <p-tabView >
+      <p-tabPanel header='Журнал' >
+        <app-notification-journal [militaryUnitId]='militaryUnitId'></app-notification-journal>
+      </p-tabPanel>
+      <p-tabPanel header='Настройка' >
+        <app-notification-settings [militaryUnitId]='militaryUnitId'></app-notification-settings>
+      </p-tabPanel>
+    </p-tabView>
+  </section>
+</section>
+
+
+

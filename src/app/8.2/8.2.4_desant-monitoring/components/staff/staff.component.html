@@ -1,0 +1,37 @@
+<div class="staff__title">
+  <div class="staff__title_left">
+    <p-calendar [(ngModel)]="selectedDate"
+                [showIcon]="true"
+                icon="pi pi-calendar"
+                dateFormat="dd.mm.yy"
+                firstDayOfWeek='1'
+                class="staff__calendar"
+                *ngIf="selectedTabIndex==0"
+    ></p-calendar>
+    <span class="p-input-icon-right">
+  <i class="pi pi-search"></i>
+  <input pInputText type="text"
+         placeholder="Поиск"/>
+</span>
+  </div>
+  <div class="staff__title_right">
+    <button pButton pRipple type="button" label="Настройка штата" class="p-button-outlined"
+            icon="pi pi-cog"
+            (click)="setPersonnelSettings()"
+            *ngIf="selectedTabIndex==0"
+    ></button>
+    <span class="staff__button__report">
+      <p-button label="Сформировать доклад" (onClick)="generateReport()" class="p-button-info"></p-button>
+    </span>
+  </div>
+</div>
+<div class="staff__tab_panel">
+  <p-tabView (onChange) = "setTabIndex($event)">
+    <p-tabPanel header="Укомлектованность">
+      <app-staffing-level></app-staffing-level>
+    </p-tabPanel>
+    <p-tabPanel header="Десантирование">
+      <app-staff-desanting></app-staff-desanting>
+    </p-tabPanel>
+  </p-tabView>
+</div>

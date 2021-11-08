@@ -1,0 +1,47 @@
+<section [appLoader]='loader.isLoading$' class='wrapper' >
+    <form [formGroup]='usForm'>
+      <div class='edit-field'>
+        <div class='edit-field_unit'>
+          <p class='edit-field_label'>Воинское формирование</p>
+          <app-military-units-dropdown [accessLevels]='[availableAccessLevel]' formControlName='division' [showDivisionOf]='config.data.military_unit_id'></app-military-units-dropdown>
+          <small *ngIf='usForm.value.center_type?.annotation' class='description'><i class='pi pi-info-circle'></i>{{usForm.value.center_type?.annotation}}</small>
+        </div>
+        <div class='edit-field_number'>
+          <p class='edit-field_label'>Номер</p>
+          <input placeholder='Введите номер' formControlName='number' pInputText />
+        </div>
+        <div class='edit-field_type'>
+          <p class='edit-field_label'>Тип</p>
+          <p-dropdown placeholder='Выберите тип' optionLabel='name' formControlName='center_type' [options]='config.data.types'></p-dropdown>
+        </div>
+        <p-button (onClick)='saveUsCenterForm()' class='edit-field_save' styleClass='p-button-outlined' label='Сохранить'></p-button>
+      </div>
+
+      <div class='body__content-table'>
+        <p-table
+          [value]='tableDataBase'
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Воинское формирование</th>
+              <th>Условное обозначение</th>
+              <th>Действия</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-tableBodyRow>
+            <tr>
+              <td> <div [ngClass]='{"table-td-border border-left": tableBodyRow.edit}'></div> {{tableBodyRow.division?.label}}</td>
+              <td>{{tableBodyRow.number}} {{tableBodyRow.center_type.name}}</td>
+              <td>
+                <div [ngClass]='{"table-td-border border-right": tableBodyRow.edit}'></div>
+                <div class='action-list'>
+                  <i (click)="doAction('edit', tableBodyRow)" class="pi pi-pencil"></i>
+                  <i (click)="doAction('delete', tableBodyRow)" class="pi pi-trash"></i>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </form>
+</section>

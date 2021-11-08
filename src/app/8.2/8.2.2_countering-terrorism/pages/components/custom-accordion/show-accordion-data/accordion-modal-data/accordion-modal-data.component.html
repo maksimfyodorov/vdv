@@ -1,0 +1,128 @@
+<div>
+    <div class="row">
+        <div class="row__mode_logo bold">ОГ "Антитеррор"</div>
+        <div class="row__mode_scell">
+            <div class="text">сокр.</div>
+            <div>Режим В</div>
+        </div>
+        <div class="row__mode_scell">
+            <div class="text">полн.</div>
+            <div>Режим А, Б</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row__mode_logo">
+            Подразделения усиления гарнизона
+        </div>
+        <div class="row__mode_scell">{{data?.mode?.soldiers}}</div>
+        <div class="row__mode_scell">{{data?.mode?.secondSoldiers}}</div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo bold">Подразделения антитеррора</div>
+        <div class="row__form_scell">
+            <div>Л/С</div>
+        </div>
+        <div class="row__form_scell">
+            <div>ВВТ АТ</div>
+        </div>
+        <div class="row__form_scell">
+            <div>ВВТ БТ</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row__form_logo">Подразделения усиления гарнизона</div>
+        <div class="row__form_scell">
+            <div>{{data?.strengthGarrison?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.strengthGarrison?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.strengthGarrison?.armoredTransport}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Подразделения антитеррора гарнизона</div>
+        <div class="row__form_scell">
+            <div>{{data?.antiterrorGarrison?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.antiterrorGarrison?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.antiterrorGarrison?.armoredTransport}}</div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        Подразделения усиления гарнизона:
+    </div>
+    <div *ngFor="let item of data?.strengthGarrisonArray">
+        <div class="row">
+            <div class="row__form_logo padding-left">{{item?.name}}</div>
+            <div class="row__form_scell">
+                <div>{{item?.soldiers}}</div>
+            </div>
+            <div class="row__form_scell">
+                <div>{{item?.autoTransport}}</div>
+            </div>
+            <div class="row__form_scell">
+                <div>{{item?.armoredTransport}}</div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="row__form_logo">Резерв в НГ (НЗ)</div>
+        <div class="row__form_scell">
+            <div>{{data?.reserve?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.reserve?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.reserve?.armoredTransport}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Моб. рез. КВВО</div>
+        <div class="row__form_scell">
+            <div>{{data?.mobileReserve?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.mobileReserve?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.mobileReserve?.armoredTransport}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Функц. гр. ОШ ФСБ-КТО</div>
+        <div class="row__form_scell">
+            <div>{{data?.functionGroup?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.functionGroup?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.functionGroup?.armoredTransport}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo bold">Подразделение ликвидации последствий теракта</div>
+        <div class="row__form_scell">
+            <div>{{data?.liquidationDivision?.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.liquidationDivision?.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{data?.liquidationDivision?.armoredTransport}}</div>
+        </div>
+    </div>
+</div>

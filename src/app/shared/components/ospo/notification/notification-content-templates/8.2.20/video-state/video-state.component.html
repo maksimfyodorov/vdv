@@ -1,0 +1,37 @@
+<div class='video-state__wrapper'>
+  <div>Доклад состояния:</div>
+  <div class='video-state__objects'>Средства в/наблюдения размещены на {{videoStateData.objects}} объектах.</div>
+  <div class='video-state__list list'>
+    <div class='list__string string'>
+      <div class='string__name'>По штату:</div>
+      <div class='string__value'>{{videoStateData.staff}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>В наличии:</div>
+      <div class='string__value'>{{videoStateData.current}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>Излишествует:</div>
+      <div class='string__value'>{{videoStateData.excess}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>Недостает:</div>
+      <div class='string__value'>{{videoStateData.lack}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>Сломано:</div>
+      <div class='string__value'>{{videoStateData.broken}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>Работает:</div>
+      <div class='string__value'>{{videoStateData.work}}</div>
+    </div>
+    <div class='list__string string'>
+      <div class='string__name'>Предавария:</div>
+      <div class='string__value'>{{videoStateData.preaccident}}</div>
+    </div>
+  </div>
+  <div class='video-state__link' *ngIf='data.data.link' (click)='emitClickLink(data.data.link)'>
+    Список в/камер
+  </div>
+</div>

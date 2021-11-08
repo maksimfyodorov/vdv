@@ -1,0 +1,39 @@
+<div [appLoader]='loader.isLoading$'>
+  <form  [formGroup]='form' class='form'>
+    <label class='row'>
+      <span class='title'>Учебный год</span>
+      <p-dropdown
+        (onChange)='scheduleChanged($event)'
+        [options]='yearOptions'
+        optionDisabled='exists'
+        formControlName='year'
+        optionLabel='year'
+        optionValue='year'
+        emptyMessage='Не найдено'
+        placeholder='Выберите год'>
+      </p-dropdown>
+    </label>
+    <label
+      class='row'>
+      <span *ngIf='currentReason?.name' class='title'>Основание для формирования графика проверок:</span>
+      <p class='reason'>{{currentReason?.name}}</p>
+      <span class='title'>Основание для формирования графика проверок:</span>
+      <p-dropdown
+        [options]='reasonOptions'
+        formControlName='reason_uuid'
+        optionLabel='name'
+        optionValue='uuid'
+        emptyMessage='Не найдено'
+        placeholder='Выберите основание'>
+      </p-dropdown>
+    </label>
+  </form>
+  <div class='controls'>
+    <p-button [disabled]='form.invalid' (onClick)='createSchedule()' class='controls_button'>
+      Создать
+    </p-button>
+    <p-button (onClick)='close()' class='controls_button' styleClass="p-button-outlined">
+      Отмена
+    </p-button>
+  </div>
+</div>

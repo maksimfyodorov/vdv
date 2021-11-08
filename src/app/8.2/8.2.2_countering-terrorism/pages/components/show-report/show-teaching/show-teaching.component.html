@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="header">
+        Учения
+    </div>
+    <div class="logo">
+        Участие в международных учениях и тренировках
+    </div>
+    <div class="message">
+        Состояние криминогенной обстановки (в том числе происшествия (преступления) террористического характера, имевшие
+        место в отчетном периоде (в соответствии с приказом командующего Воздушно-десантными войсками от 30 июня 2014 г.
+        No143 дсп).
+    </div>
+    <div>
+        {{teaching.internationalExercises}}
+    </div>
+    <div class="logo">
+        Участие в штабных переговорах
+    </div>
+    <div class="message">
+        Участие в штабных переговорах, консультациях, рабочих встречах, мероприятиях по обмену опытом и международного
+        военного сотрудничества.
+    </div>
+    <div>
+        {{teaching.participationStaff}}
+    </div>
+    <div class="logo">
+        Участие в разработке международных нормативно-правовых и иных документов
+    </div>
+    <div>
+        {{teaching.developmentParticipation}}
+    </div>
+    <div class="header">
+        Проблемные вопросы
+    </div>
+    <div>
+        {{teaching.problematicIssues}}
+    </div>
+</div>
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        routerLink='../verification'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='reducePageIndex()'
+    ></p-button>
+    <p-button
+        label='Доложить' 
+        (click)='create()'
+    ></p-button>
+
+</div>

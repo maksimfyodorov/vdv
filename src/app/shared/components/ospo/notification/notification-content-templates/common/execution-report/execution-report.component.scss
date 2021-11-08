@@ -1,0 +1,13 @@
+.execution-report {
+  &__wrapper {
+    max-width: 340px;
+  }
+  &__name {
+    font-size: 14px;
+  }
+  &__link {
+    color: #398BE2;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+}

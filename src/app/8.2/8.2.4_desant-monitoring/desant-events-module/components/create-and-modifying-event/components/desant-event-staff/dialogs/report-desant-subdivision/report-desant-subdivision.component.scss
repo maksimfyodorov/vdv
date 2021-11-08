@@ -1,0 +1,68 @@
+.p-input-icon-right > .p-inputtext {
+    width: 420.5px;
+    height: 40px;
+  }
+
+:host ::ng-deep .subdivisions-dropdown{
+  .p-dropdown {
+    width: 240px;
+    height: 40px;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 784px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal {
+  &__title {
+    display: flex;
+
+    &_subdivision {
+      width: 240px;
+      height: 66px;
+      margin-right: 16px;
+    }
+    &_units-count {
+      width: 88px;
+      height: 66px;
+      margin-right: 16px;
+    }
+  }
+
+  &__confirm {
+    margin-top: 16px;
+  }
+  &__radiobutton {
+    display: flex;
+    margin-top: auto;
+  }
+
+  &__search {
+    margin-top: auto;
+    margin-left: 26px;
+  }
+  &__table {
+    margin-top: 40px;
+    width: 1118px;
+    min-height: 600px;
+  }
+}
+
+h5 {
+  margin: 0;
+  padding-bottom: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  color: #252B34;
+}
+#disabled-input_subdivision-count {
+  width: 88px;
+  height: 40px;
+  margin-top: auto;
+}

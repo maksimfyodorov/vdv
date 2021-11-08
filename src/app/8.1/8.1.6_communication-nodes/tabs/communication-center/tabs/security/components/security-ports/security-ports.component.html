@@ -1,0 +1,47 @@
+<p-table (onEditComplete)='editComplete()' [value]='ports' >
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Наименование</th>
+      <th>IP адрес</th>
+      <th>Канал связи</th>
+      <th class='controls'></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-port>
+    <tr>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="port.name">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{port.name}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pattern="\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}\b" pInputText [(ngModel)]="port.ip">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{port.ip}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="port.channel">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{port.channel}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <img (click)='deletePort(port)' class='delete_button' alt='' src='assets/img/icons/main-delete-red.svg' />
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

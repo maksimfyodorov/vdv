@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    background: #f5f6f8;
+    height: 60px;
+    border-radius: 4px;
+}
+
+.data {
+    font-size: 12px;
+    line-height: 18px;
+    color: #959ea9;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 24px;
+    color: #252b34;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__mode {
+        &_logo {
+            width: 516px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        &_scell {
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        &_bcell {
+            width: 110px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+    &__form {
+        &_logo {
+            width: 516px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+        &_scell {
+            width: 80px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        &_bcell {
+            width: 110px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+}

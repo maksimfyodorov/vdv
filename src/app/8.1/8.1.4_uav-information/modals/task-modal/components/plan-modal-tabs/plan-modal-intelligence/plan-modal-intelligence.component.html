@@ -1,0 +1,46 @@
+<div class='modal-content' [formGroup]='this.form'>
+  <div class=''>
+    <div class='modal-row'>
+      <div class='input-wrap full-width'>
+        <label for='input-name'>Название</label>
+        <input id='input-name' class='full-width' formControlName='name' type='text' pInputText>
+      </div>
+    </div>
+
+    <div class='modal-row'>
+      <div class='input-wrap' style='width: 48%'>
+        <label for='date-begin'>Начало полёта (план):</label>
+        <p-calendar id='date-begin' formControlName='start_flight_plan' [showTime]="true" dateFormat="dd.mm.yy" [firstDayOfWeek]="1"  [showIcon]='true' icon='pi pi-calendar'></p-calendar>
+      </div>
+
+      <div class='input-wrap' style='width: 48%'>
+        <label for='date-end'>Окончание полёта (план):</label>
+        <p-calendar id='date-end' formControlName='end_flight_plan' [showTime]="true" dateFormat="dd.mm.yy" [firstDayOfWeek]="1"  [showIcon]='true' icon='pi pi-calendar'></p-calendar>
+      </div>
+    </div>
+
+    <div *ngFor='let row of coordinateModel'>
+      <p>{{row.title}}</p>
+
+      <div class='modal-row'>
+        <div class='input-wrap'>
+          <label for='input-{{row.type}}-latitude'>Широта</label>
+          <input [value]="getCoordinatesValue(row.type, 'latitude')" id='input-{{row.type}}-latitude' readonly class='coordinates' type='text' pInputText>
+        </div>
+
+        <div class='input-wrap'>
+          <label for='input-{{row.type}}-longitude'>Долгота</label>
+          <input [value]='getCoordinatesValue(row.type, "longitude")' id='input-{{row.type}}-longitude' readonly class='coordinates' type='text' pInputText>
+        </div>
+
+        <button [style.visibility]="form.disabled ? 'hidden' : 'visible'" pButton type='button' label='Выбрать' (click)='selectCoordinates(row.type)'  icon='pi pi-map-marker' class='p-button-text'></button>
+      </div>
+    </div>
+  </div>
+
+  <div class='modal-row button-wrap'>
+    <button *ngIf="!form.disabled" (click)="actionEmit.emit(data.mode.mode);" pButton type='button' label='Сохранить'></button>
+    <button *ngIf="!checkTaskMode(['create'])" pButton type='button' (click)="actionEmit.emit('print')" icon='pi pi-print' label='Печать' class='p-button-outlined'></button>
+    <button *ngIf="!checkTaskMode(['create']) && !form.disabled" (click)="actionEmit.emit('delete')" pButton type='button' class='p-button-outlined p-button-danger' icon='pi pi-trash'></button>
+  </div>
+</div>

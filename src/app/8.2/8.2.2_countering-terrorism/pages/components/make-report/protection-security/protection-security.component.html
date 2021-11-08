@@ -1,0 +1,127 @@
+<div [formGroup]="protectionForm">
+    <div class='message'>
+        Проделанная работа по обеспечению антитеррористической защищенности на непосредственно и оперативно подчиненных
+        объектах Вооруженных Сил Российской Федерации.
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo head">Источники информации и порядок её получения</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="informationSourcesFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Информация о составе сил и средств, предназначенных для противодействия терроризму в подчиненных соединениях
+            и
+            воинских частях ВДВ формируется на уровне управления соединение,и передаётся для обобщения и последующего
+            анализа в вышестоящий орган управления по существующим закрытым каналам связи.
+        </div>
+        <div *ngIf="this.protectionForm.controls['informationSourcesFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(0,'Источники информации и порядок ее получения')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Источники информации и порядок ее получения',this.protectionForm.controls['informationSources'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Источники информации и порядок ее получения')"
+                pInputTextarea
+                formControlName="informationSources"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo head">Работа по обеспечению антитеррористической защищенности</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="securityWorkFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Принятие в отчетном периоде на вооружение (ввод в эксплуатацию, установка, ремонт) защитных устройств и
+            комплексов технических средств охраны, инженерных, строительных, технических сооружений, конструкций и
+            ограждений, обеспечивающих защиту и безопасные условия жизнедеятельности военнослужащих и лиц гражданского
+            персонала.
+        </div>
+        <div *ngIf="this.protectionForm.controls['securityWorkFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(1,'Работа по обеспечению антитеррористической защещенности')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Работа по обеспечению антитеррористической защещенности',this.protectionForm.controls['securityWork'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Работа по обеспечению антитеррористической защещенности')"
+                pInputTextarea
+                formControlName="securityWork"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <div class="row contentSpaceBetween">
+            <div class="logo head">Пределы изменения данных, их размерность</div>
+            <div class="center">
+                <div class="center">
+                    Предоставлять данные
+                </div>
+                <p-inputSwitch formControlName="dataLimitsFlag"></p-inputSwitch>
+            </div>
+        </div>
+        <div class="text">
+            Данные отображаемые в ходе решения задачи выражают количественное значение, измеряются в целых числах имеют
+            отображение: — числовые значения для обозначения наименований воинских частей и соединений, количественных
+            характеристик состава сил и средств противодействия терроризму; — текстовый формат для отображения
+            наименования
+            воинских частей и соединений,
+        </div>
+        <div *ngIf="this.protectionForm.controls['dataLimitsFlag'].value">
+            <div class="row contentSpaceBetween">
+                <div
+                    class="btn width145"
+                    (click)="openReportDialog(2,'Пределы измененных данных, их размерность')"
+                >Заполнить из шаблона</div>
+                <div
+                    class="btn"
+                    (click)="sendTemplate('Пределы измененных данных, их размерность',this.protectionForm.controls['dataLimits'].value)"
+                >Сохранить шаблон</div>
+            </div>
+            <textarea
+                (blur)="sendSingleReportRecord('Пределы измененных данных, их размерность')"
+                pInputTextarea
+                formControlName="dataLimits"
+            ></textarea>
+        </div>
+    </div>
+    <div>
+        <p-button
+            label='Назад'
+            icon='pi pi-arrow-left'
+            iconPos='left'
+            (click)='reducePageIndex()'
+            routerLink='/countering-terrorism/make-report/annual-plan'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+        <p-button
+            label='Проверки'
+            icon='pi pi-arrow-right'
+            iconPos='right'
+            (click)='addPageIndex()'
+            routerLink='/countering-terrorism/make-report/verification'
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        ></p-button>
+    </div>
+</div>

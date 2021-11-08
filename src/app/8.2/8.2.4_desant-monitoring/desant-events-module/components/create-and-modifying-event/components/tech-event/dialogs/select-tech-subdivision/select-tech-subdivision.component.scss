@@ -1,0 +1,255 @@
+@import '../../../../../../../../../../styles/variables/colors';
+
+:host ::ng-deep {
+  .p-dropdown {
+    width: 480px;
+    height: 40px;
+  }
+  .p-inputtext {
+    width: 100%;
+    height: 40px;
+  }
+  .p-datatable .p-datatable-thead > tr {
+    text-align: left;
+    border: 1px solid #E1E3E8;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+
+    text-align: left;
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    height: 40px;
+    color: #252B34;
+    padding: 0;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0;
+    text-align: left;
+    line-height: 20px;
+  }
+  .pi pi-ellipsis-h icon-pointer {
+    margin-left: 10px;
+  }
+
+  .p-calendar-w-btn .p-datepicker-trigger {
+    background: white;
+    color: #959EA9;
+    border-color: #C7CDD3;
+    border-left: none;
+  }
+  .p-calendar-w-btn .p-inputtext {
+    width: 250px;
+  }
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+    .p-paginator-pages {
+      .p-paginator-page{
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "\e900";
+        }
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(2) {
+  width: 184px;
+}
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(3) {
+  width: 144px;
+}
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(4) {
+  width: 271px;
+}
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(5) {
+  width: 184px;
+}
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(6) {
+  width: 265px;
+}
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(7) {
+  width: 318px;
+}
+
+:host ::ng-deep .p-input-icon-right {
+  width: 420.5px;
+  height: 40px;
+  margin-top: auto;
+}
+.p-dialog .p-dialog-content {
+  padding: 0;
+}
+.wrapper {
+  width: 100%;
+  min-height: 784px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal {
+  &__title {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    &_subdivision {
+      width: 480px;
+      height: 100px;
+      margin-right: 16px;
+    }
+    &_units-count {
+      width: 88px;
+      height: 66px;
+      margin-right: 16px;
+    }
+    &_date {
+      width: 144px;
+      height: 66px;
+    }
+  }
+  &__subtitle {
+    display: flex;
+    width: 700px;
+    height: 100px;
+    &_date {
+      width: 283px;
+      height: 66px;
+    }
+    &_jump-info {
+      width: 188px;
+      height: 66px;
+      margin-left: 16px;
+    }
+  }
+  &__search {
+    display: flex;
+    margin-top: 24px;
+    width: 1106px;
+    height: 68px;
+    justify-content: space-between;
+    &__dropdown {
+      height: 68px;
+    }
+  }
+  &__table {
+    margin-top: 16px;
+    width: 1106px;
+    min-height: 500px;
+    &_input {
+      display: flex;
+      width: 150px;
+      height: 40px;
+      justify-content: space-between;
+      border-bottom: 1px solid #E1E3E8;;
+    }
+    &_date {
+      width: 100%;
+      height: 40px;
+    }
+    &_jump-count {
+      width: 130px;
+    }
+  }
+  &__confirm {
+    margin-top: 16px;
+  }
+}
+h5 {
+  margin: 0;
+  padding-bottom: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  color: #252B34;
+}
+#disabled-input_subdivision-count {
+  width: 88px;
+  height: 40px;
+}
+#disabled-input_airplane-type {
+  width: 188px;
+  height: 40px;
+}
+#ready-time {
+  width: 210px;
+}
+.pi-ellipsis-h:before {
+  height: 39px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #959EA9;
+}
+.element {
+  &__select {
+    width: 16px;
+    height: 16px;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+  &__airplane {
+    display: flex;
+    margin-top: 8px;
+    &__capacity {
+      margin-left: 5px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      color: #959EA9;}
+  }
+  &__vvst {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+.pi-exclamation-circle:before {
+  color: #959EA9;
+}
+

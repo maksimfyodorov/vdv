@@ -1,0 +1,40 @@
+<form 
+  [formGroup]="aircraftForm" 
+  (ngSubmit)="onSubmit()">
+  <div class="inputs__container">
+    <input
+      type="text"
+      pInputText
+      formControlName="name"
+      class="aircraft__name__input"
+      placeholder="Введите наименование судна"
+    />
+    <input
+      pInputText
+      inputId="integeronly"
+      formControlName="capacity_vvst"
+      class="capacity_vvst__input"
+      placeholder="Вместимость ВВСТ"
+    />
+    <input
+      pInputText
+      inputId="integeronly"
+      formControlName="capacity_ls"
+      class="capacity_ls__input"
+      placeholder="Вместимость человек"
+    />
+    <p-dropdown
+      [options]="aircraftType"
+      formControlName="type"
+      optionLabel="name"
+      class="choose__type"
+      placeholder="Выберите тип судна"
+    >
+    </p-dropdown>
+  </div>
+  <p-button 
+    type="submit"
+    class="save__aircraft-button" 
+    label="Сохранить судно"> 
+  </p-button>
+</form>

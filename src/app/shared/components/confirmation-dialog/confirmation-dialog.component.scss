@@ -1,0 +1,13 @@
+.dialog {
+  &__message {
+    max-width: 320px;
+  }
+  &__controls {
+    p-button {
+      margin-right: 16px;
+      i {
+        margin-right: 8px;
+      }
+    }
+  }
+}

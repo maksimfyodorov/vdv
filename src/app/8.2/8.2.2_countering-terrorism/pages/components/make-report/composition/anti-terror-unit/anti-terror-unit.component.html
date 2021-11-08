@@ -1,0 +1,48 @@
+<div
+    [formGroup]="divisionForm"
+    class="row"
+>
+    <div class="margin-right8px">
+        <app-soldier-length-form
+            [mode]="mode"
+            [amplificationUuid]="amplificationUuid"
+            [bchsUuid]="bchsUuid"
+            [bchsGroup]="bchsGroup"
+            formControlName="soldiers"
+        ></app-soldier-length-form>
+    </div>
+    <div class="margin-right8px">
+        <app-military-transport
+            [amplificationUuid]="amplificationUuid"
+            [bchsUuid]="bchsUuid"
+            [bchsGroup]="bchsGroup"
+            [mode]="'автотранспорт'"
+            formControlName="autoTransport"
+        ></app-military-transport>
+    </div>
+    <div class="margin-right24px">
+        <app-military-transport
+            [amplificationUuid]="amplificationUuid"
+            [bchsUuid]="bchsUuid"
+            [bchsGroup]="bchsGroup"
+            mode="'бронетранспорт'"
+            formControlName="armoredTransport"
+        ></app-military-transport>
+    </div>
+    <div class="margin-right8px width109">
+        <app-time-input
+            (sendTime)="sendWorkTime($event)"
+            [initConfig]="initConfig"
+            formControlName="work_time"
+        >
+        </app-time-input>
+    </div>
+    <div class="width109">
+        <app-time-input
+            (sendTime)="sendNotWorkTime($event)"
+            [initConfig]="initConfig"
+            formControlName="not_work_time"
+        >
+        </app-time-input>
+    </div>
+</div>

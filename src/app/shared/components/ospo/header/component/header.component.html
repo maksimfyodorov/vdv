@@ -1,0 +1,89 @@
+<div class='main'>
+
+  <div class='left-container'>
+    <div class='menu'>
+      <p-sidebar #sidebar [(visible)]='isSidebarDisplayed'
+                 [showCloseIcon]='false'
+                 [style]="{width:'30em'}">
+        <app-sidebar-menu [currentPageTitle]='currentPageTitle'
+                          (closeSidebar)='closeSidebar($event, sidebar)'
+        ></app-sidebar-menu>
+      </p-sidebar>
+      <!--      <button [routerLink]="taskUrl?.headerUrl || '/task'" type='button' pButton icon='pi pi-list'-->
+      <!--              label='Центр-М ВДВ'></button>-->
+      <p-button label='{{currentPageTitle}}'
+                icon='pi pi-bars'
+                (onClick)='displaySidebar()'>
+      </p-button>
+    </div>
+    <div class='notifications'>
+      <p-badge value='560' severity='danger'></p-badge>
+    </div>
+  </div>
+
+
+  <div class='formation'>
+    <img *ngIf='currentAccessLevel==="command"' src='../../../../../../assets/img/VDV_command.svg' alt='vdv' />
+    <img *ngIf='currentAccessLevel==="conjunction"' src='../../../../../../assets/img/VDV_conjunction.png' alt='vdv' />
+    <img *ngIf='currentAccessLevel==="regiment"' src='../../../../../../assets/img/VDV_regiment.png' alt='vdv' />
+    <div class='formation_description'>
+      <p class='formation_title'>{{currentRole !== "observer" ? (currentUser?.mu_name) : ''}}</p>
+<!--      <p>{{currentAcceptLevelText}}</p>-->
+    </div>
+  </div>
+
+  <div class='right-container'>
+    <div class='right-container__left-column'>
+      <div class='time'>
+        <div class='time__top-block'>
+          <p class='time_exact'>
+            {{ currentTime.currentTime$ | async }}
+          </p>
+          <span>
+        МСК
+      </span>
+        </div>
+        <div class='time__bottom-block'>
+          <p class='time_date'>
+            {{ currentTime.currentDate$ | async }}
+          </p>
+        </div>
+      </div>
+      <div class='databaseMode'>
+        <!--        <p-inputSwitch id='isTestDatabaseMode' [(ngModel)]='isTestDatabaseMode'></p-inputSwitch>-->
+        <div [ngClass]='{"databaseMode__indicator_active": isTestDatabaseMode}' class='databaseMode__indicator'></div>
+        <label>Учебный режим</label>
+      </div>
+    </div>
+    <div class='profile' (click)='profileMenu.show($event)'>
+      <div class='profile__text'>
+        <p>гв капитан</p>
+        <p class='name-fullname'>{{currentUser?.full_name}}</p>
+        <p>начальник службы РАВ</p>
+      </div>
+      <p-avatar size='xlarge'
+                shape='circle'
+                image='../../../../../assets/img/13.png'
+      ></p-avatar>
+      <p-badge
+        [value]='8'
+        severity='danger'
+        styleClass='profile__badge'
+      ></p-badge>
+    </div>
+  </div>
+</div>
+<p-overlayPanel class='profile-menu' #profileMenu>
+  <ul class='profile-menu__list'>
+    <li class='profile-menu__item'>
+      <a (click)='openPermissionDialog()'><i class='pi pi-lock'></i>Права пользователя</a>
+    </li>
+    <li class='profile-menu__item'>
+      <a><i class='pi pi-bell'></i>Уведомления <span>8</span></a>
+    </li>
+    <li *ngIf='currentPageUrl === "/ia-monitoring"' class='profile-menu__item'>
+      <a (click)='openListDialog()'><i class='pi pi-file'></i>Документы</a>
+    </li>
+  </ul>
+  <app-document-links-dialog [links]='currentDocumentLinks'></app-document-links-dialog>
+</p-overlayPanel>

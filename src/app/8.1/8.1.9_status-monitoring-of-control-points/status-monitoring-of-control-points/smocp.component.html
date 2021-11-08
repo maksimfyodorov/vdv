@@ -1,0 +1,52 @@
+<div class='all-content'>
+  <div class='uav-content__side-bar'>
+    <app-nodes-hierarchy
+      [dataSource]='selectionTreeService.selectionTreeSubject | async'
+      [selectedItem]='selectionTreeService.selectionTreeSelectItemSubject | async'
+    >
+      <app-uav-node-folder #folder></app-uav-node-folder>
+    </app-nodes-hierarchy>
+  </div>
+  <div class='main-content' *ngIf='currentMUid'>
+    <div class='header'>
+      <p class='header-text'>{{headerText}}</p>
+      <div class='print-block'>
+        <app-documents-formalized groupName="8.1.9"></app-documents-formalized>
+      </div>
+    </div>
+    <div class='card'>
+      <p-tabView class='smocp-nav' (onChange)='tabChanged($event)'>
+<!--        <p-tabPanel header='Настройка'>-->
+<!--          <app-setting-section [militaryUnitId]='currentMUid.uuid'></app-setting-section>-->
+<!--        </p-tabPanel>-->
+        <p-tabPanel header='График заступления'>
+          <app-intercession-schedule [militaryUnitId]='currentMUid.uuid'></app-intercession-schedule>
+        </p-tabPanel>
+        <p-tabPanel header='Укомплектованность'>
+          <app-completness></app-completness>
+        </p-tabPanel>
+        <p-tabPanel header='Допуски'>
+          <app-tolerances></app-tolerances>
+        </p-tabPanel>
+        <p-tabPanel header='Журнал'>
+          <app-journal></app-journal>
+        </p-tabPanel>
+        <p-tabPanel header='Стабильность'>
+          <app-stability-section></app-stability-section>
+        </p-tabPanel>
+        <ng-template>
+          zxc
+        </ng-template>
+      </p-tabView>
+<!--      <div class='buttons-space'>-->
+<!--              <p-calendar class='buttons-space-element' [showIcon]='true' dateFormat='dd.mm.yy' appendTo='body' firstDayOfWeek='1'-->
+<!--                          icon='pi pi-calendar'></p-calendar>-->
+<!--              <p-button class='buttons-space-element state-setting-button' icon="pi pi-users" iconPos="left" label='Настройка шатата'></p-button>-->
+<!--              <p-button class='buttons-space-element save-button' icon="pi pi-save" iconPos="left"></p-button>-->
+<!--              <p-button class='buttons-space-element change-report-button' icon="pi pi-file" iconPos="left" label='Доложить о смене'></p-button>-->
+<!--              <p-button class='buttons-space-element report-button' label='Доложить' icon="pi pi-file" iconPos="left"></p-button>-->
+<!--              <p-dropdown class='buttons-space-element print-dropdown' >Печать</p-dropdown>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>

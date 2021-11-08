@@ -1,0 +1,12 @@
+.inputs__wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.inputs__wrapper >* {
+    margin-right: 10px;
+}
+
+p-checkbox {
+    margin-bottom: 15px;
+}

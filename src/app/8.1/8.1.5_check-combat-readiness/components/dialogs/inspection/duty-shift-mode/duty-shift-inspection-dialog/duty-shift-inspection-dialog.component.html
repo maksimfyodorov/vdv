@@ -1,0 +1,167 @@
+<script src='duty-shift-inspection-dialog.component.ts'></script>
+<form
+  class='dialog'
+  [formGroup]='dialogFormParams'>
+  <p-tabView>
+    <p-tabPanel>
+      <div *ngIf='mode!=="create"' class='card'>
+        <p-steps [model]='items' [activeIndex]='activeIndex' [readonly]='true'></p-steps>
+      </div>
+      <div class='content'>
+        <div class='col-row' *ngIf='mode==="view"'>
+          <button
+            pButton
+            (click)='openHistoryCheckDialog()'
+            class='history-of-change-button'
+            label='История изменений..'>
+          </button>
+        </div>
+        <div class='header-space'></div>
+        <p class='joint-fields-text'>Проверямая структура</p>
+        <div class='col-row'>
+          <p-button class='select-tree-button'
+                    [label]='formData?.structure ? formData.structure?.label : "Выбрать"'
+                    (onClick)='openCheckingStructureDialog()' icon='pi pi-chevron-down' iconPos='right'
+                    [disabled]='mode==="view"'></p-button>
+        </div>
+        <p *ngIf='currentAccessLevel !== "command"' class='joint-fields-text'>Подразделение</p>
+        <div *ngIf='currentAccessLevel !== "command"' class='col-row'>
+          <p-button class='select-tree-button'
+                    [label]='formData.subdivision ? formData.subdivision?.label : "Выбрать"'
+                    (onClick)='openSubdivisionDialog()' icon='pi pi-chevron-down' iconPos='right'
+                    [disabled]='mode==="view" || !formData.structure'></p-button>
+        </div>
+        <p class='joint-fields-text'>Планируемый срок проверки</p>
+        <div class='dual-field col-row'>
+             <span class='pi-float-label dialog-span-left'>
+                  <p-calendar
+                    (onSelect)='dateStartIsChanged = true'
+                    [showIcon]='true'
+                    appendTo='body'
+                    formControlName='dateStart'
+                    class='ui-inputtext resize-calendar'
+                    dateFormat='dd.mm.yy'
+                    firstDayOfWeek='1'
+                    [disabled]='mode==="view"'>
+               </p-calendar>
+              </span>
+          <span class='dialog-span-center'></span>
+          <span class='pi-float-label dialog-span-right'>
+                 <p-calendar
+                   (onSelect)='dateEndIsChanged = true'
+                   [showIcon]='true'
+                   appendTo='body'
+                   formControlName='dateEnd'
+                   class='ui-inputtext resize-calendar'
+                   dateFormat='dd.mm.yy'
+                   firstDayOfWeek='1'
+                   [disabled]='mode==="view"'>
+                 </p-calendar>
+              </span>
+        </div>
+<!--        <app-documents-->
+<!--          *ngIf='mode==="view" && (config.data?.importedDialogData?.document_groups?.length > 0) && config.data.importedDialogData?.status?.name ==="Отменена"'-->
+<!--          [documentsToShow]='documents ? documents: []'-->
+<!--          mode='multiple'-->
+<!--          [categories]='documentCategories'-->
+<!--          (currentDocumentList)='currentDocumentList = $event'-->
+<!--          [isViewMode]='true'></app-documents>-->
+
+<!--        <app-documents-->
+<!--          *ngIf='mode==="view" && (config.data?.importedDialogData?.document_groups?.length > 0) && config.data.importedDialogData?.status?.name !=="Отменена"'-->
+<!--          [documentsToShow]='documents ? documents: []'-->
+<!--          mode='multiple'-->
+<!--          [categories]='documentCategories'-->
+<!--          [editableCategory]='config.data.importedDialogData?.status?.name'-->
+<!--          (currentDocumentList)='currentDocumentList = $event' ></app-documents>-->
+
+<!--        <app-documents *ngIf='mode==="view" && selectedSchedule?.status?.name === "Сохранен" && config.data?.importedDialogData?.status?.name !== "Закрепление статуса"-->
+<!--            && (config.data?.importedDialogData?.document_groups?.length === 0)'-->
+<!--                       [documentsToShow]='documents ? documents: []'-->
+<!--                       mode='multiple'-->
+<!--                       [categories]='documentCategories'-->
+<!--                       [editableCategory]='config.data.importedDialogData?.status?.name'-->
+<!--                       (currentDocumentList)='currentDocumentList = $event' ></app-documents>-->
+        <div style='height: 40px'></div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</form>
+<footer *ngIf='config.data.importedDialogData?.status?.name !=="Отменена"'>
+  <div class='col-row'>
+    <div class='ui-toolbar-group-left'>
+        <button
+          *ngIf='mode==="edit"'
+          class='edit-button'
+          pButton
+          (click)='submit()'
+          label='Изменить'>
+        </button>
+        <button
+          *ngIf='mode==="view" && selectedSchedule?.status?.name ==="Создан" && roleModelService.userPermissions$.value["access.edit_planned_inspection"]'
+          class='edit-button'
+          pButton
+          (click)='changeModeToEdit()'
+          label='Редактировать'>
+        </button>
+      <button
+        *ngIf='mode==="view" && selectedSchedule?.status?.name ==="Создан" && roleModelService.userPermissions$.value["access.delete_planned_inspection"]'
+        (click)='deleteInspection()'
+        class='delete-dialog-button footer-buttons'
+        label='Удалить'
+        pButton>
+      </button>
+        <button
+          *ngIf='mode==="view" && selectedSchedule?.status?.name !=="Создан"  && roleModelService.userPermissions$.value["access.cancel_planned_inspection"]'
+          (click)='openCancelInspectionDialog()'
+          class='inspection-cancel-dialog-button'
+          label='Отменить'
+          pButton>
+        </button>
+        <button
+          pButton
+          *ngIf='mode==="view" && selectedSchedule?.status?.name !=="Создан" && roleModelService.userPermissions$.value["access.transfer_planned_inspection"]'
+          class='transfer-dialog-button footer-buttons'
+          label='Перенести'
+          type='button'
+          (click)='openTransferInspectionDialog()'>
+        </button>
+        <button
+          *ngIf='mode==="create" && roleModelService.userPermissions$.value["access.start_sudden_inspection"]'
+          class='edit-button'
+          pButton
+          (click)='submit()'
+          label='Добавить'>
+        </button>
+        <button
+          *ngIf='mode==="view" && selectedSchedule?.status?.name !=="Создан" && config.data?.importedDialogData?.status?.name !== "Закрепление статуса"
+           && config.data?.importedDialogData?.status?.name !== "Завершена" && roleModelService.userPermissions$.value["access.edit_inspection_status"] !== false'
+          class='edit-button'
+          pButton
+          (click)='submitNewStatus()'
+          [label]='submitButtonText'>
+        </button>
+        <button
+          *ngIf='mode==="view" && config.data?.importedDialogData?.status?.name === "Завершена"  && roleModelService.userPermissions$.value["access.change_status_CR"]'
+          class='edit-button'
+          pButton
+          (click)='submitBG("БГ")'
+          label='Успешно'>
+        </button>
+        <button
+          *ngIf='mode==="view" && config.data?.importedDialogData?.status?.name === "Завершена" && roleModelService.userPermissions$.value["access.change_status_not_CR"]'
+          class='not-bg-button'
+          pButton
+          (click)='submitBG("Не БГ")'
+          label='Не успешно'>
+        </button>
+        <button
+          *ngIf='mode==="view" && config.data?.importedDialogData?.status?.name === "Завершена"  && roleModelService.userPermissions$.value["access.edit_inspection_status"]'
+          class='transfer-dialog-button'
+          pButton
+          (click)='submitBG("Не определено")'
+          label='По срокам неопределен'>
+        </button>
+      </div>
+    </div>
+</footer>

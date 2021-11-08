@@ -1,0 +1,108 @@
+<div class='top-section'>
+  <div class='left-block'>
+    <h2>Узлы связи и боевые посты </h2>
+  </div>
+
+  <div class='right-block'>
+    <div class='buttons'>
+      <app-documents-formalized groupName='8.1.6'></app-documents-formalized>
+      <p-button
+        icon='pi pi-file'
+        label='Доложить о структуре'>
+      </p-button>
+    </div>
+  </div>
+</div>
+
+<section class='table' [appLoader]='loader.isLoading$'>
+  <p-treeTable
+    [autoLayout]='true'
+    [value]='nodes'
+    [columns]='cols'>
+    <ng-template
+      pTemplate='header'
+      let-columns>
+      <tr>
+        <th *ngFor='let col of columns'>
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowNode>
+      <tr>
+        <td class='table-cell_wrapper' *ngFor='let col of cols; let i = index'>
+          <div [ngClass]='{node: i === 0}' class='table-cell' >
+            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+            <ng-container *ngTemplateOutlet='getTemplate(col.field); context: {$implicit: rowNode.node}'></ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+</section>
+
+
+<ng-template #node let-nodeData>
+  <div class='communication-node' *ngIf='nodeData.point === "cn"' >
+    <div class='communication-node_left'>
+      <span>{{nodeData.call_sign}}</span>
+      <span *ngIf='!nodeData.division' > [{{nodeData.military_unit?.label}}]</span>
+      <span *ngIf='nodeData.division' > [{{nodeData.division.label}}]</span>
+    </div>
+    <div class='communication-node_right' >
+      <span>О: {{nodeData.security}}%</span>
+      <span>У: {{nodeData.staffing}}%</span>
+      <img *ngIf='nodeData.node_kind?.name === "Мобильный"' alt='mobile' class='car-icon' src='assets/img/icons/car.svg' />
+    </div>
+  </div>
+  <div class='communication-node' *ngIf='nodeData.point === "center"' >
+    <div class='communication-node_left'>
+      <span>{{nodeData.number}}</span>
+      <span>{{nodeData.center_type.name}}</span>
+    </div>
+  </div>
+  <div class='communication-node' *ngIf='nodeData.point === "bp"' >
+    <div class='communication-node_left'>
+      <span class='communication-node_highlighted' >{{nodeData.number}} {{nodeData.type.name}}</span>
+      <span *ngIf='nodeData.division'> [{{nodeData.division.label}}]</span>
+    </div>
+    <div class='communication-node_right' >
+      <img *ngIf='nodeData.kind?.name === "Мобильный"' alt='mobile' class='car-icon' src='assets/img/icons/car.svg' />
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #communication_type let-nodeData>
+  <p *ngIf='nodeData?.connection_type'>{{nodeData?.connection_type?.name}}</p>
+  <p *ngIf='nodeData?.type' >{{nodeData?.type?.name}}</p>
+</ng-template>
+
+<ng-template #coordinates let-nodeData>
+  <p *ngIf='nodeData?.coordinate?.mark' >{{nodeData?.coordinate?.mark}}</p>
+  <p *ngIf='!nodeData?.coordinate?.mark && nodeData?.coordinate?.x' >{{nodeData?.coordinate?.x}}, {{nodeData?.coordinate?.y}}</p>
+</ng-template>
+
+<ng-template #deploy_time let-nodeData>
+  <p *ngIf='nodeData?.deploy_time'>{{nodeData?.deploy_time}}</p>
+  <p *ngIf='nodeData?.deployment_time'>{{nodeData?.deployment_time}} мин.</p>
+</ng-template>
+
+<ng-template #actions let-nodeData>
+  <ng-container [ngSwitch]='nodeData.point'>
+    <div *ngSwitchCase='"cn"' class='controls'>
+      <i (click)='createBattlePost(nodeData)' class='controls_plus pi pi-plus'></i>
+    </div>
+    <div *ngSwitchCase='"center"' class='controls'>
+
+    </div>
+    <div *ngSwitchCase='"bp"' class='controls'>
+      <i (click)='editBattlePost(nodeData)' class='pi pi-pencil controls_edit'></i>
+      <img (click)='deleteBattlePost(nodeData)' alt='delete' class='controls_delete' src='assets/img/icons/main-delete-red.svg' />
+    </div>
+  </ng-container>
+</ng-template>
+
+
+
+

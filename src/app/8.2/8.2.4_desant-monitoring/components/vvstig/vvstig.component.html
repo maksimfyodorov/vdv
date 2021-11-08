@@ -1,0 +1,43 @@
+<div class="inputs__wrapper">
+    <p-calendar
+        *ngIf="selectedIndex == 0"
+        [showIcon]="true"
+        icon="pi pi-calendar"
+        dateFormat="dd.mm.yy"
+        class="calendar"
+    >
+    </p-calendar>
+    <span class="p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input
+            class="search__input"
+            type="text"
+            pInputText
+            placeholder="Поиск"
+        />
+    </span>
+</div>
+
+<p-tabView
+    (onChange)="onChange($event)"
+    class="vvstig__tabView"
+>
+    <p-tabPanel header="Обеспеченность">
+        <ng-template pTemplate="content">
+            <app-security-table
+                [cols]="cols"
+                [dataSource]="hierarchy"
+            ></app-security-table>
+        </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header="Десантирование ВВСТ">
+        <ng-template pTemplate="content">
+            <app-landing-vvst></app-landing-vvst>
+        </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header="Десантирование грузов">
+        <ng-template pTemplate="content">
+            <app-landing-of-cargo></app-landing-of-cargo>
+        </ng-template>
+    </p-tabPanel>
+</p-tabView>

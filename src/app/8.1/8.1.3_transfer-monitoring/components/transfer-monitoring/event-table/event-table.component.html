@@ -1,0 +1,18 @@
+<table class="my-table">
+    <thead class="row">
+        <tr>
+            <th *ngFor="let column of cols">{{ column.header }}</th>
+        </tr>
+        <div
+            *ngIf="editFlag"
+            class="blue"
+            (click)="pushVf()"
+        >+ВФ</div>
+    </thead>
+    <div *ngFor="let header of headers">
+        <app-event-adder
+            [editFlag]="editFlag"
+            [header]="header"
+        ></app-event-adder>
+    </div>
+</table>

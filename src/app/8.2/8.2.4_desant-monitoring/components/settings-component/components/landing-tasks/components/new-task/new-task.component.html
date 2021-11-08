@@ -1,0 +1,32 @@
+<form 
+    
+    [formGroup]="taskForm" 
+    (ngSubmit)="onSubmit()" >
+    <div class="inputs__container">
+        <input 
+            *ngIf="selectedType?.name == 'Прыжки'"  
+            formControlName="code" 
+            type="text" 
+            class="choose__number__input" 
+            placeholder="Выберите номер задачи">
+        <input  
+            formControlName="name" 
+            type="text" 
+            pInputText  
+            class="task__name__input" 
+            placeholder="Введите наименование задачи">
+        <p-dropdown 
+            (onChange)="onChange()" 
+            formControlName="type" 
+            [options]="tasksTypes"  
+            optionLabel="name" 
+            class="choose__type"  
+            placeholder="Выберите тип задачи">
+        </p-dropdown> 
+    </div>
+    <p-button 
+        type="submit"
+        class="save__tasks-button" 
+        label="Сохранить задачу">
+    </p-button>
+</form>

@@ -1,0 +1,26 @@
+::ng-deep .breadcrumbs {
+  background: none !important;
+  padding: 0;
+  border: none;
+
+  span {
+    color: #959EA9 !important;
+  }
+
+  li:last-child span {
+    color: #1C1F24 !important;
+  }
+
+  li:nth-child(2n)::before {
+    content: '•';
+  }
+}
+
+.container {
+  display: flex;
+  align-items: baseline;
+  i {
+    color: #959EA9;
+    margin-right: 12px;
+  }
+}

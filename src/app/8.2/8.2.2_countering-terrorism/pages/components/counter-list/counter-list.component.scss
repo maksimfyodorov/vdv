@@ -1,0 +1,56 @@
+:host ::ng-deep {
+    .p-button {
+        background: #ffffff;
+        color: #2196f3;
+        margin-right: 5px;
+    }
+
+    .blue .p-button {
+        background: #2196f3 !important;
+        color: #ffffff !important;
+    }
+
+    .p-breadcrumb {
+        border: 0;
+    }
+}
+
+.military-unit-sidebar {
+    position: absolute;
+    z-index: 100;
+    background: white;
+}
+
+.gray {
+    color: #959ea9;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__header {
+        width: 90%;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #252b34;
+        margin: 15px 0;
+    }
+    &__navigation {
+        width: 90%;
+    }
+    &__router {
+        width: 100%;
+    }
+}
+
+.setWidth {
+    width: 75%;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+}

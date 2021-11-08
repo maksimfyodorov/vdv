@@ -1,0 +1,49 @@
+<div class="wrapper">
+  <div class="landing_tasks">
+    Задачи десантирования
+  </div>
+  <p-tabView>
+    <p-tabPanel header='Общее'>
+      <ng-template pTemplate='content'>
+        <app-general></app-general>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Дежурные'>
+      <ng-template pTemplate='content'>
+        <app-attendants></app-attendants>
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Подразделения, ВВСТиГ'>
+      <ng-template pTemplate='content'>
+        Подразделения, ВВСТиГ
+      </ng-template>
+    </p-tabPanel>
+    <p-tabPanel header='Отчётность'>
+      <ng-template pTemplate='content'>
+        <app-reporting></app-reporting>
+      </ng-template>
+    </p-tabPanel>
+  </p-tabView>
+</div>
+<div class="buttons__wrapper">
+  <button
+    pButton
+    class="save__button"
+    type="button"
+    label="Доложить"
+  ></button>
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Сохранить"
+    class="p-button-outlined"
+  ></button>
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Отмена"
+    class="p-button-secondary p-button-text cancel__button"
+  ></button>
+</div>

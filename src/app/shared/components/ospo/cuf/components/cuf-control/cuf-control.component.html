@@ -1,0 +1,62 @@
+<p-scrollPanel [style]="{width: '100%', height: '600px'}">
+  <div class='cuf-control'>
+    <form [formGroup]='cufForm'>
+      <div class='cuf-control__period period'>
+        <p-button icon='pi pi-plus'
+                  styleClass='p-button-outlined'
+                  class='period__add-button'
+                  (onClick)='addPeriod()'
+        ></p-button>
+        <h3 class='period__label' for='period'>Переодичность проверки <span>{{periodsFormArray?.length}}</span></h3>
+        <div class='period__array' formArrayName='periods'>
+          <div class='period__item' *ngFor='let period of periodsFormArray?.controls; let i = index;'>
+            <app-period id='period' [formControlName]='i'></app-period>
+            <p-button icon='pi pi-trash'
+                      styleClass='p-button-outlined p-button-danger'
+                      class='period__remove-button'
+                      [disabled]='periodsFormArray?.controls?.length < 2'
+                      (onClick)='removePeriod(i)'
+            ></p-button>
+          </div>
+        </div>
+      </div>
+      <div class='cuf-control__server'>
+        <label class='label' for='server'>Сервер</label>
+        <p-dropdown id='server'
+                    [options]='servers'
+                    optionLabel='url'
+                    optionValue='uuid'
+                    placeholder='Выберите...'
+                    (onChange)='this.getHosts($event.value);'
+                    formControlName='server_uuid'>
+        </p-dropdown>
+      </div>
+      <div class='cuf-control__host'>
+        <label class='label' for='host'>Устройства Zabbix(host)</label>
+        <p-dropdown id='host'
+                    [options]='hosts'
+                    optionLabel='name'
+                    optionValue='id'
+                    placeholder='Выберите...'
+                    (onChange)='getServerTriggers($event.value)'
+                    filter='true'
+                    formControlName='host_id'>
+        </p-dropdown>
+      </div>
+      <div class='cuf-control__triggers triggers'>
+        <p-button icon='pi pi-plus' styleClass='p-button-outlined' class='triggers__add-button'
+                  [disabled]='!hostTriggers.length' (onClick)='addTrigger()'></p-button>
+        <h3 class='triggers__label'>Настройка триггеров <span>{{triggersFormArray?.length}}</span></h3>
+        <div class='triggers'>
+          <app-trigger *ngFor='let triggerFormGroup of triggersFormArray?.controls; let i = index'
+                       [host]='cufForm.get("host_id")'
+                       [triggerFormGroup]='triggerFormGroup'
+                       [hostTriggers]='hostTriggers'
+                       [onTriggeredStatuses]='onTriggeredStatuses'
+                       (onDeleteTrigger)='deleteTrigger(i)'
+          ></app-trigger>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-scrollPanel>

@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="chips">
+    <ng-container *ngIf="values.length > 0; else unset">
+      <ng-container *ngFor="let item of values" >
+          <div class="card card_margin">
+            {{'@ ' + item.name}}
+            <i class="pi pi-times pointer" (click)="deleteItem(item)"></i>
+          </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #unset>
+      Выбрать значение..
+    </ng-template>
+  </div>
+
+  <i class="pi pi-chevron-down pointer" (click)="showPopUp($event)"></i>
+</div>
+<div class="pop-up" *ngIf="isShow">
+  <div class="" *ngIf="isNotFound; else unset">
+    Результата нет
+    <p-button label="Добавить форму" (click)="createItemMenu($event)"></p-button>
+  </div>
+  <ng-template #unset>
+    <ng-container *ngFor="let form of forms">
+      <div class="pop-up__item pointer">
+        <span (click)="selectItemMenu(form)">{{form.name}}</span>
+
+        <div class="pop-up__action-box">
+          <i class='pi pi-pencil pointer' (click)="showEditDialog(form)"></i>
+          <i class="pi pi-times pointer" (click)="deleteItemMenu(form)"></i>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="searchValue"
+    (ngModelChange)="search($event)"
+    placeholder="Введите значение.."/>
+</div>
+
+<div class="pop-up" *ngIf="isEditMode">
+  <div class="pop-up__center">
+      <p>
+        Значение: {{editValue1}}
+      </p>
+      <p>
+        Заменить на:
+      </p>
+  </div>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="editValue.name"
+    placeholder="Введите значение.."/>
+  <p-button label="Сохранить" (click)="editItemMenu($event)"></p-button>
+</div>

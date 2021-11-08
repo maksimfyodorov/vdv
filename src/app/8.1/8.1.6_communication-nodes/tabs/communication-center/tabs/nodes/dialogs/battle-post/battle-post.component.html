@@ -1,0 +1,70 @@
+<section [appLoader]='this.loader.isLoading$' [formGroup]='form' class='wrapper' >
+ <div class='row'>
+   <p class='row_label'>Центр боевого поста</p>
+   <div class='row_field' >
+     <p-dropdown emptyMessage='Центры БП отсутствуют' formControlName='center' class='dropdown' placeholder='Выберите центр БП' [options]='mappedCenters' optionLabel='name' ></p-dropdown>
+     <p-button
+       (onClick)='addUsCenter()'
+       styleClass='p-button-outlined'
+       class='row_button'
+       icon='pi pi-pencil' ></p-button>
+   </div>
+ </div>
+  <div class='row'>
+    <h2 class='row_title' >Боевой пост</h2>
+    <div class='row_field' >
+      <div class='row_half-field' >
+        <p class='row_label'>Воинское формирование</p>
+        <app-military-units-dropdown [accessLevels]='[availableAccessLevel]' formControlName='division' [showDivisionOf]='divisionsToShow'></app-military-units-dropdown>
+      </div>
+      <div class='row_half-field' >
+        <p class='row_label'>Номер</p>
+        <input min='0' type='number' formControlName='number' class='row_text-input' pInputText />
+      </div>
+    </div>
+    <small class='row_description'><i class='pi pi-info-circle'></i>пункт управления приемным радиоцентром (радиоцентром) и частотно-диспетчерский пост.</small>
+  </div>
+  <div class='row'>
+    <p class='row_label'>Тип</p>
+    <p-dropdown placeholder='Выберите тип БП' formControlName='type' class='dropdown' [options]='selectors.battle_post_types' optionLabel='name' ></p-dropdown>
+  </div>
+  <div class='row'>
+    <h2 class='row_title' >Вид</h2>
+    <div class='row_field'>
+      <p-radioButton formControlName='kind' *ngFor='let kind of selectors.battle_post_kinds' class='row_radio' [value]='kind' [label]='kind.name' ></p-radioButton>
+    </div>
+  </div>
+  <ng-container *ngIf='isMobile'>
+    <div class='row'>
+      <h2 class='row_title' >Координаты</h2>
+      <div class='row_field'>
+        <input
+          class='row_text-input'
+          placeholder='Отметка'
+          [value]='getCoordinatesValue()'
+          pInputText
+          [disabled]='true' />
+        <p-button (onClick)='openAddCoordinate()' styleClass='p-button-outlined' class='row_button' icon='pi pi-map-marker' ></p-button>
+      </div>
+    </div>
+  </ng-container>
+  <div class='row'>
+    <div class='row_field'>
+      <p class='row_label'>Время на развёртывание: </p>
+      <input pInputText type='number' formControlName='deployment_time' placeholder='мин.' class='deploy-time' />
+    </div>
+  </div>
+  <div class='controls'>
+    <p-button
+      (onClick)='save()'
+      [disabled]='form.invalid'
+      label='Сохранить'
+      icon='pi pi-save'>
+    </p-button>
+    <p-button
+      (onClick)='closeDialog()'
+      styleClass='p-button-secondary p-button-text'
+      label='Отмена'>
+    </p-button>
+  </div>
+</section>

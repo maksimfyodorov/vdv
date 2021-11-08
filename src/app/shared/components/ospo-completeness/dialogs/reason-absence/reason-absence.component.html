@@ -1,0 +1,35 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+  <div class="dialog">
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="dropdown"
+        [autoDisplayFirst]="false"
+        [showClear]="true"
+        [options]="reasons"
+        optionLabel="label"
+        optionValue="value"
+        formControlName="reason"
+      ></p-dropdown>
+      <label for="dropdown">Выберите причину отсутствия</label>
+    </span>
+    <p-checkbox
+      label="Другая причина"
+      [binary]="true"
+      formControlName="allowAnotherReason"
+      (onChange)="allowAnotherReason($event.checked)"
+    ></p-checkbox>
+    <textarea pInputTextarea formControlName="descriptionReason"></textarea>
+    <hr class="drawler" />
+    <div class="p-d-flex p-jc-end flex-gap-1">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Отмена"
+        class="p-button-secondary p-button-text"
+        (click)="closeDialog()"
+      ></button>
+      <button type="submit" pButton label="Сохранить" icon="pi pi-file"></button>
+    </div>
+  </div>
+</form>

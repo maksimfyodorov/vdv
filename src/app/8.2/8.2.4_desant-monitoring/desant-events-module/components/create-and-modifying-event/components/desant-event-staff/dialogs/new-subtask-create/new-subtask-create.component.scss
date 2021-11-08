@@ -1,0 +1,37 @@
+.wrapper {
+  min-height: 758px;
+}
+
+.table__expanded {
+  width: 950px;
+  padding: 0;
+}
+
+.buttons__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pi-check-circle:before {
+  line-height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #959EA9;
+  cursor: pointer;
+}
+
+.pi-trash:before {
+  line-height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #959EA9;
+  cursor: pointer;
+}
+
+.pi-pencil:before {
+  line-height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #959EA9;
+  cursor: pointer;
+}

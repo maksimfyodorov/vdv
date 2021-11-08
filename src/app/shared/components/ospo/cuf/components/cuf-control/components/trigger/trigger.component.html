@@ -1,0 +1,40 @@
+<form [formGroup]='triggerFormGroup' class='trigger'>
+  <div class='trigger__host-trigger'>
+    <label class='label' for='hostTrigger'>Триггер</label>
+    <p-dropdown id='hostTrigger' [options]='hostTriggers'
+                appendTo='body'
+                optionLabel='description'
+                optionValue='id'
+                scrollHeight='180px'
+                filter='true'
+                placeholder='Выберите...'
+                [panelStyle]='{"width": "150px"}'
+                [style]='{"max-width": "438px"}'
+                formControlName='trigger_id'>
+    </p-dropdown>
+  </div>
+  <div class='trigger__status-on-triggered'>
+    <label class='label' for='statusOnTriggered'>Статус при срабатывании</label>
+    <p-dropdown id='statusOnTriggered'
+                [options]='onTriggeredStatuses'
+                appendTo='body'
+                optionLabel='name'
+                optionValue='uuid'
+                placeholder='Выберите...'
+                formControlName='status_uuid'></p-dropdown>
+  </div>
+  <div class='trigger__delete'>
+    <p-button styleClass='p-button-outlined p-button-danger'
+              icon='pi pi-trash'
+              [disabled]='!this.host?.value'
+              (onClick)='delete()'>
+    </p-button>
+  </div>
+  <div class='trigger__doReport'>
+    <p-checkbox id='doReport'
+                formControlName='auto_report'
+                [binary]='true'>
+    </p-checkbox>
+    <label for='doReport'>Докладывать</label>
+  </div>
+</form>

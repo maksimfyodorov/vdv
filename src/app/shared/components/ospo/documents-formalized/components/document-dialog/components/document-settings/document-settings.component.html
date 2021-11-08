@@ -1,0 +1,237 @@
+<div class="saved-documents" [formGroup]="documentSettingsForm">
+  <div class="saved-documents__settings settings">
+    <h3 class="settings__title title">Настройка формирования документа</h3>
+
+    <div class="settings__body-wrap" *ngIf="periods.areShown" formArrayName="periods">
+      <div class="settings__body-title-row">
+        <p-button (onClick)="createPeriod()" icon="pi pi-plus" styleClass="p-button-outlined"></p-button>
+      </div>
+
+      <div class="settings__body" *ngFor="let period of periodsArray.controls, index as i" [formGroupName]="i">
+        <div class="settings__body-periods-row">
+          <div class="settings__body-inner-container">
+            <div class="settings__period">
+              <label for="periodDropdown"><small>Период</small></label>
+              <p-dropdown [options]="periodsToRender"
+                          id="periodDropdown"
+                          optionValue="value"
+                          optionLabel="description"
+                          formControlName="period"
+              ></p-dropdown>
+            </div>
+
+            <div class="settings__period-values" formGroupName="periodValue">
+              <div class="settings__date" *ngIf='period.value.period === "day"'>
+                <p-calendar firstDayOfWeek="1"
+                            [showIcon]="true"
+                            dateFormat="dd.mm.yy"
+                            formControlName="day"
+                ></p-calendar>
+              </div>
+
+              <div class="settings__week"
+                   *ngIf='period.value.period === "week"'
+                   formGroupName="week"
+              >
+                <div class="settings__week-number">
+                  <p-dropdown [options]="weeksNumbers"
+                              [autoDisplayFirst]=false
+                              formControlName="weekNumber"
+                  ></p-dropdown>
+                  <span> неделя </span>
+                  <p-dropdown [options]="years"
+                              [autoDisplayFirst]=false
+                              formControlName="yearInWeekPeriod"
+                  ></p-dropdown>
+                  <span> года</span>
+                </div>
+              </div>
+
+              <div class="settings__month" *ngIf='period.value.period === "month"'>
+                <p-calendar firstDayOfWeek="1"
+                            [showIcon]="true"
+                            view="month"
+                            dateFormat="MM yy"
+                            formControlName="month"
+                ></p-calendar>
+              </div>
+
+              <div class="settings__periods" *ngIf="period.value.period === 'periods'" formGroupName="periods">
+                <div class="settings__periods-input">
+                  <label for="yearInPeriodsSection"><small>Год</small></label>
+                  <p-dropdown id="yearInPeriodsSection"
+                              formControlName="yearInPeriodsSection"
+                              [options]="yearsInPeriodsSection"
+                              [autoDisplayFirst]="false"
+                              [emptyMessage]="'Нет данных для отображения'"
+                              (onChange)="yearInPeriodsSectionChanged($event, period)"
+                  ></p-dropdown>
+                </div>
+
+                <div class="settings__periods-input">
+                  <label for="selectedPeriod"><small>Учебный период</small></label>
+                  <p-dropdown id="selectedPeriod"
+                              formControlName="selectedPeriodUuid"
+                              [options]="period.value.periodValue.periods.periodsOfYear"
+                              optionLabel="name"
+                              optionValue="uuid"
+                              [autoDisplayFirst]="false"
+                              [emptyMessage]="'Нет данных для отображения'"
+                              (onChange)="selectedPeriodChanged($event, period)"
+                  ></p-dropdown>
+                  <p class="settings__periods-input-tip" *ngIf="period.value.periodValue.periods.selectedPeriod">
+                    <i class="pi pi-info-circle"></i>
+                    С {{ period.value.periodValue.periods.selectedPeriod.start_date | date: 'dd.MM.yyyy' }}
+                    по {{ period.value.periodValue.periods.selectedPeriod.end_date | date: 'dd.MM.yyyy' }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="settings__year" *ngIf="period.value.period === 'academic'">
+                <p-dropdown [options]="years"
+                            formControlName="year"
+                            [autoDisplayFirst]=false
+                ></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <p-button (onClick)="deletePeriod(i)" [disabled]="periodsArray.controls.length === 1" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger"></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="saved-documents__category category" *ngIf="militaryUnits.areShown && militaryUnit">
+    <mat-expansion-panel [expanded]="isExpanded" togglePosition="before">
+      <mat-expansion-panel-header>
+        <h3 class="category__title title">Формирования<span class="title__asterisk" *ngIf="militaryUnits.required">*</span></h3>
+      </mat-expansion-panel-header>
+
+      <div class="category__military-units">
+        <div class="military-units">
+          <div class="military-units__left-side">
+            <mat-slide-toggle color="primary" labelPosition="before" (change)="toggleButton($event); ">Подразделения</mat-slide-toggle>
+            <span #inputWrapper
+                  class="military-units__input p-input-icon-right"
+                  [class]="input.value && 'p-input-icon-left'"
+                  (click)="documentFormalizedOP.show($event); documentFormalizedOP.style={ width: inputWrapper.offsetWidth+'px' }"
+            >
+              <i class="military-units__clear-search-button pi pi-times"
+                 *ngIf="input.value"
+                 (click)="$event.stopPropagation(); documentSettingsForm.get('military_units_search').setValue('')"
+              ></i>
+              <input #input pInputText placeholder="Поиск" formControlName="military_units_search">
+              <i class="pi pi-search"></i>
+            </span>
+            <p-overlayPanel #documentFormalizedOP class="military-units__dropdown" appendTo="body" styleClass="dropdown__panel document-formalized-military-units__dropdown">
+              <ng-template pTemplate>
+                <p-tree
+                        [value]="isSearching ? filteredMilitaryUnits : fetchedMilitaryUnits"
+                        scrollHeight="300px"
+                        selectionMode="checkbox"
+                        [(selection)]="selectedMilitaryUnits"
+                        [propagateSelectionUp]="false"
+                        [propagateSelectionDown]="false"
+                        [emptyMessage]="'Нет данных для отображения'"
+                >
+                  <ng-template let-militaryUnit pTemplate="default">
+                    <span>{{militaryUnit.label}}</span>
+                  </ng-template>
+                </p-tree>
+              </ng-template>
+            </p-overlayPanel>
+          </div>
+
+          <div class="military-units__right-side">
+            <button pButton class="military-units__clear-button p-button-outlined" (click)="clearMilitaryUnitsArray()" icon='pi pi-trash' label="Очистить"></button>
+            <div class="military-units__form-array" formArrayName="military_units">
+              <ul class="military-units__form-array-list">
+                <li class="military-units__form-array-item"
+                    *ngFor="let militaryUnit of militaryUnitsArray.controls, index as i"
+                    [formGroupName]="i"
+                >
+                  {{ militaryUnit.value.label }}
+                  <button pButton (click)="deleteMilitaryUnit(i, militaryUnit)" icon="pi pi-trash" class="p-button-outlined p-button-danger"></button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div class="saved-documents__category category" *ngIf="signers.areShown" formArrayName="signers">
+    <mat-expansion-panel [expanded]="isExpanded" togglePosition="before">
+      <mat-expansion-panel-header>
+        <h3 class="category__title title">Подписанты <span class="title__asterisk" *ngIf="signers.required || signers.amountOfRequired">*</span><span> {{ signersArray.length }}</span></h3>
+        <p-button (onClick)="$event.stopPropagation(); createSigner()" [disabled]="!signers.haveAnyAmount" icon="pi pi-plus" class="category__add-button" styleClass="p-button-outlined"></p-button>
+      </mat-expansion-panel-header>
+
+      <div class="category__list">
+        <div class="category__item" *ngFor="let signer of signersArray.controls, index as i" [formGroupName]="i">
+
+          <div class="category__item-container">
+            <app-military formControlName="militaries" (appointment)="getMilitaryMan($event, signer)" [loadExecutive]="true">Подписывает<span class="title__asterisk" *ngIf="signer.value.required">*</span></app-military>
+            <p class="category__item-user-icon">
+              <i class="pi pi-user"></i>
+              {{ signer.value?.appointment || 'Должность' }}
+            </p>
+          </div>
+
+          <p-button (onClick)="deleteSigner(i)" [disabled]="signer.value.required" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger"></p-button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div class="saved-documents__category category" *ngIf="approvers.areShown" formArrayName="approvers">
+    <mat-expansion-panel [expanded]="isExpanded" togglePosition="before">
+      <mat-expansion-panel-header>
+        <h3 class="category__title title">Утверждает <span class="title__asterisk" *ngIf="approvers.required || approvers.amountOfRequired">*</span><span> {{ approversArray.length }}</span></h3>
+        <p-button (onClick)="$event.stopPropagation(); createApprover()" [disabled]="!approvers.haveAnyAmount" icon="pi pi-plus" class="category__add-button" styleClass="p-button-outlined"></p-button>
+      </mat-expansion-panel-header>
+
+      <div class="category__list">
+        <div class="category__item" *ngFor="let approver of approversArray.controls, index as i" [formGroupName]="i">
+
+          <div class="category__item-container">
+            <app-military formControlName="militaries" (appointment)="getMilitaryMan($event, approver)" [loadExecutive]="true">Подписывает<span class="title__asterisk" *ngIf="approver.value.required">*</span></app-military>
+            <p class="category__item-user-icon">
+              <i class="pi pi-user"></i>
+              {{ approver.value?.appointment || 'Должность' }}
+            </p>
+          </div>
+
+          <p-button (onClick)="deleteApprover(i)" [disabled]="approver.value.required" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger"></p-button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div class="saved-documents__category category" *ngIf="coordinators.areShown" formArrayName="coordinators">
+    <mat-expansion-panel [expanded]="isExpanded" togglePosition="before">
+      <mat-expansion-panel-header>
+        <h3 class="category__title title">Согласовывает <span class="title__asterisk" *ngIf="coordinators.required || coordinators.amountOfRequired">*</span><span> {{ coordinatorsArray.length }}</span></h3>
+        <p-button (onClick)="$event.stopPropagation(); createCoordinator()" [disabled]="!coordinators.haveAnyAmount" icon="pi pi-plus" class="category__add-button" styleClass="p-button-outlined"></p-button>
+      </mat-expansion-panel-header>
+
+      <div class="category__list">
+        <div class="category__item" *ngFor="let coordinator of coordinatorsArray.controls, index as i" [formGroupName]="i">
+
+          <div class="category__item-container">
+            <app-military formControlName="militaries" (appointment)="getMilitaryMan($event, coordinator)" [loadExecutive]="true">Подписывает<span class="title__asterisk" *ngIf="coordinator.value.required">*</span></app-military>
+            <p class="category__item-user-icon">
+              <i class="pi pi-user"></i>
+              {{ coordinator.value?.appointment || 'Должность' }}
+            </p>
+          </div>
+
+          <p-button (onClick)="deleteCoordinator(i)" [disabled]="coordinator.value.required" icon="pi pi-trash" styleClass="p-button-outlined p-button-danger"></p-button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>

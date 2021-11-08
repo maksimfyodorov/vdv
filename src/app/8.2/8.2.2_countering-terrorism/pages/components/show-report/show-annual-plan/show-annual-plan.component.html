@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="logo">
+        План подготовки личнного состава по противодействию терроризму
+    </div>
+    <div
+        *ngIf="annualPlan.name"
+        class="order"
+    >
+        {{annualPlan.name}}
+    </div>
+    <div *ngIf="annualPlan.documents">
+        <div
+            class="row"
+            *ngFor="let item of annualPlan.documents"
+        >
+            <div>
+                {{item}}
+            </div>
+            <div class="border"></div>
+        </div>
+    </div>
+    <div
+        *ngIf="annualPlan.events"
+        class="table-container"
+    >
+        <p-table
+            #dt
+            [value]='annualPlan.events'
+            [rowHover]='true'
+            dataKey='uuid'
+        >
+            <ng-template pTemplate='header'>
+                <tr>
+                    <th class="number">№</th>
+                    <th class="point">Пункт</th>
+                    <th class="event">Мероприятие</th>
+                    <th class="status">Статус</th>
+                </tr>
+            </ng-template>
+            <ng-template
+                pTemplate='body'
+                let-product
+                let-i='rowIndex'
+            >
+                <tr>
+                    <td>{{product.number}}</td>
+                    <td>{{product.point}}</td>
+                    <td>{{product.event}}</td>
+                    <td>
+                        <div
+                            class="done"
+                            *ngIf="product.status === 'Выполненно'"
+                        >
+                            {{product.status}}
+                        </div>
+                        <div
+                            class="doing"
+                            *ngIf="product.status === 'Выполняется'"
+                        >
+                            {{product.status}}
+                        </div>
+                        <div
+                            class="not-done"
+                            *ngIf="product.status === 'Не выполнено'"
+                        >
+                            {{product.status}}
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div
+        *ngIf="!annualPlan.documents && !annualPlan.name && !annualPlan.events"
+        class="no-data"
+    >
+        Данные не предоставленны.
+    </div>
+</div>
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        (click)='reducePageIndex()'
+        routerLink='../preparation-antiterror'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+    <p-button
+        label='Защита и охрана'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        (click)='addPageIndex()'
+        routerLink='../protection-security'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+    ></p-button>
+</div>

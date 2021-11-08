@@ -1,0 +1,82 @@
+{
+  "hierarchy":
+  [
+    {
+      "point": "cn",
+      "deploy_time": null,
+      "military_unit": {
+        "pid": 84000000,
+        "label": "17 дшд, в/ч 79252",
+        "id": 9152
+      },
+      "coordinates": {
+        "mark": "Калуга",
+        "y": 7161151.920650513,
+        "x": 4233367.9277016055,
+        "uuid": "f88a95ba-0b37-4d57-bb0a-93adec5c64a4"
+      },
+      "connection_type": {
+        "uuid": "07ded1b3-b04a-4268-b44a-0cc965853795",
+        "name": "ЗКП"
+      },
+      "positionY": 200,
+      "uuid": "3becceb8-e9b3-4d8e-a2be-0ae420a477c2",
+      "positionX": 438,
+      "division": null,
+      "call_sign": "Люстра",
+      "access_level": {
+        "parent_id": 3,
+        "name": "Бригада",
+        "id": 4
+      },
+      "security": 81,
+      "staffing": 55,
+      "children":
+      [
+        {
+          "point": "center",
+          "uuid": "fe648e41-ae28-4926-83f8-41bf894457f2",
+          "number": 34231,
+          "division": {
+            "pid": 41777,
+            "label": "370 омедб, в/ч 40656",
+            "id": 41786
+          },
+          "center_type": {
+            "annotation": null,
+            "name": "Тестовый",
+            "uuid": "b764cb80-d38e-4390-8a27-f23345865a7f"
+          },
+          "children" :
+          [
+            {
+              "point": "bp",
+              "coordinates": {
+                "mark": "Точка-3047",
+                "y": 7161151.920650513,
+                "x": 4233367.9277016055,
+                "uuid": "f88a95ba-0b37-4d57-bb0a-93adec5c64a4"
+              },
+              "uuid": "4ef9eab3-1482-4cf0-ae89-1b2fc7139e4f",
+              "number": 34231,
+              "type": {
+                "name": "П-300",
+                "uuid": "0e769320-2515-4a57-a2ee-20af7d215ad7"
+              },
+              "division": {
+                "pid": 41777,
+                "label": "370 омедб, в/ч 40656",
+                "id": 41786
+              },
+              "kind": {
+                "name": "Мобильный",
+                "uuid": "e114c26e-6e2b-49e1-84de-953ed251f3da"
+              },
+              "deployment_time": 273942
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

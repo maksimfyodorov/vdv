@@ -1,0 +1,69 @@
+:host::ng-deep .add__aircraft-button {
+  .p-button {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+  }
+}
+
+:host::ng-deep {
+  tr.unselected:hover {
+    cursor: pointer;
+    background-color: #f7f7f7;
+  }
+}
+
+#cancel {
+  width: 192px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.number {
+  width: 55px;
+  height: 40px;
+}
+
+.name {
+  width: 563px;
+  height: 40px;
+}
+
+.capacity_vvst {
+  width: 180px;
+  height: 40px;
+}
+
+.capacity_ls {
+  width: 180px;
+  height: 40px;
+}
+
+.task__type {
+  width: 180px;
+  height: 40px;
+}
+
+.action {
+  width: 104px;
+  height: 40px;
+}
+
+.icons_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.pi-trash {
+  cursor: pointer;
+}
+
+.selected {
+  td {
+    background: #f7f7f7;
+  }
+}
+
+.table_container {
+  margin-top: 25px;
+}

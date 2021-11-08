@@ -1,0 +1,74 @@
+<div class='container'>
+  <main>
+    <p-tabView (onChange)='changeTab($event)'>
+      <p-tabPanel
+        *ngFor='let tab of tabs'
+        [selected]='activeSectionIndex == tab.index'
+        [header]='tab.header'>
+        <div class='section'>
+          <div class='title'></div>
+
+          <div
+            [ngClass]="toggleStatus ? 'long_info' : 'short_info'"
+            class='card'
+            pRipple
+            *ngFor='let task of tab.tasks'
+            (click)='openClickedTask(task.routerLink)'>
+            <div *ngIf='!toggleStatus'
+                 class='button_description'
+            >
+              <img src='../../../../assets/img/tripple-dot.png'>
+            </div>
+
+            <h4 class='card_title'>
+              {{ task.title }}
+            </h4>
+
+            <p class='card_description'>
+              {{ task.description }}
+            </p>
+          </div>
+
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+
+    <div class='actions'>
+			<span class='wrap-container'>
+				<p class='wrap-container__title'>Полное название</p>
+				<p-inputSwitch
+          [(ngModel)]='toggleStatus'
+          (onChange)='changeTaskToggleStatus()'>
+        </p-inputSwitch>
+			</span>
+
+      <div
+        class='search'
+        [formGroup]='searchForm'>
+
+        <mat-form-field appearance='outline'>
+          <input
+            placeholder='Поиск задач'
+            type='text'
+            class='search-input'
+            matInput
+            formControlName='searchControl'
+            [matAutocomplete]='autoGroup'>
+
+          <mat-autocomplete class='search-autocomplete' #autoGroup='matAutocomplete'>
+            <mat-optgroup
+              *ngFor='let group of filteredOptions | async'
+              [label]='group.header'>
+              <mat-option
+                (onSelectionChange)='openClickedTask(task?.routerLink)'
+                *ngFor='let task of group?.tasks'
+                [value]='task.title'>
+                <p>{{task.title}}</p>
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+  </main>
+</div>

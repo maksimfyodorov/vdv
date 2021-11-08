@@ -1,0 +1,10 @@
+@import '../../../../../../8.2/8.2.30_commander-orders/common/mixins/calendar.scss';
+
+.tab-caption {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+::ng-deep {
+  @include calendar-weekend;
+}

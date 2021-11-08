@@ -1,0 +1,284 @@
+:host {
+  width: 100%;
+
+  ::ng-deep {
+    .p-overlaypanel {
+      right: 0;
+      margin-top: 3px;
+      box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%) !important;
+      .p-overlaypanel-content {
+      }
+      &:after,
+      &:before {
+        display: none !important;
+      }
+    }
+  }
+
+  .main {
+    $header-height: 100px;
+
+    width: 100%;
+    height: $header-height;
+    margin: auto;
+    background-color: #fff;
+    border-bottom: 1px solid #E1E3E8;
+    align-items: center;
+
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+
+    ::ng-deep {
+
+      .p-sidebar {
+        padding-top: 0;
+      }
+
+      .actions-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .actions-container .p-button {
+        margin-right: 20px;
+      }
+
+      .actions-container .p-button span {
+        font-size: 20px;
+      }
+
+      .p-button {
+        background: #fff;
+        color: #68737F;
+        border: none;
+
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+  ;
+
+    .left-container {
+      justify-self: flex-start;
+      display: flex;
+      align-items: center;
+    }
+
+    .right-container {
+      display: flex;
+      flex-direction: row;
+
+      &__left-column {
+        margin-right: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+
+
+    .icon {
+      height: 60px;
+      width: 60px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: row;
+      font-size: 16px;
+      max-width: 460px;
+
+      ::ng-deep {
+        .p-button-label {
+          font-weight: bold !important;
+          color: #252B34;
+        }
+      }
+    }
+
+    .profile {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 20px;
+
+      p-badge {
+        position: absolute;
+        top: 12px;
+        right: -4px;
+      }
+    }
+
+    .profile__text {
+      margin-right: 20px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      p {
+        margin: 0;
+      }
+    }
+
+
+    .name-fullname {
+      font-family: Noto Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+
+    .name {
+      margin: 4px 0;
+    }
+
+    .header__time {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      // margin-right: 130px;
+      margin-left: 154px;
+    }
+
+    .header__date {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .title,
+    .buttons {
+      margin: 0 10px;
+      height: 100%;
+    }
+
+    .logo {
+      height: 60px;
+      width: 80px;
+    }
+
+    .title {
+      font-size: 30px;
+      line-height: $header-height;
+      color: var(--text-color);
+
+      cursor: pointer;
+    }
+
+    .logo {
+      margin-left: 20px;
+
+      height: $header-height - 2px;
+
+      cursor: pointer;
+    }
+  }
+}
+
+.formation {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 80px;
+  }
+
+  &_description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 18px;
+
+    p {
+      margin: 0 0 4px 0;
+    }
+  }
+
+  &_title {
+    font-weight: 700;
+  }
+
+  &_address {
+    color: #727272;
+  }
+}
+
+.time {
+  flex: 1;
+
+  &_exact {
+    font-size: 20px;
+    margin: 0 8px 0 0;
+    font-weight: 600;
+    color: #68737F;
+  }
+
+  &_date {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.time__top-block {
+  display: flex;
+  align-items: baseline;
+}
+
+.time__bottom-block {
+
+}
+
+.databaseMode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &__indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #DED4DA;
+    &_active {
+      background: #74C0FC;
+    }
+  }
+
+  label {
+    font-size: 12px;
+    color: #959EA9;
+  }
+}
+
+.profile-menu {
+  .profile-menu__list {
+    padding-inline: 0;
+    margin: 0;
+    .profile-menu__item {
+      list-style: none;
+      margin: 8px 0;
+      a {
+        cursor: pointer;
+        i {
+          margin-right: 10px;
+        }
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+@media print {
+  :host {
+    display: none;
+  }
+}
+

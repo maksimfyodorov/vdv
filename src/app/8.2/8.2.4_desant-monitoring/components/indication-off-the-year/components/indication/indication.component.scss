@@ -1,0 +1,73 @@
+:host::ng-deep {
+  .p-button {
+    width: 152px;
+    height: 30px;
+    margin-right: 16px;
+  }
+  .p-button-label {
+    font-size: 11px;
+  }
+}
+
+:host::ng-deep .documents__component {
+  .p-button {
+    width: 20px;
+    margin-right: 8px;
+  }
+  .document__title {
+    font-size: 12px;
+  }
+  .documents__header {
+    .p-button {
+      width: 40px;
+    }
+  }
+}
+
+:host::ng-deep .p-inputtextarea {
+  min-width: 100%;
+  height: 140px;
+}
+
+.label {
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.buttons__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  justify-content: space-around;
+  height: 100px;
+  margin-left: -27px;
+}
+
+.input__text__wrapper {
+  width: 1061px;
+  height: 173px;
+  min-width: 500px;
+  margin-right: 40px;
+}
+
+.indication__wrapper {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 40px;
+}
+
+textarea {
+  margin-bottom: 48px;
+}
+
+.documents__component {
+  min-width: 440px;
+}
+
+.delete__button {
+  display: flex;
+  justify-content: flex-end;
+}

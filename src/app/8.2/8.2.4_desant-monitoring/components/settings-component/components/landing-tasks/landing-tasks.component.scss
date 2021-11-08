@@ -1,0 +1,82 @@
+:host::ng-deep .add__task__container {
+  .p-button {
+    width: 192px;
+    height: 40px;
+    border-radius: 4px;
+  }
+  p-component {
+    width: 192px;
+  }
+}
+
+:host::ng-deep {
+  tr.unselected:hover {
+    cursor: pointer;
+    background-color: #f7f7f7;
+  }
+}
+
+:host::ng-deep .p-inputnumber-input {
+  width: 100%;
+}
+
+#cancel {
+  width: 192px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.nameChange__input {
+  width: 100%;
+}
+
+.table_container {
+  margin-top: 25px;
+}
+
+.number {
+  width: 55px;
+  height: 40px;
+}
+
+.name {
+  width: 743px;
+  height: 40px;
+}
+
+.task__type {
+  width: 180px;
+  height: 40px;
+}
+
+.action {
+  width: 104px;
+  height: 40px;
+}
+
+.add__task__container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.task__input {
+  width: 904px;
+  height: 140px;
+  margin-bottom: 20px;
+}
+
+.icons_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.pi-trash {
+  cursor: pointer;
+}
+
+.selected {
+  td {
+    background: #f7f7f7;
+  }
+}

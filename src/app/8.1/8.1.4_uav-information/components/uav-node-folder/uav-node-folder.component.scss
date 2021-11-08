@@ -1,0 +1,41 @@
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+}
+
+.green {
+  border-left-color: #82C91E!important;
+}
+
+.folded-green {
+  background: #82C91E!important;
+}
+
+.red {
+  border-left-color: #F03E3E!important;
+}
+
+.folded-red {
+  background: #F03E3E!important;
+}
+
+.yellow {
+  border-left-color: #FAB005!important;
+}
+
+.folded-yellow {
+  background: #FAB005!important;
+}
+
+.singe-folder {
+  padding-left: 30px;
+}
+
+.expand-button {
+  margin: 0;
+}
+
+.selected {
+  border-left: 3px solid #228be6;
+  box-shadow: none;
+}

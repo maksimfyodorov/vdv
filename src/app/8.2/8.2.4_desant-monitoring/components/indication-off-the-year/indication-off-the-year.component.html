@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="inputs__wrapper">
+    <p-dropdown
+      [(ngModel)]="selectedYear"
+      [options]="years"
+      (onChange)="onChange($event)"
+      class="academic__year"
+      placeholder="Учебный год"
+    >
+    </p-dropdown>
+    <p-dropdown 
+      [disabled] ="!selectedYear"
+      [options]="filteredPeriods" 
+      optionLabel="name" 
+      class="period" 
+      placeholder="Период">
+    </p-dropdown>
+    <p-button 
+      (click)="addIndication()" 
+      class="add__indication-button" 
+      label=" Добавить указание">
+    </p-button>
+  </div>
+</div>
+<app-indication
+  [indicationIndex]="i"
+  (emitDeleteIndication)="deleteIndication(i)"
+  *ngFor="let indication of indications; let i = index"
+></app-indication>

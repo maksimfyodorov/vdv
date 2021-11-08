@@ -1,0 +1,34 @@
+@mixin calendar {
+  .p-datepicker-trigger {
+    color: #959EA9;
+    background: none;
+    border-color: #ced4da;
+    border-left: none;
+    border-right: 1px solid #ced4da !important;
+  }
+
+  .p-component {
+    cursor: pointer;
+    border-right: none;
+
+    &:hover {
+      border-color: #ced4da;
+    }
+
+    &:focus {
+      box-shadow: none;
+      border-color: #ced4da;
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+}
+
+@mixin calendar-weekend {
+  .p-datepicker th:last-child,
+  .p-datepicker tr td:last-child {
+    color: #D32F2F;
+  }
+}

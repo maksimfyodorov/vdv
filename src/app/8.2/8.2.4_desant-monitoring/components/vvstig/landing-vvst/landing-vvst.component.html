@@ -1,0 +1,66 @@
+<div
+  [appLoader]="loader.isLoading$"
+  class="loader-wrapper"
+>
+  <p class="dropdown__title">Подразделение</p>
+  <div class="flex-wrapper">
+    <p-dropdown
+      placeholder="Выберите подразделение"
+      [options]="divisions"
+      optionLabel="label"
+      class="subdivision__dropdown"
+    ></p-dropdown>
+
+    <p-button
+      class="add-subdivision-button"
+      label="Добавить"
+    ></p-button>
+  </div>
+
+  <div class="container">
+    <div class="subdivision__table">
+      <p-table
+        [paginator]="true"
+        [rows]="3"
+        dataKey="number"
+        [value]="tableData"
+        selectionMode="single"
+        [(selection)]="selectedTech"
+        (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+      >
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="number__th">№ п/п</th>
+            <th class="name__th">Наименование</th>
+            <th class="count">Инв. номер</th>
+            <th class="subdivision">Подразделение</th>
+            <th class="jump_count">Прыжков</th>
+          </tr>
+        </ng-template>
+
+        <ng-template
+          pTemplate="body"
+          let-data
+          let-ri="rowIndex"
+        >
+          <tr
+            [pSelectableRow]="data"
+            class="table-body-row"
+            (click)="getRowIndex(ri)"
+          >
+            <td>{{data.number}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.inventoryNumber}}</td>
+            <td>{{data.subdivision}}</td>
+            <td>{{data.jumpCount}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="info__container">
+      <app-tech-desanting-card></app-tech-desanting-card>
+    </div>
+  </div>
+</div>

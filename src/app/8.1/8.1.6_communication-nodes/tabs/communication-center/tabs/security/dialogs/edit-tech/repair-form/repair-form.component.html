@@ -1,0 +1,58 @@
+<p-accordion>
+  <p-accordionTab [header]="header">
+    <form [formGroup]="formGroup" class="form">
+      <span class="p-float-label">
+        <p-calendar
+          id="planInRepair"
+          formControlName="sending_date"
+          dateFormat="dd.mm.yy"
+          firstDayOfWeek="1"
+          appendTo="body"
+          [disabled]="formGroup.get('uuid').value"
+        ></p-calendar>
+        <label for="planInRepair">Планируемый срок отправки в ремонт</label>
+      </span>
+      <span class="p-float-label">
+        <p-calendar
+          id="planOutRepair"
+          formControlName="receipt_date"
+          dateFormat="dd.mm.yy"
+          firstDayOfWeek="1"
+          appendTo="body"
+          [disabled]="formGroup.get('uuid').value"
+        ></p-calendar>
+        <label for="planOutRepair">Планируемый срок получения из ремонта</label>
+      </span>
+      <span class="p-float-label">
+        <p-calendar
+          id="planInstall"
+          formControlName="installation_date"
+          dateFormat="dd.mm.yy"
+          firstDayOfWeek="1"
+          appendTo="body"
+          [disabled]="formGroup.get('uuid').value"
+        ></p-calendar>
+        <label for="planInstall">Срок установки на штатное место</label>
+      </span>
+      <span class="coordinate-row">
+        <small style="margin-left: 0.5rem">Местонахождение ремонтной организации</small>
+        <span class="coordinate">
+          <p *ngIf="formGroup.get('coordinate')?.value?.mark" pInputText>
+            {{formGroup.get('coordinate')?.value?.mark}}
+          </p>
+          <p *ngIf="formGroup.get('coordinate')?.value?.x && !formGroup.get('coordinate')?.value?.mark" pInputText>
+            {{formGroup.get('coordinate')?.value?.x}} , {{formGroup.get('coordinate')?.value?.y}}
+          </p>
+          <p *ngIf="!formGroup.get('coordinate')?.value" pInputText>Выберите метку</p>
+          <p-button
+            styleClass="p-button-outlined"
+            icon="pi pi-map-marker"
+            [disabled]="formGroup.get('uuid')?.value"
+            (onClick)="openCoorditanesDialog()"
+          >
+          </p-button>
+        </span>
+      </span>
+    </form>
+  </p-accordionTab>
+</p-accordion>

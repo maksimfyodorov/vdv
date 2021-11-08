@@ -1,0 +1,133 @@
+ <div class="tech__header-button">
+    <p-button label="Новая задача"
+              (click)="addNewTechTask()"
+              class="add__task-button"
+              [disabled]="!newEventDataService.eventUUID"
+    ></p-button>
+  </div>
+  <p-paginator [rows]="row"
+               [totalRecords]="tasksCount"
+               (onPageChange)="showNextPage($event.page)"
+               *ngIf="allPage > 1"></p-paginator>
+  <div class="staff__container">
+    <div class="staff__event">
+      <div class="staff__title">
+        <div class="staff__title__date">
+          <span class="element__staff_main-font">13.06.2021</span>
+          <span><i class="pi pi-minus"></i></span>
+          <span class="element__staff_main-font">14.06.2021</span>
+        </div>
+        <div class="staff__title_airplane">
+          <span class="element__staff_main-font">Ил-76</span>
+        </div>
+        <div class="staff__title_buttons">
+          <i class="pi pi-pencil" (click)="changeTechTask()"></i>
+          <i class="pi pi-trash" (click)="deleteTechTask()"></i>
+          <button pButton pRipple type="button" label="Выполнить" class="p-button-outlined"
+                  (click)="setTechCompleteStatus()"></button>
+        </div>
+      </div>
+      <div class="staff__title">
+        <div class="staff__title_event-name">
+          <span class="element__event-name">БМД-4</span>
+        </div>
+        <div class="staff__title_parachute">
+          <span class="element__staff_main-font">П-7</span>
+        </div>
+        <div class="staff__title_jumps">
+          <span class="element__jumps_planned">6</span>
+          <span class="element__jumps_slash">/</span>
+          <span class="element__jumps_done">0</span>
+        </div>
+      </div>
+      <div class="staff__title">
+        <div class="staff__title_event-name">
+          <span class="element__event-name">ЛС десантируемый вслед за техникой</span>
+        </div>
+        <div class="staff__title_parachute">
+          <span class="element__staff_main-font">Д-10</span>
+        </div>
+        <div class="staff__title_jumps">
+          <span class="element__jumps_planned">6</span>
+          <span class="element__jumps_slash">/</span>
+          <span class="element__jumps_done">0</span>
+        </div>
+      </div>
+      <div class="staff__title">
+        <div class="staff__title_event-name">
+          <span class="element__event-name">Десантирование внутри боевой машины</span>
+        </div>
+        <div class="staff__title_parachute">
+          <span class="element__staff_main-font">П-7</span>
+        </div>
+        <div class="staff__title_jumps">
+          <span class="element__jumps_planned">6</span>
+          <span class="element__jumps_slash">/</span>
+          <span class="element__jumps_done">0</span>
+        </div>
+      </div>
+      <div class="staff_subdivisions">
+        <span class="element_subdivisions">Привлеченные подразделения:</span>
+        <span class="element__divisions">вдо рдо,</span>
+        <span class="element__divisions">3пдп</span>
+      </div>
+      <div class="staff__coordinates">
+        <div class="staff__coordinates_departure">
+          <div class="staff__coordinates_airports_title">
+            <img src="../../../../../../../../assets/img/icons/airplane.svg">
+            <span class="element_airport_name">Чкаловский</span>
+          </div>
+          <div class="staff__coordinates_airports_name">
+            <span class="element_airport_region">Московская обл.</span>
+          </div>
+        </div>
+        <span class="element__arrow-right"><i class="pi pi-arrow-right"></i></span>
+        <div class="staff__coordinates_landing">
+          <div class="staff__coordinates_airports_title">
+            <img src="../../../../../../../../assets/img/icons/parachute.svg">
+            <span class="element_airport_name">59° 23′ 45″ с.ш., 56° 44′ 00″ в.д.</span>
+          </div>
+          <div class="staff__coordinates_airports_name">
+            <span class="element_airport_region">Тульская обл.</span>
+          </div>
+        </div>
+      </div>
+      <div class="staff__subtasks">
+        <div class="staff__subtasks_element">
+          <span class="element__subtasks">13.06.2021</span>
+          <div class="staff__subtasks_element_steps">
+            <div class="staff__subtasks_element_badge">
+<!--              <p-badge [value]="1"></p-badge>-->
+              <div class="staff__subtasks_element_inactive-badge">
+                <span>1</span>
+              </div>
+
+            </div>
+<!--            <div class="staff__subtasks_element_active-line"></div>-->
+            <div class="staff__subtasks_element_not-active-line"></div>
+          </div>
+          <div class="staff__subtasks_element_data">
+            <div>
+              <div class="staff__subtasks_element_data_info">
+                <div class="staff__subtasks_element_data_icons">
+                  <i class="pi pi-check"></i>
+                </div>
+                <div class="staff__subtasks_element_data_name">
+                  <span class="element__subtasks">Подготовка</span>
+                </div>
+                <div class="staff__subtasks_element_data_edit">
+                  <i class="pi pi-pencil"></i>
+                  <i class="pi pi-check-circle"></i>
+                </div>
+              </div>
+            </div>
+            <i class="pi pi-plus" (click)="addNewTechSubTask()"></i>
+            <span class="element__subtasks_new">Новая подзадача</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

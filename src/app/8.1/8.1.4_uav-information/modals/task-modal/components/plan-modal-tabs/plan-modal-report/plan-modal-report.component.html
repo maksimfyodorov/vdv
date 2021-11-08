@@ -1,0 +1,56 @@
+<div class="modal-content" [formGroup]="this.form">
+  <div class="">
+    <div class='modal-row'>
+      <div class='input-wrap' style='width: 40%'>
+        <label for='date-begin'>Начало полёта (факт):</label>
+        <p-calendar id='date-begin' formControlName="start_flight_fact" [firstDayOfWeek]="1" [showTime]="true" dateFormat="dd.mm.yy" [showIcon]='true' icon='pi pi-calendar'></p-calendar>
+      </div>
+
+      <div class='input-wrap' style='width: 40%'>
+        <label for='date-end'>Окончание полёта (факт):</label>
+        <p-calendar id='date-end' formControlName="end_flight_fact" [firstDayOfWeek]="1" [showTime]="true" dateFormat="dd.mm.yy" [showIcon]='true' icon='pi pi-calendar'></p-calendar>
+      </div>
+    </div>
+
+    <p class="sub-title">Отчет о полете</p>
+
+    <app-documents [documentsToShow]="documents" [isViewMode]="form.disabled" (attachDocument)="attachDocument($event)" (detachDocument)="detachDocument($event)"></app-documents>
+
+    <div class="note">
+      <label for="note" class="label">Примечание</label>
+      <textarea id="note" formControlName="note" rows="6" pInputTextarea></textarea>
+    </div>
+  </div>
+
+  <div class="modal-row button-wrap" *ngIf="checkTaskMode(['view', 'completed', 'not_completed']); else nonViewModeButtonsTemplate">
+    <p class="status-label {{data.task?.status_name}}">{{getText(data.task?.status_name)}}</p>
+<!--    <button pButton type='button' *ngIf="!checkTaskMode(['create'])" (click)="actionEmit.emit('save')" label='Сохранить' ></button>-->
+    <button pButton type='button' *ngIf="!checkTaskMode(['create'])" (click)="actionEmit.emit('print')" icon='pi pi-print' label='Печать' class='p-button-outlined'></button>
+<!--    <button pButton type='button' *ngIf="!checkTaskMode(['create'])" (click)="actionEmit.emit('delete')" icon='pi pi-trash' label='' class='p-button-outlined p-button-danger'></button>-->
+  </div>
+</div>
+
+<ng-template #nonViewModeButtonsTemplate>
+  <div class="modal-row button-wrap">
+
+    <button pButton type='button' [disabled]="data.mode.mode !== 'planned' || data.mode?.subordinate"
+            (click)="actionEmit.emit('completed')" class='status success passed' icon="pi pi-check" iconPos="left"
+            label='Завершить задание'></button>
+
+    <button pButton type='button' [disabled]="data.mode.mode !== 'planned' || data.mode?.subordinate"
+            (click)="actionEmit.emit('new')"
+            label='Сохранить'></button>
+
+    <button pButton type='button' [disabled]="data.mode.mode !== 'planned' || data.mode?.subordinate"
+            (click)="actionEmit.emit('not_completed')" class='status error not_passed'
+            label='Доложить о не выполнении'></button>
+
+    <button pButton type='button' *ngIf="data.mode.mode !== 'create'"
+            (click)="actionEmit.emit('print')" icon='pi pi-print' class='p-button-outlined'
+            label='Печать'></button>
+
+    <button pButton type='button' *ngIf="!checkTaskMode(['create', 'planned'])  && form.disabled" [disabled]="data.mode.subordinate"
+            (click)="actionEmit.emit('delete')" class='p-button-outlined p-button-danger'
+            icon='pi pi-trash'></button>
+  </div>
+</ng-template>

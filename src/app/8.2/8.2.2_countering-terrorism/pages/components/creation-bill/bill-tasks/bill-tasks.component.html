@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="container__main">
+        <div class="firstColumn">
+            <div
+                *ngIf="!completeCreationFlag; else completeCreation"
+                class="container__main_report"
+            >
+                <div
+                    class="button"
+                    [routerLink]="['../make-report']"
+                    [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+                >
+                    Донесение
+                </div>
+                <div class="button">
+                    Донесение подчиненного ВФ
+                </div>
+            </div>
+            <div
+                *ngIf="documents?.length <= 0"
+                class="button container__main_document"
+                (click)="openDocumentDialog()"
+            >
+                +Прикрепить документ
+            </div>
+            <div
+                *ngIf="documents?.length > 0"
+                class="button container__main_documents"
+            >
+                <div style="width: 100%; height: 100%;">
+                    <div>
+                        <div class="logo">
+                            Документы
+                        </div>
+                        <p-scrollPanel [style]="{width: '100%', height: '150px'}">
+                            <div
+                                class="delete-doc"
+                                *ngFor="let item of documents"
+                            >
+                                <span>
+                                    {{item.name}}
+                                </span>
+                                <div class="dashed"></div>
+                                <i
+                                    (click)="deleteDocument(item.uuid)"
+                                    class="pi pi-trash pointer"
+                                ></i>
+                            </div>
+                        </p-scrollPanel>
+                    </div>
+                    <div
+                        class="doc-dialog"
+                        (click)="openDocumentDialog()"
+                    >+ Прикрепить документ</div>
+                </div>
+            </div>
+        </div>
+        <div class="secondColumn">
+            <div *ngFor="let item of firstTaskData">
+                <ng-container
+                    [ngTemplateOutlet]="showTaskData"
+                    [ngTemplateOutletContext]="{ $implicit: item}"
+                ></ng-container>
+            </div>
+        </div>
+        <div>
+            <div *ngFor="let item of secondTaskData">
+                <ng-container
+                    [ngTemplateOutlet]="showTaskData"
+                    [ngTemplateOutletContext]="{ $implicit: item}"
+                ></ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #completeCreation>
+    <div
+        *ngIf="completeCreationFlag"
+        class="container__main_report"
+    >
+        <div
+            class="button__edit"
+            [routerLink]="['../make-report']"
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        >
+            <div>
+                <i class="pi pi-pencil"></i>
+            </div>
+            <div>
+                Редактировать
+            </div>
+            <div>
+                донесение
+            </div>
+        </div>
+        <div
+            class="button__report"
+            (click)="openSubordinateDialog()"
+        >
+            <div>
+                <i class="pi pi-plus"></i>
+            </div>
+            <div>
+                Донесение
+            </div>
+            <div>
+                подчиненного ВФ
+            </div>
+        </div>
+        <div
+            class="button__report-back"
+            [routerLink]="['../show-report']"
+            [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        >
+            <div>
+                <i class="pi pi-send"></i>
+            </div>
+            <div>
+                Доложить
+            </div>
+            <div>
+                об исполнении
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template
+    #showTaskData
+    let-taskData
+>
+    <div class="task">
+        <div class="logo"><i class="pi pi-clock"></i>{{taskData?.name}}</div>
+        <div class="status">
+            <div *ngIf="taskData?.count > 0 ">
+                {{taskData?.count}}
+            </div>
+            <div *ngIf="taskData?.count === 0">
+                Не заполнено
+            </div>
+        </div>
+    </div>
+</ng-template>

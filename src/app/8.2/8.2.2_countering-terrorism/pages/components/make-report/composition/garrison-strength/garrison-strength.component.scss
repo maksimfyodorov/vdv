@@ -1,0 +1,42 @@
+.logo {
+    width: 658px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.trash {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c7cdd3;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-btn {
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    width: 120px;
+    color: #228be6;
+}
+
+input {
+    height: 40px;
+    margin-right: 8px;
+    width: 240px;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+}

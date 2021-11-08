@@ -1,0 +1,246 @@
+<form [formGroup]="militaryForm">
+  <div class="container">
+
+    <div class="sidebar">
+      <p class="container__text container__text_large">{{folder}}</p>
+      <ng-container *ngIf="tree">
+        <app-custom-tree
+          [tree]="tree"
+          [selectedForPropreties]="selectedForPropreties"
+          (onSelectItem)="selectLabel($event)"
+        ></app-custom-tree>
+      </ng-container>
+    </div>
+
+    <div class="content content_margin-left">
+      <div class="container__text container__text_title">Идентификатор</div>
+      <input
+        style="width: 665px;"
+        type="text"
+        formControlName="identificator"
+        pInputText
+      />
+      <div class="wrap-box">
+
+        <p class="container__text container__text_low">
+          Принадлежность
+        </p>
+        <div class="wrap-box wrap-box__row">
+          <app-military-units-dropdown formControlName="military_unit">
+            <p class="container__text container__text_title">Воинское формирование</p>
+          </app-military-units-dropdown>
+          <app-military
+            [loadExecutive]="true"
+            [selectedMilitary]="responsible_uuid"
+            (appointment)="setResponse($event)"
+          >Ответственный</app-military>
+        </div>
+
+      </div>
+
+      <div class="wrap-box">
+
+        <p class="container__text container__text_low">
+          Контроль
+        </p>
+        <div class="wrap-box wrap-box__row">
+          <app-military-units-dropdown-flat formControlName="nco">
+            <p class="container__text container__text_title">Подразделение НЦУО</p>
+          </app-military-units-dropdown-flat>
+          <app-military
+            [loadExecutive]="true"
+            [selectedMilitary]="supervising_uuid"
+            (appointment)="setSupervising($event)"
+          >Контролирующий</app-military>
+        </div>
+
+      </div>
+
+      <div class="wrap-box">
+
+        <p class="container__text container__text_low">
+          Группа
+        </p>
+        <div class="wrap-box wrap-box__row wrap-box_nesting-level1">
+
+          <div class="item">
+            <p class="container__text container__text_title">
+              Номер
+            </p>
+            <input
+              type="text"
+              formControlName="number"
+              pInputText
+              disabled
+            />
+          </div>
+
+          <div class="item">
+            <p class="container__text container__text_title">
+              Информационная группа
+            </p>
+            <p-dropdown
+              formControlName="group"
+              (onChange)="choose()"
+              [options]="infArray"
+              optionLabel="name"
+            >
+            </p-dropdown>
+            <p
+              (click)="openInformationGroup()"
+              class="container__text container__text_title container__text_primaryColor container__text_remove-margin"
+            >
+              <i class="pi pi-cog"></i>
+              Настройка
+            </p>
+          </div>
+
+          <div class="item">
+            <p class="container__text container__text_title">
+              Раздел
+            </p>
+            <input
+              type="text"
+              formControlName="section"
+              pInputText
+              disabled
+            />
+          </div>
+
+        </div>
+
+        <div class="wrap-box wrap-box__row wrap-box_nesting-level2">
+
+          <div class="item">
+            <p class="container__text container__text_title">
+              Форма
+            </p>
+            <input
+              formControlName="form"
+              type="text"
+              pInputText
+              disabled
+            />
+          </div>
+
+          <div class="item">
+            <p class="container__text container__text_title">
+              Характер
+            </p>
+            <input
+              type="text"
+              formControlName="character"
+              pInputText
+              disabled
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="tracking">
+        <div *ngFor="let track of tracking.controls;">
+          <ng-container [formGroup]="track">
+            <div class="tracking__row">
+              <div>
+                <app-period
+                  formControlName="info"
+                  [isActualization]="true"
+                ></app-period>
+              </div>
+              <div
+                class="tracking__row_trash"
+                *ngIf="tracking.controls.indexOf(track)>0"
+                (click)="deleteTrack(tracking.controls.indexOf(track))"
+              >
+                <span
+                  class="p-button-icon pi pi-trash"
+                  aria-hidden="true"
+                ></span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div
+          class="tracking__blueColor"
+          (click)="addTrack()"
+        >+ добавить отслеживание</div>
+      </div>
+      <div class="expansion">
+        <mat-expansion-panel class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="flex__container">
+                <div class="tree__header">Настройка ожиданий</div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p-tree
+            *ngIf="waitings.length"
+            [value]="waitings"
+            selectionMode="single"
+          >
+            <ng-template
+              let-node
+              pTemplate="default"
+            >
+              <div class="row">
+                <div *ngIf="node.is_dir">
+                  <i
+                    class="pi pi-folder"
+                    style="font-size: 19px"
+                  ></i>
+                </div>
+                <div *ngIf="!node.is_dir">
+                  <i
+                    class="pi pi-file"
+                    style="font-size: 19px"
+                  ></i>
+                </div>
+                <div class="tree__content_wrapper">
+                  <div
+                    class="treeNode"
+                    style="width:100%"
+                  >{{node.path | namePipe}}</div>
+                  <div
+                    class="add"
+                    (click)="addNode(node)"
+                  >+</div>
+                  <i
+                    class="pi pi-trash add"
+                    style="font-size: 17px"
+                    (click)="deleteNode(node)"
+                  >
+                  </i>
+                </div>
+              </div>
+            </ng-template>
+          </p-tree>
+        </mat-expansion-panel>
+        <div
+          class="addWaiting"
+          (click)="addWaiting()"
+        >+</div>
+      </div>
+      <div class="buttons__wrapper">
+        <button
+          pButton
+          class="save"
+          type="button"
+          [disabled]="disableButton"
+          (click)="saveInformationArray()"
+          label="Сохранить"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Отменить"
+          (click)="closeDialog()"
+          class="p-button-secondary p-button-text"
+        ></button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,30 @@
+<div class="nodes">
+  <p-tabView class="tab-wrapper">
+    <p-tabPanel header="Узлы">
+      <ng-template pTemplate="content">
+        <app-nodes></app-nodes>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel class="ues-map" header="Карта">
+      <ng-template pTemplate="content">
+        <ues-map>
+          <app-battle-posts-map-view></app-battle-posts-map-view>
+          <ues-main-toolbar></ues-main-toolbar>
+        </ues-map>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel class="tab-wrapper" header="Обеспеченность">
+      <ng-template pTemplate="content">
+        <app-security></app-security>
+      </ng-template>
+    </p-tabPanel>
+
+    <p-tabPanel header="Укомплектованность">
+      <ng-template pTemplate="content">
+        <app-completeness></app-completeness>
+      </ng-template>
+    </p-tabPanel>
+  </p-tabView>
+</div>

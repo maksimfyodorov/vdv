@@ -1,0 +1,153 @@
+@import '../../../../../styles/variables/colors';
+
+.wrapper {
+  display: flex;
+}
+
+.title_sport {
+  display: flex;
+  margin-bottom: 34px;
+  padding-top: 42px;
+}
+
+.calendar {
+  padding-left: 24px;
+}
+
+.table {
+  width: 800px;
+  border: 1px solid #E1E3E8;
+  border-radius: 8px;
+}
+
+:host ::ng-deep {
+  .p-button{
+    padding: 8px 24px;
+    height: 40px;
+  }
+  .p-datatable{
+    &.p-datatable-gridlines {
+      .p-paginator-bottom {
+        border: none;
+      }
+    }
+    &.p-datatable-sm .p-datatable-thead  th {
+      background: none;
+    }
+  }
+  .p-paginator {
+    justify-content: flex-start !important;
+    margin-top: 16px;
+    .p-paginator-pages {
+      .p-paginator-page{
+        &.p-highlight {
+          background: $primary-color;
+          border-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+    .p-paginator-first,
+    .p-paginator-last {
+      display: none;
+    }
+    .p-paginator-prev {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "\e900";
+        }
+        &::after {
+          content: "Назад";
+          margin: 0 13px;
+        }
+      }
+    }
+    .p-paginator-next {
+      color: $primary-color;
+      &:not(.p-disabled):not(.p-highlight):hover {
+        color: $primary-color;
+        background: white;
+      }
+      span {
+        &::before {
+          content: "Вперед";
+          margin: 0 13px;
+        }
+        &::after {
+          content: "\e901";
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+
+    text-align: left;
+    font-weight: normal;
+    background: #fff !important;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    color: #252B34;
+  }
+
+  .p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+    line-height: 20px;
+  }
+
+  .p-calendar-w-btn .p-datepicker-trigger {
+    background: white;
+    color: #959EA9;
+    border-color: #C7CDD3;
+    border-left: none;
+  }
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :first-child {
+  width: 47px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(2) {
+  width: 144px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(3) {
+  width: 86px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(4) {
+  width: 153.33px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(5) {
+  width: 153.33px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(6) {
+  width: 153.33px;
+}
+
+:host::ng-deep .p-datatable .p-datatable-thead > tr :nth-child(7) {
+  width: 30px;
+}
+
+.container__card {
+  margin-left: 32px;
+  width: 715px;
+  min-height: 516px;
+  border: 1px solid #E1E3E8;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+

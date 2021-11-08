@@ -1,0 +1,171 @@
+<p-scrollPanel [style]='{height: "80vh"}'>
+  <form class='add-order-form' [formGroup]='form' [appLoader]='loader.isLoading$' [class._disabled]="form.disabled">
+
+    <section class='customer'>
+      <h3 class='title'>По решению</h3>
+      <app-editable-autocomplete [dataSource]='customers'
+                                 [displayField]='"name"'
+                                 [searchField]='"name"'
+                                 (createItem)="createCustomer($event)"
+                                 (editItem)="editCustomer($event)"
+                                 (deleteItem)="deleteCustomer($event)"
+                                 [selectedSuggestion]="editedCustomer"
+                                 formControlName='customer_uuid'
+                                 [disable]="isViewMode"
+      ></app-editable-autocomplete>
+    </section>
+
+    <section class='name'>
+      <h3 class='title'>Краткое наименование</h3>
+      <div class='name__input'>
+        <input formControlName='name' pInputText type='text' placeholder='Наименование'>
+      </div>
+      <textarea formControlName='description' [rows]='5' [cols]='30' pInputTextarea placeholder='Краткое содержание'></textarea>
+    </section>
+
+    <section class='document-info'>
+
+      <div class='document-creation-date'>
+        <h3 class='title'>Дата поступления документа</h3>
+        <p-calendar formControlName='date_of_receipt'
+                    [showIcon]='true'
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon='pi pi-calendar'
+        ></p-calendar>
+      </div>
+
+      <div class='document-execution-date'>
+        <h3 class='title'>Срок исполнения поручения</h3>
+        <p-calendar formControlName='term_of_execution'
+                    [showIcon]='true'
+                    firstDayOfWeek="1"
+                    dateFormat="dd.mm.yy"
+                    icon='pi pi-calendar'
+        ></p-calendar>
+      </div>
+
+      <div class='document-number'>
+        <h3 class='title'>Входящий номер документа</h3>
+        <input formControlName='incoming_number' type='text' pInputText>
+      </div>
+    </section>
+
+    <section class='executors'>
+      <section class='executor' formGroupName='executor'>
+        <h3 class='executor__title'>Исполнитель</h3>
+
+        <div class='executor__container'>
+          <div class='executor__administration'>
+            <p class='title'>Управление (отдел, служба)</p>
+            <app-military-units-dropdown-flat formControlName='military_unit_id'></app-military-units-dropdown-flat>
+          </div>
+
+          <div class='executor__military-man'>
+            <app-military [loadExecutive]="true" formControlName='shdk_uuid'>Исполнитель ДЛ</app-military>
+            <p class='executor__user-icon' *ngIf="form.get('executor').value.shdk_uuid">
+              <i class="pi pi-user"></i>
+              {{form.get('executor').value.shdk_uuid.appointment}}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class='co-executor'
+               formArrayName='co_executors'
+               *ngFor="let coExecutor of form.get('co_executors')['controls']; let i = index;"
+      >
+        <div class='co-executor__inner-wrap' [formGroupName]='i'>
+          <h3 class='co-executor__title'>Соисполнитель</h3>
+          <div class='co-executor__container'>
+            <div class='co-executor__administration'>
+              <p class='title'>Управление (отдел, служба)</p>
+              <app-military-units-dropdown-flat formControlName='military_unit_id'></app-military-units-dropdown-flat>
+            </div>
+
+            <div class='co-executor__military-man'>
+              <app-military [loadExecutive]="true"
+                            formControlName='shdk_uuid'
+              >Соисполнитель ДЛ</app-military>
+              <p class='co-executor__user-icon' *ngIf='coExecutor.value.shdk_uuid?.appointment' >
+                <i class="pi pi-user"></i>
+                {{ coExecutor.value.shdk_uuid?.appointment }}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+      <div class='executors__buttons' *ngIf="!isViewMode">
+        <button (click)='addCoExecutor()'
+                pButton
+                type="button"
+                label="Добавить"
+                class="p-button-outlined"
+                [disabled]="!this.form.get('co_executors').value[this.form.get('co_executors').value.length - 1]?.shdk_uuid &&
+                            !this.form.get('co_executors').value[this.form.get('co_executors').value.length - 1]?.military_unit_id"
+        ></button>
+        <button *ngIf="this.form.get('co_executors').value.length > 1"
+                (click)='deleteCoExecutor()'
+                pButton type="button"
+                label="Удалить"
+                class="p-button-danger delete-btn"
+        ></button>
+        <button *ngIf="this.form.get('co_executors').value[0]?.shdk_uuid && this.form.get('co_executors').value.length === 1 ||
+                       this.form.get('co_executors').value[0]?.military_unit_id && this.form.get('co_executors').value.length === 1"
+                (click)='resetCoExecutor()'
+                pButton type="button"
+                label="Удалить"
+                class="p-button-danger delete-btn"
+        ></button>
+      </div>
+    </section>
+
+    <section class='dislocation-point'>
+      <h3 class='title'>Пункт дислокации</h3>
+      <span class="p-input-icon-right">
+        <i class="pi pi-ellipsis-h"></i>
+        <input pInputText
+               (click)='openOSPOCoordinatesWithHeight()'
+               [value]='dislocationPoint?.name || orderToEdit?.coordinate?.mark'
+               placeholder='Выбрать...'
+               [disabled]="isViewMode"
+               type="text">
+      </span>
+    </section>
+
+    <section class='attached-docs'>
+      <h3 class='title'>Прикреплённые документы</h3>
+      <div class='attached-docs__item'>
+        <app-documents title='Поручение'
+                       hasNullifiedPaddings='true'
+                       attachMode='single'
+                       isMainDocument='true'
+                       [documentsToShow]='form?.get("document").value'
+                       (currentDocumentList)='orderInDocumentsChanged($event)'
+                       [isViewMode]='isViewMode'
+        ></app-documents>
+      </div>
+      <div class='attached-docs__item'>
+        <app-documents title='Дополнительные документы'
+                       hasNullifiedPaddings='true'
+                       [documentsToShow]='form?.get("additional_documents").value'
+                       (currentDocumentList)='documentsChanged($event)'
+                       [isViewMode]='isViewMode'
+        ></app-documents>
+      </div>
+    </section>
+
+    <section class='controls' *ngIf="!isViewMode">
+      <button *ngIf='!orderToEdit else reportButton' (click)='addOrder()' [disabled]='form.invalid' pButton type="button" label="Добавить"></button>
+    </section>
+
+  </form>
+</p-scrollPanel>
+
+
+
+<ng-template #reportButton>
+  <button  (click)='editOrder()' [disabled]='form.invalid' pButton type="button" label="Сохранить"></button>
+  <button (click)='makeReport()' [disabled]='form.invalid' pButton type="button" label="Доложить" class="p-button-success"></button>
+</ng-template>

@@ -1,0 +1,129 @@
+<div class="card">
+  <p-tabView>
+    <p-tabPanel header="Основные сведения">
+      <div class="card__inner">
+        <div class="container" *ngIf="selectedUUID">
+          <div class="container__inner_jump">
+            <div class="container_jumps-all-info" *ngFor="let parachuteSystem of desantingCardInfo?.parachute_systems">
+              <small><span class="element_title">{{parachuteSystem?.name}}</span></small>
+              <small><span class="element_done">{{parachuteSystem?.done}}</span> <span
+                class="element_slash">/</span><span class="element_planned">{{parachuteSystem?.planned}} </span>
+                <p-badge [value]="parachuteSystem?.incident" severity="danger"
+                         *ngIf="parachuteSystem?.incident !=0"></p-badge>
+              </small>
+            </div>
+          </div>
+          <div class="title_jump">
+            <small class="element_header">Прыжки с летательных средств</small>
+          </div>
+          <div class="container_jumps-all-info" *ngFor="let aircraft of desantingCardInfo?.aircraft">
+            <small><span class="element_title"> {{aircraft?.name}}</span></small>
+            <small><span class="element_done">{{aircraft?.done}}</span> <span class="element_slash">/</span><span
+              class="element_planned">{{aircraft?.planned}} </span>
+              <p-badge [value]="aircraft?.incident" severity="danger" *ngIf="aircraft?.incident !=0"></p-badge>
+            </small>
+          </div>
+          <div class="container__inner_division">
+            <small class="element_header">В составе подразделений: </small>
+            <small *ngFor="let military_unit of desantingCardInfo?.military_units" class="element_military_normal">
+              <p-badge [value]="military_unit?.incident" severity="danger"
+                       *ngIf="military_unit?.incident !=0"></p-badge>
+              {{military_unit?.name}} </small>
+          </div>
+          <div class="container_tasks">
+            <div class="title_jump">
+              <span class="element_title">Прыжки по задачам</span>
+            </div>
+            <div class="container_jumping-on-tasks" *ngFor="let jumping_on_task of desantingCardInfo?.jumping_on_tasks">
+              <small class="element_jumping-on-tasks_title">{{jumping_on_task?.title}}</small>
+              <div class="container_jumping-on-tasks_info">
+                <small><span class="element_jumping-on-tasks_done">{{jumping_on_task?.done}}</span> <span
+                  class="element_jumping-on-tasks_slash">/</span><span
+                  class="element_jumping-on-tasks_planned">{{jumping_on_task?.planned}}</span>
+                </small>
+              </div>
+              <div class="container_jumping-on-tasks_subbing_info"
+                   *ngIf="jumping_on_task?.parachuteSystems.length != 0">
+                <div class="container_jumping-on-tasks_subbing_info"
+                     *ngFor="let jumpSys of jumping_on_task?.parachuteSystems">
+                  <small class="element_jumping-on-tasks_subtitle">{{jumpSys?.name}}</small>
+                  <div class="container_jumping-on-tasks_info">
+                    <small><span class="element_jumping-on-tasks_sub_done">{{jumpSys?.done}}</span><span
+                      class="element_jumping-on-tasks_slash">/</span><span
+                      class="element_jumping-on-tasks_sub_planned">{{jumpSys?.planned}}</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="title_jump">
+            <span class="element_title">Десантирование вслед за ВВСТ</span>
+          </div>
+          <div class="block_after_military"
+               *ngFor="let jumping_after_military of desantingCardInfo?.jumping_after_military_equipment">
+            <div class="block_after_military_title">
+              <small class="element_jumping-on-tasks_title">
+                {{jumping_after_military?.title}}
+              </small>
+            </div>
+            <div class="block_after_military_parachute_info">
+              <small class="element_jumping-after-military-equipment">
+                {{jumping_after_military?.parachuteSystems}}
+              </small>
+            </div>
+            <div class="block_jump_info">
+              <small><span class="element_jumping-on-tasks_done">{{jumping_after_military?.done}}</span> <span
+                class="element_jumping-on-tasks_slash">/</span><span
+                class="element_jumping-on-tasks_planned">{{jumping_after_military?.planned}}</span>
+              </small>
+            </div>
+          </div>
+          <div class="block__in-military">
+            <div class="title_jump">
+              <span class="element_title">Десантирование внутри боевой машины</span>
+            </div>
+            <div class="block_after_military"
+                 *ngFor="let jumping_after_military of desantingCardInfo?.jumping_in_military_equipment">
+              <div class="block_after_military_title">
+                <small class="element_jumping-on-tasks_title">
+                  {{jumping_after_military?.title}}
+                </small>
+              </div>
+              <div class="block_after_military_parachute_info">
+                <small class="element_jumping-after-military-equipment">
+                  {{jumping_after_military?.parachuteSystems}}
+                </small>
+              </div>
+              <div class="block_jump_info">
+                <small><span class="element_jumping-on-tasks_done">{{jumping_after_military?.done}}</span> <span
+                  class="element_jumping-on-tasks_slash">/</span><span
+                  class="element_jumping-on-tasks_planned">{{jumping_after_military?.planned}}</span>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="История">
+      <div class="table__card">
+        <p-table [value]="desantingCardInfo?.history" *ngIf="selectedUUID">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Дата</th>
+              <th>Событие</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-sportCard>
+            <tr>
+              <td>{{sportCard?.date | date: 'dd.MM.yyyy'}}</td>
+              <td>{{sportCard?.event}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,0 +1,250 @@
+.card {
+  &__inner {
+    width: 667px;
+    min-height: 437px;
+    background: #F5F6F8;
+    border: 1px solid #E1E3E8;
+    border-radius: 0px 0px 4px 4px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &_jump_second {
+      display: grid;
+      padding-left: 110px;
+    }
+
+    &_jump_third {
+      display: grid;
+      padding-left: 73px;
+    }
+  }
+}
+
+.container {
+  padding: 8px 16px 16px 16px;
+
+  &_tasks {
+    width: 100%;
+    border-bottom: 1px solid #E1E3E8;
+  }
+
+  &__inner_jump {
+    min-height: 50px;
+    width: 100%;
+    border-bottom: 1px solid #E1E3E8;
+
+    &_aircraft {
+      display: block;
+      min-height: 50px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  &__inner_division {
+    display: block;
+    box-sizing: border-box;
+    min-height: 40px;
+    border-bottom: 1px solid #E1E3E8;
+  }
+
+  &_jumps-all-info {
+    display: inline-grid;
+    padding-right: 20px;
+  }
+
+  &_jumping-on-tasks {
+    display: flex;
+    flex-flow: row wrap;
+    width: 633px;
+    line-height: 20px;
+
+    &_info {
+      margin-left: auto;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+    }
+
+    &_subbing_info {
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      line-height: 20px;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .p-dropdown {
+    width: 379px;
+    height: 40px;
+  }
+
+  .p-inputtext {
+    width: 240px;
+    height: 40px;
+    margin-left: 12px;
+  }
+
+  .p-button {
+    margin-left: 16px;
+  }
+
+  .p-badge {
+    min-width: 18px;
+    height: 18px;
+
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .p-tabview-panels {
+    padding: 0;
+  }
+}
+
+.title_jump {
+  min-height: 25px;
+}
+
+.block {
+  &_after_military {
+    display: flex;
+
+    &_title {
+      flex-basis: 408px;
+    }
+
+    &_parachute_info {
+      flex-basis: 142px;
+    }
+  }
+
+  &_in_military {
+    border-top: 1px solid #E1E3E8;
+    margin-top: 4px;
+  }
+}
+
+.block_jump_info {
+  margin-left: auto;
+}
+
+.element {
+  &_title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #959EA9;
+  }
+
+  &_planned {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #82C91E;
+  }
+
+  &_done {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #252B34;
+  }
+
+  &_header {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #959EA9;
+  }
+
+  &_slash {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #E1E3E8;
+  }
+
+  &_jumping-on-tasks {
+    &_slash {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      color: #E1E3E8;
+    }
+
+    &_done {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      color: #252B34;
+    }
+
+    &_title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      max-width: 408px
+    }
+
+    &_planned {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      color: #82C91E;
+    }
+
+    &_subtitle {
+      text-align: left;
+      padding-left: 16px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_sub_done {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #252B34;
+    }
+
+    &_sub_planned {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: #82C91E;
+    }
+  }
+
+  &_military_normal {
+    padding-right: 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #484F59;
+  }
+
+  &_jumping-after-military-equipment {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252B34;
+  }
+}
+

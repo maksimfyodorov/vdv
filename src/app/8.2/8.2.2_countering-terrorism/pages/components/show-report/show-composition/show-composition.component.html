@@ -1,0 +1,244 @@
+<div>
+    <div class="logo bold">
+        Руководящий состав
+    </div>
+    <div class="table-container">
+        <p-table
+            #dt
+            [value]='composition.managment'
+            [rowHover]='true'
+            dataKey='uuid'
+        >
+            <ng-template pTemplate='header'>
+                <tr>
+                    <th class="number">№</th>
+                    <th class="position">Должность</th>
+                    <th class="responsible">Ответственный за противодействие терроризму</th>
+                    <th class="phone">Телефоны</th>
+                </tr>
+            </ng-template>
+            <ng-template
+                pTemplate='body'
+                let-product
+                let-i='rowIndex'
+            >
+                <tr>
+                    <td>{{product.number}}</td>
+                    <td>{{product.position}}</td>
+                    <td>{{product.responsible}}</td>
+                    <td>{{product.phone}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div>
+    <div class="logo bold">Состояние сил и средств</div>
+    <div class="logo bold">{{composition.cityName}}</div>
+    <div class="row">
+        <div class="row__mode_logo bold">ОГ "Антитеррор"</div>
+        <div class="row__mode_scell">
+            <div class="text">сокр.</div>
+            <div>Режим В</div>
+        </div>
+        <div class="row__mode_scell">
+            <div class="text">полн.</div>
+            <div>Режим А, Б</div>
+        </div>
+        <div class="row__mode_bcell">
+            <div class="text">Время готовности</div>
+            <div>Рабочее</div>
+        </div>
+        <div class="row__mode_bcell">
+            <div class="text">Время готовности</div>
+            <div>Нерабочее</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row__mode_logo">
+            Подразделения усиления гарнизона
+        </div>
+        <div class="row__mode_scell">{{composition.mode.soldiers}}</div>
+        <div class="row__mode_scell">{{composition.mode.secondSoldiers}}</div>
+        <div class="row__mode_bcell">{{composition.mode.work_time}}</div>
+        <div class="row__mode_bcell">{{composition.mode.not_work_time}}</div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo bold">Подразделения антитеррора</div>
+        <div class="row__form_scell">
+            <div>Л/С</div>
+        </div>
+        <div class="row__form_scell">
+            <div>ВВТ АТ</div>
+        </div>
+        <div class="row__form_scell">
+            <div>ВВТ БТ</div>
+        </div>
+        <div class="row__form_bcell">
+            <div class="text">Время</div>
+            <div>Рабочее</div>
+        </div>
+        <div class="row__form_bcell">
+            <div class="text">Время</div>
+            <div>Нерабочее</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row__form_logo">Подразделения усиления гарнизона</div>
+        <div class="row__form_scell">
+            <div>{{composition.strengthGarrison.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.strengthGarrison.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.strengthGarrison.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.strengthGarrison.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.strengthGarrison.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Подразделения антитеррора гарнизона</div>
+        <div class="row__form_scell">
+            <div>{{composition.antiterrorGarrison.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.antiterrorGarrison.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.antiterrorGarrison.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.antiterrorGarrison.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.antiterrorGarrison.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        Подразделения усиления гарнизона:
+    </div>
+    <div *ngFor="let item of composition.strengthGarrisonArray">
+        <div class="row">
+            <div class="row__form_logo padding-left">{{item.name}}</div>
+            <div class="row__form_scell">
+                <div>{{item.soldiers}}</div>
+            </div>
+            <div class="row__form_scell">
+                <div>{{item.autoTransport}}</div>
+            </div>
+            <div class="row__form_scell">
+                <div>{{item.armoredTransport}}</div>
+            </div>
+            <div class="row__form_bcell">
+                <div>{{item.work_time}}</div>
+            </div>
+            <div class="row__form_bcell">
+                <div>{{item.not_work_time}}</div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="row__form_logo">Резерв в НГ (НЗ)</div>
+        <div class="row__form_scell">
+            <div>{{composition.reserve.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.reserve.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.reserve.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.reserve.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.reserve.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Моб. рез. КВВО</div>
+        <div class="row__form_scell">
+            <div>{{composition.mobileReserve.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.mobileReserve.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.mobileReserve.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.mobileReserve.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.mobileReserve.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo">Функц. гр. ОШ ФСБ-КТО</div>
+        <div class="row__form_scell">
+            <div>{{composition.functionGroup.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.functionGroup.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.functionGroup.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.functionGroup.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.functionGroup.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="row__form_logo bold">Подразделение ликвидации последствий теракта</div>
+        <div class="row__form_scell">
+            <div>{{composition.liquidationDivision.soldiers}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.liquidationDivision.autoTransport}}</div>
+        </div>
+        <div class="row__form_scell">
+            <div>{{composition.liquidationDivision.armoredTransport}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.liquidationDivision.work_time}}</div>
+        </div>
+        <div class="row__form_bcell">
+            <div>{{composition.liquidationDivision.not_work_time}}</div>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<div>
+    <p-button
+        label='Назад'
+        icon='pi pi-arrow-left'
+        iconPos='left'
+        routerLink='../general-information'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)="reducePageIndex()"
+    ></p-button>
+    <p-button
+        label='Обстановка'
+        icon='pi pi-arrow-right'
+        iconPos='right'
+        routerLink='../situation'
+        [queryParams]="{'uuid': id, 'militaryItem': militaryItemId}"
+        (click)='addPageIndex()'
+    ></p-button>
+</div>

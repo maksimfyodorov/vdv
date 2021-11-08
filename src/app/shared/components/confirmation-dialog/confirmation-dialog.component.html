@@ -1,0 +1,12 @@
+<section class='wrapper'>
+  <p class='dialog__message'>{{message}}</p>
+
+  <div class='dialog__controls'>
+    <p-button styleClass='p-button-danger'  (onClick)='acceptDialog()'>
+      <i class='pi {{acceptIcon}}'></i>{{accept}}
+    </p-button>
+    <p-button styleClass='p-button-secondary p-button-text' (onClick)="rejectDialog()">
+      {{reject}}
+    </p-button>
+  </div>
+</section>

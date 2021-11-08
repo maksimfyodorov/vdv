@@ -1,0 +1,28 @@
+<div [appLoader]='loaderService.isLoading$' *ngIf="equipment" class="video-settings-page">
+  <div class="nav-btns">
+    <button
+      *ngFor="let section of sections"
+      [class]="section.isActive ? '' : 'p-button-text'"
+      pButton
+      (click)="selectSection(section)"
+    >
+      {{section.label}}
+    </button>
+    <button pButton
+            class='p-button-outlined'
+    (click)='openCufDialog()'>
+      Контроль работы
+    </button>
+  </div>
+  <div [ngSwitch]='selectedSection.value'>
+    <ng-template ngSwitchCase='0'>
+      <app-equipment-characteristics
+        (actionEmitter)="doAction($event)"
+        [fixations]="fixations"
+        [equipment]="equipment"
+        [allMonitoringObjects]="allMonitoringObjects"
+        [equipmentStatuses]="equipmentStatuses"
+      ></app-equipment-characteristics>
+    </ng-template>
+  </div>
+</div>

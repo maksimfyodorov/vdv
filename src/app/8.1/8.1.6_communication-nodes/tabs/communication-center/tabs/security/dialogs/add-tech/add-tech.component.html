@@ -1,0 +1,30 @@
+<section class='wrapper'>
+  <p-button
+    class='add_button'
+    (onClick)='createItem()'
+    icon='pi pi-plus'
+    label='Добавить технику'
+    styleClass='p-button-outlined'>
+  </p-button>
+  <p-scrollPanel [style]='{height: "500px", marginTop: "18px"}'>
+    <div class='table'>
+      <div>
+        <small class='table_label'>Техника</small>
+        <small class='table_label'>Штат</small>
+      </div>
+      <app-tech-settings-item
+        *ngFor='let control of formArray.controls;'
+        [techItem]='control.value'
+        [formGroup]='control'
+        [techItems]='itemsForAutoComplete'
+        (valueChanged)='techChanged($event)'
+        (deleteItem)='deleteItem($event)'>
+      </app-tech-settings-item>
+    </div>
+  </p-scrollPanel>
+  <div class='controls'>
+    <p-button [disabled]='!formArray.valid || !formArray.controls.length' (onClick)='save()'
+              label='Сохранить'></p-button>
+    <p-button (onClick)='close()' styleClass='p-button-outlined' label='Отмена'></p-button>
+  </div>
+</section>

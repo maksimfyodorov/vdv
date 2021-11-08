@@ -1,0 +1,44 @@
+@import '../../node_modules/@angular/material/theming';
+@include mat-core();
+
+
+$mat-custom-primary: (
+  700: #228BE6,
+  contrast: (
+    700: #FFFFFF,
+  )
+);
+
+$mat-custom-accent: (
+  700: #FFFFFF,
+  contrast: (
+    700: #959EA9,
+  )
+);
+
+$mat-custom-warn: (
+  500: #FA5252,
+  contrast: (
+    500: #FFFFFF,
+  )
+);
+
+$rhbz-primary: mat-palette($mat-custom-primary, 700);
+$rhbz-accent: mat-palette($mat-custom-accent, 700);
+$rhbz-warn: mat-palette($mat-custom-warn, 500);
+
+$rhbz-theme: mat-light-theme((
+  color: (
+    primary: $rhbz-primary,
+    accent: $rhbz-accent,
+    warn: $rhbz-warn,
+  )
+));
+
+/* Custom Font */
+$custom-typography: mat-typography-config(
+  $font-family: 'Noto Sans'
+);
+
+@include angular-material-typography($custom-typography);
+@include angular-material-theme($rhbz-theme);

@@ -1,0 +1,34 @@
+<div class="margins">
+    <div class="text">
+        Перевод в всБГ
+    </div>
+    <div>
+        <p-dropdown
+            [options]="transferTypes"
+            (onChange)="selectType($event)"
+            [(ngModel)]="selectedType"
+            optionLabel="name"
+        >
+        </p-dropdown>
+    </div>
+</div>
+<div>
+    <p-timeline
+        [value]="showEvent"
+        layout="horizontal"
+        align="bottom"
+    >
+        <ng-template
+            pTemplate="content"
+            let-event
+            class="column"
+        >
+            <div>
+                {{event.type}}
+            </div>
+            <div class="status">
+                {{event.status}}
+            </div>
+        </ng-template>
+    </p-timeline>
+</div>

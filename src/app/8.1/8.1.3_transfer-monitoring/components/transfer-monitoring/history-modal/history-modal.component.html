@@ -1,0 +1,22 @@
+<p-table [value]="history">
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="logo">Дата изменений</th>
+            <th class="logo">Пользователь</th>
+            <th class="logo">Действие</th>
+            <th class="logo">Статус</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+            <td class="text">{{data.date | date}}</td>
+            <td class="text">{{data.user}}</td>
+            <td class="text">{{data.action}}</td>
+            <td class="text">
+                <div class="status" appStatusStyle>
+                    {{data.status}}
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

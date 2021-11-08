@@ -1,0 +1,28 @@
+<div class="events__title">
+  <div class="events__title_left">
+    <div class="events__title_left_search">
+    </div>
+    <p-button label="Добавить мероприятие"
+              (onClick)="addDesantEvent()"
+              class="p-button-info"
+              routerLink="../new-or-change"
+    ></p-button>
+  </div>
+  <div class="events__title_right">
+    <span class="p-input-icon-right">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" placeholder="Поиск"/>
+      </span>
+    <p-button label="Сформировать доклад по выполнению"
+              class="p-button-info"
+    ></p-button>
+  </div>
+</div>
+<div class="events__wrapper">
+  <div class="events__container">
+    <app-desant-event-card></app-desant-event-card>
+  </div>
+  <div class="events__container_filter">
+    <app-filter-desant-events></app-filter-desant-events>
+  </div>
+</div>

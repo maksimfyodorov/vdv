@@ -1,0 +1,64 @@
+<div *ngFor="let prod of dialogProducts; let i = index">
+  <div class="d_content">
+
+    <p class="title title_high title_bold">Информационный массив {{uuid[i]}}</p>
+    <p-table [value]="prod.files" [rows]="10" dataKey="name">
+       <ng-template pTemplate="header">
+           <tr>
+               <th>Файл</th>
+               <th>Дата (план)</th>
+               <th>Дата (факт)</th>
+               <th>Статус</th>
+           </tr>
+       </ng-template>
+       <ng-template pTemplate="body" let-product>
+           <tr>
+               <td>{{product.file}}</td>
+               <td>{{product.date_plan}}</td>
+               <td>{{product.date_fact}}</td>
+               <td>
+                 <div [ngStyle]="{
+                    'background': getBackgroundColor(product.status),
+                    'border-radius': '4px',
+                    'font-family': 'Noto Sans',
+                    'font-style': 'normal',
+                    'font-weight': 'bold',
+                    'font-size': '12px',
+                    'line-height': '18px',
+                    'color': '#FFFFFF',
+                    'padding': '2px 8px',
+                    'display': 'flex',
+                    'justify-content': 'center'
+                    }">
+                    {{getStatus(product.status)}}
+                  </div>
+               </td>
+           </tr>
+       </ng-template>
+    </p-table>
+
+  </div>
+
+    <div class="total">
+      <p class="title title_small title_bold">
+        Итого
+      </p>
+
+      <div [ngStyle]="{
+        'background': getBackgroundStatus(statuses[i]?.length),
+        'min-width': '177px',
+        'border-radius': '4px',
+        'font-family': 'Noto Sans',
+        'font-style': 'normal',
+        'font-weight': 'bold',
+        'font-size': '12px',
+        'line-height': '18px',
+        'color': '#FFFFFF',
+        'padding': '2px 8px',
+        'display': 'flex',
+        'justify-content': 'center'
+        }">
+        {{statuses[i]}}
+      </div>
+    </div>
+</div>

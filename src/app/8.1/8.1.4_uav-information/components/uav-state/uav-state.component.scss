@@ -1,0 +1,53 @@
+@import '../../../../8.2/8.2.30_commander-orders/common/mixins/calendar.scss';
+
+.wrapper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.security {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 24px;
+
+  &_left {
+    display: flex;
+    align-items: center;
+  }
+
+  &_right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .button {
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.table {
+  margin: 12px;
+  overflow: auto;
+  height: 75vh;
+}
+
+.inputswitch-container {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+::ng-deep {
+  @include calendar-weekend;
+}

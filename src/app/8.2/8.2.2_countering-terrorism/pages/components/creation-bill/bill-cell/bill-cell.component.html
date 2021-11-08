@@ -1,0 +1,31 @@
+<div style="width: 90vw;">
+    <div style="margin-left: 20px;">
+        <app-new-custom-accordion
+            [selected]="selected"
+            header="{{militaryUnit?.label}}"
+            footer='Ведомость №{{numberOfBill}} от {{dateOfBill | date}}'
+            [reportResults]='reportResults'
+        >
+            <app-bill-tasks
+                [militaryUnitId]="militaryUnitId"
+                (newSubordinate)="newSubordinateEvent($event)"
+                [completeCreationFlag]="completeCreationFlag"
+            ></app-bill-tasks>
+        </app-new-custom-accordion>
+    </div>
+    <div
+        class="first-node"
+        *ngFor="let item of reportList; let i = index"
+    >
+        <app-bill-cell
+            [selected]="false"
+            [billData]="reportList[i]"
+        ></app-bill-cell>
+        <div
+            (click)="deleteItem(item)"
+            class="delete-btn"
+        >
+            <i class="pi pi-trash"></i>
+        </div>
+    </div>
+</div>

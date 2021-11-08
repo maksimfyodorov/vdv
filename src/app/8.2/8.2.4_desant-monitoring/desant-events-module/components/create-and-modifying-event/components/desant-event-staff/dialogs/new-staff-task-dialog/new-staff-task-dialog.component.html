@@ -1,0 +1,207 @@
+<div class="new-task__container" [appLoader]="loader.isLoading$">
+  <div class="new-task__header">
+  </div>
+  <p-tabView>
+    <p-tabPanel header="Общее">
+      <form [formGroup]="form"
+            (ngSubmit)="createOrChangeTask()"
+      >
+        <div class="new-task__wrapper">
+          <div class="general__title">
+            <h5>Наименование задачи</h5>
+            <p-dropdown [options]="allTasks"
+                        placeholder="Выберите задачу"
+                        optionLabel="name"
+                        [showClear]="true"
+                        emptyMessage="Результаты не найдены"
+                        formControlName="name"
+            ></p-dropdown>
+          </div>
+          <div class="general__input">
+            <div class="general__input_container">
+              <h5>Дата с:</h5>
+              <div class="general__input_time">
+                <p-calendar [showIcon]="true"
+                            dateFormat="dd.mm.yy"
+                            firstDayOfWeek='1'
+                            class="calendar"
+                            formControlName="date_start_plan"
+                ></p-calendar>
+                <p-calendar [timeOnly]="true"
+                            [showIcon]="true"
+                            icon="pi pi-clock"
+                            formControlName="time_start_plan"
+                ></p-calendar>
+              </div>
+            </div>
+            <div class="general__input_container">
+              <h5>по:</h5>
+              <div class="general__input_time">
+                <p-calendar [showIcon]="true"
+                            dateFormat="dd.mm.yy"
+                            firstDayOfWeek='1'
+                            class="calendar"
+                            formControlName="date_end_plan"
+                ></p-calendar>
+                <p-calendar [timeOnly]="true"
+                            [showIcon]="true"
+                            icon="pi pi-clock"
+                            formControlName="time_end_plan"
+                ></p-calendar>
+              </div>
+            </div>
+          </div>
+          <div class="general__input">
+            <div class="general__input_container">
+              <h5>Аэродром взлета</h5>
+              <p-dropdown [options]="airportDeparture"
+                          placeholder="Выбрать"
+                          optionLabel="name"
+                          [showClear]="true"
+                          emptyMessage="Результаты не найдены"
+                          formControlName="airport_departure"
+              ></p-dropdown>
+            </div>
+            <div class="general__input_container">
+              <h5>Площадка приземления</h5>
+              <span class="p-input-icon-right">
+          <i class="pi pi-map-marker" (click)="openCoordinateModal('landing')"></i>
+           <input type="text"
+                  pInputText
+                  [(ngModel)]="selectedLandingAria"
+                  [ngModelOptions]="{standalone: true}"
+                  placeholder="Выбрать"
+           />
+          </span>
+            </div>
+          </div>
+          <div class="general__input">
+            <div class="general__input_container">
+              <h5>Летательное средство</h5>
+              <p-dropdown [options]="allAirplane"
+                          placeholder="Выбрать"
+                          optionLabel="name"
+                          [showClear]="true"
+                          emptyMessage="Результаты не найдены"
+                          formControlName="airplane"
+              ></p-dropdown>
+            </div>
+            <div class="general__input_container">
+              <h5>Место специальных мероприятий</h5>
+              <span class="p-input-icon-right">
+          <i class="pi pi-map-marker" (click)="openCoordinateModal('special')"></i>
+           <input type="text" pInputText
+                  [(ngModel)]="selectedPlaceSpecialEvent"
+                  [ngModelOptions]="{standalone: true}"
+                  placeholder="Выбрать"
+           />
+          </span>
+            </div>
+          </div>
+          <div class="p-field-checkbox">
+            <p-checkbox [(ngModel)]="banOtherAirplane"
+                        [ngModelOptions]="{standalone: true}"
+                        binary="true"
+                        inputId="binary"
+            ></p-checkbox>
+            <label for="binary">Запрещается совершать прыжки из других летательных средств</label>
+          </div>
+          <div class="general__title">
+            <h5>Другие летательные средства</h5>
+            <p-multiSelect [options]="allAirplane"
+                           [(ngModel)]="otherAirplane"
+                           [ngModelOptions]="{standalone: true}"
+                           defaultLabel="Выбрать"
+                           optionLabel="name"
+                           [disabled]="banOtherAirplane"
+                           [filter]="false"
+            ></p-multiSelect>
+          </div>
+          <div class="p-field-checkbox">
+            <p-checkbox [(ngModel)]="selectedSportTaskState"
+                        [ngModelOptions]="{standalone: true}"
+                        binary="true"
+                        inputId="sportBinary"
+                        *ngIf="!banOtherAirplane"
+            ></p-checkbox>
+            <label for="sportBinary" *ngIf="!banOtherAirplane">Спортивная задача</label>
+          </div>
+          <div class="general__radiobutton">
+            <div *ngFor="let state of jumpsState" class="p-field-checkbox">
+              <p-radioButton name="category"
+                             [value]="state"
+                             [(ngModel)]="selectedState"
+                             [ngModelOptions]="{standalone: true}"
+              ></p-radioButton>
+              <label [for]="state.name">{{state.name}}</label>
+            </div>
+          </div>
+          <div class="general__text-field">
+            <h5>Примечание</h5>
+            <textarea id="input-textarea"
+                      rows="5"
+                      cols="30"
+                      pInputTextarea
+                      formControlName="notes"
+            ></textarea>
+          </div>
+          <div class="new-task__buttons">
+            <p-button type="submit" [disabled] = "form.invalid"  label="Создать" *ngIf="componentState === 'create'"></p-button>
+            <p-button label="Сохранить изменения" (click)="changeTask()" *ngIf="componentState === 'edit'"></p-button>
+            <button pButton pRipple type="button" label="Отмена" class="p-button-text p-button-plain"
+                    (click)="closeModal()"></button>
+          </div>
+        </div>
+      </form>
+    </p-tabPanel>
+    <p-tabPanel header="Подразделения" [disabled]="componentState === 'create'">
+      <div class="new-task__wrapper">
+        <div class="subdivisions__button">
+          <button pButton pRipple type="button" label="Добавить" class="p-button-outlined" icon="pi pi-plus"
+                  (click)="addDesantSubdivision()"></button>
+        </div>
+
+        <p-table [value]="completingTableInfo" dataKey="id" editMode="row" [appLoader]="loader.isLoading$">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Дата</th>
+              <th>Наименование</th>
+              <th>Кол-во чел. / ед.</th>
+              <th>Кол-во прыжков</th>
+              <th>Парашют</th>
+              <th style="width:8rem"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-completing>
+            <tr>
+              <td>{{completing.date_plan | date: 'dd.MM.yyyy'}}</td>
+              <td>{{completing?.division?.complicated_name}}</td>
+              <td>{{completing.paratrooper_count_total || '-'}}</td>
+              <td>{{completing.jump_count_total || '-'}}</td>
+              <td>Д10</td>
+              <td>
+                <div class="subdivisions__table_icons">
+                    <span class="element__table-icons"><i class="pi pi-pencil"
+                                                          (click)="changeCompleting(completing.uuid)"></i></span>
+                  <span class="element__table-icons"><i class="pi pi-trash"
+                                                        (click)="deleteCompleting(completing.uuid)"></i></span>
+
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Документы" [disabled]="componentState === 'create'">
+      <div class="new-task__wrapper">
+        <app-documents [documentsToShow]="documents" [title]=titleDoc></app-documents>
+      </div>
+      <div class="new-task__buttons">
+        <p-button label="Сохранить изменения" (click)="saveDocuments()" *ngIf="componentState === 'edit'"></p-button>
+        <button pButton pRipple type="button" label="Отмена" class="p-button-text p-button-plain"
+                (click)="closeModal()"></button>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

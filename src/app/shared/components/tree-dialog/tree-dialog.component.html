@@ -1,0 +1,22 @@
+<section [appLoader]='loader.isLoading$' >
+  <p-tree emptyMessage='Не найдено' [value]='treeData' selectionMode='single' [(selection)]='selectedElement'
+          [propagateSelectionUp]='false' [propagateSelectionDown]='false'></p-tree>
+  <div class='footer'>
+    <div class='ui-toolbar-group-left'>
+      <button
+        class='edit-button'
+        pButton
+        (click)='submit()'
+        label='Выбрать'>
+      </button>
+      <button
+        pButton
+        class='cancel-dialog-button'
+        label='Отмена'
+        type='button'
+        (click)='closeWithoutSaveCancel()'>
+      </button>
+    </div>
+  </div>
+</section>
+

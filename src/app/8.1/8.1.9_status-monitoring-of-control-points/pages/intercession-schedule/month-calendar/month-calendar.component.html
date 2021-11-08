@@ -1,0 +1,9 @@
+<p-inputNumber class='year-selector' (ngModelChange)='yearChanged($event)' [(ngModel)]='selectedYear'
+               [showButtons]='true' [min]='0' [max]='3000'>
+</p-inputNumber>
+
+<div class='month-block'>
+  <p-button (onClick)='selectMonth(month)' *ngFor='let month of currentMonths'
+            [style]='{background: getMonthColor(month.month_status)}' class='month-button'
+            [label]='month.name'></p-button>
+</div>

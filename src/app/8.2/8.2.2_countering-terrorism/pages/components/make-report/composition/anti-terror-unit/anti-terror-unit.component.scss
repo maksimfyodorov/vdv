@@ -1,0 +1,44 @@
+.row {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.time {
+    border: 1px solid #c7cdd3;
+    width: 109px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.disable {
+    display: none;
+}
+
+.logo {
+    width: 658px;
+}
+
+.margin-right8px {
+    margin-right: 8px;
+}
+
+.margin-right24px {
+    margin-right: 24px;
+}
+
+.input-style {
+    width: 240px;
+    height: 40px;
+    border: 1px solid #c7cdd3;
+    border-radius: 4px;
+}
+
+.width109 {
+    width: 109px;
+}

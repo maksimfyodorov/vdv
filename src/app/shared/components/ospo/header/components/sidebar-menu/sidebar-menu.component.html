@@ -1,0 +1,40 @@
+<div class='sidebar-menu'>
+  <div class='sidebar-menu__header'>
+    <p-button label='{{currentPageTitle}}'
+              icon='pi pi-bars'
+              (onClick)='expandSidebar($event)'>
+    </p-button>
+  </div>
+  <p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 420px)'}">
+    <ul class='sidebar-menu__page-list page-list'>
+      <li *ngFor='let page of pages'>
+        <a routerLink='/{{page.routerLink}}'
+           routerLinkActive='page-list__item-active'
+           [routerLinkActiveOptions]='{exact: true}'
+           (click)='expandSidebar($event)'
+        >
+          <img src='../../../../../../../assets/img/file.svg' alt=''>
+          <span>{{page.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </p-scrollPanel>
+  <div class='divider'></div>
+  <ul class='sidebar-menu__page-list page-list ospos'>
+    <li *ngFor='let ospo of ospos'>
+      <a *ngIf='ospo.routerLink'
+         routerLink='/{{ospo.routerLink}}'
+         routerLinkActive='page-list__item-active'
+         [routerLinkActiveOptions]='{exact: true}'
+         (click)='expandSidebar($event)'
+      >
+        <i class='pi {{ospo.icon}}'></i>
+        <span>{{ospo.title}}</span>
+      </a>
+      <div *ngIf='ospo.modal' (click)='openModal(ospo.modal); expandSidebar($event)'>
+        <i class='pi {{ospo.icon}}'></i>
+        <span>{{ospo.title}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

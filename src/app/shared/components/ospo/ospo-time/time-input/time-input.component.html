@@ -1,0 +1,52 @@
+<span
+    #test
+    (click)="op.toggle($event)"
+    class="p-input-icon-left p-input-icon-right"
+>
+    <i
+        class="pi"
+        *ngIf="timeChFlag; else C"
+    >
+        Ч+
+    </i>
+    <input
+        type="text"
+        pInputText
+        [formControl]="info"
+    />
+    <i class="pi pi-clock"></i>
+</span>
+
+<p-overlayPanel
+    #op
+    [appendTo]='test'
+>
+    <ng-template pTemplate>
+        <app-choose-time
+            (timeChange)="setTime($event)"
+            [timeStr]='timeStr'
+            [time]='info.value'
+            [initConfig]='initConfig'
+        ></app-choose-time>
+    </ng-template>
+</p-overlayPanel>
+
+<ng-template #C>
+    <i class="pi">
+        C+
+    </i>
+</ng-template>
+
+<ng-template #clearForm>
+    <div class="width center row">
+        <div>
+            00:
+        </div>
+        <div *ngFor="let item of formDataLength">
+            00:
+        </div>
+        <div>
+            00
+        </div>
+    </div>
+</ng-template>

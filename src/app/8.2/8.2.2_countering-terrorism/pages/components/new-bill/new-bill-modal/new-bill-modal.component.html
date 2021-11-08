@@ -1,0 +1,25 @@
+<div class='container'>
+    <div class='text'>Номер</div>
+    <input
+        class='input'
+        type='text'
+        placeholder='номер'
+        pInputText
+        [(ngModel)]='inputNumber'
+    />
+    <div class='text'>Дата</div>
+    <p-calendar
+        [(ngModel)]='date'
+        dateFormat="dd.mm.yy"
+    ></p-calendar>
+    <div class="buttons">
+        <div
+            (click)="closeModal()"
+            class="buttons__cancel"
+        >Отмена</div>
+        <div
+            class="buttons__save"
+            (click)="closeModalAndSave()"
+        >Создать ведомость</div>
+    </div>
+</div>

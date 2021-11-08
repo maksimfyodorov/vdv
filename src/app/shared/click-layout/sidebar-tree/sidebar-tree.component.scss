@@ -1,0 +1,10 @@
+.exmpl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.exmpl svg, .exmpl img {
+  min-width: 100%;
+  min-height: 100%;
+  flex-shrink: 0;
+}

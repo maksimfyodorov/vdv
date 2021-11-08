@@ -1,0 +1,383 @@
+<div class="p-d-flex">
+  <app-nodes-hierarchy [dataSource]="militaryUnits">
+    <app-monitoring-node-folder #folder></app-monitoring-node-folder>
+  </app-nodes-hierarchy>
+
+  <div class="table-container">
+    <div class="p-d-flex p-ai-center flex-gap-1">
+      <h2>
+        {{ monitoringService.selectedMilitaryUnit$.getValue().name || 'Мониторинг видеонаблюдения' }}
+      </h2>
+      <span *ngIf="monitoringService.selectedMilitaryUnit$.getValue().id">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-map"
+          label="Показать схему"
+          class="p-button-text"
+          (click)="showMilitaryUnitSchema()"
+        ></button
+        ><button
+          pButton
+          pRipple
+          type="button"
+          label="Сброс"
+          class="p-button-text"
+          (click)="resetMilitaryUnit()"
+        ></button>
+      </span>
+    </div>
+    <div class="select-buttons">
+      <button
+        *ngFor="let type of pageStore.typesOfSchema"
+        [class]="type.isActive ? '' : 'p-button-text'"
+        pButton
+        (click)="selectTypeOfTable(type)"
+      >
+        {{type.label}}
+      </button>
+    </div>
+    <div class="p-d-flex p-jc-center p-flex-column flex-gap-1" [ngSwitch]="pageStore.selectedTypeOfSchema.value">
+      <ng-template ngSwitchCase="Объекты">
+        <p-table
+          [value]="selectedMonitoringObjects"
+          selectionMode="single"
+          [(selection)]="selectedMonitoringObject"
+          (onRowSelect)="onRowSelect($event.data)"
+          (onRowUnselect)="onRowUnselect()"
+          [paginator]="true"
+          [rows]="pageStore.rows"
+          [first]="pageStore.selectedItem"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 5%;">№</th>
+              <th style="width: 75%;">Объект</th>
+              <th>Камеры</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-monitoringObject>
+            <tr [pSelectableRow]="monitoringObject">
+              <td style="width: 5%;">{{ selectedMonitoringObjects.indexOf(monitoringObject) + 1 }}</td>
+              <td style="width: 75%;">
+                {{monitoringObject.name}}
+                <span class="status-badge" *ngIf="!monitoringObject.uuid"> не сохранён </span>
+              </td>
+              <td>
+                {{ getWorkingEquipmentLength(monitoringObject) + '/' + monitoringObject.equipments.length }}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <div style="padding: 1rem">Объекты отсутствуют</div>
+            </tr>
+          </ng-template>
+        </p-table>
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="monitoringService.selectedMilitaryUnit$.getValue().id ? '+ Объект' : 'Чтобы создать объект выберите воинское формирование'"
+          class="p-button-outlined"
+          [disabled]="!monitoringService.selectedMilitaryUnit$.getValue().id"
+          (click)="addNewMonitoringObject()"
+        ></button>
+      </ng-template>
+      <ng-template ngSwitchCase="Камеры">
+        <p-table
+          [value]="equipments"
+          selectionMode="single"
+          [(selection)]="selectedEquipment"
+          [paginator]="true"
+          [rows]="pageStore.rows"
+          [first]="pageStore.selectedItem"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 5%;">№</th>
+              <th>Расположение</th>
+              <th>Статус</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-equipment>
+            <tr [pSelectableRow]="equipment">
+              <td style="width: 5%;">{{equipments.indexOf(equipment) + 1}}</td>
+              <td>
+                <div class="p-d-flex p-flex-column">
+                  {{equipment.object ? equipment.object.name : 'Не установлена' }}
+                  <small style="color: #ccc; font-size: 1rem;" *ngIf="equipment.installation_date">
+                    установлена {{ equipment.installation_date | date: 'd.MM.YYY' }}
+                  </small>
+                </div>
+              </td>
+              <td [style.color]="equipment?.status?.color || 'black'">
+                {{equipment?.status?.name || 'Статус отсутствует'}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-product>
+            <tr>
+              <div style="padding: 1rem">Камеры отсутствуют</div>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="+ Камера"
+          class="p-button-outlined"
+          (click)="showCreateEquipmentDialog()"
+        ></button>
+      </ng-template>
+    </div>
+    <div class="buttons">
+      <app-documents-formalized groupName="8.2.20"></app-documents-formalized>
+    </div>
+  </div>
+  <ng-container [ngSwitch]="pageStore.selectedTypeOfSchema.value">
+    <ng-template ngSwitchCase="Объекты">
+      <app-editor (onChangedCanvas)="setCanvasNativeElement($event)"></app-editor>
+    </ng-template>
+    <ng-template ngSwitchCase="Камеры">
+      <app-video-settings
+        [equipment]="selectedEquipment || null"
+        (actionEmitter)="doAction($event)"
+        [allMonitoringObjects]="allMonitoringObjects"
+        [fixations]="fixations"
+        [equipmentStatuses]="equipmentStatuses"
+      ></app-video-settings>
+    </ng-template>
+  </ng-container>
+</div>
+
+<div class="ui-canvas-caption" *ngIf="canvasState?.object?.getMonitoringObject()?.uuid">
+  <div class="p-d-flex p-flex-column">
+    <h3>Наименование объекта</h3>
+    <div class="p-d-flex flex-gap-1" style="width: 20rem;">
+      <input
+        id="monitoringObjectName"
+        [value]="canvasState?.object?.getMonitoringObject()?.name"
+        [disabled]="canvasState?.object.isEdit || target === 'military_unit_id'"
+        (input)="changeNameMonitoringObject($event.target.value)"
+        pInputText
+      />
+      <button
+        *ngIf="canvasState?.object?.getMonitoringObject()?.name !== selectedMonitoringObject?.name && target === 'object_uuid'"
+        pButton
+        icon="pi pi-save"
+        class="p-button-success"
+        (click)="saveMonitoringObjectName()"
+      ></button>
+      <button
+        *ngIf="canvasState?.object?.getMonitoringObject()?.name !== selectedMonitoringObject?.name && target === 'object_uuid'"
+        pButton
+        icon="pi pi-undo"
+        class="p-button-secondary"
+        (click)="resetMonitoringObjectName()"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div class="ui-canvas-equipment-list" *ngIf="pageStore.visibleListEquipment">
+  <span class="p-float-label" *ngIf="canvasState.object.getMonitoringObject().equipments.length; else messageEmptyList">
+    <p-dropdown
+      inputId="dropdown"
+      showClear="true"
+      [autoDisplayFirst]="false"
+      [options]="notInstalledEquipments"
+      [(ngModel)]="selectedEquipment"
+      optionLabel="uuid"
+      (onChange)="setTool('equipment')"
+      emptyMessage="Неустановленные камеры отсутствуют"
+    ></p-dropdown>
+    <label for="dropdown">Выберите неустановленную камеру</label>
+  </span>
+  <ng-template #messageEmptyList>
+    <span class="p-float-label">
+      <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [disabled]="true"></p-dropdown>
+      <label for="dropdown">Неустановленные камеры отсутствуют</label>
+    </span>
+  </ng-template>
+</div>
+
+<div class="ui-canvas-buttons" *ngIf="canvasState?.object?.getMonitoringObject()?.uuid">
+  <div *ngIf="pageStore.visibleTools">
+    <app-select-buttons [items]="pageStore.typesOfFigure" (onChangeActiveItem)="setTool($event)"></app-select-buttons>
+  </div>
+  <div class="ui-canvas-edit-buttons">
+    <div>
+      <button
+        pButton
+        icon="pi pi-trash"
+        class="p-button-outlined p-button-secondary"
+        (click)="deleteMonitoringObject()"
+      ></button>
+    </div>
+    <button
+      [disabled]="!canvasState.object.getMonitoringObject().uuid"
+      pButton
+      class="p-button-success"
+      label="Добавить камеру"
+      icon="pi pi-camera"
+      (click)="showCreateEquipmentDialog()"
+    ></button>
+    <button
+      [disabled]="!canvasState.object.getMonitoringObject().uuid"
+      pButton
+      pRipple
+      [icon]="pageStore.visibleListEquipment ?  'pi pi-angle-left' : 'pi pi-camera'"
+      type="button"
+      [label]="pageStore.visibleListEquipment ? 'Отмена' : 'Выбрать камеру'"
+      class="p-button-outlined"
+      (click)="showAvailableEquipments()"
+    ></button>
+    <button
+      [disabled]="!canvasState.object.getMonitoringObject().uuid"
+      pButton
+      pRipple
+      type="button"
+      [label]="pageStore.visibleTools ? 'Назад' : 'Редактировать схему'"
+      class="p-button-outlined"
+      (click)="showTools()"
+    ></button>
+  </div>
+</div>
+
+<p-dialog
+  class="dialog"
+  [resizable]="false"
+  modal="true"
+  [(visible)]="pageStore.visibleCreateEquipmentDialog"
+  [draggable]="false"
+  header="Создать камеру видеонаблюдения"
+  (onHide)="clearForm()"
+  [dismissableMask]="true"
+>
+  <form [formGroup]="formGroup" class="dialog" (ngSubmit)="createEquipment()">
+    <div class="p-d-flex p-flex-column">
+      <h3>Персональные</h3>
+      <div class="p-d-flex p-flex-column">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Место установки
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            [options]="selectedMonitoringObjects"
+            optionLabel="name"
+            optionValue="uuid"
+            formControlName="location"
+            [filter]="true"
+            emptyMessage="Схемы отсутствуют"
+            emptyFilterMessage="Схемы отсутствуют"
+            appendTo="body"
+          ></p-dropdown>
+        </div>
+        <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+      </div>
+
+      <div class="p-d-flex p-flex-column">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Модель камеры *
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            [options]="fixations"
+            optionLabel="number"
+            optionValue="uuid"
+            formControlName="fixation_uuid"
+            [filter]="true"
+            emptyMessage="Модели камер отсутствуют"
+            emptyFilterMessage="Модели камер отсутствуют"
+            appendTo="body"
+          ></p-dropdown>
+        </div>
+        <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+      </div>
+
+      <div class="p-d-flex p-flex-column">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Статус *
+          <p-dropdown
+            [autoDisplayFirst]="false"
+            [showClear]="true"
+            [options]="equipmentStatuses"
+            optionLabel="name"
+            optionValue="uuid"
+            formControlName="status"
+            [filter]="true"
+            emptyMessage="Статусы отсутствуют"
+            emptyFilterMessage="Статусы отсутствуют"
+            appendTo="body"
+          ></p-dropdown>
+        </div>
+        <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+      </div>
+      <div class="p-d-flex p-flex-column">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Дата установки
+          <p-calendar
+            dateFormat="dd.mm.yy"
+            [showIcon]="true"
+            formControlName="installation_date"
+            firstDayOfWeek="1"
+            [disabled]="!formGroup.value.location"
+            appendTo="body"
+            showButtonBar="true"
+          ></p-calendar>
+        </div>
+        <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+      </div>
+      <div class="p-d-flex p-flex-column">
+        <div class="p-d-flex p-jc-between p-ai-center">
+          Примечание
+          <input type="text" pInputText formControlName="description" />
+        </div>
+        <hr style="border: none; color: #ccc; background: #ccc; height: 1px; width: 100%;" />
+      </div>
+      <div class="p-d-flex p-jc-end flex-gap-1">
+        <button
+          pButton
+          [disabled]="!formGroup.valid"
+          type="submit"
+          label="Создать"
+          icon="pi pi-save"
+          class="p-button-outlined p-button-success"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Отмена"
+          class="p-button-outlined p-button-secondary"
+          (click)="clearForm()"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>
+
+<app-context-menu
+  [items]="contextMenuObjectItems"
+  [selectedItem]="canvasState?.editedSchema"
+  [position]="pageStore.contextMenuObjectState.position"
+  [contextMenuVisible]="pageStore.contextMenuObjectState.visible"
+  (onChangeVisibleContextMenu)="
+    pageStore.contextMenuObjectState.visible = $event
+  "
+>
+</app-context-menu>
+
+<app-context-menu
+  [items]="contextMenuEquipmentItems"
+  [selectedItem]="canvasState?.editedEquipment?.getEquipment()"
+  [position]="pageStore.contextMenuEquipmentState.position"
+  [contextMenuVisible]="pageStore.contextMenuEquipmentState.visible"
+  (onChangeVisibleContextMenu)="
+    pageStore.contextMenuEquipmentState.visible = $event
+  "
+>
+</app-context-menu>
